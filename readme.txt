@@ -38,6 +38,9 @@ This plugin borrows from the code structure and philosophy found in popular plug
 = Contact =
 For more info, check me out on twitter and follow <a href="http://twitter.com/frankGM1">Twitter</a> .
 
+= Developers =
+Github Link <a href="https://github.com/FrankM1/video-central">https://github.com/FrankM1/video-central</a>
+
 == Installation ==
 
 1. Upload the `video-central` folder to the `/wp-content/plugins/` directory
