@@ -1,0 +1,16 @@
+/vendor
+composer.phar
+.DS_Store
+Thumbs.db
+*.log
+/node_modules
+
+.*
+!.gitignore
+!.jshintrc
+!.bowerrc
+!.editorconfig
+!.travis.yml
+!.gitattributes
+!.htaccess
+*~

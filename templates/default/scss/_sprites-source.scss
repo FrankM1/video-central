@@ -1,0 +1,28 @@
+.bg-arrow-carousel-big-next, .bg-arrow-carousel-big-prev, .bg-icon-play-24, .bg-icon-play-64, .bg-icon-plus-24, .bg-view {
+    background: url("../img/sprite.png") no-repeat;
+}
+
+.bg-arrow-carousel-big-next {
+    background-position: 0 0;
+}
+
+.bg-arrow-carousel-big-prev {
+    background-position: 0 -95px;
+}
+
+.bg-icon-play-24 {
+    background-position: 0 -190px;
+}
+
+.bg-icon-play-64 {
+    background-position: 0 -262px;
+}
+
+.bg-icon-plus-24 {
+    background-position: 0 -360px;
+}
+
+.bg-view {
+    background-position: 0 -429px;
+}
+
