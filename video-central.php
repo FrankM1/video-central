@@ -4,7 +4,7 @@ Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
 Author: Franklin M Gitonga
-Version: 1.0.0
+Version: 1.0.1
 Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
@@ -360,8 +360,8 @@ class Video_Central {
     public function setup_actions() {
 
         // Add actions to plugin activation and deactivation hooks
-        add_action( 'activate_'   . $this->basename, $this->basename . '_activation'   );
-        add_action( 'deactivate_' . $this->basename, $this->basename . '_deactivation' );
+        add_action( 'activate_'   . $this->basename, 'video_central_activation'   );
+        add_action( 'deactivate_' . $this->basename, 'video_central_deactivation' );
 
          // If Video Central is being deactivated, do not add any actions
         if ( video_central_is_deactivation( $this->basename ) )

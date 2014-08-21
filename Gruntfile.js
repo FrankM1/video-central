@@ -21,12 +21,10 @@ module.exports = function(grunt) {
         // sass
         sass: {
             dist: {
-                options: {
-                    sourcemap: true,
-                },
+
                 files: {
                     'assets/admin/css/style.css': 'assets/admin/scss/style.scss',
-                    
+
                     'assets/admin/css/metaboxes/file.css': 'assets/admin/scss/metaboxes/file.scss',
                     'assets/admin/css/metaboxes/image-select.css': 'assets/admin/scss/metaboxes/image-select.scss',
                     'assets/admin/css/metaboxes/image.css': 'assets/admin/scss/metaboxes/image.scss',
@@ -35,9 +33,9 @@ module.exports = function(grunt) {
                     'assets/admin/css/metaboxes/select.css': 'assets/admin/scss/metaboxes/select.scss',
                     'assets/admin/css/metaboxes/style.css': 'assets/admin/scss/metaboxes/style.scss',
                     'assets/admin/css/metaboxes/wysiwyg.css': 'assets/admin/scss/metaboxes/wysiwyg.scss',
-                    
+
                     'assets/frontend/css/video-js.css': 'assets/frontend/scss/video-js.scss',
-                    
+
                     'templates/default/css/style.css': 'templates/default/scss/style.scss',
                     'templates/default/css/grid.css': 'templates/default/scss/grid.scss',
                     'templates/default/css/font-awesome.css': 'templates/default/scss/font-awesome.scss',
@@ -129,7 +127,7 @@ module.exports = function(grunt) {
                 		'assets/frontend/js/vendor/vjs.youtube.js',
                      ]
                 }
-                
+
             }, //careful here. Minified video-js doesn't work properly
 
             admin_js: {

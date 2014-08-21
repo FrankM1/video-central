@@ -67,19 +67,16 @@ h2.video-central-ajax-response {
 @keyframes videojsloading {
   0% {
     background-position: 0 0; }
-
   100% {
     background-position: 80px 0; } }
 @-webkit-keyframes videojsloading {
   0% {
     background-position: 0 0; }
-
   100% {
     background-position: 80px 0; } }
 @-moz-keyframes videojsloading {
   0% {
     background-position: 0 0; }
-
   100% {
     background-position: 80px 0; } }
 /* Progress bar */
@@ -105,7 +102,7 @@ h2.video-central-ajax-response {
       width: 77%;
       height: 7px;
       border: none;
-      background: #dddddd;
+      background: #DDDDDD;
       border-bottom: 1px solid #fff;
       position: absolute;
       bottom: 10px;
@@ -128,7 +125,7 @@ h2.video-central-ajax-response {
       height: 50px;
       text-align: center;
       font-size: 12px;
-      color: #cccccc;
+      color: #ccc;
       position: relative;
       text-shadow: 1px 1px #fff;
       -webkit-transition: all 0.3s ease-in;
@@ -154,24 +151,24 @@ h2.video-central-ajax-response {
         width: 16px;
         height: 16px;
         border-radius: 20px;
-        border: 2px solid #dddddd;
-        background: #dddddd;
+        border: 2px solid #DDDDDD;
+        background: #DDDDDD;
         bottom: 12px;
         left: 50%;
         margin-left: -8px;
         content: '';
         z-index: 2; }
       .wizard-container .progress_bar div.step.current {
-        color: #222222; }
+        color: #222; }
         .wizard-container .progress_bar div.step.current:before {
           display: block; }
       .wizard-container .progress_bar div.step.complete {
-        color: #888888;
+        color: #888;
         cursor: pointer; }
         .wizard-container .progress_bar div.step.complete:before {
           display: block; }
         .wizard-container .progress_bar div.step.complete:hover {
-          color: #555555; }
+          color: #555; }
   .wizard-container #blocks {
     width: 100%;
     position: relative;

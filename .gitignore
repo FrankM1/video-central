@@ -4,6 +4,7 @@ composer.phar
 Thumbs.db
 *.log
 /node_modules
+deploy.sh
 
 .*
 !.gitignore

@@ -294,7 +294,7 @@ e.g. <video class="video-js my-skin-name">
       line-height: 1; }
       .vjs-default-skin .vjs-seek-handle .vjs-control-text:before {
         border: solid;
-        border-color: black transparent;
+        border-color: #000 transparent;
         border-width: 4px 4px 0 4px;
         bottom: -4px;
         content: "";
@@ -498,7 +498,7 @@ fonts to show/hide properly.
   margin: -35px 0 -32px;
   border-width: 4px;
   border-style: solid;
-  border-color: white white rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.5);
+  border-color: #FFF #FFF rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.5);
   opacity: .9;
   border-radius: 50%;
   /* animation */
@@ -510,43 +510,36 @@ fonts to show/hide properly.
 @-moz-keyframes videojs-spin {
   0% {
     -moz-transform: rotate(0deg); }
-
   100% {
     -moz-transform: rotate(359deg); } }
 @-webkit-keyframes videojs-spin {
   0% {
     -webkit-transform: rotate(0deg); }
-
   100% {
     -webkit-transform: rotate(359deg); } }
 @-o-keyframes videojs-spin {
   0% {
     -o-transform: rotate(0deg); }
-
   100% {
     -o-transform: rotate(359deg); } }
 @keyframes videojs-spin {
   0% {
     transform: rotate(0deg); }
-
   100% {
     transform: rotate(359deg); } }
 @keyframes videojsloading {
   0% {
     background-position: 0 0; }
-
   100% {
     background-position: 80px 0; } }
 @-webkit-keyframes videojsloading {
   0% {
     background-position: 0 0; }
-
   100% {
     background-position: 80px 0; } }
 @-moz-keyframes videojsloading {
   0% {
     background-position: 0 0; }
-
   100% {
     background-position: 80px 0; } }
 /*
@@ -677,7 +670,7 @@ body.vjs-full-window {
   text-align: center; }
 
 .video-js .vjs-subtitles {
-  color: white; }
+  color: #ffffff; }
 
 .video-js .vjs-captions {
   color: #ffcc66; }

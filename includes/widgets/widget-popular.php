@@ -69,7 +69,7 @@ class Video_Central_Popular_Widget extends WP_Widget {
             $title_tag = 'h5';
 
         } else {
-            $thumb_w    = '285'; //Define width
+            $thumb_w    = '298'; //Define width
             $thumb_h    = '140'; // Define height
             $title_tag = 'h4';
         }
@@ -96,34 +96,37 @@ class Video_Central_Popular_Widget extends WP_Widget {
 			echo $args['before_title'] . $settings['title'] . $args['after_title'];
 		} ?>
 
-        <ul class="thumbnail-<?php echo $thumbnail_size; ?>">
+        <div class="video-central">
 
-			<?php while ( $widget_query->have_posts() ) : $widget_query->the_post(); ?>
+            <ul class="thumbnail-<?php echo $thumbnail_size; ?>">
 
-				<li class="clearfix">
-					<div class="video-central-video-thumb">
-						<a class="" href="<?php video_central_video_permalink( $widget_query->post->ID ); ?>">
+    			<?php while ( $widget_query->have_posts() ) : $widget_query->the_post(); ?>
 
-                            <?php do_action('video_central_after_popular_widget_thumb'); ?>
+    				<li class="clearfix">
+    					<div class="video-central-video-thumb">
+    						<a class="" href="<?php video_central_video_permalink( $widget_query->post->ID ); ?>">
 
-                            <img src="<?php video_central_featured_image_url( $widget_query->post->ID, array( 'width' => $thumb_w, 'height' => $thumb_h ) ); ?>" alt=""/>
+                                <?php do_action('video_central_after_popular_widget_thumb'); ?>
 
-                            <?php do_action('video_central_after_popular_widget_thumb'); ?>
+                                <img src="<?php video_central_featured_image_url( $widget_query->post->ID, array( 'width' => $thumb_w, 'height' => $thumb_h ) ); ?>" alt=""/>
 
-                            <?php if ( $thumbnail_size == 'large' ) { ?><div class="video-entry-meta duration"><?php video_central_video_duration($widget_query->post->ID); ?></div><?php } ?>
+                                <?php do_action('video_central_after_popular_widget_thumb'); ?>
 
-                            <span class="video-icon-wrapper"><span class="icon icon-play"></span></span>
-						</a>
-					</div>
-					<div class="video-central-video-title">
-						<<?php echo $title_tag; ?> class="entry-title"><a href="<?php video_central_video_permalink( $widget_query->post->ID ); ?>"><?php video_central_video_title( $widget_query->post->ID ); ?></a></<?php echo $title_tag; ?>>
-					</div>
-				</li>
+                                <?php if ( $thumbnail_size == 'large' ) { ?><div class="video-entry-meta duration"><?php video_central_video_duration($widget_query->post->ID); ?></div><?php } ?>
 
-			<?php endwhile; ?>
+                                <span class="video-icon-wrapper"><span class="icon icon-play"></span></span>
+    						</a>
+    					</div>
+    					<div class="video-central-video-title">
+    						<<?php echo $title_tag; ?> class="entry-title"><a href="<?php video_central_video_permalink( $widget_query->post->ID ); ?>"><?php video_central_video_title( $widget_query->post->ID ); ?></a></<?php echo $title_tag; ?>>
+    					</div>
+    				</li>
 
-		</ul>
+    			<?php endwhile; ?>
 
+    		</ul>
+
+        </div>
 		<?php
 
 		echo $args['after_widget'];

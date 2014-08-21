@@ -57,11 +57,11 @@ add_action( 'video_central_init', 'video_central_admin' );
 
 // Activation
 add_action( 'video_central_activation', 'video_central_delete_rewrite_rules'        );
-add_action( 'video_central_activation', 'video_central_make_current_user_keymaster' );
+//add_action( 'video_central_activation', 'video_central_make_current_user_keymaster' );
 
 // Deactivation
-add_action( 'video_central_deactivation', 'video_central_remove_caps'          );
-add_action( 'video_central_deactivation', 'video_central_delete_rewrite_rules' );
+//add_action( 'video_central_deactivation', 'video_central_remove_caps'          );
+//add_action( 'video_central_deactivation', 'video_central_delete_rewrite_rules' );
 
 // New Site
 add_action( 'video_central_new_site', 'video_central_create_initial_content', 8 );

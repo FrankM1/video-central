@@ -91,18 +91,16 @@ class Radium_Video_Template {
      * Checks if the template is assigned to the page
      */
     public function view_project_template( $template ) {
-
-        global $post;
-
-        $page_template = get_post_meta( $post->ID, '_wp_page_template', true );
+				
+        $page_template = get_post_meta( get_the_ID(), '_wp_page_template', true );
 
         if( $page_template == 'video-home.php' || $page_template == 'video-list.php' )
         	add_filter('video_central_is_video_archive', '__return_true');
 
-        if (!isset($this->templates[get_post_meta( $post->ID, '_wp_page_template', true )] ) )
+        if (!isset($this->templates[get_post_meta( get_the_ID(), '_wp_page_template', true )] ) )
             return $template;
 
-        $file = $this->page_template_path . get_post_meta( $post->ID, '_wp_page_template', true );
+        $file = $this->page_template_path . get_post_meta( get_the_ID(), '_wp_page_template', true );
 
         // Just to be safe, we check if the file exist first
         if( file_exists( $file ) ) {

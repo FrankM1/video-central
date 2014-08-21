@@ -201,11 +201,19 @@ $border-color:      #dfdfdd !default;
         .page-numbers {
             border: 1px solid grey;
             padding: 3px 10px 5px 10px;
-            border-radius: 2px;
             margin-right: 4px;
+            font-size: 14px;
             color: inherit;
 
-            &.active { color: black; border-color: black; }
+            &:hover {
+                border-color: black;
+                color: black;
+            }
+
+            &.current {
+                color: black;
+                border-color: black;
+            }
         }
 
     }
@@ -609,20 +617,20 @@ $border-color:      #dfdfdd !default;
 				text-align: center;
 				line-height: 27px;
 				color: black;
-				
+
 				display: inline-block;
 				font-family: FontAwesome;
 				font-style: normal;
 				font-weight: normal;
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
-				
+
 				&::after {
-				
+
 				}
 			}
 
-			.video-carousel-prev { 
+			.video-carousel-prev {
 				&:after {
 					 content: "\f077";
 				}
@@ -963,22 +971,22 @@ video:hover {outline:none;}
 /* Theme Compatibility - Theme specific overrides for twenty12 */
 .video-central-twenty {
 
-	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner, 
-	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .video-item, 
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner,
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .video-item,
 	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb {
 		width: 576px;
 		height: 324px;
 	}
-	
+
 	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb,
 	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb img {
 		min-height: 324px;
 	}
-	
+
 	.video-home-slider-grid .video-wall-wrap .carousel-nav .video-carousel .video-carousel-clip {
 		height: 245px;
 	}
-	
+
 }
 
 
