@@ -103,6 +103,14 @@ class Radium_Video_Metaboxes {
                     'std'  => '',
                     'type' => 'Text',
                 ),
+                
+                array(
+                    'name' =>__('Video Embed Code','video_central'),
+                    'desc' => __('Add an embed code here.','video_central'),
+                    'id'   => '_video_central_embed_code',
+                    'std'  => '',
+                    'type' => 'TextArea',
+                ),
 
                 array(
                     'name' =>__('Video Source','video_central'),
@@ -112,7 +120,8 @@ class Radium_Video_Metaboxes {
                     'options' => array(
                     	'vimeo' 	=> 'Vimeo',
                     	'youtube' 	=> 'Youtube',
-                    	'self' 		=> 'Self',
+                    	'self' 		=> __('Self Hosted', 'video_central'),
+                    	'embed' 	=> __('Embed Code', 'video_central'),
                     ),
                     'multiple'  => false,
                     'std'       => array( 'self' )

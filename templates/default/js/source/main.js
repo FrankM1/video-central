@@ -463,9 +463,9 @@ jQuery(document).ready(function($){
 
 		}
 	});
-
-	if (parseInt(likesdata.refresh) > 0) {
-
+		
+	if (parseInt(likesdata.refresh) > 0) {		
+		
 		jQuery.ajaxSetup({ cache: false });
 		var likeables = [];
 

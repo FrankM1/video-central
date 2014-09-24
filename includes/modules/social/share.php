@@ -22,17 +22,25 @@ function video_central_get_tweets($url, $cache_time) {
     if ($cache_time == '') {
         $cache_time = 15;
     }
+    
     if (false === ( $trans = get_transient($transient_name) )) {
+        
         $get_link = wp_remote_get('http://urls.api.twitter.com/1/urls/count.json?url=' . $url);
+        
         if (is_wp_error($get_link)) {
-            return "0";
+        
+            return 0;
+        
         } else {
             $twitter_count = json_decode($get_link['body'], true);
             set_transient($transient_name, intval($twitter_count['count']), $cache_time * 60);
             return intval($twitter_count['count']);
         }
+        
     } else {
+        
         return get_transient($transient_name);
+    
     }
 }
 
@@ -86,7 +94,7 @@ function video_central_get_plusones($ur, $cache_time) {
         $json_string = wp_remote_post("https://clients6.google.com/rpc", $args);
 
         if (is_wp_error($json_string)) {
-            return "0";
+            return 0;
         } else {
             $json = json_decode($json_string['body'], true);
             set_transient($transient_name, intval($json['result']['metadata']['globalCounts']['count']), $cache_time * 60);
@@ -119,7 +127,7 @@ function video_central_get_stumbleupon($url, $cache_time) {
     if (false === ( $trans = get_transient($transient_name) )) {
         $get_link = wp_remote_get('http://www.stumbleupon.com/services/1.01/badge.getinfo?url=' . $url);
         if (is_wp_error($get_link)) {
-            return "0";
+            return 0;
         } else {
             $stumbleupon_count = json_decode($get_link['body'], true);
             if (@$stumbleupon_count['result']['views'] == '') {
@@ -157,7 +165,7 @@ function video_central_get_linkedin($url, $cache_time) {
     if (false === ( $trans = get_transient($transient_name) )) {
         $get_link = wp_remote_get('http://www.linkedin.com/countserv/count/share?url=' . $url . '&format=json');
         if (is_wp_error($get_link)) {
-            return "0";
+            return 0;
         } else {
             $linkedin_count = json_decode($get_link['body'], true);
             if ($linkedin_count['count'] == '') {
@@ -200,7 +208,7 @@ function video_central_get_pinit($url, $cache_time) {
         $temp_json = substr($temp_json, 0, -1);
 
         if (is_wp_error($get_link)) {
-            return "0";
+            return 0;
         } else {
             $pinit_count = json_decode($temp_json, true);
             if ($pinit_count['count'] == '') {
@@ -232,7 +240,7 @@ function video_central_get_twitter_followers() {
 
     // CHECK SETTINGS & DIE IF NOT SET
     if( empty($options['consumerkey']) || empty($options['consumersecret']) ){
-         return;
+         return 0;
     }
 
     // some variables
@@ -331,20 +339,27 @@ function video_central_get_facebook_likes( $facebook_user, $cache_time ) {
         $cache_time = 15;
 
     if (false === ( $video_central_overall_facebook_followers = get_transient($transient_name) )) {
+        
         $json = wp_remote_get("http://graph.facebook.com/" . $facebook_user, array('timeout' => 30));
 
         if (is_wp_error($json)) {
-            return "0.";
+        
+            return 0;
+        
         } else {
+            
             $json = wp_remote_get("http://graph.facebook.com/" . $facebook_user, array('timeout' => 30));
+            
             if (is_wp_error($json))
-                return "0";
+                return 0;
+                
             $fbData = json_decode($json['body'], true);
 
             set_transient($transient_name, intval($fbData['likes']), $cache_time * 60);
 
             return intval($fbData['likes']);
         }
+        
     } else {
         return get_transient($transient_name);
     }
@@ -391,7 +406,7 @@ function video_central_gplus_count( $id, $cache_time ) {
 
         if (is_wp_error($remote_data)) {
 
-            return "0.";
+            return 0;
 
         } else {
 
@@ -453,18 +468,18 @@ function video_central_single_get_tweets( $url = null, $cache_time = 15 ) {
 	    ); 
 	
 	    $response = wp_remote_get('http://urls.api.twitter.com/1/urls/count.json?url=' . $url, $args);
-	    
+	    	    
 	    if( is_wp_error( $response ) )
-	     		return;
+	    	return 0;
 	    
 		$xml = $response['body'];
 	
 		if( is_wp_error( $xml ) )
-		return;
+			return 0;
 	
 		$json = json_decode( $xml, true );
 	    
-	    $shares = isset( $json['count'] ) ?  $json['count']  : false;
+	    $shares = isset( $json['count'] ) ?  $json['count'] : 0;
 	    
 	    if($shares)
 	    	set_transient($transient_name, $shares, $cache_time * 60);
@@ -509,16 +524,16 @@ function video_central_single_get_linkedin_shares( $url = null, $cache_time = 15
 	    $response = wp_remote_get("http://www.linkedin.com/countserv/count/share?url=$url&format=json", $args);
 	    
 	    if( is_wp_error( $response ) )
-	    	return;
+	    	return 0;
 	        
 		$xml = $response['body'];
 	
 		if( is_wp_error( $xml ) )
-			return;
+			return 0;
 	
 		$json = json_decode( $xml, true );
 	
-	    $shares = isset( $json['count'] ) ?  $json['count']  : false;
+	    $shares = isset( $json['count'] ) ? $json['count'] : 0;
 	    
 	    if($shares)
 	    	set_transient($transient_name, $shares, $cache_time * 60);
@@ -542,7 +557,7 @@ function video_central_single_get_facebook_likes( $url = null, $cache_time = 15 
  
 	$post_id = get_the_ID();
 	
-	$transient_name = 'video_central_single_get_linkedin_'. $post_id;
+	$transient_name = 'video_central_single_get_facebook_likes_'. $post_id;
 	
 	$url = $url ? $url : get_permalink();
 	
@@ -564,16 +579,16 @@ function video_central_single_get_facebook_likes( $url = null, $cache_time = 15 
     	$response = wp_remote_get('http://graph.facebook.com/?ids=' . $url, $args);
     	
     	if( is_wp_error( $response ) )
-    	    	return;
+    	    	return 0;
     	        
 		$xml = $response['body'];
 	
 		if( is_wp_error( $xml ) )
-			return;
+			return 0;
 	
 		$json = json_decode( $xml, true );
 		    
-    	$shares = isset( $json[$url]['shares'] ) ? intval( $json[$url]['shares'] ) : false;
+    	$shares = isset( $json[$url]['shares'] ) ? intval( $json[$url]['shares'] ) : 0;
     	
     	if ( $shares )
     		set_transient($transient_name, $shares, $cache_time * 60);
@@ -581,7 +596,6 @@ function video_central_single_get_facebook_likes( $url = null, $cache_time = 15 
     	return $shares;
     
     } else {
-        
     	return get_transient($transient_name);
     
     }
@@ -624,16 +638,16 @@ function video_central_single_get_plusones( $url = null, $cache_time = 15 ) {
         $response = wp_remote_get( 'https://clients6.google.com/rpc', $args );
 		
 		if( is_wp_error( $response ) )
-		    return;
+		    return 0;
 		        
 		$xml = $response['body'];
 		
 		if( is_wp_error( $xml ) )
-			return;
+			return 0;
 		
 		$json = json_decode( $xml, true );
 	    
-	    $shares = isset( $json[0]['result']['metadata']['globalCounts']['count'] ) ? intval( $json[0]['result']['metadata']['globalCounts']['count'] ) : false;
+	    $shares = isset( $json[0]['result']['metadata']['globalCounts']['count'] ) ? intval( $json[0]['result']['metadata']['globalCounts']['count'] ) : 0;
 	    
 	    if ( $shares )
 	    	set_transient($transient_name, $shares, $cache_time * 60);

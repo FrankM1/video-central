@@ -1,13 +1,13 @@
 <?php
 /**
- *  Youtube Importer Data class for Video Central.
+ *  Vimeo Importer Data class for Video Central.
  *
  * @since 1.0.0
  *
  * @package Video Central
  * @author  Franklin M Gitonga
  */
-class Video_Central_Youtube_ImporterData {
+class Video_Central_Vimeo_ImporterData {
 
 	/**
 	 * [$results description]
@@ -33,12 +33,12 @@ class Video_Central_Youtube_ImporterData {
     public function __construct( $args ){
 
         $defaults = array(
-            'source'        => 'youtube', // video source
+            'source'        => 'vimeo', // video source
             'feed'          => 'query', // type of feed to retrieve
-            'query'         => false, // feed query - can contain username, playlist ID or search query
-            'results'       => 50, // number of results to retrieve
+            'query'         => false, // feed query - can contain username, playlist ID or serach query
+            'results'       => 20, // number of results to retrieve
             'start-index'   => 0,
-            'response'      => 'jsonc', // YouTube response type
+            'response'      => 'jsonc', // Vimeo response type
             'order'         => 'published', // order
             'language'      => 'en',
             'safe'          => 'moderate',
@@ -87,14 +87,14 @@ class Video_Central_Youtube_ImporterData {
         $source_query   = sprintf( $source_data['feeds'][$data['feed']]['uri'], $data['query'] );
         $full_url       = add_query_arg(array( $vars ), $source_url.$source_query);
 
-        $content = wp_remote_get( $full_url, array( 'timeout' => 30) );
+        $content = wp_remote_get( $full_url );
 
         if( is_wp_error( $content ) || 200 != $content['response']['code'] ){
             return false;
         }
 
         $result = json_decode( $content['body'], true );
-				
+
         if( isset( $result['data']['items'] ) ){
             $raw_entries = $result['data']['items'];
         }else{
@@ -103,13 +103,13 @@ class Video_Central_Youtube_ImporterData {
 
         $entries =  array();
         foreach ( $raw_entries as $entry ){
-            $entries[] = video_central_format_youtube_video_entry( $entry );
+            $entries[] = video_central_format_vimeo_video_entry( $entry );
         }
 
         $this->results = $entries;
         $this->total_items = $result['data']['totalItems'];
     }
-
+	
     public function get_feed(){
         return $this->results;
     }
@@ -126,8 +126,8 @@ class Video_Central_Youtube_ImporterData {
      */
     private function sources(){
         $sources = array(
-            'youtube' => array(
-                'url'       => 'http://gdata.youtube.com/feeds/api/',
+            'vimeo' => array(
+                'url'       => 'http://gdata.vimeo.com/feeds/api/',
                 'variables' => array(
                     'response' => array(
                         'var'   => 'alt',
@@ -191,9 +191,9 @@ class Video_Central_Youtube_ImporterData {
 
         return $sources;
     }
-
+	
 	/**
-	 * Order data
+	 * Order data 
 	 *
 	 * @since 1.0.0
 	 *
@@ -201,7 +201,7 @@ class Video_Central_Youtube_ImporterData {
     private function order( $source, $feed_type = false, $orderby = false ){
 
         $order = array(
-            'youtube' => array(
+            'vimeo' => array(
                 'query' => array('published', 'viewCount', 'relevance', 'rating'),
                 'user' => array('published', 'viewCount', 'position', 'commentCount', 'duration', 'reversedPosition', 'title'),
                 'playlist' => array('published', 'viewCount', 'position', 'commentCount', 'duration', 'reversedPosition', 'title'),
@@ -213,9 +213,9 @@ class Video_Central_Youtube_ImporterData {
             return false;
         }
 
-        $order = $order[$source][$feed_type];
+        $ord = $order[$source][$feed_type];
 
-        if( !in_array($orderby, $order) ){
+        if( !in_array($orderby, $ord) ){
             return $order[$source]['default'];
         }
 

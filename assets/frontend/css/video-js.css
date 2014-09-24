@@ -690,9 +690,6 @@ body.vjs-full-window {
   opacity: 1;
   visibility: visible; }
 
-.video-central-player .fluid-width-video-wrapper {
-  padding-top: 0 !important; }
-
 .vjs-youtube .vjs-big-play-button,
 .vjs-youtube .vjs-loading-spinner {
   display: none; }

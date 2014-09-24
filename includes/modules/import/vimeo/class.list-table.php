@@ -1,6 +1,6 @@
 <?php
 
-class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
+class Video_Central_Vimeo_Importer_ListTable extends WP_List_Table{
 	
 	/**
 	 * Constructor. Hooks all interactions to initialize the class.
@@ -63,7 +63,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
 
 		// row actions
     	$actions = array(
-    		'view' 		=> sprintf( '<a href="http://www.youtube.com/watch?v=%1$s" target="_video_central_youtube_open">%2$s</a>', $item['video_id'], __('View on YouTube', 'video_central') ),
+    		'view' 		=> sprintf( '<a href="http://www.vimeo.com/watch?v=%1$s" target="_video_central_vimeo_open">%2$s</a>', $item['video_id'], __('View on Vimeo', 'video_central') ),
     	);
 
     	return sprintf('%1$s %2$s',
@@ -154,45 +154,42 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
     	$suffix = 'top' == $which ? '_top' : '2';
 
    		$selected = false;
-   		
 		if( isset( $_GET['cat'] ) ){
 			$selected = $_GET['cat'];
 		}
-		
     	$args = array(
-			'show_count' 	=> true,
+			'show_count' 	=> 1,
     		'hide_empty'	=> 0,
-			'taxonomy' 		=> video_central_get_video_category_tax_id(),
+			'taxonomy' 		=> 'videos',
 			'name'			=> 'cat'.$suffix,
 			'id'			=> 'video_central_categories'.$suffix,
 			'selected'		=> $selected,
     		'hide_if_empty' => true,
-    		'echo'			=> false,
-    		'orderby' 		=> 'NAME'
+    		'echo'			=> false
 		);
 
 		if ( video_central_import_categories() ) {
-			$args['show_option_all'] = __('Create categories from YouTube', 'video_central');
+			$args['show_option_all'] = __('Create categories from Vimeo', 'video_central');
 		} else {
 			$args['show_option_all'] = __('Select category (optional)', 'video_central');
 		}
-			 
-		// get dropdown output
-		$category_select = wp_dropdown_categories($args);
 		
+		// get dropdown output
+		$categ_select = wp_dropdown_categories($args);
     	?>
     	<select name="action<?php echo $suffix;?>" id="action_<?php echo $which;?>">
     		<option value="-1"><?php _e('Bulk actions', 'video_central');?></option>
-    		<option value="import" selected="selected"><?php _e('Import', 'video_central');?></option>
+    		<option value="import"><?php _e('Import', 'video_central');?></option>
     	</select>
 
-    	<?php if( $category_select ): ?>
-    		<label for="video_central_categories<?php echo $suffix;?>"><?php _e('Import into category', 'video_central');?> :</label>
-			<?php echo $category_select; ?>
+    	<?php if( $categ_select ): ?>
+    	<label for="video_central_categories<?php echo $suffix;?>"><?php _e('Import into category', 'video_central');?> :</label>
+		<?php echo $categ_select;?>
 		<?php endif;?>
 
-		<?php submit_button( __( 'Apply', 'video_central' ), 'action', false, false, array( 'id' => "doaction$suffix" ) );
-    	    	
+		<?php submit_button( __( 'Apply', 'video_central' ), 'action', false, false, array( 'id' => "doaction$suffix" ) );?>
+    	<span class="video-central-ajax-response"></span>
+    	<?php
     }
 
     /**
@@ -201,7 +198,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
      */
     function prepare_items() {
 
-        $per_page 	 = 50;
+        $per_page 	 = 10;
 		$total_items = (int)$_GET['video_central_results'];
 		$current_page = $this->get_pagenum();
 
@@ -215,7 +212,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
 			'start-index' => ( $current_page - 1 ) * $per_page + 1
 		);
 
-		$import = new Video_Central_Youtube_ImporterData($args);
+		$import = new Video_Central_Vimeo_ImporterData($args);
 
 		$videos = $import->get_feed();
 

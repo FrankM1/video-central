@@ -59,7 +59,7 @@ class Video_Central_Admin {
 	/**
 	 * @var bool Minimum capability to access Tools and Settings
 	 */
-	public $minimum_capability = 'keep_gate';
+	public $minimum_capability = 'manage_options'; //'keep_gate'; //patch till user management is fully functional
 
 	/** Separator *************************************************************/
 
@@ -444,7 +444,7 @@ class Video_Central_Admin {
 
 		wp_enqueue_script( 'video-central-admin-import', $this->js_url .'source/import.js', array('jquery'), $version, true );
 
-		// Post type checker (only topics and replies)
+		// Post type checker (only videos)
 		if ( 'post' === get_current_screen()->base ) {
 			switch( get_current_screen()->post_type ) {
 				case video_central_get_video_post_type() :
@@ -555,7 +555,7 @@ class Video_Central_Admin {
 	 * @return string Return 'keep_gate' capability
 	 */
 	public function option_page_capability_video_central( $capability = 'manage_options' ) {
-		$capability = 'keep_gate';
+		$capability = 'manage_options'; //'keep_gate';
 		return $capability;
 	}
 
@@ -625,9 +625,8 @@ class Video_Central_Admin {
 
 		<div class="wrap about-wrap">
 			<h1><?php printf( esc_html__( 'Welcome to Video Central %s', 'video_central' ), $display_version ); ?></h1>
-			<div class="about-text"><?php printf( esc_html__( 'Thank you for updating! Video Central %s is bundled up and ready to weather the storm of users in your community!', 'video_central' ), $display_version ); ?></div>
-			<div class="video-central-badge"><?php printf( esc_html__( 'Version %s', 'video_central' ), $display_version ); ?></div>
-
+			<div class="about-text"><?php printf( esc_html__( 'Thank you for updating.', 'video_central' ), $display_version ); ?></div>
+ 
 			<h2 class="nav-tab-wrapper">
 				<a class="nav-tab nav-tab-active" href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'video-central-about' ), 'index.php' ) ) ); ?>">
 					<?php esc_html_e( 'What&#8217;s New', 'video_central' ); ?>
@@ -637,46 +636,22 @@ class Video_Central_Admin {
 			</h2>
 
 			<div class="changelog">
-				<h3><?php esc_html_e( 'video Subscriptions', 'video_central' ); ?></h3>
+				<h3><?php esc_html_e( 'Video Subscriptions', 'video_central' ); ?></h3>
 
 				<div class="feature-section col two-col">
-					<div class="last-feature">
-						<h4><?php esc_html_e( 'Subscribe to Videos', 'video_central' ); ?></h4>
-						<p><?php esc_html_e( 'Now your users can subscribe to new topics in specific Videos.', 'video_central' ); ?></p>
-					</div>
-
-					<div>
-						<h4><?php esc_html_e( 'Manage Subscriptions', 'video_central' ); ?></h4>
-						<p><?php esc_html_e( 'Your users can manage all of their subscriptions in one convenient location.', 'video_central' ); ?></p>
-					</div>
+				 
 				</div>
 			</div>
 
 			<div class="changelog">
 				<h3><?php esc_html_e( 'Converters', 'video_central' ); ?></h3>
-
-				<div class="feature-section col one-col">
-					<div class="last-feature">
-						<p><?php esc_html_e( 'We&#8217;re all abuzz about the hive of new importers, AEF, Drupal, FluxBB, Kunena Videos for Joomla, MyBB, Phorum, PHPFox, PHPWind, PunBB, SMF, Xenforo and XMB. Existing importers are now sweeter than honey with improved importing stickies, topic tags, video categories and the sting is now gone if you need to remove imported users.', 'video_central' ); ?></p>
-					</div>
-				</div>
-
+ 
 				<div class="feature-section col three-col">
 					<div>
 						<h4><?php esc_html_e( 'Theme Compatibility', 'video_central' ); ?></h4>
 						<p><?php esc_html_e( 'Better handling of styles and scripts in the template stack.', 'video_central' ); ?></p>
 					</div>
-
-					<div>
-						<h4><?php esc_html_e( 'Polyglot support', 'video_central' ); ?></h4>
-						<p><?php esc_html_e( 'Video Central fully supports automatic translation updates.', 'video_central' ); ?></p>
-					</div>
-
-					<div class="last-feature">
-						<h4><?php esc_html_e( 'User capabilities', 'video_central' ); ?></h4>
-						<p><?php esc_html_e( 'Roles and capabilities have been swept through, cleaned up, and simplified.', 'video_central' ); ?></p>
-					</div>
-				</div>
+ 				</div>
 			</div>
 
 			<div class="return-to-dashboard">

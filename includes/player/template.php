@@ -35,42 +35,43 @@ function video_central_player( $video_id = 0 ) {
 
         $video_id = video_central_get_video_id( $video_id );
 
-		$upload_video_id  = get_post_meta( $video_id, '_video_central_video_id',    true );
-        $upload_source    = get_post_meta( $video_id, '_video_central_source',      true );
-
+		$upload_video_id  	= get_post_meta( $video_id, '_video_central_video_id',    true );
+        $upload_source    	= get_post_meta( $video_id, '_video_central_source',      true );
+		$embed_code    		= get_post_meta( $video_id, '_video_central_embed_code', true );
+                
         $poster = video_central_get_featured_image_url( $video_id, array( 'height'=>'800', 'width'=>'600') );
 
         if ( $upload_source == 'youtube') {
 
-            $url = 'http://www.youtube.com/watch?v=' . $upload_video_id;
+            $url = 'https://www.youtube.com/embed/' . $upload_video_id;
 
             $dataSetup['forceSSL'] = 'true';
             $dataSetup['techOrder'] = array("youtube");
             $dataSetup['quality'] = '720p';
+            $dataSetup['ytcontrols'] = 'true';
+            $dataSetup['forceHTML5'] = 'true';
 
             $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
 
-            //Output the <video> tag
 $output = <<<_end_
-
-             <video class="video-js vjs-default-skin" controls preload="auto" width="auto" height="auto" data-setup={$jsonDataSetup}>
-                <source src="{$url}" type="video/youtube" />
-              </video>
+<iframe id="ytplayer" type="text/html" width="auto" height="auto" src="{$url}" frameborder="0"></iframe>
 _end_;
-
             return $output;
 
 		} elseif ( $upload_source == 'vimeo') {
 
             $url = 'http://vimeo.com/' . $upload_video_id;
-
+ 
 $output = <<<_end_
 
-            <div class="video-central-player-video-wrapper">
-                <iframe src="//player.vimeo.com/video/{$upload_video_id}" width="" height="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            </div>
+<iframe src="//player.vimeo.com/video/{$upload_video_id}" width="auto" height="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 _end_;
+
             return $output;
+            
+		} elseif ( $upload_source == 'embed') {
+		 		
+            return $embed_code;
 
         } else {
 

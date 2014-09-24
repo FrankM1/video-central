@@ -107,7 +107,7 @@ class Video_Central_Recent_Widget extends WP_Widget {
 
                                 <?php do_action('video_central_before_recent_widget_thumb'); ?>
 
-                                <img src="<?php video_central_featured_image_url( $widget_query->post->ID, array( 'width' => $thumb_w, 'height' => $thumb_h ) ); ?>" alt=""/>
+                                <img src="<?php video_central_featured_image_url( $widget_query->post->ID, array( 'width' => $thumb_w, 'height' => $thumb_h ) ); ?>" alt="<?php video_central_video_title( $widget_query->post->ID ); ?>" height="<?php echo $thumb_h; ?>" width="<?php echo $thumb_w; ?>"/>
 
                                 <?php do_action('video_central_after_recent_widget_thumb'); ?>
 

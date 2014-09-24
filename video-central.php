@@ -4,7 +4,7 @@ Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
 Author: Franklin M Gitonga
-Version: 1.0.1
+Version: 1.1.0
 Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
@@ -184,7 +184,7 @@ class Video_Central {
 
         /** Versions **********************************************************/
 
-        $this->version    = '1.0.0';
+        $this->version    = '1.1.0';
         $this->db_version = '1';
 
         /** Paths *************************************************************/
@@ -218,14 +218,14 @@ class Video_Central {
         $this->video_cat_tax_id         = apply_filters( 'video_central_videos_cat_tax_id', 'video_category' );
         $this->search_id                = apply_filters( 'video_central_search_id',         'video_search' );
         $this->user_id                  = apply_filters( 'video_central_user_id',           'video_user'   );
-		$this->view_id           		= apply_filters( 'video_central_view_id',   		'video_view'   );
+        $this->view_id                  = apply_filters( 'video_central_view_id',           'video_view'   );
 
         /** Queries ***********************************************************/
-		$this->current_view_id      = 0; // Current view id
-		$this->current_video_id     = 0; // Current video id
+        $this->current_view_id      = 0; // Current view id
+        $this->current_video_id     = 0; // Current video id
 
-        $this->video_query    		= new WP_Query(); // Main video query
-        $this->search_query   		= new WP_Query(); // Main search query
+        $this->video_query          = new WP_Query(); // Main video query
+        $this->search_query         = new WP_Query(); // Main search query
 
         /** Theme Compat ******************************************************/
 
@@ -318,9 +318,9 @@ class Video_Central {
 
         if ( is_admin() ) :
 
-          	// Quick admin check and load if needed
-           	require( $this->includes_dir . 'admin/admin.php'   );
-           	require( $this->includes_dir . 'admin/actions.php' );
+            // Quick admin check and load if needed
+            require( $this->includes_dir . 'admin/admin.php'   );
+            require( $this->includes_dir . 'admin/actions.php' );
 
             //Check that 'class-wp-list-table.php' is available
             if(!class_exists('WP_List_Table')) :
@@ -342,6 +342,14 @@ class Video_Central {
             include_once $this->includes_dir.'modules/import/youtube/class.thumbnails.php';
             include_once $this->includes_dir.'modules/import/youtube/class.wizard.php';
             include_once $this->includes_dir.'modules/import/youtube/class.list-table.php';
+
+            //import youtube videos
+           // include_once $this->includes_dir.'modules/import/vimeo/functions.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.importer.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.importer-data.php';
+            include_once $this->includes_dir.'modules/import/vimeo/class.thumbnails.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.wizard.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.list-table.php';
 
         else :
 
@@ -445,8 +453,9 @@ class Video_Central {
         wp_enqueue_script( 'video-central-general', $this->core_assets_url . 'frontend/js/source/video-central.js', array( 'jquery' ), $this->version, true );
 
         //video js (http://videojs.com)
-        wp_enqueue_script( 'video-central-player', $this->core_assets_url . 'frontend/js/vendor/video.dev.js', array( 'jquery' ), $this->version, true );
-        wp_enqueue_script( 'video-central-player-plugins', $this->core_assets_url . 'frontend/js/vendor/vjs.youtube.js', array( 'jquery', 'video-central-player' ), $this->version, true );
+        wp_enqueue_script( 'video-central-player', $this->core_assets_url . 'frontend/js/vendor/video.dev.js', array( 'jquery' ), $this->version, true ); //dev version is required for some plugins to work
+        wp_enqueue_script( 'video-central-player-youtube', $this->core_assets_url . 'frontend/js/vendor/vjs.youtube.js', array( 'jquery', 'video-central-player' ), $this->version, true );
+        wp_enqueue_script( 'video-central-player-vimeo', $this->core_assets_url . 'frontend/js/vendor/vjs.vimeo.js', array( 'jquery', 'video-central-player' ), $this->version, true );
 
         //custom css files
         wp_enqueue_style( 'video-central-player-style', $this->core_assets_url . 'frontend/css/video-js.css', array(), $this->version );
@@ -625,11 +634,11 @@ class Video_Central {
         $priority           = 'top';
 
         // Archive Slugs
-        $search_slug        	= video_central_get_search_slug();
+        $search_slug            = video_central_get_search_slug();
 
         // Tertiary Slugs
         $paged_slug         = video_central_get_paged_slug();
-		$view_slug          = video_central_get_view_slug();
+        $view_slug          = video_central_get_view_slug();
 
         // Unique rewrite ID's
         $paged_id           = video_central_get_paged_rewrite_id();

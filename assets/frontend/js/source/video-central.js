@@ -3,6 +3,8 @@ jQuery(document).ready(function($) {
 	 
 	$('.video-central-player').each(function() {
 		$(this).removeClass('loading');
+		
+		//$(this).find('.video-js, ').css('padding', '');
 	});
 	            
     // Once the video is ready make it responsive
@@ -34,7 +36,9 @@ jQuery(document).ready(function($) {
         resizeVideoJS(); // Initialize the function
         window.onresize = resizeVideoJS; // Call the function on resize
        
- 
+ 		
+ 		//$(".video-js").unFitVids();
+ 		
     });
     
     /*
@@ -149,3 +153,11 @@ jQuery(document).ready(function($) {
 
 
  });
+ 
+ //unfit vid http://stackoverflow.com/questions/15961004/is-there-any-way-to-remove-fitvids-from-an-element-after-its-been-applied
+jQuery.fn.unFitVids = function () {
+     var id = jQuery(this).attr("id");
+     var $children = jQuery("#" + id + " .fluid-width-video-wrapper").children().clone();
+     jQuery("#" + id + " .fluid-width-video-wrapper").remove(); //removes the element
+     jQuery("#" + id).append($children); //adds it to the parent
+ };

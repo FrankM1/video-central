@@ -88,25 +88,21 @@ class Video_Central_Default_Theme extends Video_Central_Theme_Compat {
 		// Setup styles array
 		$styles = array();
 
-		//if ( is_video_central() ) {
+		$styles['video-central-grid'] = array(
+			'file'         => 'css/grid.css',
+			'dependencies' => array()
+		);
 
-			$styles['video-central-grid'] = array(
-				'file'         => 'css/grid.css',
-				'dependencies' => array()
-			);
+		$styles['video-central-style'] = array(
+			'file'         => 'css/style.css',
+			'dependencies' => array()
+		);
 
-			$styles['video-central-style'] = array(
-				'file'         => 'css/style.css',
-				'dependencies' => array()
-			);
-
-			$styles['video-central-font-awesome'] = array(
-				'file'         => 'css/font-awesome.css',
-				'dependencies' => array()
-			);
-
-		//}
-
+		$styles['video-central-font-awesome'] = array(
+			'file'         => 'css/font-awesome.css',
+			'dependencies' => array()
+		);
+ 
 		// Filter the scripts
 		$styles = apply_filters( 'video_central_default_theme_styles', $styles );
 
@@ -114,6 +110,7 @@ class Video_Central_Default_Theme extends Video_Central_Theme_Compat {
 		foreach ( $styles as $handle => $attributes ) {
 			video_central_enqueue_style( $handle, $attributes['file'], $attributes['dependencies'], $this->version, 'screen' );
 		}
+		
 	}
 
 	/**
@@ -167,9 +164,9 @@ class Video_Central_Default_Theme extends Video_Central_Theme_Compat {
 		wp_localize_script( 'video-central-js', 'likesdata', array(
 			'ajaxurl' 	=> admin_url( 'admin-ajax.php' ),
 			'nonce' 	=> wp_create_nonce( 'likes-nonce' ),
-			'refresh' 	=> isset($options['likes_refresh' ]) ? $options['likes_refresh' ] : 50000,
-			'lifetime'	=> isset($options['likes_lifetime']) ? $options['likes_lifetime'] : 1460,
-			'unlike'	=> isset($options['likes_unlike'  ]) && is_bool($options['likes_unlike'  ]) ? $options['likes_unlike'] : true
+			'refresh' 	=> isset($options['likes_refresh' ]) ? "'".$options['likes_refresh' ]."'" : '0',
+			'lifetime'	=> isset($options['likes_lifetime']) ? "'".$options['likes_lifetime']."'" : '1460',
+			'unlike'	=> isset($options['likes_unlike'  ]) && "'".is_bool($options['likes_unlike'  ])."'" ? $options['likes_unlike'] : "1"
 		));
 
 	}

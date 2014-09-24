@@ -493,7 +493,6 @@ function video_central_settings_integration( $default = 0 ) {
 	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_settings_integration', $default ) );
 }
 
-
 /**
  * Toggle Video Content
  *
@@ -520,9 +519,8 @@ function video_central_thumbnail_dimensions( $default = array( 'width' => 300, '
 	return apply_filters( __FUNCTION__, get_option( '_video_central_thumbnail_dimensions', $default ) );
 }
 
-
 /**
- * Video Short Title Lenght
+ * Video Short Title Length
  *
  * @since 1.0.0
  *

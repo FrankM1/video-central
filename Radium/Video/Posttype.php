@@ -444,7 +444,9 @@ class Radium_Video_Posttype {
     function admin_order($wp_query) {
 
         if (is_admin()) {
-
+			
+			global $wp_query;
+			
             // Get the post type from the query
             $post_type = $wp_query->query['post_type'];
 
