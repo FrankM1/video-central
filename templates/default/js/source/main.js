@@ -9,6 +9,9 @@ var VideoCentral = {
 		jQuery('.orderby-select').change(function() {
 			location.href = this.options[this.selectedIndex].value;
 		});
+		
+		// FitVid Magic - Target all videos
+		jQuery('.video-central-player').fitVids({ customSelector: "iframe[src*='livestream']" });
 
 	},
 

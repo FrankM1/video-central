@@ -111,12 +111,12 @@
   
   jQuery(function($) {
   
-   var plugin = $.fn.likeable = function() {
-      return this.each(function() {
-        return new Kudoable($(this));
-      });
-    };
-    
-    return plugin;
+	   var plugin = $.fn.likeable = function() {
+	      return this.each(function() {
+	        return new Kudoable($(this));
+	      });
+	    };
+	    
+	    return plugin;
   });
   

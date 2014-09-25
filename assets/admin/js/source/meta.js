@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
         _video_central_video_id = '._video_central_video_id',
         _video_central_webm = '._video_central_webm',
         _video_central_mp4 = '._video_central_mp4',
-        _video_central_ogg = '._video_central_ogg';
+        _video_central_ogg = '._video_central_ogg',
         _video_central_embed_code = '._video_central_embed_code';
         
 	currentType = jQuery(VideoCentralTypeTrigger).val();

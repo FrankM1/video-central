@@ -94,6 +94,7 @@ module.exports = function(grunt) {
                         'templates/default/js/vendor/jquery.cookie.js',
                         'templates/default/js/vendor/jquery.jcarousel.js',
                         'templates/default/js/vendor/bootstrap.tabs.js',
+                        'templates/default/js/vendor/fitvid.js',
                     ]
                 }
             },
