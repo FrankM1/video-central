@@ -1,12 +1,12 @@
 === Video Central for WordPress ===
-Contributors: frankgitonga
+Contributors: frankgitonga, radiumthemes
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y8T9VMQZ8URY4
 License: GPLv2+
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: Video, Media, Shortcode, Youtube, Vimeo, Comments, Widget
 Requires at least: 3.3
 Tested up to: 4.0.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 
 Video Central is the ultimate video manager for WordPress.
 
@@ -41,6 +41,9 @@ For more info, check me out on twitter and follow <a href="http://twitter.com/fr
 = Developers =
 Github Link <a href="https://github.com/FrankM1/video-central">https://github.com/FrankM1/video-central</a>
 
+= Officially Supported Themes =
+<a href="http://themes.radiumthemes.com/wp/newscore">Newscore</a>
+
 == Installation ==
 
 1. Upload the `video-central` folder to the `/wp-content/plugins/` directory
@@ -64,11 +67,11 @@ Github Link <a href="https://github.com/FrankM1/video-central">https://github.co
 = Which video sources does this plugin support? =
 Youtube, Vimeo are supported. You can also upload and host your own mp4, webm and m4v files. We will be adding support for more providers soon.
 
-== Supported Themes ==
-
-<a href="http://themes.radiumthemes.com/wp/newscore">Newscore</a>
-
 == Changelog ==
+
+= 1.1.2 =
+
+* Fullscreen button fix for the youtube player
 
 = 1.1.1 =
 
@@ -81,7 +84,7 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 * PHP 5.2 compatibility
 * Increased import per page to 50 from 20
 * Better and higher timeout for youtube api
-* Vime Thumbnail import
+* Vimeo Thumbnail import
 
 = 1.0.0 =
 *Initial Release

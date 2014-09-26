@@ -54,7 +54,7 @@ function video_central_player( $video_id = 0 ) {
             $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
 
 $output = <<<_end_
-<iframe id="ytplayer" type="text/html" width="auto" height="auto" src="{$url}" frameborder="0"></iframe>
+<iframe id="video-central-ytplayer" type="text/html" width="auto" height="auto" src="{$url}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 _end_;
             return $output;
 

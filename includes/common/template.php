@@ -428,7 +428,10 @@ function video_central_body_class( $wp_classes, $custom_classes = false ) {
 
 	/** Add theme class **************************************************************/
 	$main_theme = wp_get_theme();
-	$video_central_classes[] = 'video-central-' . strtolower($main_theme->get( 'Name' ));
+	
+	$main_theme = sanitize_title_with_dashes($main_theme->get( 'Name' ));
+	
+	$video_central_classes[] = 'video-central-' . strtolower( $main_theme);
 
 	/** Clean up **************************************************************/
 

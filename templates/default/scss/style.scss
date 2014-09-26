@@ -970,7 +970,7 @@ video:hover {outline:none;}
 }
 
 /* Theme Compatibility - Theme specific overrides for twenty12 */
-.video-central-twenty {
+.video-central-twenty-twelve {
 
 	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner,
 	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .video-item,
@@ -990,6 +990,59 @@ video:hover {outline:none;}
 
 }
 
+/* Theme Compatibility - Theme specific overrides for twenty thirteen */
+
+.video-central-twenty-thirteen {
+	
+	&.video-central #main > .video-central-row {
+		max-width: 1038px;
+		margin-left: 222px;
+	}
+	
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner,
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .video-item,
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb {
+		width: 734px;
+		height: 379px;
+	}
+
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb,
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb img {
+		min-height: 379px;
+	}
+
+	.video-home-slider-grid .video-wall-wrap .carousel-nav .video-carousel .video-carousel-clip {
+		height: 300px;
+	}
+
+}
+
+/* Theme Compatibility - Theme specific overrides for twenty fourteen */
+
+.video-central-twenty-fourteen {
+	
+	&.video-central #main > .video-central-row {
+		max-width: 1038px;
+		margin-left: 222px;
+	}
+	
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner,
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .video-item,
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb {
+		width: 674px;
+		height: 379px;
+	}
+
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb,
+	.video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner .thumb img {
+		min-height: 379px;
+	}
+
+	.video-home-slider-grid .video-wall-wrap .carousel-nav .video-carousel .video-carousel-clip {
+		height: 300px;
+	}
+
+}
 
 /* Mobile */
 @media only screen and (max-width: 767px) {
