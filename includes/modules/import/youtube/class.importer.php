@@ -88,7 +88,7 @@ class Video_Central_Youtube_Importer {
             8 => sprintf( __('Video saved. <a target="_blank" href="%s">See video</a>', 'video_central'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
             9 => sprintf( __('Video will be published at: <strong>%1$s</strong>. <a target="_blank" href="%2$s">See video</a>', 'video_central'),
             // translators: Publish box date format, see http://php.net/date
-            date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
+            date_i18n( 'M j, Y @ G:i', strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
             10 => sprintf( __('Video draft saved. <a target="_blank" href="%s">See video</a>', 'video_central'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
 
             101 => __('Please select a source', 'video_central'),

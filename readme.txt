@@ -69,6 +69,9 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 == Changelog ==
 
+= 1.1.3 =
+* Fixed Translation strings and added .po file
+
 = 1.1.2 =
 
 * Fullscreen button fix for the youtube player

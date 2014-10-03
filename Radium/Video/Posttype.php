@@ -235,7 +235,7 @@ class Radium_Video_Posttype {
 
         $num_posts = wp_count_posts( $this->post_type );
         $num = number_format_i18n( $num_posts->publish );
-        $text = _n( 'Video Item', 'Video Items', intval($num_posts->publish) );
+        $text = _n( 'Video Item', 'Video Items', intval($num_posts->publish), 'video_central' );
         if ( current_user_can( 'edit_posts' ) ) {
             $num = "<a href='edit.php?post_type=".$this->post_type."'>$num</a>";
             $text = "<a href='edit.php?post_type=". $this->post_type ."'>$text</a>";
@@ -246,7 +246,7 @@ class Radium_Video_Posttype {
 
         if ($num_posts->pending > 0) {
             $num = number_format_i18n( $num_posts->pending );
-            $text = _n( 'Video Item Pending', 'Video Items Pending', intval($num_posts->pending) );
+            $text = _n( 'Video Item Pending', 'Video Items Pending', intval($num_posts->pending), 'video_central' );
             if ( current_user_can( 'edit_posts' ) ) {
                 $num = "<a href='edit.php?post_status=pending&post_type=video'>$num</a>";
                 $text = "<a href='edit.php?post_status=pending&post_type=video'>$text</a>";

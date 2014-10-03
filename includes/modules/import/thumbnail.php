@@ -316,7 +316,7 @@ class Video_Central_Import_Thumbnails {
 
         if( is_wp_error( $response ) ) {
 
-            $error = new WP_Error( 'thumbnail_retrieval', __( 'Error retrieving a thumbnail from the URL <a href="' . $image_url . '">' . $image_url . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message() ) );
+            $error = new WP_Error( 'thumbnail_retrieval', __( 'Error retrieving a thumbnail from the URL <a href="' . $image_url . '">' . $image_url . '</a> using <code>wp_remote_get()</code><br />If opening that URL in your web browser returns anything else than an error page, the problem may be related to your web server and might be something your host administrator can solve.<br />Details: ' . $response->get_error_message(), 'video_central' ) );
 
         } else {
 
@@ -346,7 +346,7 @@ class Video_Central_Import_Thumbnails {
 
             } else {
 
-                return new WP_Error( 'thumbnail_upload', __( 'Unsupported MIME type:' ) . ' ' . $image_type );
+                return new WP_Error( 'thumbnail_upload', __( 'Unsupported MIME type:', 'video_central' ) . ' ' . $image_type );
 
             }
 
@@ -361,7 +361,7 @@ class Video_Central_Import_Thumbnails {
             // Stop for any errors while saving the data or else continue adding the image to the media library
             if ( $upload['error'] ) {
 
-                $error = new WP_Error( 'thumbnail_upload', __( 'Error uploading image data:' ) . ' ' . $upload['error'] );
+                $error = new WP_Error( 'thumbnail_upload', __( 'Error uploading image data:', 'video_central' ) . ' ' . $upload['error'] );
                 return $error;
 
             } else {

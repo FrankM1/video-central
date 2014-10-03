@@ -170,11 +170,68 @@ module.exports = function(grunt) {
                     dest: 'templates/default/img/'
                 }]
             }
-        }
+        },
+        
+        checktextdomain: {
+	    	options: {
+	    		correct_domain: false,
+	    		text_domain: 'video_central',
+	    		keywords: [
+	    			'__:1,2d',
+	    			'_e:1,2d',
+	    			'_x:1,2c,3d',
+	    			'_n:1,2,4d',
+	    			'_ex:1,2c,3d',
+	    			'_nx:1,2,4c,5d',
+	    			'esc_attr__:1,2d',
+	    			'esc_attr_e:1,2d',
+	    			'esc_attr_x:1,2c,3d',
+	    			'esc_html__:1,2d',
+	    			'esc_html_e:1,2d',
+	    			'esc_html_x:1,2c,3d',
+	    			'_n_noop:1,2,3d',
+	    			'_nx_noop:1,2,3c,4d'
+	    		]
+	    	},
+	    	files: {
+	    		src: '**/*.php',
+	    		expand: true
+	    	}
+	    },
+	
+	    addtextdomain: {
+	    	options: {
+		            textdomain: 'video_central',    // Project text domain.
+	        },
+	
+	        target: {
+	            files: {
+	                src: ['*.php', '**/*.php', '!node_modules/**']
+	            }
+	        }
+	    },
+	
+	    makepot: {
+	    	target: {
+	    		options: {
+	     			domainPath: 'languages',
+	    			mainFile: 'style.css',
+	    			potFilename: 'en_EN.po',
+	    			processPot: function( pot ) {
+	    				pot.headers['report-msgid-bugs-to'] = 'frank@radiumthemes.com';
+	                	pot.headers['language-team'] = 'RadiumThemes <http://radiumthemes.com>';
+	                	pot.headers['Last-Translator'] = 'Franklin Gitonga <frank@radiumthemes.com>';
+	    				return pot;
+	    			},
+	    			type: 'wp-plugin'
+	    		}
+	    	}
+	    },
 
     });
 
     // register task
     grunt.registerTask('build', ['sass', 'sprites', 'autoprefixer', 'jshint', 'uglify', 'watch']);
+	grunt.registerTask('build-lang',  ['checktextdomain', 'makepot' ] );
 
 };

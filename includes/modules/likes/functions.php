@@ -62,7 +62,7 @@ function video_central_get_likes_count( $video_id = 0 ) {
 	$metaclass = $beta = null;
 	
 	if (!empty($hover)) {
-		$beta = '<div class="like-meta-beta like-dontmove"><span>'.str_replace('//','<br />',esc_html__($hover)).'</span></div>'."\n\t\t";
+		$beta = '<div class="like-meta-beta like-dontmove"><span>'.str_replace('//','<br />',esc_html($hover)).'</span></div>'."\n\t\t";
 		$metaclass = " like-hideonhover";
 	}
 
@@ -71,7 +71,7 @@ function video_central_get_likes_count( $video_id = 0 ) {
 	$output.= '<span class="like-count">'.get_video_central_likes_count($video_id).'</span>'."\n\t\t\t";
 
 	if (!empty($text))
-		$output.= "\t".'<span class="like-text">'.str_replace('//','<br />',esc_html__($text)).'</span>'."\n\t\t\t";
+		$output.= "\t".'<span class="like-text">'.str_replace('//','<br />',esc_html($text)).'</span>'."\n\t\t\t";
 	
 	$output.= '</div>'."\n\t\t\t";
 	$output.= $beta;
@@ -116,9 +116,9 @@ function video_central_get_likes_count( $video_id = 0 ) {
 	
 		$style = isset($style) && !empty($style) ? trim($style) : "";
 		$class = isset($class) && !empty($class) ? " ".trim($class) : "";
-		$css = !empty($style) ? ' style="'.esc_attr__($style).'"':'';
+		$css = !empty($style) ? ' style="'.esc_html($style).'"':'';
 		
-		$output = '<div class="like-box'.esc_html__($class).'"'.$css.'>'."\n\t";
+		$output = '<div class="like-box'.esc_html($class).'"'.$css.'>'."\n\t";
 		$output.= '<figure class="like likeable" data-id="'.$video_id.'">'."\n\t\t";
 		
 		$output.= '<a class="like-object">'."\n\t\t\t";

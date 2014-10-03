@@ -16,8 +16,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
 			wp_enqueue_style( 'rwmb-file', video_central()->admin->css_url  . 'metaboxes/file.css', array(), video_central()->version  );
 			wp_enqueue_script( 'rwmb-file', video_central()->admin->js_url  . 'metaboxes/file.js', array( 'jquery' ), video_central()->version, true );
 			wp_localize_script( 'rwmb-file', 'rwmbFile', array(
-				'maxFileUploadsSingle' => __( 'You may only upload maximum %d file', 'rwmb' ),
-				'maxFileUploadsPlural' => __( 'You may only upload maximum %d files', 'rwmb' ),
+				'maxFileUploadsSingle' => __( 'You may only upload maximum %d file', 'video_central' ),
+				'maxFileUploadsPlural' => __( 'You may only upload maximum %d files', 'video_central' ),
 			) );
 		}
 
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
 			if ( $ok )
 				wp_send_json_success();
 			else
-				wp_send_json_error( __( 'Error: Cannot delete file', 'rwmb' ) );
+				wp_send_json_error( __( 'Error: Cannot delete file', 'video_central' ) );
 		}
 
 		/**
@@ -80,8 +80,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
 		 */
 		static function html( $meta, $field )
 		{
-			$i18n_title = apply_filters( 'rwmb_file_upload_string', _x( 'Upload Files', 'file upload', 'rwmb' ), $field );
-			$i18n_more  = apply_filters( 'rwmb_file_add_string', _x( '+ Add new file', 'file upload', 'rwmb' ), $field );
+			$i18n_title = apply_filters( 'rwmb_file_upload_string', _x( 'Upload Files', 'file upload', 'video_central' ), $field );
+			$i18n_more  = apply_filters( 'rwmb_file_add_string', _x( '+ Add new file', 'file upload', 'video_central' ), $field );
 
 			// Uploaded files
 			$html = self::get_uploaded_files( $meta, $field );
@@ -133,8 +133,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
 
 		static function file_html( $attachment_id )
 		{
-			$i18n_delete = apply_filters( 'rwmb_file_delete_string', _x( 'Delete', 'file upload', 'rwmb' ) );
-			$i18n_edit   = apply_filters( 'rwmb_file_edit_string', _x( 'Edit', 'file upload', 'rwmb' ) );
+			$i18n_delete = apply_filters( 'rwmb_file_delete_string', _x( 'Delete', 'file upload', 'video_central' ) );
+			$i18n_edit   = apply_filters( 'rwmb_file_edit_string', _x( 'Edit', 'file upload', 'video_central' ) );
 			$li = '
 			<li>
 				<div class="rwmb-icon">%s</div>

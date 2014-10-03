@@ -182,7 +182,7 @@ class Video_Central_Featured_Widget extends WP_Widget {
 		</p>
 
         <p>
-            <label for="<?php echo $this->get_field_id('thumbnail_size'); ?>"><?php _e('Thumbnail size', 'radium'); ?></label>
+            <label for="<?php echo $this->get_field_id('thumbnail_size'); ?>"><?php _e('Thumbnail size', 'video_central'); ?></label>
             <select id="<?php echo $this->get_field_id( 'thumbnail_size' ); ?>" name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" class="widefat">
                 <?php
                 $i = 0;

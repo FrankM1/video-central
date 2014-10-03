@@ -4,7 +4,7 @@ Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
 Author: Franklin M Gitonga
-Version: 1.1.2
+Version: 1.1.3
 Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
@@ -414,7 +414,7 @@ class Video_Central {
 
         if ( version_compare( $wp_version, '3.0.0', '<' ) ) {
             deactivate_plugins( plugin_basename( __FILE__ ) );
-            wp_die( printf( __( 'Sorry, but your version of WordPress, <strong>%s</strong>, does not meet the Video Central\'s required version of <strong>3.3.1</strong> to run properly. The plugin has been deactivated. <a href="%s">Click here to return to the Dashboard</a>', 'video_central_forms' ), $wp_version, admin_url() ) );
+            wp_die( printf( __( 'Sorry, but your version of WordPress, <strong>%s</strong>, does not meet the Video Central\'s required version of <strong>3.3.1</strong> to run properly. The plugin has been deactivated. <a href="%s">Click here to return to the Dashboard</a>', 'video_central' ), $wp_version, admin_url() ) );
         }
 
     }

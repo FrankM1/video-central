@@ -37,7 +37,7 @@ class Video_Central_Importer_Wizard {
      */
     public function menu_pages(){
 
-        $video_import = add_submenu_page( 'edit.php?post_type='.$this->post_type, __('Import videos', 'video_central'), __('Import videos', 'video_central_videos'), 'edit_posts', 'video_central_import', array($this, 'import_source_tabs'));
+        $video_import = add_submenu_page( 'edit.php?post_type='.$this->post_type, __('Import videos', 'video_central'), __('Import videos', 'video_central'), 'edit_posts', 'video_central_import', array($this, 'import_source_tabs'));
 		
         add_action( 'load-'.$video_import, array($this, 'import_onload') );
 

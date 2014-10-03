@@ -136,19 +136,19 @@ class Video_Central_Vimeo_Thumbnails extends Video_Central_Thumbnails_Providers 
 				'markup'        => '<iframe src="http://player.vimeo.com/video/41504360" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
 				'expected'      => 'http://i.vimeocdn.com/video/287850781_1280.jpg',
 				'expected_hash' => '5388e0d772b827b0837444b636c9676c',
-				'name'          => __( 'iFrame Embed', 'video-thumbnails' )
+				'name'          => __( 'iFrame Embed', 'video_central' )
 			),
 			array(
 				'markup'        => '<object width="500" height="281"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=41504360&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=00adef&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="500" height="281"></embed></object>',
 				'expected'      => 'http://i.vimeocdn.com/video/287850781_1280.jpg',
 				'expected_hash' => '5388e0d772b827b0837444b636c9676c',
-				'name'          => __( 'Flash Embed', 'video-thumbnails' )
+				'name'          => __( 'Flash Embed', 'video_central' )
 			),
 			array(
 				'markup'        => 'https://vimeo.com/channels/soundworkscollection/44520894',
 				'expected'      => 'http://i.vimeocdn.com/video/313130530_1280.jpg',
 				'expected_hash' => '32f742bbe980e5d98d8aa0256026b459',
-				'name'          => __( 'Channel URL', 'video-thumbnails' )
+				'name'          => __( 'Channel URL', 'video_central' )
 			),
 		);
 
