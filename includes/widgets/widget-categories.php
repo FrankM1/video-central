@@ -35,16 +35,35 @@ class Video_Central_Widget_Categories extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;
 
-		$cat_args = array( 'taxonomy' => video_central()->video_cat_tax_id, 'orderby' => 'name', 'show_count' => $c, 'hierarchical' => $h);
-
+		$cat_args = array( 
+			'taxonomy' 		=> video_central_get_video_category_tax_id(), 
+			'orderby' 		=> 'name', 
+			'show_count' 	=> $c, 
+			'hierarchical' 	=> $h
+		);
+				
 		if ( $d ) {
-			$cat_args['show_option_none'] = __('Select Category', "video_central" );
-			wp_dropdown_categories(apply_filters('widget_video_categories_dropdown_args', $cat_args));
+			
+			$categories = get_categories('taxonomy=' .video_central_get_video_category_tax_id() );
+			$select = "<select name='cat' id='cat' class='postform'>n";
+			
+			$select.= "<option value='-1'>". __('Select Category', "video_central" ) ."</option>";
+			   foreach($categories as $category){
+			   if($category->count > 0){
+			       $select.= "<option value='".$category->slug."'>".$category->name."</option>";
+			   }
+			}
+			
+			$select.= "</select>";
+			
+			echo $select;
+			   
 ?>
 
 <script type='text/javascript'>
 /* <![CDATA[ */
 	var dropdown = document.getElementById("cat");
+	
 	function onCatChange() {
 		if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
 			location.href = "<?php echo home_url(); ?>/?video_category="+dropdown.options[dropdown.selectedIndex].value;
