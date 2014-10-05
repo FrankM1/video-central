@@ -2443,15 +2443,58 @@ function video_central_categories_list( $args = array() ) {
 			'title' => __('Categories: ', 'video_central'),
 			'before'   => '',
 			'after'    => ''
-		), 'get_video_author_role' );
+		), 'get_categories_list' );
 
-		$video_id    = video_central_get_video_id( $r['video_id'] );
+		$video_id = video_central_get_video_id( $r['video_id'] );
 
 		if ( !video_central_allow_video_categories() ) return;
 
-		$categories  = get_the_term_list( $video_id, video_central_get_video_category_tax_id() );
+		$categories = get_the_term_list( $video_id, video_central_get_video_category_tax_id() );
 
 		if( $categories ) $output = sprintf( '%1$s<div class="%2$s"><strong>%3$s</strong>%4$s</div>%5$s', $r['before'], $r['class'], $r['title'], $categories, $r['after'] );
+
+		return apply_filters( __FUNCTION__, $output, $r );
+
+	}
+
+/**
+ * Output a list of tags
+ *
+ * @since 1.0.0
+ *
+ * @param array $args Optional.
+ * @uses video_central_get_tags_list() To get the video tags
+ */
+function video_central_tags_list( $args = array() ) {
+	echo video_central_get_tags_list( $args );
+}
+	/**
+	 * Return a list of tags
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string footer meta
+	 */
+	function video_central_get_tags_list( $args = array() ) {
+
+		$output = null;
+
+		// Parse arguments against default values
+		$r = video_central_parse_args( $args, array(
+			'video_id' => 0,
+			'class'    => 'video-central-tags-list clearfix',
+			'title' => __('Tags: ', 'video_central'),
+			'before'   => '',
+			'after'    => ''
+		), 'get_tags_list' );
+
+		$video_id = video_central_get_video_id( $r['video_id'] );
+
+		if ( !video_central_allow_video_tags() ) return;
+
+		$tags = get_the_term_list( $video_id, video_central_get_video_tag_tax_id() );
+				
+		if( $tags ) $output = sprintf( '%1$s<div class="%2$s"><strong>%3$s</strong>%4$s</div>%5$s', $r['before'], $r['class'], $r['title'], $tags, $r['after'] );
 
 		return apply_filters( __FUNCTION__, $output, $r );
 

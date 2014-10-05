@@ -156,8 +156,10 @@ $border-color:      #dfdfdd !default;
             text-decoration: none;
         }
 
-        .video-central-categories-list {
+        .video-central-categories-list,
+        .video-central-tags-list {
         	float: left;
+        	width: 80%;
         }
 
         .video-central-share {

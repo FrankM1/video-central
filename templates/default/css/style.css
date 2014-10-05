@@ -477,8 +477,10 @@ div.like-opening div.like-circle {
   .single-video footer.meta a {
     background: #AAA;
     text-decoration: none; }
-  .single-video footer.meta .video-central-categories-list {
-    float: left; }
+  .single-video footer.meta .video-central-categories-list,
+  .single-video footer.meta .video-central-tags-list {
+    float: left;
+    width: 80%; }
   .single-video footer.meta .video-central-share {
     float: right; }
     .single-video footer.meta .video-central-share:after {

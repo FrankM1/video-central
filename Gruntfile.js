@@ -215,8 +215,8 @@ module.exports = function(grunt) {
 	    	target: {
 	    		options: {
 	     			domainPath: 'languages',
-	    			mainFile: 'style.css',
-	    			potFilename: 'en_EN.po',
+	    			mainFile: 'video-central.php',
+	    			potFilename: 'video_central-en_US.po',
 	    			processPot: function( pot ) {
 	    				pot.headers['report-msgid-bugs-to'] = 'frank@radiumthemes.com';
 	                	pot.headers['language-team'] = 'RadiumThemes <http://radiumthemes.com>';

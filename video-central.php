@@ -592,7 +592,7 @@ class Video_Central {
         // Setup paths to current locale file
         $mofile_local  = $this->lang_dir . $mofile;
         $mofile_global = WP_LANG_DIR . '/video_central/' . $mofile;
-
+				
         // Look in global /wp-content/languages/video-central folder
         load_textdomain( $this->domain, $mofile_global );
 

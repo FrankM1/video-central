@@ -8,11 +8,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-10-03 18:18+0300\n"
+"PO-Revision-Date: 2014-10-04 15:01-0500\n"
 "Last-Translator: Franklin Gitonga <frank@radiumthemes.com>\n"
 "Language-Team: RadiumThemes <http://radiumthemes.com>\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.9\n"
 "Last-Translator: Franklin Gitonga <frank@radiumthemes.com>\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"Language: pl\n"
 
 #: Radium/MediaElements/Helper.php:188
 msgid ""
@@ -127,7 +130,7 @@ msgstr ""
 
 #: Radium/Video/Posttype.php:104
 msgid "Radium Videos"
-msgstr ""
+msgstr "Kontrowersje"
 
 #: Radium/Video/Posttype.php:238
 msgid "Video Item"
@@ -143,7 +146,7 @@ msgstr[1] ""
 
 #: Radium/Video/Posttype.php:267
 msgid "Sort Videos"
-msgstr ""
+msgstr "Sortuj kontrowersje"
 
 #: Radium/Video/Posttype.php:267
 msgid "Sort"
@@ -177,7 +180,7 @@ msgstr ""
 
 #: Radium/Video/Shortcodes.php:341 includes/widgets/widget-categories.php:41
 msgid "Select Category"
-msgstr ""
+msgstr "Wybierz kategorię"
 
 #: Radium/Video/Widget.php:24
 msgid "A widget that displays your recent videos."
@@ -283,7 +286,7 @@ msgstr ""
 
 #: includes/admin/settings.php:42
 msgid "Videos Per Page"
-msgstr ""
+msgstr "Kontrowersje na stronę"
 
 #: includes/admin/settings.php:48
 msgid "Videos Root Slug"
@@ -323,7 +326,7 @@ msgstr ""
 #: includes/modules/class.woosidebars.integration.php:129
 #: includes/videos/template.php:49 includes/videos/template.php:50
 msgid "Videos"
-msgstr ""
+msgstr "Kontrowersje"
 
 #: includes/admin/settings.php:156
 msgid "Videos Root"
@@ -425,7 +428,7 @@ msgstr ""
 
 #: includes/admin/settings.php:520
 msgid "Latest Videos"
-msgstr ""
+msgstr "Najnowsze kontrowersje"
 
 #: includes/admin/settings.php:551
 msgid "Custom slugs for single videos, categories, tags, views, and search."
@@ -461,7 +464,7 @@ msgstr ""
 
 #: includes/admin/settings.php:784
 msgid "Videos base"
-msgstr ""
+msgstr "Baza kontrowersji"
 
 #: includes/admin/settings.php:787
 msgid "Video slug"
@@ -493,67 +496,67 @@ msgstr ""
 
 #: includes/common/functions.php:122
 msgid "right now"
-msgstr ""
+msgstr "teraz"
 
 #: includes/common/functions.php:123
 msgid "%s ago"
-msgstr ""
+msgstr "%s temu"
 
 #: includes/common/functions.php:127
 msgid "year"
-msgstr ""
+msgstr "rok"
 
 #: includes/common/functions.php:127
 msgid "years"
-msgstr ""
+msgstr "lat"
 
 #: includes/common/functions.php:128
 msgid "month"
-msgstr ""
+msgstr "miesiąc"
 
 #: includes/common/functions.php:128
 msgid "months"
-msgstr ""
+msgstr "miesięcy"
 
 #: includes/common/functions.php:129
 msgid "week"
-msgstr ""
+msgstr "tydzień"
 
 #: includes/common/functions.php:129
 msgid "weeks"
-msgstr ""
+msgstr "tygodni"
 
 #: includes/common/functions.php:130
 msgid "day"
-msgstr ""
+msgstr "dzień"
 
 #: includes/common/functions.php:130
 msgid "days"
-msgstr ""
+msgstr "dni"
 
 #: includes/common/functions.php:131
 msgid "hour"
-msgstr ""
+msgstr "godzina"
 
 #: includes/common/functions.php:131
 msgid "hours"
-msgstr ""
+msgstr "godzin"
 
 #: includes/common/functions.php:132
 msgid "minute"
-msgstr ""
+msgstr "minuta"
 
 #: includes/common/functions.php:132
 msgid "minutes"
-msgstr ""
+msgstr "minut"
 
 #: includes/common/functions.php:133
 msgid "second"
-msgstr ""
+msgstr "sekunda"
 
 #: includes/common/functions.php:133
 msgid "seconds"
-msgstr ""
+msgstr "sekund"
 
 #: includes/common/functions.php:408
 msgid ""
@@ -585,7 +588,7 @@ msgstr ""
 
 #: includes/common/template.php:693
 msgid "Likes"
-msgstr ""
+msgstr "Polubienia"
 
 #: includes/common/template.php:694
 msgid "Sort by Likes"
@@ -617,7 +620,7 @@ msgstr ""
 
 #: includes/common/template.php:841
 msgid "Videos: %s"
-msgstr ""
+msgstr "Kontrowersje: %s"
 
 #: includes/core/capabilities.php:374
 msgid "Keymaster"
@@ -668,7 +671,7 @@ msgstr ""
 #: includes/modules/class.woosidebars.integration.php:130
 #: includes/videos/template.php:52
 msgid "All Videos"
-msgstr ""
+msgstr "Wszystkie kontrowersje"
 
 #: includes/modules/class.woosidebars.integration.php:134
 msgid "Account Pages"
@@ -680,11 +683,11 @@ msgstr ""
 
 #: includes/modules/class.woosidebars.integration.php:140
 msgid "Videos in the \"%s\" category"
-msgstr ""
+msgstr "Kontrowersje w kategorii \"%s\""
 
 #: includes/modules/class.woosidebars.integration.php:141
 msgid "Videos tagged \"%s\""
-msgstr ""
+msgstr "Tagi kontrowersji \"%s\""
 
 #: includes/modules/import/thumbnail.php:349
 msgid "Unsupported MIME type:"
@@ -890,7 +893,7 @@ msgstr ""
 #: includes/modules/import/vimeo/class.list-table.php:174
 #: includes/modules/import/youtube/class.list-table.php:177
 msgid "Select category (optional)"
-msgstr ""
+msgstr "Wybierz kategorię"
 
 #: includes/modules/import/vimeo/class.list-table.php:181
 #: includes/modules/import/youtube/class.list-table.php:185
@@ -1111,8 +1114,9 @@ msgstr ""
 #: includes/search/template.php:376 includes/videos/template.php:1979
 msgid "Showing %1$s videos"
 msgid_plural "Showing %1$s videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Oglądasz %1$s kontrowersję"
+msgstr[1] "Oglądasz %1$s kontrowersje"
+msgstr[2] "Oglądasz %1$s kontrowersji"
 
 #: includes/search/template.php:381 includes/videos/template.php:1987
 msgid "Showing %2$s (of %4$s total)"
@@ -1270,7 +1274,7 @@ msgstr ""
 
 #: includes/videos/template.php:60 includes/widgets/widget-search.php:126
 msgid "Search Videos"
-msgstr ""
+msgstr "Szukaj kontrowersji"
 
 #: includes/videos/template.php:61
 msgid "No videos found"
@@ -1390,7 +1394,7 @@ msgstr ""
 
 #: includes/videos/template.php:2443
 msgid "Categories: "
-msgstr ""
+msgstr "Kategoria:"
 
 #: includes/widgets/widget-categories.php:11
 msgid "A list or dropdown of video categories."
@@ -1439,7 +1443,7 @@ msgstr ""
 #: includes/widgets/widget-featured.php:213
 #: templates/default/videos/content-video-slider-grid.php:4
 msgid "Featured Videos"
-msgstr ""
+msgstr "Ciekawe kontrowersje"
 
 #: includes/widgets/widget-popular.php:27
 msgid "The video central popular videos."
@@ -1447,12 +1451,12 @@ msgstr ""
 
 #: includes/widgets/widget-popular.php:30
 msgid "(Video Central) Popular Videos"
-msgstr ""
+msgstr "Popularne kontrowersje"
 
 #: includes/widgets/widget-popular.php:210
 #: templates/default/videos/content-video-slider-grid.php:5
 msgid "Popular Videos"
-msgstr ""
+msgstr "Popularne kontrowersje"
 
 #: includes/widgets/widget-recent.php:27
 msgid "The video central recent videos."
@@ -1460,11 +1464,11 @@ msgstr ""
 
 #: includes/widgets/widget-recent.php:30
 msgid "(Video Central) Recent Videos"
-msgstr ""
+msgstr "Najnowsze kontrowersje"
 
 #: includes/widgets/widget-recent.php:210
 msgid "Recent Videos"
-msgstr ""
+msgstr "Najnowsze kontrowersje"
 
 #: includes/widgets/widget-search.php:27
 msgid "The video_central video search form."
@@ -1534,11 +1538,11 @@ msgstr ""
 
 #: templates/default/videos/loop-related-videos.php:5
 msgid "You may also like"
-msgstr ""
+msgstr "Zobacz również"
 
 #: templates/default/videos/loop-single-content.php:36
 msgid "Show more"
-msgstr ""
+msgstr "Czytaj więcej"
 
 #: templates/default/videos/loop-single-content.php:38
 msgid "Show less"
@@ -1562,15 +1566,15 @@ msgstr ""
 
 #: video-central.php:530
 msgid "Most popular videos"
-msgstr ""
+msgstr "Najciekawsze kontrowersje"
 
 #: video-central.php:541
 msgid "Latest videos"
-msgstr ""
+msgstr "Najnowsze kontrowersje"
 
 #: video-central.php:551
 msgid "Featured videos"
-msgstr ""
+msgstr "Polecane kontrowersje"
 
 #: Radium/Video/Metaboxes/Field/File.php:83
 msgctxt "file upload"

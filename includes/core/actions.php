@@ -108,6 +108,9 @@ add_action('video_central_video_sentiment', 'video_central_likes');
 //categories list
 add_action('video_central_template_content_footer', 'video_central_categories_list');
 
+//Tags list
+add_action('video_central_template_content_footer', 'video_central_tags_list');
+
 //add comments
 add_action('video_central_template_after_video_content', 'video_central_add_comments');
 
