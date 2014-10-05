@@ -587,16 +587,16 @@ class Video_Central {
 
         // Traditional WordPress plugin locale filter
         $locale        = apply_filters( 'plugin_locale', get_locale(), $this->domain );
-        $mofile        = sprintf( '%1$s-%2$s.mo', $this->domain, $locale );
+        $mofile        = $locale . '.mo';
 
         // Setup paths to current locale file
         $mofile_local  = $this->lang_dir . $mofile;
-        $mofile_global = WP_LANG_DIR . '/video_central/' . $mofile;
-				
+        $mofile_global = WP_LANG_DIR . '/plugins/video-central/'. $mofile;
+						
         // Look in global /wp-content/languages/video-central folder
         load_textdomain( $this->domain, $mofile_global );
 
-        // Look in local /wp-content/plugins/video-central/video-central-languages/ folder
+        // Look in local /wp-content/plugins/video-central/ folder
         load_textdomain( $this->domain, $mofile_local );
 
         // Look in global /wp-content/languages/plugins/

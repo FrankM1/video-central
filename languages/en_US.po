@@ -1,34 +1,33 @@
-# Copyright (C) 2014 
-# This file is distributed under the same license as the  package.
+# Copyright (C) 2014 Franklin M Gitonga
+# This file is distributed under the GPL v2+.
 msgid ""
 msgstr ""
 "Project-Id-Version: Video Central 1.1.3\n"
 "Report-Msgid-Bugs-To: frank@radiumthemes.com\n"
-"POT-Creation-Date: 2014-10-03 14:58:52+00:00\n"
+"POT-Creation-Date: 2014-10-05 05:18:27+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-10-04 15:01-0500\n"
-"Last-Translator: Franklin Gitonga <frank@radiumthemes.com>\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: RadiumThemes <http://radiumthemes.com>\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: grunt-wp-i18n 0.4.8\n"
 "Last-Translator: Franklin Gitonga <frank@radiumthemes.com>\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
-"Language: pl\n"
 
 #: Radium/MediaElements/Helper.php:188
 msgid ""
-"<span>Update Required</span>To play the audio you will need to either update "
-"your browser to a recent version or update your <a href=\"http://get.adobe."
-"com/flashplayer/\" target=\"_blank\">Flash plugin</a>."
+"<span>Update Required</span>To play the audio you will need to either "
+"update your browser to a recent version or update your <a "
+"href=\"http://get.adobe.com/flashplayer/\" target=\"_blank\">Flash "
+"plugin</a>."
 msgstr ""
 
 #: Radium/MediaElements/Helper.php:364
 msgid ""
-"<span>Update Required</span>To play the video you will need to either update "
-"your browser to a recent version or update your <a href=\"http://get.adobe."
-"com/flashplayer/\" target=\"_blank\">Flash plugin</a>."
+"<span>Update Required</span>To play the video you will need to either "
+"update your browser to a recent version or update your <a "
+"href=\"http://get.adobe.com/flashplayer/\" target=\"_blank\">Flash "
+"plugin</a>."
 msgstr ""
 
 #: Radium/Video/Metaboxes/Field/File.php:19
@@ -100,8 +99,8 @@ msgstr ""
 
 #: Radium/Video/Metaboxes.php:101
 msgid ""
-"Get video id from the url eg http://youtube.com/watch?v=<strong>123456</"
-"strong>"
+"Get video id from the url eg "
+"http://youtube.com/watch?v=<strong>123456</strong>"
 msgstr ""
 
 #: Radium/Video/Metaboxes.php:108
@@ -130,7 +129,7 @@ msgstr ""
 
 #: Radium/Video/Posttype.php:104
 msgid "Radium Videos"
-msgstr "Kontrowersje"
+msgstr ""
 
 #: Radium/Video/Posttype.php:238
 msgid "Video Item"
@@ -146,7 +145,7 @@ msgstr[1] ""
 
 #: Radium/Video/Posttype.php:267
 msgid "Sort Videos"
-msgstr "Sortuj kontrowersje"
+msgstr ""
 
 #: Radium/Video/Posttype.php:267
 msgid "Sort"
@@ -158,8 +157,8 @@ msgstr ""
 
 #: Radium/Video/Posttype.php:285
 msgid ""
-"Click, drag, re-order & repeat as necessary. The item at the top of the list "
-"will display first."
+"Click, drag, re-order & repeat as necessary. The item at the top of the "
+"list will display first."
 msgstr ""
 
 #: Radium/Video/Posttype.php:361
@@ -178,9 +177,9 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: Radium/Video/Shortcodes.php:341 includes/widgets/widget-categories.php:41
+#: Radium/Video/Shortcodes.php:341 includes/widgets/widget-categories.php:50
 msgid "Select Category"
-msgstr "Wybierz kategorię"
+msgstr ""
 
 #: Radium/Video/Widget.php:24
 msgid "A widget that displays your recent videos."
@@ -190,7 +189,7 @@ msgstr ""
 msgid "Permanent Link to %s"
 msgstr ""
 
-#: Radium/Video/Widget.php:153 includes/widgets/widget-categories.php:90
+#: Radium/Video/Widget.php:153 includes/widgets/widget-categories.php:109
 #: includes/widgets/widget-featured.php:173
 #: includes/widgets/widget-popular.php:171
 #: includes/widgets/widget-recent.php:171
@@ -206,8 +205,7 @@ msgstr ""
 msgid "Description:"
 msgstr ""
 
-#: includes/admin/admin.php:198 includes/admin/admin.php:199
-#: includes/modules/class.woosidebars.integration.php:97
+#. Plugin Name of the plugin/theme
 msgid "Video Central"
 msgstr ""
 
@@ -286,7 +284,7 @@ msgstr ""
 
 #: includes/admin/settings.php:42
 msgid "Videos Per Page"
-msgstr "Kontrowersje na stronę"
+msgstr ""
 
 #: includes/admin/settings.php:48
 msgid "Videos Root Slug"
@@ -305,8 +303,7 @@ msgid "Video tags"
 msgstr ""
 
 #: includes/admin/settings.php:99 includes/admin/settings.php:218
-#: includes/search/template.php:195
-#: templates/default/videos/form-search.php:16
+#: includes/search/template.php:195 templates/default/videos/form-search.php:16
 msgid "Search"
 msgstr ""
 
@@ -326,7 +323,7 @@ msgstr ""
 #: includes/modules/class.woosidebars.integration.php:129
 #: includes/videos/template.php:49 includes/videos/template.php:50
 msgid "Videos"
-msgstr "Kontrowersje"
+msgstr ""
 
 #: includes/admin/settings.php:156
 msgid "Videos Root"
@@ -428,7 +425,7 @@ msgstr ""
 
 #: includes/admin/settings.php:520
 msgid "Latest Videos"
-msgstr "Najnowsze kontrowersje"
+msgstr ""
 
 #: includes/admin/settings.php:551
 msgid "Custom slugs for single videos, categories, tags, views, and search."
@@ -464,7 +461,7 @@ msgstr ""
 
 #: includes/admin/settings.php:784
 msgid "Videos base"
-msgstr "Baza kontrowersji"
+msgstr ""
 
 #: includes/admin/settings.php:787
 msgid "Video slug"
@@ -496,67 +493,67 @@ msgstr ""
 
 #: includes/common/functions.php:122
 msgid "right now"
-msgstr "teraz"
+msgstr ""
 
 #: includes/common/functions.php:123
 msgid "%s ago"
-msgstr "%s temu"
+msgstr ""
 
 #: includes/common/functions.php:127
 msgid "year"
-msgstr "rok"
+msgstr ""
 
 #: includes/common/functions.php:127
 msgid "years"
-msgstr "lat"
+msgstr ""
 
 #: includes/common/functions.php:128
 msgid "month"
-msgstr "miesiąc"
+msgstr ""
 
 #: includes/common/functions.php:128
 msgid "months"
-msgstr "miesięcy"
+msgstr ""
 
 #: includes/common/functions.php:129
 msgid "week"
-msgstr "tydzień"
+msgstr ""
 
 #: includes/common/functions.php:129
 msgid "weeks"
-msgstr "tygodni"
+msgstr ""
 
 #: includes/common/functions.php:130
 msgid "day"
-msgstr "dzień"
+msgstr ""
 
 #: includes/common/functions.php:130
 msgid "days"
-msgstr "dni"
+msgstr ""
 
 #: includes/common/functions.php:131
 msgid "hour"
-msgstr "godzina"
+msgstr ""
 
 #: includes/common/functions.php:131
 msgid "hours"
-msgstr "godzin"
+msgstr ""
 
 #: includes/common/functions.php:132
 msgid "minute"
-msgstr "minuta"
+msgstr ""
 
 #: includes/common/functions.php:132
 msgid "minutes"
-msgstr "minut"
+msgstr ""
 
 #: includes/common/functions.php:133
 msgid "second"
-msgstr "sekunda"
+msgstr ""
 
 #: includes/common/functions.php:133
 msgid "seconds"
-msgstr "sekund"
+msgstr ""
 
 #: includes/common/functions.php:408
 msgid ""
@@ -588,7 +585,7 @@ msgstr ""
 
 #: includes/common/template.php:693
 msgid "Likes"
-msgstr "Polubienia"
+msgstr ""
 
 #: includes/common/template.php:694
 msgid "Sort by Likes"
@@ -620,7 +617,7 @@ msgstr ""
 
 #: includes/common/template.php:841
 msgid "Videos: %s"
-msgstr "Kontrowersje: %s"
+msgstr ""
 
 #: includes/core/capabilities.php:374
 msgid "Keymaster"
@@ -671,7 +668,7 @@ msgstr ""
 #: includes/modules/class.woosidebars.integration.php:130
 #: includes/videos/template.php:52
 msgid "All Videos"
-msgstr "Wszystkie kontrowersje"
+msgstr ""
 
 #: includes/modules/class.woosidebars.integration.php:134
 msgid "Account Pages"
@@ -683,11 +680,11 @@ msgstr ""
 
 #: includes/modules/class.woosidebars.integration.php:140
 msgid "Videos in the \"%s\" category"
-msgstr "Kontrowersje w kategorii \"%s\""
+msgstr ""
 
 #: includes/modules/class.woosidebars.integration.php:141
 msgid "Videos tagged \"%s\""
-msgstr "Tagi kontrowersji \"%s\""
+msgstr ""
 
 #: includes/modules/import/thumbnail.php:349
 msgid "Unsupported MIME type:"
@@ -787,9 +784,9 @@ msgstr ""
 msgid "Video updated."
 msgstr ""
 
-#. translators: %s: date and time of the revision
 #: includes/modules/import/vimeo/class.importer.php:82
 #: includes/modules/import/youtube/class.importer.php:85
+#. translators: %s: date and time of the revision
 msgid "Video restored to version %s"
 msgstr ""
 
@@ -811,13 +808,13 @@ msgstr ""
 #: includes/modules/import/vimeo/class.importer.php:86
 #: includes/modules/import/youtube/class.importer.php:89
 msgid ""
-"Video will be published at: <strong>%1$s</strong>. <a target=\"_blank\" href="
-"\"%2$s\">See video</a>"
+"Video will be published at: <strong>%1$s</strong>. <a target=\"_blank\" "
+"href=\"%2$s\">See video</a>"
 msgstr ""
 
-#. translators: Publish box date format, see http:php.net/date
 #: includes/modules/import/vimeo/class.importer.php:89
 #: includes/modules/import/youtube/class.importer.php:92
+#. translators: Publish box date format, see http:php.net/date
 msgid "Video draft saved. <a target=\"_blank\" href=\"%s\">See video</a>"
 msgstr ""
 
@@ -893,7 +890,7 @@ msgstr ""
 #: includes/modules/import/vimeo/class.list-table.php:174
 #: includes/modules/import/youtube/class.list-table.php:177
 msgid "Select category (optional)"
-msgstr "Wybierz kategorię"
+msgstr ""
 
 #: includes/modules/import/vimeo/class.list-table.php:181
 #: includes/modules/import/youtube/class.list-table.php:185
@@ -1020,8 +1017,7 @@ msgid "Search by"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:63
-msgid ""
-"Enter playlist ID, user ID or search query according to Feed Type selection."
+msgid "Enter playlist ID, user ID or search query according to Feed Type selection."
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:68
@@ -1095,8 +1091,8 @@ msgstr ""
 
 #: includes/modules/import/youtube/views/import_videos.php:35
 msgid ""
-"Enter any number of results you want to retrieve. Results will be paginated. "
-"Youtube allows a maximum of 1000 per request."
+"Enter any number of results you want to retrieve. Results will be "
+"paginated. Youtube allows a maximum of 1000 per request."
 msgstr ""
 
 #: includes/modules/import/youtube/views/import_videos.php:57
@@ -1114,9 +1110,8 @@ msgstr ""
 #: includes/search/template.php:376 includes/videos/template.php:1979
 msgid "Showing %1$s videos"
 msgid_plural "Showing %1$s videos"
-msgstr[0] "Oglądasz %1$s kontrowersję"
-msgstr[1] "Oglądasz %1$s kontrowersje"
-msgstr[2] "Oglądasz %1$s kontrowersji"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/search/template.php:381 includes/videos/template.php:1987
 msgid "Showing %2$s (of %4$s total)"
@@ -1126,8 +1121,8 @@ msgstr[1] ""
 
 #: includes/users/functions.php:457
 msgid ""
-"<strong>ERROR</strong>: No video was found! Which video are you marking/"
-"unmarking as favorite?"
+"<strong>ERROR</strong>: No video was found! Which video are you "
+"marking/unmarking as favorite?"
 msgstr ""
 
 #: includes/users/functions.php:461 includes/users/functions.php:935
@@ -1155,13 +1150,12 @@ msgstr ""
 
 #: includes/users/functions.php:931 includes/users/functions.php:1037
 msgid ""
-"<strong>ERROR</strong>: No video was found! Which video are you subscribing/"
-"unsubscribing to?"
+"<strong>ERROR</strong>: No video was found! Which video are you "
+"subscribing/unsubscribing to?"
 msgstr ""
 
 #: includes/users/functions.php:984 includes/users/functions.php:1090
-msgid ""
-"<strong>ERROR</strong>: There was a problem unsubscribing from that video!"
+msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that video!"
 msgstr ""
 
 #: includes/users/functions.php:986 includes/users/functions.php:1092
@@ -1274,7 +1268,7 @@ msgstr ""
 
 #: includes/videos/template.php:60 includes/widgets/widget-search.php:126
 msgid "Search Videos"
-msgstr "Szukaj kontrowersji"
+msgstr ""
 
 #: includes/videos/template.php:61
 msgid "No videos found"
@@ -1394,7 +1388,11 @@ msgstr ""
 
 #: includes/videos/template.php:2443
 msgid "Categories: "
-msgstr "Kategoria:"
+msgstr ""
+
+#: includes/videos/template.php:2486
+msgid "Tags: "
+msgstr ""
 
 #: includes/widgets/widget-categories.php:11
 msgid "A list or dropdown of video categories."
@@ -1408,15 +1406,15 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: includes/widgets/widget-categories.php:94
+#: includes/widgets/widget-categories.php:113
 msgid "Display as dropdown"
 msgstr ""
 
-#: includes/widgets/widget-categories.php:97
+#: includes/widgets/widget-categories.php:116
 msgid "Show post counts"
 msgstr ""
 
-#: includes/widgets/widget-categories.php:100
+#: includes/widgets/widget-categories.php:119
 msgid "Show hierarchy"
 msgstr ""
 
@@ -1443,7 +1441,7 @@ msgstr ""
 #: includes/widgets/widget-featured.php:213
 #: templates/default/videos/content-video-slider-grid.php:4
 msgid "Featured Videos"
-msgstr "Ciekawe kontrowersje"
+msgstr ""
 
 #: includes/widgets/widget-popular.php:27
 msgid "The video central popular videos."
@@ -1451,12 +1449,12 @@ msgstr ""
 
 #: includes/widgets/widget-popular.php:30
 msgid "(Video Central) Popular Videos"
-msgstr "Popularne kontrowersje"
+msgstr ""
 
 #: includes/widgets/widget-popular.php:210
 #: templates/default/videos/content-video-slider-grid.php:5
 msgid "Popular Videos"
-msgstr "Popularne kontrowersje"
+msgstr ""
 
 #: includes/widgets/widget-recent.php:27
 msgid "The video central recent videos."
@@ -1464,11 +1462,11 @@ msgstr ""
 
 #: includes/widgets/widget-recent.php:30
 msgid "(Video Central) Recent Videos"
-msgstr "Najnowsze kontrowersje"
+msgstr ""
 
 #: includes/widgets/widget-recent.php:210
 msgid "Recent Videos"
-msgstr "Najnowsze kontrowersje"
+msgstr ""
 
 #: includes/widgets/widget-search.php:27
 msgid "The video_central video search form."
@@ -1538,11 +1536,11 @@ msgstr ""
 
 #: templates/default/videos/loop-related-videos.php:5
 msgid "You may also like"
-msgstr "Zobacz również"
+msgstr ""
 
 #: templates/default/videos/loop-single-content.php:36
 msgid "Show more"
-msgstr "Czytaj więcej"
+msgstr ""
 
 #: templates/default/videos/loop-single-content.php:38
 msgid "Show less"
@@ -1554,10 +1552,10 @@ msgstr ""
 
 #: video-central.php:417
 msgid ""
-"Sorry, but your version of WordPress, <strong>%s</strong>, does not meet the "
-"Video Central's required version of <strong>3.3.1</strong> to run properly. "
-"The plugin has been deactivated. <a href=\"%s\">Click here to return to the "
-"Dashboard</a>"
+"Sorry, but your version of WordPress, <strong>%s</strong>, does not meet "
+"the Video Central's required version of <strong>3.3.1</strong> to run "
+"properly. The plugin has been deactivated. <a href=\"%s\">Click here to "
+"return to the Dashboard</a>"
 msgstr ""
 
 #: video-central.php:491
@@ -1566,15 +1564,31 @@ msgstr ""
 
 #: video-central.php:530
 msgid "Most popular videos"
-msgstr "Najciekawsze kontrowersje"
+msgstr ""
 
 #: video-central.php:541
 msgid "Latest videos"
-msgstr "Najnowsze kontrowersje"
+msgstr ""
 
 #: video-central.php:551
 msgid "Featured videos"
-msgstr "Polecane kontrowersje"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://plugins.radiumthemes.com/video-central"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "The Ultimate Video Manager for WordPress"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Franklin M Gitonga"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://radiumthemes.com/"
+msgstr ""
 
 #: Radium/Video/Metaboxes/Field/File.php:83
 msgctxt "file upload"
