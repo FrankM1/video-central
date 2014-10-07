@@ -2460,7 +2460,7 @@ function video_central_categories_list( $args = array() ) {
 /**
  * Output a list of tags
  *
- * @since 1.0.0
+ * @since 1.1.3
  *
  * @param array $args Optional.
  * @uses video_central_get_tags_list() To get the video tags
@@ -2471,7 +2471,7 @@ function video_central_tags_list( $args = array() ) {
 	/**
 	 * Return a list of tags
 	 *
-	 * @since 1.0.0
+ 	 * @since 1.1.3
 	 *
 	 * @return string footer meta
 	 */
