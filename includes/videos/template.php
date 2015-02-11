@@ -679,7 +679,7 @@ function video_central_archive_title( $title = '' ) {
  * @since 1.0.0
  *
  * @param int $video_id Optional. Video id
- * @uses video_central_get_video_content() To get the video content
+ * @uses video_central_get_content() To get the video content
  */
 function video_central_content( $video_id = 0 ) {
 	echo video_central_get_content( $video_id );
@@ -694,7 +694,7 @@ function video_central_content( $video_id = 0 ) {
 	 * @uses post_password_required() To check if the video requires pass
 	 * @uses get_the_password_form() To get the password form
 	 * @uses get_post_field() To get the content post field
-	 * @uses apply_filters() Calls 'video_central_get_video_content' with the content
+	 * @uses apply_filters() Calls 'video_central_get_content' with the content
 	 *                        and video id
 	 * @return string Content of the video
 	 */
@@ -710,11 +710,63 @@ function video_central_content( $video_id = 0 ) {
 
         $args = array();
 
-        $content = apply_filters( 'video_central_get_content_urls', $content, $args );
+        $content = apply_filters( 'video_central_get_content', $content, $args );
 
 		return apply_filters( __FUNCTION__, $content, $video_id );
 	}
 
+/**
+ * Output the excerpt of the video
+ *
+ * @since 1.1.3
+ *
+ * @param int $video_id Optional. Video id
+ * @uses video_central_get_excerpt() To get the video content
+ */
+function video_central_excerpt( $video_id = 0, $excerpt_length = '' ) {
+	echo video_central_get_excerpt( $video_id, $excerpt_length );
+}
+	/**
+	 * Return the content of the video
+	 *
+	 * @since 1.1.3
+	 *
+	 * @param int $video_id Optional. Video id
+	 * @uses video_central_get_video_id() To get the video id
+	 * @uses post_password_required() To check if the video requires pass
+	 * @uses get_the_password_form() To get the password form
+	 * @uses get_post_field() To get the content post field
+	 * @uses apply_filters() Calls 'video_central_get_excerpt' with the content
+	 *                        and video id
+	 * @return string Content of the video
+	 */
+	function video_central_get_excerpt( $video_id = 0, $excerpt_length = 55 ) {
+		$video_id = video_central_get_video_id( $video_id );
+        $excerpt_length = apply_filters( 'video_central_excerpt_length', $excerpt_length );
+
+		// Check if password is required
+		if ( post_password_required( $video_id ) )
+			return get_the_password_form();
+			
+		$content = get_post_meta($video_id, '_video_central_description', true );
+
+        $args = array();
+		
+		var_export($video_id);
+		
+		/**
+		 * Filter the string in the "more" link displayed after a trimmed excerpt.
+		 *
+		 * @param string $more_string The string shown within the more link.
+		 */
+		$excerpt_more = apply_filters( 'video_central_excerpt_more', ' ' . '[&hellip;]' );
+		$content = wp_trim_words( $content, $excerpt_length, $excerpt_more );
+		
+        $content = apply_filters( 'video_central_get_excerpt_content', $content, $args );
+
+		return apply_filters( __FUNCTION__, $content, $video_id );
+	}
+	
 /**
  * Output the post date and time of a video
  *

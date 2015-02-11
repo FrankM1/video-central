@@ -48,7 +48,7 @@ function video_central_human_time( $seconds ){
     $m = floor( $seconds % 3600 / 60 );
     $s = floor( $seconds %3600 % 60 );
 
-    return ( ($h > 0 ? $h . ":" : "").($m > 0 ? ($h > 0 && $m < 10 ? "0" : "") . $m . ":" : "0:") . ($s < 10 ? "0" : "") . $s);
+    return apply_filters( __FUNCTION__, ( ($h > 0 ? $h . ":" : "").($m > 0 ? ($h > 0 && $m < 10 ? "0" : "") . $m . ":" : "0:") . ($s < 10 ? "0" : "") . $s), $seconds);
 
 }
 
@@ -221,7 +221,7 @@ function video_central_truncate_text( $string, $length = 100, $append="&hellip;"
 		$string = array_shift($string) . $append;
 	}
 
-	return $string;
+	return apply_filters( __FUNCTION__, $string, $length, $append );
 }
 
 /**
@@ -261,7 +261,7 @@ function video_central_url_make_clickable($content, $args = array() ) {
     $content = preg_replace("#(<a( [^>]+?>|>))<a [^>]+?>([^>]+?)</a></a>#i", "$1$3</a>", $content);
     $content = trim($content);
 
-    return $content;
+	return apply_filters( __FUNCTION__, $content, $args );
 }
 
 

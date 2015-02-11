@@ -33,8 +33,8 @@ class Radium_Video_Template {
 
         $this->templates = array();
 
-		$this->page_template_path = plugin_dir_path( dirname(dirname(__FILE__) ) ) . 'templates/' . video_central_get_theme_package_id() . '/page-templates/';
-
+		$this->page_template_path = apply_filters('video_central_view_page_template_path', plugin_dir_path( dirname(dirname(__FILE__) ) ) . 'templates/' . video_central_get_theme_package_id() . '/page-templates/');
+				
         // Add a filter to the attributes metabox to inject template into the cache.
         add_filter( 'page_attributes_dropdown_pages_args', array( $this, 'register_project_templates' ) );
 
@@ -101,7 +101,7 @@ class Radium_Video_Template {
             return $template;
 
         $file = $this->page_template_path . get_post_meta( get_the_ID(), '_wp_page_template', true );
-
+		
         // Just to be safe, we check if the file exist first
         if( file_exists( $file ) ) {
 

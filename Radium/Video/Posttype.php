@@ -407,7 +407,7 @@ class Radium_Video_Posttype {
 
                 $meta = get_post_meta( $post_id, '_video_central_video_data', true );
 
-                $duration = isset($meta['duration']) ? video_central_sec_to_time($video_data['duration']) : "null";
+                $duration = isset($meta['duration']) ? video_central_sec_to_time($meta['duration']) : "null";
 
                 echo $duration;
 

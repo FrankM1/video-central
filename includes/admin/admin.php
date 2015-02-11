@@ -635,15 +635,7 @@ class Video_Central_Admin {
 				</a>
 			</h2>
 
-			<div class="changelog">
-				<h3><?php esc_html_e( 'Video Subscriptions', 'video_central' ); ?></h3>
-
-				<div class="feature-section col two-col">
-				 
-				</div>
-			</div>
-
-			<div class="changelog">
+			<!-- <div class="changelog">
 				<h3><?php esc_html_e( 'Converters', 'video_central' ); ?></h3>
  
 				<div class="feature-section col three-col">
@@ -652,7 +644,7 @@ class Video_Central_Admin {
 						<p><?php esc_html_e( 'Better handling of styles and scripts in the template stack.', 'video_central' ); ?></p>
 					</div>
  				</div>
-			</div>
+			</div> -->
 
 			<div class="return-to-dashboard">
 				<a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'video_central' ), 'options-general.php' ) ) ); ?>"><?php esc_html_e( 'Go to video Settings', 'video_central' ); ?></a>

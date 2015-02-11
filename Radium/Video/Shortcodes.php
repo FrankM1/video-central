@@ -870,80 +870,79 @@ _end_;
 
     }
 
-    	/** Search ****************************************************************/
+	/** Search ****************************************************************/
 
-    	/**
-    	 * Display the search form in an output buffer and return to ensure
-    	 * post/page contents are displayed first.
-    	 *
-    	 * @since 1.0.0
-    	 *
-    	 * @uses get_template_part()
-    	 */
-    	public function display_search_form() {
+	/**
+	 * Display the search form in an output buffer and return to ensure
+	 * post/page contents are displayed first.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @uses get_template_part()
+	 */
+	public function display_search_form() {
 
-    		// Bail if search is disabled
-    		if ( ! video_central_allow_search() ) {
-    			return;
-    		}
+		// Bail if search is disabled
+		if ( ! video_central_allow_search() ) {
+			return;
+		}
 
-    		// Start output buffer
-    		$this->start( 'video_central_search_form' );
+		// Start output buffer
+		$this->start( 'video_central_search_form' );
 
-    		// Output templates
-    		video_central_get_template_part( 'form', 'search' );
+		// Output templates
+		video_central_get_template_part( 'form', 'search' );
 
-    		// Return contents of output buffer
-    		return $this->end();
-    	}
+		// Return contents of output buffer
+		return $this->end();
+	}
 
-    	/**
-    	 * Display the contents of search results in an output buffer and return to
-    	 * ensure that post/page contents are displayed first.
-    	 *
-    	 * @since 1.0.0
-    	 *
-    	 * @param array $attr
-    	 * @param string $content
-    	 * @uses video_central_search_query()
-    	 * @uses get_template_part()
-    	 */
-    	public function display_search( $attr, $content = '' ) {
+	/**
+	 * Display the contents of search results in an output buffer and return to
+	 * ensure that post/page contents are displayed first.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $attr
+	 * @param string $content
+	 * @uses video_central_search_query()
+	 * @uses get_template_part()
+	 */
+	public function display_search( $attr, $content = '' ) {
 
-    		// Sanity check required info
-    		if ( !empty( $content ) ) {
-    			return $content;
-    		}
+		// Sanity check required info
+		if ( !empty( $content ) ) {
+			return $content;
+		}
 
-    		// Bail if search is disabled
-    		if ( ! video_central_allow_search() ) {
-    			return;
-    		}
+		// Bail if search is disabled
+		if ( ! video_central_allow_search() ) {
+			return;
+		}
 
-    		// Trim search attribute if it's set
-    		if ( isset( $attr['search'] ) ) {
-    			$attr['search'] = trim( $attr['search'] );
-    		}
+		// Trim search attribute if it's set
+		if ( isset( $attr['search'] ) ) {
+			$attr['search'] = trim( $attr['search'] );
+		}
 
-    		// Set passed attribute to $search_terms for clarity
-    		$search_terms = empty( $attr['search'] ) ? video_central_get_search_terms() : $attr['search'];
+		// Set passed attribute to $search_terms for clarity
+		$search_terms = empty( $attr['search'] ) ? video_central_get_search_terms() : $attr['search'];
 
-    		// Unset globals
-    		$this->unset_globals();
+		// Unset globals
+		$this->unset_globals();
 
-    		// Set terms for query
-    		set_query_var( video_central_get_search_rewrite_id(), $search_terms );
+		// Set terms for query
+		set_query_var( video_central_get_search_rewrite_id(), $search_terms );
 
-    		// Start output buffer
-    		$this->start( video_central_get_search_rewrite_id() );
+		// Start output buffer
+		$this->start( video_central_get_search_rewrite_id() );
 
-    		// Output template
-    		video_central_get_template_part( 'content', 'search' );
+		// Output template
+		video_central_get_template_part( 'content', 'search' );
 
-    		// Return contents of output buffer
-    		return $this->end();
-    	}
-
+		// Return contents of output buffer
+		return $this->end();
+	}
 
 }
 

@@ -74,6 +74,7 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 * New: Tags are now displayed in single view
 * Fixed Translation strings and added .po file
 * Category widget dropdown fix 
+* Page template file filter
 
 = 1.1.2 =
 

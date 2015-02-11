@@ -397,7 +397,7 @@ class Video_Central {
         do_action_ref_array( 'video_central_after_setup_actions', array( &$this ) );
 
         //Add Page Templates
-        add_action( 'plugins_loaded', array( 'Radium_Video_Template', 'get_instance' ) );
+        add_action( 'after_setup_theme', array( 'Radium_Video_Template', 'get_instance' ) ); //load late for filters to work
     }
 
     /**
