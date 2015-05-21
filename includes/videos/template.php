@@ -1260,6 +1260,35 @@ function video_central_video_category_link( $category = '' ) {
 	}
 
 /**
+ * Output the visibility of the video
+ *
+ * @since 1.0.0
+ *
+ * @param int $video_id Optional. video id
+ * @uses video_central_get_video_visibility() To get the video visibility
+ */
+function video_central_video_visibility( $video_id = 0 ) {
+    echo video_central_get_video_visibility( $video_id );
+}
+    /**
+     * Return the visibility of the video
+     *
+     * @since 1.0.0
+     *
+     * @param int $forum_id Optional. Forum id
+     * @uses video_central_get_forum_id() To get the video id
+     * @uses get_post_visibility() To get the video's visibility
+     * @uses apply_filters() Calls 'video_central_get_forum_visibility' with the visibility
+     *                        and video id
+     * @return string Status of video
+     */
+    function video_central_get_video_visibility( $video_id = 0 ) {
+        $video_id =  video_central_get_video_id( $video_id );
+
+        return apply_filters( __FUNCTION__, get_post_status( $video_id ), $video_id );
+    }
+    
+/**
  * Is the video trashed?
  *
  * @since 1.0.0
@@ -1612,7 +1641,7 @@ function video_central_featured_image_url( $video_id = 0, $image_size = array() 
 		// Parse arguments against default values
 		$image_size = video_central_parse_args( $image_size, $args, 'get_featured_image_url' );
 
-        //Check if post has a featured image set else get the first image from the gallery and use it. If both statements are false display fallback image.
+        //Check if post has a featured image set else get the first image from the video and use it. If both statements are false display fallback image.
         if ( $thumb = get_post_meta($video_id, '_video_poster', true ) ) {
 
              $img_url = wp_get_attachment_url( $thumb, 'full' ); //get full URL to image (use "large" or "medium" if the image is too big)

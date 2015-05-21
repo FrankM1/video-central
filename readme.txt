@@ -69,6 +69,10 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 == Changelog ==
 
+= 1.1.4 =
+
+* Added post status function
+ 
 = 1.1.3 =
 
 * New: Tags are now displayed in single view

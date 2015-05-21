@@ -4,7 +4,7 @@ Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
 Author: Franklin M Gitonga
-Version: 1.1.3
+Version: 1.1.4
 Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
@@ -216,6 +216,16 @@ class Video_Central {
         $this->video_post_type          = apply_filters( 'video_central_videos_post_type',  'video' );
         $this->video_tag_tax_id         = apply_filters( 'video_central_videos_tag_tax_id', 'video_tag' );
         $this->video_cat_tax_id         = apply_filters( 'video_central_videos_cat_tax_id', 'video_category' );
+        
+        // Status identifiers
+        $this->spam_status_id    = apply_filters( 'video_central_spam_post_status',    'spam'    );
+        $this->closed_status_id  = apply_filters( 'video_central_closed_post_status',  'closed'  );
+        $this->public_status_id  = apply_filters( 'video_central_public_post_status',  'publish' );
+        $this->pending_status_id = apply_filters( 'video_central_pending_post_status', 'pending' );
+        $this->private_status_id = apply_filters( 'video_central_private_post_status', 'private' );
+        $this->hidden_status_id  = apply_filters( 'video_central_hidden_post_status',  'hidden'  );
+        $this->trash_status_id   = apply_filters( 'video_central_trash_post_status',   'trash'   );
+        
         $this->search_id                = apply_filters( 'video_central_search_id',         'video_search' );
         $this->user_id                  = apply_filters( 'video_central_user_id',           'video_user'   );
         $this->view_id                  = apply_filters( 'video_central_view_id',           'video_view'   );
