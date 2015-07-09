@@ -71,6 +71,20 @@ function video_central_get_related_videos_per_page( $default = 12 ) {
 }
 
 /**
+ * Return the related videos per page setting
+ *
+ * @since 1.2.0
+ *
+ * @param int $default Default replies per page (15)
+ * @uses get_option() To get the setting
+ * @uses apply_filters() To allow the return value to be manipulated
+ * @return int
+ */
+function video_central_get_randomize_related_videos( $default = false ) {
+	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_randomize_related_videos', $default ) );
+}
+
+/**
  * Force comments_status to 'closed' for Radium Video post types
  *
  * @since 1.0.0

@@ -26,45 +26,54 @@ function video_central_get_default_options() {
 
 		/** DB Version ********************************************************/
 
-		'_video_central_db_version'            => video_central()->db_version,
+		'_video_central_db_version'            	=> video_central()->db_version,
 
 		/** Settings **********************************************************/
-		'_video_central_theme_package_id'      	=> 'default',                  // The ID for the current theme package
+		'_video_central_theme_package_id'      		=> 'default',                  // The ID for the current theme package
 
 		/** Video Root ********************************************************/
-		'_video_central_root_slug'         		=> 'videos',    // Videos archive slug
-		'_video_central_show_on_root'      		=> 'videos',    // What to show on root (index || latest)
-		'_video_central_show_slider_root' 		=> 1, //show slider on root
-		'_video_central_include_root'      		=> 1,           // Include video before single slugs
-		'_video_central_allow_loop_actions' 	=> 1, //allow loop action sorting videos
+		'_video_central_root_slug'         			=> 'videos',    // Videos archive slug
+		'_video_central_show_on_root'      			=> 'videos',    // What to show on root (index || latest)
+		'_video_central_show_slider_root' 			=> 1, //show slider on root
+		'_video_central_include_root'      			=> 1,           // Include video before single slugs
+		'_video_central_allow_loop_actions' 		=> 1, //allow loop action sorting videos
 		'_video_central_allow_loop_sort_actions' 	=> 1, //allow loop action sorting videos
 		'_video_central_allow_loop_grid_actions' 	=> 0, //allow loop actions on grid
 	    '_video_central_allow_search'          		=> 1, // Allow video search
         '_video_central_videos_per_page'            => 16, // Number of videos per page
         '_video_central_content_toggle'             => 1, // toggle video content
 
-		'_video_central_allow_video_categories' => 1,
-		'_video_central_allow_video_tags' 		=> 1,
+		'_video_central_allow_video_categories' 	=> 1,
+		'_video_central_allow_video_tags' 			=> 1,
 
 		'_video_central_video_tag_slug' 			=> 'video-category',
 		'_video_central_video_category_slug' 		=> 'video-tag',
 
 		/** Other Slugs *******************************************************/
 
-		'_video_central_view_slug'            => 'view',      // View slug
-		'_video_central_search_slug'          => 'search',    // Search slug
+		'_video_central_view_slug'            		=> 'view',      // View slug
+		'_video_central_search_slug'          		=> 'search',    // Search slug
 
-		'_video_central_loop_item_size' 		=> 'small-block-grid-4', //allow loop action default size
+		'_video_central_loop_item_size' 			=> 'small-block-grid-4', //allow loop action default size
 
         /** Single Video View ********************************************************/
-        '_video_central_allow_comments'          => 1,           // allow comments in videos
+        '_video_central_allow_comments'          	=> 1,           // allow comments in videos
+        '_video_central_allow_video_meta'           => 1,           // allow comments in videos
+        '_video_central_allow_likes'          		=> 1,           // allow comments in videos
+        '_video_central_allow_social_links'         => 1,           // allow comments in videos
+        '_video_central_allow_related_videos'       => 1,           // show related videos
+        '_video_central_related_videos_count'    	=> 12, //number of related videos to show
+		'_video_central_randomize_related_videos'  	=> 1,
 
-        '_video_central_show_related'            => 1,           // show related videos
-        '_video_central_related_videos_count'    => 12, //number of related videos to show
-
-        '_video_central_video_slug' 			 => 'video',
+        '_video_central_video_slug' 			 	=> 'video',
 
 		/** Single Slugs ******************************************************/
+
+		/** API Keys ******************************************************/
+        '_video_central_youtube_api_key' 			=> '',
+        '_video_central_youtube_show_api_daily_quota' => 1,
+        '_video_central_youtube_api_client_id' 		=> '',
+        '_video_central_youtube_api_client_secret' 	=> '',
 
 	) );
 }
@@ -412,7 +421,7 @@ function video_central_allow_video_categories( $default = 1 ) {
  * @return bool Are tags allowed?
  */
 function video_central_allow_related_videos( $default = 1 ) {
-	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_show_related', $default ) );
+	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_allow_related_videos', $default ) );
 }
 
 /**
@@ -426,6 +435,32 @@ function video_central_allow_related_videos( $default = 1 ) {
  */
 function video_central_allow_comments( $default = 1 ) {
 	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_allow_comments', $default ) );
+}
+
+/**
+ * Are allowed video meta
+ *
+ * @since 1.2.0
+ *
+ * @param $default bool Optional. Default value true
+ * @uses get_option() To get the allow tags
+ * @return bool Are tags allowed?
+ */
+function video_central_allow_video_meta( $default = 1 ) {
+    return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_allow_video_meta', $default ) );
+}
+
+/**
+ * Are social links allowed
+ *
+ * @since 1.2.0
+ *
+ * @param $default bool Optional. Default value true
+ * @uses get_option() To get the allow tags
+ * @return bool Are tags allowed?
+ */
+function video_central_allow_social_links( $default = 1 ) {
+	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_allow_social_links', $default ) );
 }
 
 /**
@@ -532,3 +567,80 @@ function video_central_short_title_length( $default = 65 ) {
 	return apply_filters( __FUNCTION__, get_option( '_video_central_short_title_length', $default ) );
 }
 
+/**
+ * Youtube Api Key
+ *
+ * @since 1.0.0
+ *
+ * @param $default string Optional.
+ * @uses get_option() To get the admin integration setting
+ * @return string
+ */
+function video_central_youtube_api_key( $default = '' ) {
+	return apply_filters( __FUNCTION__, get_option( '_video_central_youtube_api_key', $default ) );
+}
+
+/**
+ * Youtube Client ID
+ *
+ * @since 1.0.0
+ *
+ * @param $default string Optional.
+ * @uses get_option() To get the admin integration setting
+ * @return string
+ */
+function video_central_youtube_api_client_id( $default = '' ) {
+	return apply_filters( __FUNCTION__, get_option( '_video_central_youtube_api_client_id', $default ) );
+}
+
+/**
+ * Youtube Client Secret
+ *
+ * @since 1.0.0
+ *
+ * @param $default string Optional.
+ * @uses get_option() To get the admin integration setting
+ * @return string
+ */
+function video_central_youtube_api_client_secret( $default = '' ) {
+	return apply_filters( __FUNCTION__, get_option( '_video_central_youtube_api_client_secret', $default ) );
+}
+
+/**
+ * Youtube Api Daily Quota Secret
+ *
+ * @since 1.0.0
+ *
+ * @param $default string Optional.
+ * @uses get_option() To get the admin integration setting
+ * @return bool
+ */
+function video_central_youtube_api_daily_quota( $default = true ) {
+	return (bool) apply_filters( __FUNCTION__, get_option( '_video_central_youtube_api_daily_quota', $default ) );
+}
+
+/**
+ * Returns OAuth credentials registered by user
+ *
+ * @since 1.0.0
+ *
+ * @param $default string Optional.
+ * @uses get_option() To get the admin integration setting
+ * @return array
+ */
+function video_central_youtube_api_oauth_details( $default = array() ) {
+
+    $args = array(
+        'client_id'     => video_central_youtube_api_client_id(),
+        'client_secret' => video_central_youtube_api_client_secret(),
+        'token' => array(
+            'value' => '',
+            'valid' => 0,
+            'time'  => time()
+        )
+    );
+
+    $arg = video_central_parse_args( $args, $default, 'youtube_api_oauth_details');
+
+    return apply_filters( __FUNCTION__, get_option( '_video_central_youtube_api_oauth_details', $arg ) );
+}

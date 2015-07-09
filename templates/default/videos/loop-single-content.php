@@ -17,11 +17,17 @@ $content_toggle = video_central_content_toggle();
 
     <h2><?php video_central_video_title(); ?></h2>
 
-    <?php do_action( 'video_central_template_after_video_title' ); ?>
-
-    <?php video_central_get_template_part( 'loop', 'single-video-actions' ); ?>
-
-	<?php do_action( 'video_central_template_before_video_content' ); ?>
+    <?php 
+    
+    do_action( 'video_central_template_after_video_title' ); 
+    
+	if ( video_central_allow_video_meta() ) {
+ 		video_central_get_template_part( 'loop-single-video', 'actions' ); 
+ 	} 
+    
+    do_action( 'video_central_template_before_video_content' ); 
+    
+    ?>
 
 	<div class="video-central-single-content entry-content"><?php video_central_content(); ?></div>
 
@@ -54,9 +60,15 @@ $content_toggle = video_central_content_toggle();
 
 				<footer class="meta clearfix">
 
-					<?php do_action( 'video_central_template_content_footer' ); ?>
+					<?php
 
-					<?php video_central_get_template_part( 'social', 'share' ); ?>
+						do_action( 'video_central_template_content_footer' );
+
+						if ( video_central_allow_social_links() ) {
+
+							video_central_get_template_part( 'social', 'share' );
+
+						} ?>
 
 				</footer>
 

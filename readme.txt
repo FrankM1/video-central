@@ -69,11 +69,23 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 == Changelog ==
 
+= 1.2.0 =
+
+* New Youtube API endpoints - to v2
+* New theme options
+* Import videos as posts
+
+
+= 1.1.4 =
+
+* Added post status function
+
 = 1.1.3 =
 
 * New: Tags are now displayed in single view
 * Fixed Translation strings and added .po file
-* Category widget dropdown fix 
+* Category widget dropdown fix
+* Page template file filter
 
 = 1.1.2 =
 
@@ -85,7 +97,7 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 = 1.1.0 =
 
-* Add embed code 
+* Add embed code
 * Player not working in firefox
 * PHP 5.2 compatibility
 * Increased import per page to 50 from 20

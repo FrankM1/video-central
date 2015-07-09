@@ -19,7 +19,7 @@ class Video_Central_Import_Video_Settings {
     public function __construct(){
 
         add_filter('video_central_map_settings_meta_caps',      array($this, 'set_caps'), 10, 4 );
-        add_filter('video_central_admin_get_settings_sections', array($this, 'settings_sections'));
+        add_filter('video_central_admin_get_settings_sections', array($this, 'settings_sections'), 99);
         add_filter('video_central_admin_get_settings_fields',   array($this, 'settings_fields'));
 
     }
@@ -60,17 +60,13 @@ class Video_Central_Import_Video_Settings {
      */
     function settings_sections( $sections ){
 
-        $new_sections = array (
-
-            'video_central_settings_import_videos' => array (
-                'title'    => __( 'Video Central Import Settings', 'video_central' ),
-                'callback' => array($this, 'setting_section_callback'),
-                'page'     => 'discussion'
-            )
-
+        $sections['video_central_settings_import_videos'] = array (
+            'title'    => __( 'Video Central Import Settings', 'video_central' ),
+            'callback' => array($this, 'setting_section_callback'),
+            'page'     => 'discussion'
         );
 
-        return array_merge($new_sections, $sections);
+        return $sections;
 
     }
 
@@ -103,6 +99,14 @@ class Video_Central_Import_Video_Settings {
                 'args'              => array()
             ),
 
+            // Allow topic tags
+            '_video_central_import_as_post' => array(
+                'title'             => __( 'Import Videos as posts', 'video_central' ),
+                'callback'          => array($this, 'setting_callback_import_as_post'),
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
         );
 
         return $fields;
@@ -117,8 +121,30 @@ class Video_Central_Import_Video_Settings {
     public function setting_callback_allow_video_imports( ){ ?>
         <input name="_video_central_allow_video_imports" id="_video_central_allow_video_imports" type="checkbox" value="1" <?php checked( video_central_allow_video_imports( true ) ); video_central_maybe_admin_setting_disabled( '_video_central_allow_video_imports' ); ?> />
         <label for="_video_central_allow_video_imports"><?php esc_html_e( 'Allow video imports', 'video_central' ); ?></label>
-      <?php  
+      <?php
+    }
+
+    /**
+     * Add subpages on our custom post type
+     *
+     * @since 1.0.0
+     */
+    public function setting_callback_import_as_post( ){ ?>
+        <input name="_video_central_import_as_post" id="_video_central_import_as_post" type="checkbox" value="1" <?php checked( video_central_import_as_post( true ) ); video_central_maybe_admin_setting_disabled( '_video_central_import_as_post' ); ?> />
+        <label for="_video_central_import_as_post"><?php esc_html_e( 'Import Videos as posts', 'video_central' ); ?></label>
+      <?php
     }
 
 }
-video_central()->admin->importer_settings = new Video_Central_Import_Video_Settings;
+
+add_action( 'video_central_init', 'video_central_import_video_settings' );
+/**
+ * Setup Video Central Admin
+ *
+ * @since 1.0.0
+ *
+ * @uses Video_Central_Admin
+ */
+function video_central_import_video_settings() {
+	video_central()->admin->importer_settings = new Video_Central_Import_Video_Settings;
+}

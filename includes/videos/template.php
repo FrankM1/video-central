@@ -679,7 +679,7 @@ function video_central_archive_title( $title = '' ) {
  * @since 1.0.0
  *
  * @param int $video_id Optional. Video id
- * @uses video_central_get_video_content() To get the video content
+ * @uses video_central_get_content() To get the video content
  */
 function video_central_content( $video_id = 0 ) {
 	echo video_central_get_content( $video_id );
@@ -694,7 +694,7 @@ function video_central_content( $video_id = 0 ) {
 	 * @uses post_password_required() To check if the video requires pass
 	 * @uses get_the_password_form() To get the password form
 	 * @uses get_post_field() To get the content post field
-	 * @uses apply_filters() Calls 'video_central_get_video_content' with the content
+	 * @uses apply_filters() Calls 'video_central_get_content' with the content
 	 *                        and video id
 	 * @return string Content of the video
 	 */
@@ -710,7 +710,59 @@ function video_central_content( $video_id = 0 ) {
 
         $args = array();
 
-        $content = apply_filters( 'video_central_get_content_urls', $content, $args );
+        $content = apply_filters( 'video_central_get_content', $content, $args );
+
+		return apply_filters( __FUNCTION__, $content, $video_id );
+	}
+
+/**
+ * Output the excerpt of the video
+ *
+ * @since 1.1.3
+ *
+ * @param int $video_id Optional. Video id
+ * @uses video_central_get_excerpt() To get the video content
+ */
+function video_central_excerpt( $video_id = 0, $excerpt_length = '' ) {
+	echo video_central_get_excerpt( $video_id, $excerpt_length );
+}
+	/**
+	 * Return the content of the video
+	 *
+	 * @since 1.1.3
+	 *
+	 * @param int $video_id Optional. Video id
+	 * @uses video_central_get_video_id() To get the video id
+	 * @uses post_password_required() To check if the video requires pass
+	 * @uses get_the_password_form() To get the password form
+	 * @uses get_post_field() To get the content post field
+	 * @uses apply_filters() Calls 'video_central_get_excerpt' with the content
+	 *                        and video id
+	 * @return string Content of the video
+	 */
+	function video_central_get_excerpt( $video_id = 0, $excerpt_length = 55 ) {
+		$video_id = video_central_get_video_id( $video_id );
+        $excerpt_length = apply_filters( 'video_central_excerpt_length', $excerpt_length );
+
+		// Check if password is required
+		if ( post_password_required( $video_id ) )
+			return get_the_password_form();
+
+		$content = get_post_meta($video_id, '_video_central_description', true );
+
+        $args = array();
+
+		var_export($video_id);
+
+		/**
+		 * Filter the string in the "more" link displayed after a trimmed excerpt.
+		 *
+		 * @param string $more_string The string shown within the more link.
+		 */
+		$excerpt_more = apply_filters( 'video_central_excerpt_more', ' ' . '[&hellip;]' );
+		$content = wp_trim_words( $content, $excerpt_length, $excerpt_more );
+
+        $content = apply_filters( 'video_central_get_excerpt_content', $content, $args );
 
 		return apply_filters( __FUNCTION__, $content, $video_id );
 	}
@@ -1208,6 +1260,35 @@ function video_central_video_category_link( $category = '' ) {
 	}
 
 /**
+ * Output the visibility of the video
+ *
+ * @since 1.0.0
+ *
+ * @param int $video_id Optional. video id
+ * @uses video_central_get_video_visibility() To get the video visibility
+ */
+function video_central_video_visibility( $video_id = 0 ) {
+    echo video_central_get_video_visibility( $video_id );
+}
+    /**
+     * Return the visibility of the video
+     *
+     * @since 1.0.0
+     *
+     * @param int $forum_id Optional. Forum id
+     * @uses video_central_get_forum_id() To get the video id
+     * @uses get_post_visibility() To get the video's visibility
+     * @uses apply_filters() Calls 'video_central_get_forum_visibility' with the visibility
+     *                        and video id
+     * @return string Status of video
+     */
+    function video_central_get_video_visibility( $video_id = 0 ) {
+        $video_id =  video_central_get_video_id( $video_id );
+
+        return apply_filters( __FUNCTION__, get_post_status( $video_id ), $video_id );
+    }
+
+/**
  * Is the video trashed?
  *
  * @since 1.0.0
@@ -1535,6 +1616,40 @@ function video_central_single_video_description( $args = '' ) {
 		// Return filtered result
 		return apply_filters( __FUNCTION__, $retstr, $r );
 	}
+/**
+ * Get featured image
+ *
+ * @param  int $video_id video id
+ *
+ * @return array
+ */
+
+function video_central_get_featured_image_src( $video_id = 0 ){
+
+    $video_id = video_central_get_video_id( $video_id );
+
+    $image = false;
+
+    //Check if post has a featured image set else get the first image from the video and use it. If both statements are false display fallback image.
+    if ( $thumb = get_post_meta($video_id, '_video_poster', true ) ) {
+
+         $image = wp_get_attachment_image_src( $thumb, 'full' ); //get full URL to image (use "large" or "medium" if the image is too big)
+
+    } elseif ( has_post_thumbnail( $video_id ) ) {
+
+        //get featured image
+        $thumb = get_post_thumbnail_id( $video_id );
+        $image = wp_get_attachment_image_src( $thumb, 'full' ); //get full URL to image (use "large" or "medium" if the image is too big)
+
+    } elseif ( $thumb = get_post_meta($video_id, '_video_thumbnail', true ) ) {
+
+        $image = wp_get_attachment_image_src( $thumb, 'full' );
+
+    }
+
+    return apply_filters( __FUNCTION__, $image, $video_id );
+
+}
 
 /**
  * [video_central_featured_image_url description]
@@ -1560,25 +1675,15 @@ function video_central_featured_image_url( $video_id = 0, $image_size = array() 
 		// Parse arguments against default values
 		$image_size = video_central_parse_args( $image_size, $args, 'get_featured_image_url' );
 
-        //Check if post has a featured image set else get the first image from the gallery and use it. If both statements are false display fallback image.
-        if ( $thumb = get_post_meta($video_id, '_video_poster', true ) ) {
+        //Check if post has a featured image set else get the first image from the video and use it. If both statements are false display fallback image.
+        if( $image = video_central_get_featured_image_src( $video_id ) ) {
 
-             $img_url = wp_get_attachment_url( $thumb, 'full' ); //get full URL to image (use "large" or "medium" if the image is too big)
-
-        } elseif ( has_post_thumbnail( $video_id ) ) {
-
-            //get featured image
-            $thumb = get_post_thumbnail_id( $video_id );
-            $img_url = wp_get_attachment_url( $thumb, 'full' ); //get full URL to image (use "large" or "medium" if the image is too big)
-
-        } elseif ( $thumb = get_post_meta($video_id, '_video_thumbnail', true ) ) {
-
-        	$img_url = wp_get_attachment_url( $thumb, 'full' );
+            $img_url = $image[0];
 
         } else {
 
-        	//find first image anywhere in the post
-        	$img_url = video_central_get_first_post_image( $video_id );
+            //find first image anywhere in the post
+            $img_url = video_central_get_first_post_image( $video_id );
         }
 
         $image = $img_url ? video_central_resize( $img_url, $image_size['width'], $image_size['height'], $image_size['crop'] ) : false;
@@ -1651,7 +1756,7 @@ function video_central_featured_image_url( $video_id = 0, $image_size = array() 
  */
 function video_central_add_comments () {
 
-    if( ( comments_open() || '0' != get_comments_number() )  )
+    if( ( comments_open() || '0' != get_comments_number() ) && video_central_allow_comments()  )
         comments_template( '', true );
 
 }
@@ -1753,7 +1858,8 @@ function video_central_has_related_videos( $args = '' ) {
     $query_args = array();
 
     $defaults = array(
-        'number' => video_central_get_related_videos_per_page(),
+        'number' 	=> video_central_get_related_videos_per_page(),
+        'randomize' => video_central_get_randomize_related_videos(),
     );
 
     $args = wp_parse_args($args, $defaults);
@@ -1901,6 +2007,9 @@ function video_central_has_related_videos( $args = '' ) {
 
     $query_args['tax_query'] = '';
     $query_args['post__in'] = $found_posts;
+    
+    if( $randomize ) $query_args['orderby'] = 'rand';
+    
     $video_central->related_video_query = new WP_Query($query_args);
 
     return apply_filters( __FUNCTION__, $video_central->related_video_query->have_posts(), $video_central->related_video_query );
@@ -2493,7 +2602,7 @@ function video_central_tags_list( $args = array() ) {
 		if ( !video_central_allow_video_tags() ) return;
 
 		$tags = get_the_term_list( $video_id, video_central_get_video_tag_tax_id() );
-				
+
 		if( $tags ) $output = sprintf( '%1$s<div class="%2$s"><strong>%3$s</strong>%4$s</div>%5$s', $r['before'], $r['class'], $r['title'], $tags, $r['after'] );
 
 		return apply_filters( __FUNCTION__, $output, $r );

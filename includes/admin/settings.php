@@ -20,7 +20,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 function video_central_admin_get_settings_sections() {
 
-	return (array) apply_filters( 'video_central_admin_get_settings_sections', array(
+	return (array) apply_filters( __FUNCTION__, array(
 
 		'video_central_settings_users' => array(
 			'title'    => __( 'Video Central User Settings', 'video_central' ),
@@ -29,12 +29,12 @@ function video_central_admin_get_settings_sections() {
 		),
 
 		'video_central_settings_features' => array(
-			'title'    => __( 'Video Features', 'video_central' ),
+			'title'    => __( 'Video Central Features', 'video_central' ),
 			'callback' => 'video_central_admin_setting_callback_features_section',
 			'page'     => 'discussion'
 		),
 		'video_central_settings_theme_compat' => array(
-			'title'    => __( 'Video Theme Packages', 'video_central' ),
+			'title'    => __( 'Theme Packages', 'video_central' ),
 			'callback' => 'video_central_admin_setting_callback_subtheme_section',
 			'page'     => 'general'
 		),
@@ -55,6 +55,17 @@ function video_central_admin_get_settings_sections() {
 			'page'     => 'permalink',
 		),
 
+        'video_central_settings_single_video_page' => array(
+            'title'    => __( 'Single Video Page Settings', 'video_central' ),
+            'callback' => 'video_central_admin_setting_callback_single_video_page_section',
+            'page'     => 'permalink',
+        ),
+
+		'video_central_settings_youtube_api' => array(
+			'title'    => __( 'Youtube Api Settings', 'video_central' ),
+			'callback' => 'video_central_admin_setting_callback_youtube_api_section',
+			'page'     => 'permalink',
+		),
 
 	) );
 }
@@ -66,6 +77,7 @@ function video_central_admin_get_settings_sections() {
  * @return type
  */
 function video_central_admin_get_settings_fields() {
+
 	return (array) apply_filters( 'video_central_admin_get_settings_fields', array(
 
 		/** User Section ******************************************************/
@@ -106,14 +118,6 @@ function video_central_admin_get_settings_fields() {
 			'_video_central_show_slider_on_root' => array(
 				'title'             => __( 'Videos slider should show on root', 'video_central' ),
 				'callback'          => 'video_central_admin_setting_callback_show_slider_on_root',
-				'sanitize_callback' => 'sanitize_text_field',
-				'args'              => array()
-			),
-
-			// What to show on Video Root
-			'_video_central_allow_comments' => array(
-				'title'             => __( 'Comments', 'video_central' ),
-				'callback'          => 'video_central_admin_setting_callback_allow_comments',
 				'sanitize_callback' => 'sanitize_text_field',
 				'args'              => array()
 			),
@@ -222,6 +226,97 @@ function video_central_admin_get_settings_fields() {
 			)
 		),
 
+        /** Related Videos ********************************************************/
+
+        'video_central_settings_single_video_page' => array(
+
+            '_video_central_allow_comments' => array(
+                'title'             => __( 'Allow video comments', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_allow_video_comments',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
+            '_video_central_allow_likes' => array(
+                'title'             => __( 'Allow video likes', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_allow_video_likes',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
+            '_video_central_allow_video_meta' => array(
+                'title'             => __( 'Allow video meta', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_allow_video_meta',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
+            '_video_central_allow_social_links' => array(
+                'title'             => __( 'Allow video social links', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_allow_video_social_links',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
+            // display related videos setting
+            '_video_central_allow_related_videos' => array(
+                'title'             => __( 'Display Related Videos', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_allow_related_videos',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
+            '_video_central_related_videos_count' => array(
+                'title'             => __( 'Related Videos Count', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_related_videos_count',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
+            '_video_central_randomize_related_videos' => array(
+                'title'             => __( 'Randomize related videos', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_randomize_related_videos',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            )
+
+        ),
+
+		/** Youtube Api ********************************************************/
+
+		'video_central_settings_youtube_api' => array(
+
+			// Api Key setting
+			'_video_central_youtube_api_key' => array(
+				'title'             => __( 'Youtube API Key', 'video_central' ),
+				'callback'          => 'video_central_admin_setting_callback_youtube_api_key',
+				'sanitize_callback' => 'sanitize_text_field',
+				'args'              => array()
+			),
+
+			'_video_central_youtube_api_client_id' => array(
+				'title'             => __( 'Youtube API Client ID', 'video_central' ),
+				'callback'          => 'video_central_admin_setting_callback_youtube_api_client_id',
+				'sanitize_callback' => 'sanitize_text_field',
+				'args'              => array()
+			),
+
+			'_video_central_youtube_api_client_secret' => array(
+				'title'             => __( 'Youtube API Client Secret', 'video_central' ),
+				'callback'          => 'video_central_admin_setting_callback_youtube_api_client_secret',
+				'sanitize_callback' => 'sanitize_text_field',
+				'args'              => array()
+			),
+
+			'_video_central_youtube_api_daily_quota' => array(
+				'title'             => __( 'Youtube API Daily Quota', 'video_central' ),
+				'callback'          => 'video_central_admin_setting_callback_youtube_api_daily_quota',
+				'sanitize_callback' => 'intval',
+				'args'              => array()
+			),
+
+		),
+
 		/** User Slugs ********************************************************/
 
 		'video_central_settings_user_slugs' => array(
@@ -306,7 +401,7 @@ function video_central_admin_setting_callback_video_tags() {
 }
 
 /**
- * Allow video wide search
+ * Allow video search
  *
  * @since 1.0.0
  *
@@ -322,7 +417,7 @@ function video_central_admin_setting_callback_video_categories() {
 }
 
 /**
- * Allow video wide search
+ * Allow video search
  *
  * @since 1.0.0
  *
@@ -332,23 +427,7 @@ function video_central_admin_setting_callback_search() {
 ?>
 
 	<input name="_video_central_allow_search" id="_video_central_allow_search" type="checkbox" value="1" <?php checked( video_central_allow_search( true ) ); video_central_maybe_admin_setting_disabled( '_video_central_allow_search' ); ?> />
-	<label for="_video_central_allow_search"><?php esc_html_e( 'Allow video wide search', 'video_central' ); ?></label>
-
-<?php
-}
-
-/**
- * Allow video wide search
- *
- * @since 1.0.0
- *
- * @uses checked() To display the checked attribute
- */
-function video_central_admin_setting_callback_allow_comments() {
-?>
-
-	<input name="_video_central_allow_comments" id="_video_central_allow_comments" type="checkbox" value="1" <?php checked( video_central_allow_comments( true ) ); video_central_maybe_admin_setting_disabled( '_video_central_allow_comments' ); ?> />
-	<label for="_video_central_allow_comments"><?php esc_html_e( 'Allow video comments', 'video_central' ); ?></label>
+	<label for="_video_central_allow_search"><?php esc_html_e( 'Allow video search', 'video_central' ); ?></label>
 
 <?php
 }
@@ -553,6 +632,7 @@ function video_central_admin_setting_callback_single_slug_section() {
 <?php
 }
 
+
 /**
  * Video slug setting field
  *
@@ -639,6 +719,208 @@ function video_central_admin_setting_callback_search_slug() {
 <?php
 	// Slug Check
 	video_central_form_slug_conflict_check( '_video_central_search_slug', 'search' );
+}
+
+
+/** Single Video View **************************************************************/
+
+/**
+ * Youtube api settings section description for the settings page
+ *
+ * @since 1.2.0
+ */
+function video_central_admin_setting_callback_single_video_page_section() {
+
+?>
+    <p><?php _e( 'Settings for the single video page', 'video_central' ); ?></p>
+
+<?php
+}
+
+/**
+ * Include root slug setting field
+ *
+ * @since 1.2.0
+ *
+ * @uses checked() To display the checked attribute
+ */
+function video_central_admin_setting_callback_allow_video_comments() {
+?>
+
+    <input name="_video_central_allow_comments" id="_video_central_allow_comments" type="checkbox" value="1" <?php checked( video_central_allow_comments() ); video_central_maybe_admin_setting_disabled( '_video_central_allow_comments' ); ?> />
+    <label for="_video_central_allow_comments"><?php esc_html_e( 'Allow Comments videos', 'video_central' ); ?></label>
+
+<?php
+}
+
+/**
+ * Include root slug setting field
+ *
+ * @since 1.2.0
+ *
+ * @uses checked() To display the checked attribute
+ */
+function video_central_admin_setting_callback_allow_video_meta() {
+?>
+
+    <input name="_video_central_allow_video_meta" id="_video_central_allow_video_meta" type="checkbox" value="1" <?php checked( video_central_allow_video_meta() ); video_central_maybe_admin_setting_disabled( '_video_central_allow_video_meta' ); ?> />
+    <label for="_video_central_allow_video_meta"><?php esc_html_e( 'Allow video meta', 'video_central' ); ?></label>
+
+<?php
+}
+
+/**
+ * Include root slug setting field
+ *
+ * @since 1.2.0
+ *
+ * @uses checked() To display the checked attribute
+ */
+function video_central_admin_setting_callback_allow_video_likes() {
+?>
+
+    <input name="_video_central_allow_likes" id="_video_central_allow_likes" type="checkbox" value="1" <?php checked( video_central_allow_likes() ); video_central_maybe_admin_setting_disabled( '_video_central_allow_likes' ); ?> />
+    <label for="_video_central_allow_likes"><?php esc_html_e( 'Allow likes on video', 'video_central' ); ?></label>
+
+<?php
+}
+
+/**
+ * Include root slug setting field
+ *
+ * @since 1.2.0
+ *
+ * @uses checked() To display the checked attribute
+ */
+function video_central_admin_setting_callback_allow_video_social_links() {
+?>
+
+    <input name="_video_central_allow_social_links" id="_video_central_allow_social_links" type="checkbox" value="1" <?php checked( video_central_allow_social_links() ); video_central_maybe_admin_setting_disabled( '_video_central_allow_social_links' ); ?> />
+    <label for="_video_central_allow_social_links"><?php esc_html_e( 'Allow social links', 'video_central' ); ?></label>
+
+<?php
+}
+
+/**
+ * Include root slug setting field
+ *
+ * @since 1.2.0
+ *
+ * @uses checked() To display the checked attribute
+ */
+function video_central_admin_setting_callback_allow_related_videos() {
+?>
+
+    <input name="_video_central_allow_related_videos" id="_video_central_allow_related_videos" type="checkbox" value="1" <?php checked( video_central_allow_related_videos() ); video_central_maybe_admin_setting_disabled( '_video_central_allow_related_videos' ); ?> />
+    <label for="_video_central_allow_related_videos"><?php esc_html_e( 'Display related videos', 'video_central' ); ?></label>
+
+<?php
+}
+
+/**
+ * Include root slug setting field
+ *
+ * @since 1.2.0
+ *
+ */
+function video_central_admin_setting_callback_related_videos_count() {
+?>
+
+    <input name="_video_central_related_videos_count" id="_video_central_related_videos_count" type="number" min="1" step="1" value="<?php video_central_form_option( '_video_central_related_videos_count', '12' ); ?>" class="small-text"<?php video_central_maybe_admin_setting_disabled( '_video_central_related_videos_count' ); ?> />
+    <label for="_video_central_related_videos_count"><?php esc_html_e( 'items', 'video_central' ); ?></label>
+
+<?php
+}
+
+/**
+ * Include root slug setting field
+ *
+ * @since 1.2.0
+ *
+ * @uses checked() To display the checked attribute
+ */
+function video_central_admin_setting_callback_randomize_related_videos() {
+?>
+
+    <input name="_video_central_randomize_related_videos" id="_video_central_randomize_related_videos" type="checkbox" value="1" <?php checked( video_central_get_randomize_related_videos() ); video_central_maybe_admin_setting_disabled( '_video_central_randomize_related_videos' ); ?> />
+    <label for="_video_central_randomize_related_videos"><?php esc_html_e( 'Randomize related videos', 'video_central' ); ?></label>
+
+<?php
+}
+
+/** Youtube Api **************************************************************/
+
+/**
+ * Youtube api settings section description for the settings page
+ *
+ * @since 1.2.0
+ */
+function video_central_admin_setting_callback_youtube_api_section() {
+
+?>
+    <p><?php _e( 'To get your YouTube API key, visit this address: <a href="https://code.google.com/apis/console" target="_blank">https://code.google.com/apis/console</a>.<br />
+    After signing in, Create a new project and enable YouTube Data API.
+    To get your API key, visit APIs & auth and under Public API access create a new Server Key.<br />
+    For more detailed informations please see this tutorial.', 'video_central' ); ?></p>
+
+<?php
+}
+
+/**
+ * Api key setting field
+ *
+ * @since 1.2.0
+ */
+function video_central_admin_setting_callback_youtube_api_key() {
+?>
+
+	<input name="_video_central_youtube_api_key" id="_video_central_youtube_api_key" type="text" class="regular-text code" value="<?php video_central_form_option( '_video_central_youtube_api_key', '', true ); ?>"<?php video_central_maybe_admin_setting_disabled( '_video_central_youtube_api_key' ); ?> />
+
+<?php
+
+}
+
+/**
+ * Api key setting field
+ *
+ * @since 1.2.0
+ */
+function video_central_admin_setting_callback_youtube_api_daily_quota() {
+?>
+
+	<input name="_video_central_youtube_api_daily_quota" id="_video_central_youtube_api_daily_quota" type="checkbox" value="1" <?php checked( video_central_get_youtube_api_daily_quota( ) ); video_central_maybe_admin_setting_disabled( '_video_central_allow_search' ); ?> />
+	<label for="_video_central_youtube_api_daily_quota"><?php esc_html_e( 'Display daily quota', 'video_central' ); ?></label>
+
+<?php
+
+}
+
+/**
+ * Api key setting field
+ *
+ * @since 1.2.0
+ */
+function video_central_admin_setting_callback_youtube_api_client_id() {
+?>
+
+	<input name="_video_central_youtube_api_client_id" id="_video_central_youtube_api_client_id" type="text" class="regular-text code" value="<?php video_central_form_option( '_video_central_youtube_api_client_id', '', true ); ?>"<?php video_central_maybe_admin_setting_disabled( '_video_central_youtube_api_client_id' ); ?> />
+
+<?php
+
+}
+
+/**
+ * Api key setting field
+ *
+ * @since 1.0.0
+ */
+function video_central_admin_setting_callback_youtube_api_client_secret() {
+?>
+
+	<input name="_video_central_youtube_api_client_secret" id="_video_central_youtube_api_client_secret" type="text" class="regular-text code" value="<?php video_central_form_option( '_video_central_youtube_api_client_secret', '', true ); ?>"<?php video_central_maybe_admin_setting_disabled( '_video_central_youtube_api_client_secret' ); ?> />
+
+<?php
+
 }
 
 

@@ -59,6 +59,11 @@ class Radium_Video_Posttype {
 
         add_action( 'load-edit.php', array( &$this, 'edit_videos_load' ) );
 
+        // add video post type to homepage list of posts
+        //add_filter( 'pre_get_posts', array( $this, 'add_on_homepage' ), 999 );
+
+        // add video post type to main RSS feed
+        //add_filter( 'request', array( $this, 'add_to_main_feed' ) );
 
     }
 
@@ -407,7 +412,7 @@ class Radium_Video_Posttype {
 
                 $meta = get_post_meta( $post_id, '_video_central_video_data', true );
 
-                $duration = isset($meta['duration']) ? video_central_sec_to_time($video_data['duration']) : "null";
+                $duration = isset($meta['duration']) ? video_central_sec_to_time($meta['duration']) : "null";
 
                 echo $duration;
 
@@ -444,9 +449,9 @@ class Radium_Video_Posttype {
     function admin_order($wp_query) {
 
         if (is_admin()) {
-			
+
 			global $wp_query;
-			
+
             // Get the post type from the query
             $post_type = $wp_query->query['post_type'];
 
@@ -540,6 +545,94 @@ class Radium_Video_Posttype {
              }
         </style>
         <?php
+    }
+
+    /**
+     * Add video post type to homepage list of latest posts
+     *
+     * Callback function for filter 'pre_get_posts' set in class constructor
+     *
+     * @since 1.2.0
+     */
+    public function add_on_homepage( $query ){
+
+        // check that page isn't admin page, is homepage and the query
+        if ( !is_admin() && is_home() && $query->is_main_query() ){
+
+            // get plugin settings
+            if( video_central_listing_is_public() && video_central_add_videos_on_homepage() ){
+                // get the post types queried
+                $post_types = get_query_var('post_type');
+                // add video to post type
+                if( !is_array($post_types) ){
+                    $post_types = array( 'post', $this->post_type );
+                }else{
+                    $post_types[] = $this->post_type;
+                }
+
+                // add video post type to query
+                $query->set( 'post_type', $post_types );
+            }
+        }
+
+        return $query;
+    }
+
+    /**
+     * Adds video post type to main feed.
+     *
+     * Callback function to filter 'request' set in class constructor.
+     *
+     * @since 1.2.0
+     */
+    public function add_to_main_feed( $vars ){
+
+        if( isset( $vars['feed'] ) ){
+
+            if( video_central_listing_is_public() && video_central_add_videos_to_main_rss() ){
+
+                if( !isset( $vars['post_type'] ) ){
+                    $vars['post_type'] = array('post', $this->post_type);
+                    // set filter to put the correct taxonomy on custom post type video in feed entry
+                    add_filter('get_the_categories', array($this, 'set_feed_video_categories'));
+
+                }
+
+            }
+
+        }
+
+        return $vars;
+    }
+
+    /**
+     * Callback function for filter 'get_the_categories'
+     * When custom post type is inserted into main feed for each post the correct categorties based
+     * on post type taxonomy must be set. This does that otherwise all custom post type categories in
+     * feed will end up as Uncategorized.
+     *
+     * @since 1.2.0
+     *
+     * @param array $categories
+     */
+    public function set_feed_video_categories( $categories ){
+
+        global $post;
+
+        if( !$post || $this->post_type != $post->post_type ){
+            return $categories;
+        }
+
+        $categories = get_the_terms( $post, $this->taxonomy );
+        if ( ! $categories || is_wp_error( $categories ) )
+            $categories = array();
+
+        $categories = array_values( $categories );
+        foreach ( array_keys( $categories ) as $key ) {
+            _make_cat_compat( $categories[$key] );
+        }
+
+        return $categories;
     }
 
     /**
