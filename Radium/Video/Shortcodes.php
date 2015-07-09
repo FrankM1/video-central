@@ -59,24 +59,24 @@ class Radium_Video_Shortcodes {
             'video-central-index'            => array( $this, 'display_videos_index' ), // Video Index
             'video-central-single-video'     => array( $this, 'display_video'        ), // Specific video - pass an 'id' attribute
             'video-central-slider-grid'      => array( $this, 'video_slider_grid'    ), // Video Player shortcode
-			
+
 			/** Video Category ****************************************************/
-			
+
 			'video-central-video-categories'       => array( $this, 'display_video_categories'    ), // All video categories in a cloud
 			'video-central-single-category'       => array( $this, 'display_videos_of_category' ), // Videos of category
-			
+
 			/** Video Tags ****************************************************/
-			
+
 			'video-central-video-tags'       => array( $this, 'display_video_tags'    ), // All video tags in a cloud
 			'video-central-single-tag'       => array( $this, 'display_videos_of_tag' ), // Videos of Tag
 
             /** Views *********************************************************/
             'video-central-search'			=> array( $this, 'display_search' ), // search view
             'video-central-search-form'		=> array( $this, 'display_search_form' ), // search view
-            
+
             'video-central-view'      		=> array( $this, 'display_view'   ), // Single view
             'video-central-single-video' 	=> array( $this, 'player'         ), // Single video
-            
+
             'video-central-subtitle'        => array( $this, 'subtitle_track' )
 
         ) );
@@ -322,7 +322,7 @@ class Radium_Video_Shortcodes {
     }
 
     /** Video Categories ************************************************************/
-     
+
  	/**
  	 * Display a tag cloud of all video categories in an output buffer and return to
  	 * ensure that post/page contents are displayed first.
@@ -332,33 +332,33 @@ class Radium_Video_Shortcodes {
  	 * @return string
  	 */
  	public function display_video_categories($attr, $content = '') {
- 		
+
  		extract(shortcode_atts(array(
 			'show_count'   => true,
 			'hierarchical' => true,
 			'dropdown' => false,
 			'title_li' => '',
 			'show_option_none' => __('Select Category', "video_central" )
-	    ), $atts));
- 			    
+	    ), $attr));
+
  		// Unset globals
  		$this->unset_globals();
- 
+
  		// Start output buffer
  		$this->start( 'video_central_video_categories' );
 
-		$args = array( 
-			'taxonomy' => video_central_get_video_category_tax_id(), 
-			'orderby' => 'name', 
-			'show_count' => $show_count, 
+		$args = array(
+			'taxonomy' => video_central_get_video_category_tax_id(),
+			'orderby' => 'name',
+			'show_count' => $show_count,
 			'hierarchical' => $hierarchical
 		);
 
 		if ( $dropdown ) {
-		
+
 			$args['show_option_none'] = $show_option_none;
 			wp_dropdown_categories(apply_filters('video_central_shortcode_video_categories_dropdown_args', $args));
- 		
+
  		?>
  		<script type='text/javascript'>
  		/* <![CDATA[ */
@@ -373,18 +373,18 @@ class Radium_Video_Shortcodes {
  		</script>
  		<?php } else { ?><ul><?php
  				$args['title_li'] = $title_li;
- 				
+
  				wp_list_categories(apply_filters('video_central_shortcode_video_categories_args', $args));
  		?>
  				</ul>
  		<?php
- 		
+
  		}
- 
+
  		// Return contents of output buffer
  		return $this->end();
  	}
-     
+
  	/**
      * Filter the query for video categories
      *
@@ -404,7 +404,7 @@ class Radium_Video_Shortcodes {
         return $args;
 
     }
-    
+
     /**
 	 * Display the contents of a specific video categories in an output buffer
 	 * and return to ensure that post/page contents are displayed first.
@@ -442,10 +442,10 @@ class Radium_Video_Shortcodes {
 		// Return contents of output buffer
 		return $this->end();
 	}
-    
-        
+
+
     /** Video Tags ************************************************************/
-    
+
 	/**
 	 * Display a tag cloud of all video tags in an output buffer and return to
 	 * ensure that post/page contents are displayed first.
@@ -473,8 +473,8 @@ class Radium_Video_Shortcodes {
 		// Return contents of output buffer
 		return $this->end();
 	}
-    
-	    
+
+
     /**
      * Filter the query for video tags
      *
@@ -494,7 +494,7 @@ class Radium_Video_Shortcodes {
         return $args;
 
     }
-    
+
     /**
 	 * Display the contents of a specific video tag in an output buffer
 	 * and return to ensure that post/page contents are displayed first.
@@ -556,7 +556,7 @@ class Radium_Video_Shortcodes {
         ), $atts));
 
         $dataSetup = array();
-        
+
         return video_central_get_player( $id );
 
         // MP4 Source Supplied

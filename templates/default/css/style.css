@@ -377,6 +377,9 @@ div.like-opening div.like-circle {
 .sidebar .widget.widget_video_search input[type="submit"] {
   width: auto; }
 
+.sidebar .video_central_widget_categories select {
+  max-width: 250px; }
+
 /* =video-central Style
 -------------------------------------------------------------- */
 .video-central #main > .video-central-row {

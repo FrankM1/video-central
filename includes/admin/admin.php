@@ -140,11 +140,11 @@ class Video_Central_Admin {
 		add_action( 'video_central_register_admin_settings', array( $this, 'register_admin_settings'    )     ); // Add settings
 		add_action( 'video_central_activation',              array( $this, 'new_install'                )     ); // Add menu item to settings menu
 
-		add_action( 'admin_enqueue_scripts',       array( $this, 'enqueue_styles'             )     ); // Add enqueued CSS
-		add_action( 'admin_enqueue_scripts',       array( $this, 'enqueue_scripts'            )     ); // Add enqueued JS
+		add_action( 'admin_enqueue_scripts',       			 array( $this, 'enqueue_styles'             )     ); // Add enqueued CSS
+		add_action( 'admin_enqueue_scripts',       			 array( $this, 'enqueue_scripts'            )     ); // Add enqueued JS
 
-		add_action( 'wp_dashboard_setup',          array( $this, 'dashboard_widget_right_now' )     ); // Videos 'Right now' Dashboard widget
-		add_action( 'admin_bar_menu',              array( $this, 'admin_bar_about_link'       ), 15 ); // Add a link to Video Central about page to the admin bar
+		add_action( 'wp_dashboard_setup',          			 array( $this, 'dashboard_widget_right_now' )     ); // Videos 'Right now' Dashboard widget
+		add_action( 'admin_bar_menu',              			 array( $this, 'admin_bar_about_link'       ), 15 ); // Add a link to Video Central about page to the admin bar
 
 		/** Ajax **************************************************************/
 
@@ -338,15 +338,18 @@ class Video_Central_Admin {
 		switch ( $cap ) {
 
 			// Video Central
-			case 'video_central_about_page'            : // About and Credits
-			case 'video_central_settings_page'         : // Settings Page
-			case 'video_central_settings_users'        : // Settings - Users
-			case 'video_central_settings_features'     : // Settings - Features
-			case 'video_central_settings_theme_compat' : // Settings - Theme compat
-			case 'video_central_settings_root_slugs'   : // Settings - Root slugs
-			case 'video_central_settings_single_slugs' : // Settings - Single slugs
-			case 'video_central_settings_user_slugs'   : // Settings - User slugs
-			case 'video_central_settings_per_page'     : // Settings - Per page
+			case 'video_central_about_page'                      : // About and Credits
+			case 'video_central_settings_page'                   : // Settings Page
+			case 'video_central_settings_users'                  : // Settings - Users
+			case 'video_central_settings_features'               : // Settings - Features
+			case 'video_central_settings_theme_compat'           : // Settings - Theme compat
+			case 'video_central_settings_root_slugs'             : // Settings - Root slugs
+			case 'video_central_settings_single_slugs'           : // Settings - Single slugs
+            case 'video_central_settings_single_video_page'      : // Settings - Single Video page
+			case 'video_central_settings_user_slugs'             : // Settings - User slugs
+			case 'video_central_settings_per_page'               : // Settings - Per page
+            case 'video_central_settings_youtube_api'            : // Settings - Youtube Api
+
 				$caps = array( video_central()->admin->minimum_capability );
 				break;
 		}
@@ -626,7 +629,7 @@ class Video_Central_Admin {
 		<div class="wrap about-wrap">
 			<h1><?php printf( esc_html__( 'Welcome to Video Central %s', 'video_central' ), $display_version ); ?></h1>
 			<div class="about-text"><?php printf( esc_html__( 'Thank you for updating.', 'video_central' ), $display_version ); ?></div>
- 
+
 			<h2 class="nav-tab-wrapper">
 				<a class="nav-tab nav-tab-active" href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'video-central-about' ), 'index.php' ) ) ); ?>">
 					<?php esc_html_e( 'What&#8217;s New', 'video_central' ); ?>
@@ -637,7 +640,7 @@ class Video_Central_Admin {
 
 			<!-- <div class="changelog">
 				<h3><?php esc_html_e( 'Converters', 'video_central' ); ?></h3>
- 
+
 				<div class="feature-section col three-col">
 					<div>
 						<h4><?php esc_html_e( 'Theme Compatibility', 'video_central' ); ?></h4>
@@ -678,6 +681,7 @@ class Video_Central_Admin {
 	 * @uses wp_remote_get()
 	 */
 	public static function network_update_screen() { }
+
 }
 endif; // class_exists check
 

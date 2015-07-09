@@ -231,11 +231,11 @@ class Video_Central_Vimeo_Importer {
 
 	                $post_content = $post_excerpt = '';
 	                
-	                if( 'content' == video_central_import_description() || 'content_excerpt' == video_central_import_description() ){
+	                if( 'content' == video_central_import_description_key() || 'content_excerpt' == video_central_import_description_key() ){
 	                    $post_content = $video['description'];
 	                }
 	                
-	                if( 'excerpt' == video_central_import_description() || 'content_excerpt' == video_central_import_description() ){
+	                if( 'excerpt' == video_central_import_description_key() || 'content_excerpt' == video_central_import_description_key() ){
 	                    $post_excerpt = $video['description'];
 	                }
 
@@ -266,7 +266,7 @@ class Video_Central_Vimeo_Importer {
 
 	                    }
 
-                        if( video_central_import_description() == '_video_central_description') {
+                        if( video_central_import_description_key() == '_video_central_description') {
 
                             update_post_meta($post_id, '_video_central_description', $video['description']);
 

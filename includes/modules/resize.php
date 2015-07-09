@@ -37,7 +37,19 @@ function video_central_resize( $url, $width, $height = null, $crop = null, $sing
     $upload_info = wp_upload_dir();
     $upload_dir = $upload_info['basedir'];
     $upload_url = $upload_info['baseurl'];
-
+    
+	$http_prefix = "http://";
+	$https_prefix = "https://";
+	
+	/* if the $url scheme differs from $upload_url scheme, make them match 
+	   if the schemes differe, images don't show up. */
+	if(!strncmp($url,$https_prefix,strlen($https_prefix))){ //if url begins with https:// make $upload_url begin with https:// as well
+	    $upload_url = str_replace($http_prefix,$https_prefix,$upload_url);
+	}
+	elseif(!strncmp($url,$http_prefix,strlen($http_prefix))){ //if url begins with http:// make $upload_url begin with http:// as well
+	    $upload_url = str_replace($https_prefix,$http_prefix,$upload_url);      
+	}
+	
     //check if $img_url is local
     if(strpos( $url, $upload_url ) === false) return false;
 

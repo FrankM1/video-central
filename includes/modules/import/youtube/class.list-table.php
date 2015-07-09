@@ -1,7 +1,50 @@
 <?php
+/**
+ * List imported videos
+ */
+class Video_Central_Youtube_Importer_ListTable extends WP_List_Table {
 
-class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
-	
+    /**
+     * The current list of items
+     *
+     * @since 1.2.0
+     * @var array
+     * @access public
+     */
+    public $items;
+
+    /**
+     * Feed error
+     *
+     * @since 1.2.0
+     * @var boolean
+     */
+    private $feed_errors = false;
+
+    /**
+     * Total items in feed
+     *
+     * @since 1.2.0
+     * @var integer
+     */
+    private $total_items = 0;
+
+    /**
+     * Next page token
+     *
+     * @since 1.2.0
+     * @var string
+     */
+    private $next_token = '';
+
+    /**
+     * Previous page token
+     *
+     * @since 1.2.0
+     * @var string
+     */
+    private $prev_token = '';
+
 	/**
 	 * Constructor. Hooks all interactions to initialize the class.
 	 *
@@ -60,7 +103,6 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
 
 		$label = sprintf( '<label for="video_central_%1$s" class="video_central_label">%2$s</label>', $item['video_id'], $item['title'] );
 
-
 		// row actions
     	$actions = array(
     		'view' 		=> sprintf( '<a href="http://www.youtube.com/watch?v=%1$s" target="_video_central_youtube_open">%2$s</a>', $item['video_id'], __('View on YouTube', 'video_central') ),
@@ -71,8 +113,6 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
     		$this->row_actions( $actions )
     	);
 	}
-
-
 
 	/**
 	 * Column for video duration
@@ -113,7 +153,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
 	 * Date when the video was published
 	 * @param array $item
 	 */
-	function column_published( $item ){
+	function column_date( $item ){
 		$time = strtotime( $item['published'] );
 		return date('M dS, Y @ H:i:s', $time);
 	}
@@ -140,11 +180,10 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
 			'title'		=> __('Title', 		'video_central'),
 			'category'	=> __('Category', 	'video_central'),
 			'video_id'	=> __('Video ID', 	'video_central'),
-			'uploader'	=> __('Uploader', 	'video_central'),
 			'duration'	=> __('Duration', 	'video_central'),
 			'rating'	=> __('Rating', 	'video_central'),
 			'views'		=> __('Views', 		'video_central'),
-			'published' => __('Published', 	'video_central'),
+			'date'      => __('Date', 	'video_central'),
 		);
     	return $columns;
     }
@@ -154,11 +193,11 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
     	$suffix = 'top' == $which ? '_top' : '2';
 
    		$selected = false;
-   		
+
 		if( isset( $_GET['cat'] ) ){
 			$selected = $_GET['cat'];
 		}
-		
+
     	$args = array(
 			'show_count' 	=> true,
     		'hide_empty'	=> 0,
@@ -176,10 +215,10 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
 		} else {
 			$args['show_option_all'] = __('Select category (optional)', 'video_central');
 		}
-			 
+
 		// get dropdown output
 		$category_select = wp_dropdown_categories($args);
-		
+
     	?>
     	<select name="action<?php echo $suffix;?>" id="action_<?php echo $which;?>">
     		<option value="-1"><?php _e('Bulk actions', 'video_central');?></option>
@@ -192,7 +231,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
 		<?php endif;?>
 
 		<?php submit_button( __( 'Apply', 'video_central' ), 'action', false, false, array( 'id' => "doaction$suffix" ) );
-    	    	
+
     }
 
     /**
@@ -201,38 +240,120 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table{
      */
     function prepare_items() {
 
-        $per_page 	 = 50;
-		$total_items = (int)$_GET['video_central_results'];
-		$current_page = $this->get_pagenum();
+        $per_page = video_central_import_results_per_page();
+        $token  = isset( $_GET['token'] ) ? $_GET['token'] : '';
 
-		$args = array(
-			'source' 	=> $_GET['video_central_source'],
-			'feed'		=> $_GET['video_central_feed'],
-			'query'		=> $_GET['video_central_query'],
-			'order'		=> $_GET['video_central_order'],
-    		'duration'	=> isset( $_GET['video_central_duration'] ) ? $_GET['video_central_duration'] : '',
-			'results'	=> $per_page,
-			'start-index' => ( $current_page - 1 ) * $per_page + 1
-		);
+        switch( $_GET['video_central_feed'] ){
+            case 'user':
+            case 'playlist':
+            case 'channel':
+                $args = array(
+                    'type'          => 'manual',
+                    'query'         => $_GET['video_central_query'],
+                    'page_token'    => $token,
+                    'include_categories' => true,
+                    'playlist_type' => $_GET['video_central_feed']
+                );
 
-		$import = new Video_Central_Youtube_ImporterData($args);
+                $q = video_central_youtube_api_get_list( $args );
 
-		$videos = $import->get_feed();
+                $videos     = $q['videos'];
+                $list_stats = $q['page_info'];
+            break;
+            // perform a search query
+            case 'query':
+                $args = array(
+                    'query'         => $_GET['video_central_query'],
+                    'page_token'    => $token,
+                    'order'         => $_GET['video_central_order'],
+                    'duration'  => $_GET['video_central_duration']
+                );
+                $q = video_central_youtube_api_search_videos( $args );
+                $videos     = $q['videos'];
+                $list_stats = $q['page_info'];
 
-		$total_yt_items = $import->get_total_items();
+            break;
+        }
 
-		if( $total_yt_items < $total_items ){
-			$total_items = $total_yt_items;
-		}
+        $videos     = $q['videos'];
+        $list_stats = $q['page_info'];
 
-    	$this->items = $videos;
+        if( is_wp_error( $videos ) ){
+            $this->feed_errors = $videos;
+            $videos = array();
+        }
+
+        $this->items        = $videos;
+        $this->total_items  = $list_stats['total_results'];
+        $this->next_token   = $list_stats['next_page'];
+        $this->prev_token   = $list_stats['prev_page'];
 
         $this->set_pagination_args( array(
-            'total_items' => $total_items,
+            'total_items' => $this->total_items,
             'per_page'    => $per_page,
-            'total_pages' => ceil( $total_items / $per_page )
-        ));
+            'total_pages' => ceil( $this->total_items / $per_page )
+        ) );
 
+    }
+
+    /**
+     * Displays a message if playlist is empty
+     *
+     * @since 1.2.0
+     */
+    public function no_items(){
+        _e('YouTube feed is empty.', 'video_central');
+        if( is_wp_error( $this->feed_errors ) ){
+            echo '<br />';
+            printf( __(' <strong>API error (code: %s)</strong>: %s', 'video_central') , $this->feed_errors->get_error_code(), $this->feed_errors->get_error_message() ) ;
+        }
+    }
+
+    /**
+     * Display pagination
+     *
+     * @since 1.2.0
+     */
+    protected function pagination( $which ) {
+
+        $current_url    = set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
+        $current_url    = remove_query_arg( array( 'hotkeys_highlight_last', 'hotkeys_highlight_first' ), $current_url );
+        $disable_first  = empty( $this->prev_token ) ? ' disabled' : false;
+        $disable_last   = empty( $this->next_token ) ? ' disabled' : false;
+
+        $prev_page = sprintf( "<a class='%s' title='%s' href='%s'>%s</a>",
+            'prev-page' . $disable_first,
+            esc_attr__( 'Go to the previous page', 'video_central' ),
+            esc_url( add_query_arg( 'token', $this->prev_token, $current_url ) ),
+            '&lsaquo;'
+        );
+
+        ?>
+        <div class="tablenav-pages">
+
+            <span class="displaying-num"><?php printf( _n( '1 item', '%s items', $this->total_items ), number_format_i18n( $this->total_items ) );?></span>
+            <span class="pagination-links">
+                <?php
+                    // prev page
+                    printf( "<a class='%s' title='%s' href='%s'>%s</a>",
+                        'prev-page' . $disable_first,
+                        esc_attr__( 'Go to the previous page', 'video_central' ),
+                        esc_url( add_query_arg( 'token', $this->prev_token, $current_url ) ),
+                        '&lsaquo;'
+                    );
+
+                    // next page
+                    printf( "<a class='%s' title='%s' href='%s'>%s</a>",
+                        'prev-page' . $disable_last,
+                        esc_attr__( 'Go to the next page', 'video_central' ),
+                        esc_url( add_query_arg( 'token', $this->next_token, $current_url ) ),
+                        '&rsaquo;'
+                    );
+                ?>
+            </span>
+        </div>
+
+        <?php
     }
 
 }

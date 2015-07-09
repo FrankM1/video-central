@@ -65,7 +65,7 @@
 					<td valign="top"><label for="video_central_order"><?php _e('Order by', 'video_central');?> :</label></td>
 					<td>
 						<select name="video_central_order" id="video_central_order">
-							<option value="published"><?php _e('Date of publishing', 'video_central');?></option>
+							<option value="date"><?php _e('Date of publishing', 'video_central');?></option>
 							<option value="viewCount"><?php _e('Number of views', 'video_central');?></option>
 							
 							<option value="position"><?php _e('Position in playlist', 'video_central');?></option>

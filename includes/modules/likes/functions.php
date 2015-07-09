@@ -9,7 +9,7 @@
  * @return bool Are tags allowed?
  */
 function video_central_allow_likes( $default = 1 ) {
-	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_allow_likess', $default ) );
+	return (bool) apply_filters( __FUNCTION__, (bool) get_option( '_video_central_allow_likes', $default ) );
 }
 
 /**

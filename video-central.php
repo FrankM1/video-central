@@ -4,7 +4,7 @@ Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
 Author: Franklin M Gitonga
-Version: 1.1.4
+Version: 1.2.0
 Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
@@ -216,7 +216,7 @@ class Video_Central {
         $this->video_post_type          = apply_filters( 'video_central_videos_post_type',  'video' );
         $this->video_tag_tax_id         = apply_filters( 'video_central_videos_tag_tax_id', 'video_tag' );
         $this->video_cat_tax_id         = apply_filters( 'video_central_videos_cat_tax_id', 'video_category' );
-        
+
         // Status identifiers
         $this->spam_status_id    = apply_filters( 'video_central_spam_post_status',    'spam'    );
         $this->closed_status_id  = apply_filters( 'video_central_closed_post_status',  'closed'  );
@@ -225,7 +225,7 @@ class Video_Central {
         $this->private_status_id = apply_filters( 'video_central_private_post_status', 'private' );
         $this->hidden_status_id  = apply_filters( 'video_central_hidden_post_status',  'hidden'  );
         $this->trash_status_id   = apply_filters( 'video_central_trash_post_status',   'trash'   );
-        
+
         $this->search_id                = apply_filters( 'video_central_search_id',         'video_search' );
         $this->user_id                  = apply_filters( 'video_central_user_id',           'video_user'   );
         $this->view_id                  = apply_filters( 'video_central_view_id',           'video_view'   );
@@ -322,7 +322,7 @@ class Video_Central {
         require( $this->includes_dir . 'core/filters.php' );
 
         //woosidebars integration
-        require( $this->includes_dir . 'modules/class.woosidebars.integration.php'      );
+        require( $this->includes_dir . 'modules/third-party/class.woosidebars.integration.php'      );
 
         /** Admin *************************************************************/
 
@@ -331,6 +331,7 @@ class Video_Central {
             // Quick admin check and load if needed
             require( $this->includes_dir . 'admin/admin.php'   );
             require( $this->includes_dir . 'admin/actions.php' );
+            require( $this->includes_dir . 'admin/fields.php' );
 
             //Check that 'class-wp-list-table.php' is available
             if(!class_exists('WP_List_Table')) :
@@ -340,15 +341,16 @@ class Video_Central {
             //Modules (Modules can run as 'independent' plugins to enhance or add features)
             include_once $this->includes_dir.'modules/import/options.php';
 
-            include_once $this->includes_dir.'modules/import/video/functions.php';
             include_once $this->includes_dir.'modules/import/video/class.settings.php';
             include_once $this->includes_dir.'modules/import/video/class.thumbnails-providers.php';
             include_once $this->includes_dir.'modules/import/video/class.wizard.php';
+            include_once $this->includes_dir.'modules/import/video/class.import.php';
 
             //import youtube videos
             include_once $this->includes_dir.'modules/import/youtube/functions.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.api-query.php';
             include_once $this->includes_dir.'modules/import/youtube/class.importer.php';
-            include_once $this->includes_dir.'modules/import/youtube/class.importer-data.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.auto.importer.php';
             include_once $this->includes_dir.'modules/import/youtube/class.thumbnails.php';
             include_once $this->includes_dir.'modules/import/youtube/class.wizard.php';
             include_once $this->includes_dir.'modules/import/youtube/class.list-table.php';
@@ -443,8 +445,9 @@ class Video_Central {
         // Only run certain processes in the admin.
         if ( is_admin() ) :
 
-            $this->metaboxes        = new Radium_Video_Metaboxes;
-            $this->import_thumbnails = new Video_Central_Import_Thumbnails;
+            $this->metaboxes            = new Radium_Video_Metaboxes;
+            $this->import_thumbnails    = new Video_Central_Import_Thumbnails;
+            //$this->auto_import_youtube  = new Video_Central_Youtube_Auto_Importer;
 
             new Video_Central_Likes_Ajax();
 
@@ -602,7 +605,7 @@ class Video_Central {
         // Setup paths to current locale file
         $mofile_local  = $this->lang_dir . $mofile;
         $mofile_global = WP_LANG_DIR . '/plugins/video-central/'. $mofile;
-						
+
         // Look in global /wp-content/languages/video-central folder
         load_textdomain( $this->domain, $mofile_global );
 
