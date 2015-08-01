@@ -68,6 +68,19 @@ class Video_Central_Admin {
 	 */
 	public $show_separator = false;
 
+	/** Admin Settings ************************************************************/
+
+	/**
+	 * @var string Settings page slug
+	 */
+	private $general_settings_key = '';
+
+	/**
+	 * @var array Settings tabs
+	 */
+	private $plugin_settings_tabs = array();
+
+
 	/** Functions *************************************************************/
 
 	/**
@@ -199,7 +212,7 @@ class Video_Central_Admin {
 				__( 'Video Central',  'video_central' ),
 				$this->minimum_capability,
 				'video_central',
-				'video_central_admin_settings'
+				array( &$this, 'plugin_options_page' )
 			);
 		}
 
@@ -269,7 +282,7 @@ class Video_Central_Admin {
 	 * @uses register_setting() To register various settings
 	 * @todo Put fields into multidimensional array
 	 */
-	public static function register_admin_settings() {
+	public function register_admin_settings() {
 
 		// Bail if no sections available
 		$sections = video_central_admin_get_settings_sections();
@@ -297,6 +310,10 @@ class Video_Central_Admin {
 				$page = $section['page'];
 			} else {
 				$page = 'video_central';
+
+				$this->general_settings_key = $section_id;
+				$this->plugin_settings_tabs[$this->general_settings_key] = $section['title'];
+				$page = $this->general_settings_key;
 			}
 
 			// Add the section
@@ -343,11 +360,9 @@ class Video_Central_Admin {
 			case 'video_central_settings_users'                  : // Settings - Users
 			case 'video_central_settings_features'               : // Settings - Features
 			case 'video_central_settings_theme_compat'           : // Settings - Theme compat
-			case 'video_central_settings_root_slugs'             : // Settings - Root slugs
-			case 'video_central_settings_single_slugs'           : // Settings - Single slugs
+			case 'video_central_settings_slugs'                  : // Settings - slugs
             case 'video_central_settings_single_video_page'      : // Settings - Single Video page
 			case 'video_central_settings_user_slugs'             : // Settings - User slugs
-			case 'video_central_settings_per_page'               : // Settings - Per page
             case 'video_central_settings_youtube_api'            : // Settings - Youtube Api
 
 				$caps = array( video_central()->admin->minimum_capability );
@@ -681,6 +696,65 @@ class Video_Central_Admin {
 	 * @uses wp_remote_get()
 	 */
 	public static function network_update_screen() { }
+
+
+	/** Admin Settings UI **************************************************************/
+
+	/*
+	 * Plugin Options page rendering goes here, checks
+	 * for active tab and replaces key with the related
+	 * settings key. Uses the plugin_options_tabs method
+	 * to render the tabs.
+	 */
+	public function plugin_options_page() {
+
+		$tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $this->general_settings_key;
+		?>
+		<div class="wrap">
+
+			<?php $this->plugin_options_tabs(); ?>
+
+			<form method="post" action="options.php">
+
+				<?php wp_nonce_field( 'update-options' ); ?>
+
+				<?php settings_fields( $tab ); ?>
+
+				<?php do_settings_sections( $tab ); ?>
+
+				<?php submit_button(); ?>
+
+			</form>
+
+		</div>
+
+		<?php
+	}
+
+	/*
+	 * Renders our tabs in the plugin options page,
+	 * walks through the object's tabs array and prints
+	 * them one by one. Provides the heading for the
+	 * plugin_options_page method.
+	 */
+	public function plugin_options_tabs() {
+
+		$current_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $this->general_settings_key;
+
+		screen_icon();
+
+		echo '<h2 class="nav-tab-wrapper">';
+
+		foreach ( $this->plugin_settings_tabs as $tab_key => $tab_caption ) {
+
+			$active = $current_tab == $tab_key ? 'nav-tab-active' : '';
+
+			echo '<a class="nav-tab ' . $active . '" href="?page=video_central&tab=' . $tab_key . '">' . $tab_caption . '</a>';
+		}
+
+		echo '</h2>';
+
+	}
 
 }
 endif; // class_exists check

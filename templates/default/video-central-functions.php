@@ -102,7 +102,7 @@ class Video_Central_Default_Theme extends Video_Central_Theme_Compat {
 			'file'         => 'css/font-awesome.css',
 			'dependencies' => array()
 		);
- 
+
 		// Filter the scripts
 		$styles = apply_filters( 'video_central_default_theme_styles', $styles );
 
@@ -110,7 +110,7 @@ class Video_Central_Default_Theme extends Video_Central_Theme_Compat {
 		foreach ( $styles as $handle => $attributes ) {
 			video_central_enqueue_style( $handle, $attributes['file'], $attributes['dependencies'], $this->version, 'screen' );
 		}
-		
+
 	}
 
 	/**
@@ -129,10 +129,10 @@ class Video_Central_Default_Theme extends Video_Central_Theme_Compat {
 			'file'         => 'js/plugins.min.js',
 			'dependencies' => array( 'jquery' )
 		);
-		
+
         $scripts['video-central-js'] = array(
             'file'         => 'js/main.min.js',
-            'dependencies' => array( 'jquery' )
+            'dependencies' => array( 'jquery', 'video-central-plugins' )
         );
 
 		// Filter the scripts

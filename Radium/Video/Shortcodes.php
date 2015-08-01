@@ -58,7 +58,8 @@ class Radium_Video_Shortcodes {
 
             'video-central-index'            => array( $this, 'display_videos_index' ), // Video Index
             'video-central-single-video'     => array( $this, 'display_video'        ), // Specific video - pass an 'id' attribute
-            'video-central-slider-grid'      => array( $this, 'video_slider_grid'    ), // Video Player shortcode
+            'video-central-playlist'         => array( $this, 'display_playlist'    ), // Video Player playlist
+            'video-central-slider-grid'      => array( $this, 'video_slider_grid'     ), // Video Player shortcode
 
 			/** Video Category ****************************************************/
 
@@ -943,6 +944,81 @@ _end_;
 		// Return contents of output buffer
 		return $this->end();
 	}
+
+     /**
+     * Display the contents of a specific video ID in an output buffer
+     * and return to ensure that post/page contents are displayed first.
+     *
+     * @since 1.2.0
+     *
+     * @param array $attr
+     * @param string $content
+     * @uses get_template_part()
+     * @uses video_central_single_video_description()
+     * @return string
+     */
+    public function display_playlist( $attr, $content = '' ) {
+
+        // Sanity check required info
+        if ( !empty( $content ) || ( empty( $attr['ids'] ) ) )
+            return $content;
+
+        // Set passed attribute to $video_id for clarity
+        $video_id = video_central()->current_video_id = $attr['ids'];
+
+        $post = get_post();
+
+        $playlist_instance = 0;
+        video_central()->playlist_instance++;
+
+        // check if attr is set
+        if( !is_array( $attr ) || !array_key_exists('ids', $attr) ){
+            return;
+        }
+
+        /**
+         * Filter the playlist output.
+         *
+         * Passing a non-empty value to the filter will short-circuit generation
+         * of the default playlist output, returning the passed value instead.
+         *
+         * @since 1.2.0
+         *
+         * @param string $output   Playlist output. Default empty.
+         * @param array  $attr     An array of shortcode attributes.
+         * @param int    $instance Unique numeric ID of this playlist shortcode instance.
+         */
+        $output = apply_filters( 'video_central_playlist_shortcode', '', $attr, $playlist_instance );
+
+        if ( $output != '' ) {
+            return $output;
+        }
+
+        $attr = shortcode_atts( array(
+            'ids'       => '',
+            'order'     => 'ASC',
+            'orderby'   => 'menu_order ID',
+            'id'        => $post ? $post->ID : 0,
+            'style'     => 'light',
+        ), $attr, 'video_central_playlist' );
+
+        if ( is_feed() ) {
+            $output = "\n";
+            foreach ( $attachments as $att_id => $attachment ) {
+                $output .= video_central_get_video_permalink( $att_id ) . "\n";
+            }
+            return $output;
+        }
+
+        $output .= '<div id="video-central-playlist-' . video_central_get_playlist_id().'" class="video-central-playlist loading">';
+
+        $output .= video_central_get_playlist($attr);
+
+        $output .= '</div>';
+
+        return $output;
+
+    }
 
 }
 

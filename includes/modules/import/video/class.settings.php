@@ -61,9 +61,15 @@ class Video_Central_Import_Video_Settings {
     function settings_sections( $sections ){
 
         $sections['video_central_settings_import_videos'] = array (
-            'title'    => __( 'Video Central Import Settings', 'video_central' ),
+            'title'    => __( 'Import Settings', 'video_central' ),
             'callback' => array($this, 'setting_section_callback'),
             'page'     => 'discussion'
+        );
+        
+        $sections['video_central_settings_youtube_api'] = array(
+			'title'    => __( 'Youtube Api Settings', 'video_central' ),
+			'callback' => 'video_central_admin_setting_callback_youtube_api_section',
+			'page'     => 'permalink',
         );
 
         return $sections;
@@ -143,7 +149,7 @@ add_action( 'video_central_init', 'video_central_import_video_settings' );
  *
  * @since 1.0.0
  *
- * @uses Video_Central_Admin
+ * @uses Video_Central_Import_Video_Settings
  */
 function video_central_import_video_settings() {
 	video_central()->admin->importer_settings = new Video_Central_Import_Video_Settings;

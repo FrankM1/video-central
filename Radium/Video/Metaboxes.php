@@ -103,7 +103,7 @@ class Radium_Video_Metaboxes {
                     'std'  => '',
                     'type' => 'Text',
                 ),
-                
+
                 array(
                     'name' =>__('Video Embed Code','video_central'),
                     'desc' => __('Add an embed code here.','video_central'),
@@ -132,7 +132,7 @@ class Radium_Video_Metaboxes {
         $meta_boxes[] = array(
             'id'       => 'video-profile-settings',
             'title'    => __('Profile Settings', 'video_central'),
-            'pages'    => array('video'),
+            'pages'    => array( video_central_get_video_post_type() ),
             'context'  => 'normal',
             'priority' => 'high',
             'fields'   => apply_filters( 'video_central_metaboxes', $arg )

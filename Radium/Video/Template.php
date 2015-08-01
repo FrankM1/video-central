@@ -100,7 +100,25 @@ class Radium_Video_Template {
         if (!isset($this->templates[get_post_meta( get_the_ID(), '_wp_page_template', true )] ) )
             return $template;
 
-        $file = $this->page_template_path . get_post_meta( get_the_ID(), '_wp_page_template', true );
+		$wp_page_template = get_post_meta( get_the_ID(), '_wp_page_template', true );
+	        
+	    // Loop through template stack
+		foreach ( (array) video_central_get_template_stack() as $template_location ) {
+	
+			// Continue if $template_location is empty
+			if ( empty( $template_location ) ) {
+				continue;
+			}
+	
+			// Check child theme first
+			if ( file_exists( trailingslashit( $template_location ) . 'page-templates/' . $wp_page_template ) ) {
+			
+				$file = trailingslashit( $template_location ) . 'page-templates/'. $wp_page_template;
+				        			
+				break;
+			}
+			
+		} 		
 		
         // Just to be safe, we check if the file exist first
         if( file_exists( $file ) ) {

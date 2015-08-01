@@ -9,7 +9,7 @@
  * @author  Franklin M Gitonga
  */
 
-class Radium_Video_Posttype {
+class Video_Central_Video_Posttype {
 
     /**
      * Holds a copy of the object for easy reference.
@@ -106,7 +106,7 @@ class Radium_Video_Posttype {
                 'labels'              => video_central_get_video_post_type_labels(),
                 'rewrite'             => video_central_get_video_post_type_rewrite(),
                 'supports'            => video_central_get_video_post_type_supports(),
-                'description'         => __( 'Radium Videos', 'video_central' ),
+                'description'         => __( 'Video Central', 'video_central' ),
                 //'capabilities'        => video_central_get_video_caps(),
                 //'capability_type'     => array( 'video', 'videos' ),
                 'menu_position'       => 5,

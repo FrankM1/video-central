@@ -16,7 +16,7 @@ License: GPL v2+
  * 3. User accounts
  * 4. Subscriptions
  * 5. Watch Later
- * 6. Playlists
+ * 6. Playlists - working on it
  * 7. Choice of multiple players
  * 8. E-commerce
  * 9. Membership levels
@@ -47,7 +47,7 @@ class Video_Central {
      *
      * @var string
      */
-    public $version = '1.1.3';
+    public $version = '1.2.0';
 
     /** Magic *****************************************************************/
 
@@ -184,8 +184,8 @@ class Video_Central {
 
         /** Versions **********************************************************/
 
-        $this->version    = '1.1.3';
-        $this->db_version = '1';
+        $this->version    = '1.2.0';
+        $this->db_version = '1.1';
 
         /** Paths *************************************************************/
 
@@ -216,6 +216,7 @@ class Video_Central {
         $this->video_post_type          = apply_filters( 'video_central_videos_post_type',  'video' );
         $this->video_tag_tax_id         = apply_filters( 'video_central_videos_tag_tax_id', 'video_tag' );
         $this->video_cat_tax_id         = apply_filters( 'video_central_videos_cat_tax_id', 'video_category' );
+        $this->playlist_post_type       = apply_filters( 'video_central_playlists_post_type',  'playlist' );
 
         // Status identifiers
         $this->spam_status_id    = apply_filters( 'video_central_spam_post_status',    'spam'    );
@@ -283,6 +284,7 @@ class Video_Central {
         require( $this->includes_dir . 'modules/resize.php' );
 
         // Videos
+        require( $this->includes_dir . 'videos/class.posttype.php'      );
         require( $this->includes_dir . 'videos/capabilities.php'  );
         require( $this->includes_dir . 'videos/functions.php'     );
         require( $this->includes_dir . 'videos/template.php'      );
@@ -300,6 +302,11 @@ class Video_Central {
         require( $this->includes_dir . 'users/functions.php'      );
         require( $this->includes_dir . 'users/template.php'       );
         //require( $this->includes_dir . 'users/options.php'        );
+
+        // playlist
+        require( $this->includes_dir . 'playlist/class.posttype.php'      );
+        require( $this->includes_dir . 'playlist/functions.php'     );
+        require( $this->includes_dir . 'playlist/template.php'      );
 
         //likes
         require( $this->includes_dir . 'modules/likes/functions.php' );
@@ -439,7 +446,8 @@ class Video_Central {
     public function init_classes() {
 
         /** Load the plugin */
-        new Radium_Video_Posttype;
+        new Video_Central_Video_Posttype;
+        new Video_Central_Playlist_Posttype;
         new Radium_MediaElements_Shortcode;
 
         // Only run certain processes in the admin.

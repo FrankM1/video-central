@@ -74,7 +74,7 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 * New Youtube API endpoints - to v2
 * New theme options
 * Import videos as posts
-
+* Improved settings panel with tabs
 
 = 1.1.4 =
 

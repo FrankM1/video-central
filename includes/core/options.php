@@ -370,6 +370,17 @@ function video_central_get_search_slug( $default = 'search' ) {
     return apply_filters( __FUNCTION__, video_central_maybe_get_root_slug() . get_option( '_video_central_search_slug', $default ) );
 }
 
+/**
+ * Return the playlist slug
+ *
+ * @since 1.2.0
+ *
+ * @return string
+ */
+function video_central_get_playlist_slug( $default = 'playlists' ) {
+    return apply_filters( __FUNCTION__, get_option( '_video_central_playlist_slug', $default ) );
+}
+
 /** Active? *******************************************************************/
 
 /**

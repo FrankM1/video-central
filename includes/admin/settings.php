@@ -23,13 +23,13 @@ function video_central_admin_get_settings_sections() {
 	return (array) apply_filters( __FUNCTION__, array(
 
 		'video_central_settings_users' => array(
-			'title'    => __( 'Video Central User Settings', 'video_central' ),
+			'title'    => __( 'User Settings', 'video_central' ),
 			'callback' => 'video_central_admin_setting_callback_user_section',
 			'page'     => 'discussion'
 		),
 
 		'video_central_settings_features' => array(
-			'title'    => __( 'Video Central Features', 'video_central' ),
+			'title'    => __( 'General', 'video_central' ),
 			'callback' => 'video_central_admin_setting_callback_features_section',
 			'page'     => 'discussion'
 		),
@@ -38,21 +38,11 @@ function video_central_admin_get_settings_sections() {
 			'callback' => 'video_central_admin_setting_callback_subtheme_section',
 			'page'     => 'general'
 		),
-		'video_central_settings_per_page' => array(
-			'title'    => __( 'Videos Per Page', 'video_central' ),
-			'callback' => 'video_central_admin_setting_callback_per_page_section',
-			'page'     => 'reading'
-		),
 
-		'video_central_settings_root_slugs' => array(
-			'title'    => __( 'Videos Root Slug', 'video_central' ),
+		'video_central_settings_slugs' => array(
+			'title'    => __( 'Slugs', 'video_central' ),
 			'callback' => 'video_central_admin_setting_callback_root_slug_section',
 			'page'     => 'permalink'
-		),
-		'video_central_settings_single_slugs' => array(
-			'title'    => __( 'Single Video Slugs', 'video_central' ),
-			'callback' => 'video_central_admin_setting_callback_single_slug_section',
-			'page'     => 'permalink',
 		),
 
         'video_central_settings_single_video_page' => array(
@@ -60,12 +50,6 @@ function video_central_admin_get_settings_sections() {
             'callback' => 'video_central_admin_setting_callback_single_video_page_section',
             'page'     => 'permalink',
         ),
-
-		'video_central_settings_youtube_api' => array(
-			'title'    => __( 'Youtube Api Settings', 'video_central' ),
-			'callback' => 'video_central_admin_setting_callback_youtube_api_section',
-			'page'     => 'permalink',
-		),
 
 	) );
 }
@@ -78,7 +62,7 @@ function video_central_admin_get_settings_sections() {
  */
 function video_central_admin_get_settings_fields() {
 
-	return (array) apply_filters( 'video_central_admin_get_settings_fields', array(
+	return (array) apply_filters( __FUNCTION__, array(
 
 		/** User Section ******************************************************/
 
@@ -122,6 +106,14 @@ function video_central_admin_get_settings_fields() {
 				'args'              => array()
 			),
 
+            // Replies per page setting
+            '_video_central_videos_per_page' => array(
+                'title'             => __( 'Videos', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_videos_per_page',
+                'sanitize_callback' => 'intval',
+                'args'              => array()
+            ),
+
 		),
 
 		/** Theme Packages ****************************************************/
@@ -137,23 +129,9 @@ function video_central_admin_get_settings_fields() {
 			)
 		),
 
-		/** Per Page Section **************************************************/
-
-		'video_central_settings_per_page' => array(
-
-			// Replies per page setting
-			'_video_central_videos_per_page' => array(
-				'title'             => __( 'Videos', 'video_central' ),
-				'callback'          => 'video_central_admin_setting_callback_videos_per_page',
-				'sanitize_callback' => 'intval',
-				'args'              => array()
-			),
-
-		),
-
 		/** Front Slugs *******************************************************/
 
-		'video_central_settings_root_slugs' => array(
+		'video_central_settings_slugs' => array(
 
 			// Root slug setting
 			'_video_central_root_slug' => array(
@@ -179,51 +157,46 @@ function video_central_admin_get_settings_fields() {
 				'args'              => array()
 			),
 
-		),
+            // Video slug setting
+            '_video_central_video_slug' => array(
+                'title'             => __( 'Video', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_video_slug',
+                'sanitize_callback' => 'sanitize_title',
+                'args'              => array()
+            ),
 
-		/** Single Slugs ******************************************************/
+            // video tag slug setting
+            '_video_central_video_tag_tax_slug' => array(
+                'title'             => __( 'Video Tag', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_video_tag_tax_slug',
+                'sanitize_callback' => 'sanitize_title',
+                'args'              => array()
+            ),
 
-		'video_central_settings_single_slugs' => array(
+            // video tag slug setting
+            '_video_central_video_category_tax_slug' => array(
+                'title'             => __( 'Video Category', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_video_category_tax_slug',
+                'sanitize_callback' => 'sanitize_title',
+                'args'              => array()
+            ),
 
-			// Video slug setting
-			'_video_central_video_slug' => array(
-				'title'             => __( 'Video', 'video_central' ),
-				'callback'          => 'video_central_admin_setting_callback_video_slug',
-				'sanitize_callback' => 'sanitize_title',
-				'args'              => array()
-			),
+            // View slug setting
+            '_video_central_view_slug' => array(
+                'title'             => __( 'Video View', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_view_slug',
+                'sanitize_callback' => 'sanitize_title',
+                'args'              => array()
+            ),
 
-			// video tag slug setting
-			'_video_central_video_tag_tax_slug' => array(
-				'title'             => __( 'Video Tag', 'video_central' ),
-				'callback'          => 'video_central_admin_setting_callback_video_tag_tax_slug',
-				'sanitize_callback' => 'sanitize_title',
-				'args'              => array()
-			),
+            // Search slug setting
+            '_video_central_search_slug' => array(
+                'title'             => __( 'Search', 'video_central' ),
+                'callback'          => 'video_central_admin_setting_callback_search_slug',
+                'sanitize_callback' => 'sanitize_title',
+                'args'              => array()
+            )
 
-			// video tag slug setting
-			'_video_central_video_category_tax_slug' => array(
-				'title'             => __( 'Video Category', 'video_central' ),
-				'callback'          => 'video_central_admin_setting_callback_video_category_tax_slug',
-				'sanitize_callback' => 'sanitize_title',
-				'args'              => array()
-			),
-
-			// View slug setting
-			'_video_central_view_slug' => array(
-				'title'             => __( 'Video View', 'video_central' ),
-				'callback'          => 'video_central_admin_setting_callback_view_slug',
-				'sanitize_callback' => 'sanitize_title',
-				'args'              => array()
-			),
-
-			// Search slug setting
-			'_video_central_search_slug' => array(
-				'title'             => __( 'Search', 'video_central' ),
-				'callback'          => 'video_central_admin_setting_callback_search_slug',
-				'sanitize_callback' => 'sanitize_title',
-				'args'              => array()
-			)
 		),
 
         /** Related Videos ********************************************************/
@@ -479,24 +452,8 @@ function video_central_admin_setting_callback_subtheme_id() {
 	<?php endif;
 }
 
-
-/** Per Page Section **********************************************************/
-
 /**
- * Per page settings section description for the settings page
- *
- * @since 1.0.0
- */
-function video_central_admin_setting_callback_per_page_section() {
-?>
-
-	<p><?php esc_html_e( 'How many videos to show per page', 'video_central' ); ?></p>
-
-<?php
-}
-
-/**
- * Replies per page setting field
+ * Videos per page setting field
  *
  * @since 1.0.0
  *
@@ -511,7 +468,7 @@ function video_central_admin_setting_callback_videos_per_page() {
 <?php
 }
 
-/** Slug Section **************************************************************/
+/** Slugs Section **************************************************************/
 
 /**
  * Slugs settings section description for the settings page
@@ -612,26 +569,6 @@ function video_central_admin_setting_callback_show_on_root() {
 
 <?php
 }
-
-/** Single Slugs **************************************************************/
-
-/**
- * Slugs settings section description for the settings page
- *
- * @since 1.0.0
- */
-function video_central_admin_setting_callback_single_slug_section() {
-
-    // Flush rewrite rules when this section is saved
-    if ( isset( $_GET['settings-updated'] ) && isset( $_GET['page'] ) )
-        flush_rewrite_rules();
-?>
-
-	<p><?php printf( esc_html__( 'Custom slugs for single videos, categories, tags, views, and search.', 'video_central' ), get_admin_url( null, 'options-permalink.php' ) ); ?></p>
-
-<?php
-}
-
 
 /**
  * Video slug setting field
