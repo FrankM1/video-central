@@ -86,6 +86,15 @@ class Radium_Video_Metaboxes {
                     'type' => 'FileAdvanced',
 				    'max_file_uploads' => 1
                 ),
+                
+                array(
+                    'name' =>__('Video Url (.flv)', 'video_central'),
+                    'desc' => __('','video_central'),
+                    'id'   => '_video_central_flv',
+                    'std'  => '',
+                    'type' => 'FileAdvanced',
+                    'max_file_uploads' => 1
+                ),
 
 				array(
 				    'name' =>__('Custom Thumbnail','video_central'),

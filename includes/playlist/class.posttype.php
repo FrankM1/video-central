@@ -55,6 +55,7 @@ class Video_Central_Playlist_Posttype {
                 'has_archive'         => video_central_get_root_slug(),
                 'exclude_from_search' => false,
                 'show_in_nav_menus'   => true,
+                'show_in_menu'        => 'edit.php?post_type=' . video_central_get_video_post_type(),
                 'public'              => true,
                 //'show_ui'             => current_user_can( 'video_central_admin' ),
                 'can_export'          => true,

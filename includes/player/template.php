@@ -78,16 +78,39 @@ _end_;
             $file_id_mp4    = get_post_meta( $video_id, '_video_central_mp4', true );
             $file_id_webm   = get_post_meta( $video_id, '_video_central_webm', true );
             $file_id_ogg    = get_post_meta( $video_id, '_video_central_ogg', true );
+            $file_id_flv    = get_post_meta( $video_id, '_video_central_flv', true );
+            $file_extension    = get_post_meta( $video_id, '_video_central_video_file', true );
 
             $file_mp4   = wp_get_attachment_url( $file_id_mp4 );
             $file_webm  = wp_get_attachment_url( $file_id_webm );
             $file_ogg   = wp_get_attachment_url( $file_id_ogg );
+            $file_flv   = wp_get_attachment_url( $file_id_flv );
+            
+            if( $file_extension == 'flv' ) { 
+           
+           		$video_url 		= get_post_meta( $video_id, '_video_central_video_url', true );
+            
+				$dataSetup['techOrder'] = array("flash");
+				
+				$jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
 
-            $output = '<video class="video-js vjs-default-skin" controls preload="none" width="auto" height="auto" poster="' . $poster . '" data-setup="{}">';
-                if( $file_mp4 ) $output .= '<source src="'. $file_mp4 .'" type="video/mp4" />';
-                if( $file_webm ) $output .= '<source src="'. $file_webm .'" type="video/webm" />';
-                if( $file_ogg ) $output .= '<source src="'. $file_ogg .'" type="video/ogg" />';
-              $output .= '</video>';
+            	$video_url = $file_flv ? $file_flv : $video_url;
+            	
+            	$output = '<video class="video-js vjs-default-skin" controls preload="none" width="auto" height="auto" poster="' . $poster . '" data-setup="{'. $jsonDataSetup. '}">';
+				if( $video_url ) $output .= '<source src="'. $video_url .'" type="video/flv" />';
+				
+				$output .= '</video>';
+    	              
+            } else {
+
+	           	 $output = '<video class="video-js vjs-default-skin" controls preload="none" width="auto" height="auto" poster="' . $poster . '" data-setup="{}">';
+	                if( $file_mp4 ) $output .= '<source src="'. $file_mp4 .'" type="video/mp4" />';
+	                if( $file_webm ) $output .= '<source src="'. $file_webm .'" type="video/webm" />';
+	                if( $file_ogg ) $output .= '<source src="'. $file_ogg .'" type="video/ogg" />';
+	
+	              $output .= '</video>';
+	              
+            }
 
         }
 

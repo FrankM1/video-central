@@ -36,14 +36,14 @@ class Video_Central_Video_Posttype {
         add_action( 'after_setup_theme', array( &$this, 'setup' ), 99 );
 
         // PORTFOLIO THUMBNAILS
-       	add_filter( 'manage_edit-video_columns', array( &$this, 'add_thumbnail_column'), 10, 1 );
+           add_filter( 'manage_edit-video_columns', array( &$this, 'add_thumbnail_column'), 10, 1 );
 
         // add columns to posts table
         add_filter('manage_edit-'.$this->post_type.'_columns', array( $this, 'extra_columns' ));
 
-        add_filter('manage_edit-'.$this->post_type.'_sortable_columns', array( $this, 'make_extra_sortable_columns' ));
+        add_filter('manage_edit-'.$this->post_type.'_sortable_columns', array( $this, 'add_sortable_columns' ));
 
-       	add_action('manage_'.$this->post_type.'_posts_custom_column', array($this, 'output_extra_columns'), 10, 2);
+           add_action('manage_'.$this->post_type.'_posts_custom_column', array($this, 'output_extra_columns'), 10, 2);
 
         add_action( 'restrict_manage_posts', array( &$this, 'add_taxonomy_filters' ) );
 
@@ -53,7 +53,7 @@ class Video_Central_Video_Posttype {
 
        // add_action( 'admin_menu', array( &$this, 'create_video_sort_page') );
 
-        add_action( 'wp_ajax_video_sort', array( &$this, 'save_video_sorted_order' ) );
+        add_action( 'wp_ajax_video_sort', array( &$this, 'sorted_order' ) );
 
         add_filter('pre_get_posts', array( &$this, 'admin_order') );
 
@@ -77,13 +77,13 @@ class Video_Central_Video_Posttype {
         global $_wp_theme_features;
 
         if( empty($_wp_theme_features['post-thumbnails']) )
-            $_wp_theme_features['post-thumbnails'] = array( array('video') );
+            $_wp_theme_features['post-thumbnails'] = array( array(video_central_get_video_post_type()) );
 
         elseif( true === $_wp_theme_features['post-thumbnails'])
             return;
 
         elseif( is_array($_wp_theme_features['post-thumbnails'][0]) )
-            $_wp_theme_features['post-thumbnails'][0][] = 'video';
+            $_wp_theme_features['post-thumbnails'][0][] = video_central_get_video_post_type();
 
     }
 
@@ -97,7 +97,7 @@ class Video_Central_Video_Posttype {
 
     public function video_init() {
 
-		$video_central = video_central();
+        $video_central = video_central();
 
         // Register Video content type
         register_post_type(
@@ -157,47 +157,47 @@ class Video_Central_Video_Posttype {
     }
 
     /**
-	 * Register the topic tag taxonomy
-	 *
-	 * @since 1.0.0
-	 * @uses register_taxonomy() To register the taxonomy
-	 */
-	public function register_taxonomies() {
+     * Register the topic tag taxonomy
+     *
+     * @since 1.0.0
+     * @uses register_taxonomy() To register the taxonomy
+     */
+    public function register_taxonomies() {
 
-		// Register the video-tag taxonomy
-		register_taxonomy(
-			video_central_get_video_tag_tax_id(),
-			video_central_get_video_post_type(),
-			apply_filters( 'video_central_register_video_tag_taxonomy', array(
-				'labels'                => video_central_get_video_tag_tax_labels(),
-				'rewrite'               => video_central_get_video_tag_tax_rewrite(),
-				//'capabilities'          => video_central_get_video_tag_caps(),
-				'query_var'             => true,
-				'show_tagcloud'         => true,
-				'hierarchical'          => false,
-				'show_in_nav_menus'     => true,
-				'public'                => true,
-				'show_ui'               => video_central_allow_video_tags() /*&& current_user_can( 'video_central_video_tags_admin' ) */
-			)
-		) );
+        // Register the video-tag taxonomy
+        register_taxonomy(
+            video_central_get_video_tag_tax_id(),
+            video_central_get_video_post_type(),
+            apply_filters( 'video_central_register_video_tag_taxonomy', array(
+                'labels'                => video_central_get_video_tag_tax_labels(),
+                'rewrite'               => video_central_get_video_tag_tax_rewrite(),
+                //'capabilities'          => video_central_get_video_tag_caps(),
+                'query_var'             => true,
+                'show_tagcloud'         => true,
+                'hierarchical'          => false,
+                'show_in_nav_menus'     => true,
+                'public'                => true,
+                'show_ui'               => video_central_allow_video_tags() /*&& current_user_can( 'video_central_video_tags_admin' ) */
+            )
+        ) );
 
-		// Register the video-tag taxonomy
-		register_taxonomy(
-			video_central_get_video_category_tax_id(),
-			video_central_get_video_post_type(),
-			apply_filters( 'video_central_register_video_category_taxonomy', array(
-				'labels'                => video_central_get_video_category_tax_labels(),
-				'rewrite'               => video_central_get_video_category_tax_rewrite(),
-				//'capabilities'          => video_central_get_video_category_caps(),
-				'query_var'             => true,
-				'hierarchical'          => true,
-				'show_in_nav_menus'     => true,
-				'public'                => true,
-				'show_ui'               => video_central_allow_video_categories() /*&& current_user_can( 'video_central_video_categories_admin' ) */
-			)
-		) );
+        // Register the video-tag taxonomy
+        register_taxonomy(
+            video_central_get_video_category_tax_id(),
+            video_central_get_video_post_type(),
+            apply_filters( 'video_central_register_video_category_taxonomy', array(
+                'labels'                => video_central_get_video_category_tax_labels(),
+                'rewrite'               => video_central_get_video_category_tax_rewrite(),
+                //'capabilities'          => video_central_get_video_category_caps(),
+                'query_var'             => true,
+                'hierarchical'          => true,
+                'show_in_nav_menus'     => true,
+                'public'                => true,
+                'show_ui'               => video_central_allow_video_categories() /*&& current_user_can( 'video_central_video_categories_admin' ) */
+            )
+        ) );
 
-	}
+    }
 
     /*--------------------------------------------------------------------*/
     /*  ADD TAXONOMY FILTERS TO THE ADMIN PAGE - http://pippinsplugins.com
@@ -319,8 +319,14 @@ class Video_Central_Video_Posttype {
 
     <?php }
 
-    //ORDER
-    public function save_video_sorted_order() {
+    /**
+     * Set video display order
+     *
+     * @since 1.0.0
+     *
+     * @return null
+     */
+    public function sorted_order() {
 
         global $wpdb;
 
@@ -338,6 +344,7 @@ class Video_Central_Video_Posttype {
 
     // SCRIPTS
     public function print_sort_scripts() {
+
         wp_enqueue_script('jquery-ui-sortable');
         wp_enqueue_script( 'video_central_sort', Video_Central::get_url() .'/assets/admin/js/video_central_sort.js', array('jquery') );
 
@@ -374,18 +381,18 @@ class Video_Central_Video_Posttype {
 
     }
 
-	/* Thumbnail COLUMNS
-	 * @param array $columns
-	 */
+    /* Thumbnail COLUMNS
+     * @param array $columns
+     */
 
-	public function add_thumbnail_column( $columns ) {
+    public function add_thumbnail_column( $columns ) {
 
-	    $column_thumb = array( 'thumbnail' => __('Thumbnail', 'video_central') );
+        $column_thumb = array( 'thumbnail' => __('Thumbnail', 'video_central') );
 
-	    $columns = array_slice( $columns, 0, 2, true ) + $column_thumb + array_slice( $columns, 1, NULL, true );
+        $columns = array_slice( $columns, 0, 2, true ) + $column_thumb + array_slice( $columns, 1, NULL, true );
 
-	   return $columns;
-	}
+       return $columns;
+    }
 
     /**
      * Extra columns in list table output
@@ -432,7 +439,7 @@ class Video_Central_Video_Posttype {
      * @param string $column_name
      * @param int $post_id
      */
-    public function make_extra_sortable_columns($columns){
+    public function add_sortable_columns($columns){
 
         $columns['duration'] = 'duration';
         $columns['post_views'] = 'post_views';
@@ -450,7 +457,7 @@ class Video_Central_Video_Posttype {
 
         if (is_admin()) {
 
-			global $wp_query;
+            global $wp_query;
 
             // Get the post type from the query
             $post_type = $wp_query->query['post_type'];

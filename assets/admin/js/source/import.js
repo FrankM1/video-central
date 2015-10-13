@@ -396,6 +396,8 @@
                             if( typeof progress.total === 'undefined' ) progress.total = 1;
 
 							var progressWidth = Math.round((progress.current / progress.total) * 100);
+							
+							progressWidth = progressWidth ? progressWidth : 0; //convert NaN to 0
 
 							$('.video-central-ajax-response-progress').html(progressWidth + '%');
 
