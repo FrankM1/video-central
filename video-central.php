@@ -304,10 +304,10 @@ class Video_Central {
         //require( $this->includes_dir . 'users/options.php'        );
 
         // playlist
-        require( $this->includes_dir . 'playlist/class.posttype.php'      );
-        require( $this->includes_dir . 'playlist/functions.php'     );
-        require( $this->includes_dir . 'playlist/template.php'      );
-        require( $this->includes_dir . 'playlist/post-meta.php'      );
+        //require( $this->includes_dir . 'playlist/class.posttype.php'      );
+        //require( $this->includes_dir . 'playlist/functions.php'     );
+        //require( $this->includes_dir . 'playlist/template.php'      );
+        //require( $this->includes_dir . 'playlist/post-meta.php'      );
 
         //likes
         require( $this->includes_dir . 'modules/likes/functions.php' );
