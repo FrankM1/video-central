@@ -25,14 +25,8 @@ class Radium_Video_Metaboxes_Field_VideoSelect extends Radium_Video_Metaboxes_Fi
     static function html( $meta, $field )
     {
         $field['options'] = self::get_options( $field );
-        switch ( $field['field_type'] )
-        {
-            case 'select':
-                return RWMB_Select_Field::html( $meta, $field );
-            case 'select_advanced':
-            default:
-                return RWMB_Select_Advanced_Field::html( $meta, $field );
-        }
+        return Radium_Video_Metaboxes_Field_Select::html( $meta, $field );
+
     }
 
     /**
@@ -79,7 +73,7 @@ class Radium_Video_Metaboxes_Field_VideoSelect extends Radium_Video_Metaboxes_Fi
             'posts_per_page' => - 1,
         ) );
 
-        return RWMB_Select_Field::normalize_field( $field );
+        return Radium_Video_Metaboxes_Field_Select::normalize_field( $field );
 
     }
 

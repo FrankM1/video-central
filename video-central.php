@@ -21,6 +21,7 @@ License: GPL v2+
  * 8. E-commerce
  * 9. Membership levels
  * 10. JSON API
+ * 11. Cron for auto importing videos 
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -304,10 +305,10 @@ class Video_Central {
         //require( $this->includes_dir . 'users/options.php'        );
 
         // playlist
-        //require( $this->includes_dir . 'playlist/class.posttype.php'      );
-        //require( $this->includes_dir . 'playlist/functions.php'     );
-        //require( $this->includes_dir . 'playlist/template.php'      );
-        //require( $this->includes_dir . 'playlist/post-meta.php'      );
+        require( $this->includes_dir . 'playlist/class.posttype.php'      );
+        require( $this->includes_dir . 'playlist/functions.php'     );
+        require( $this->includes_dir . 'playlist/template.php'      );
+        require( $this->includes_dir . 'playlist/post-meta.php'      );
 
         //likes
         require( $this->includes_dir . 'modules/likes/functions.php' );
@@ -449,13 +450,13 @@ class Video_Central {
         /** Load the plugin */
         new Video_Central_Video_Posttype;
         new Radium_MediaElements_Shortcode;
-        //new Video_Central_Playlist_Posttype;
+        new Video_Central_Playlist_Posttype;
 
         // Only run certain processes in the admin.
         if ( is_admin() ) :
 
             $this->metaboxes            = new Radium_Video_Metaboxes;
-            //$this->playlist_metaboxes   = new Radium_Video_Playlist_Metaboxes;
+            $this->playlist_metaboxes   = new Radium_Video_Playlist_Metaboxes;
 
             $this->import_thumbnails    = new Video_Central_Import_Thumbnails;
             //$this->auto_import_youtube  = new Video_Central_Youtube_Auto_Importer;

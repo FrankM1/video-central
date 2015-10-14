@@ -69,6 +69,9 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 == Changelog ==
 
+= 1.2.2 =
+* New - Create playist
+
 = 1.2.0 =
 
 * New Youtube API endpoints - to v2
