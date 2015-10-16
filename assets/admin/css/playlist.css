@@ -1,0 +1,19 @@
+.video-central-playlist-section #titlediv {
+  margin-top: 10px; }
+
+.video-central-playlist-section {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+  padding: 10px; }
+
+.video-central-playlist-section .video-central-playlist-section-title {
+  font-size: 16px;
+  margin: 0;
+  padding: 0; }
+
+.video-central.video-central-content {
+  overflow-y: scroll; }
+
+/*# sourceMappingURL=playlist.css.map */

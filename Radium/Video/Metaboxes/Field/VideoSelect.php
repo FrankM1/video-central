@@ -63,7 +63,6 @@ class Radium_Video_Metaboxes_Field_VideoSelect extends Radium_Video_Metaboxes_Fi
 
         if ( $field['parent'] )
         {
-            $field['multiple']   = false;
             $field['field_name'] = 'parent_id';
         }
 

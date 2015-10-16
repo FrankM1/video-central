@@ -43,18 +43,13 @@ class Radium_Video_Playlist_Metaboxes {
          $args = array(
 
                 array(
-                    'name'        => __( 'Post', 'your-prefix' ),
+                    'name'        => __( 'Post', 'video_central' ),
                     'id'          => '_video_playlist_video_ids',
                     'type'        => 'VideoSelect',
-                    // 'clone'       => true,
-                    // 'multiple'    => true,
-                    // Post type: string (for single post type) or array (for multiple post types)
-                    'post_type'   => array( video_central_get_video_post_type() ),
-                    // Default selected value (post ID)
+                    'multiple'    => true,
+                    'post_type'   => video_central_get_video_post_type(),
+                    // Default selected value (post ID(s))
                     'std'         => '',
-                    // Field type, either 'select' or 'select_advanced' (default)
-                    'field_type'  => 'select',
-                    // Placeholder
                     'placeholder' => __( 'Select an Item', 'video_central' ),
                     // Query arguments (optional). No settings means get all published posts
                     // @see https://codex.wordpress.org/Class_Reference/WP_Query

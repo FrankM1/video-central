@@ -21,7 +21,7 @@ License: GPL v2+
  * 8. E-commerce
  * 9. Membership levels
  * 10. JSON API
- * 11. Cron for auto importing videos 
+ * 11. Cron for auto importing videos
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -48,7 +48,7 @@ class Video_Central {
      *
      * @var string
      */
-    public $version = '1.2.0';
+    public $version = '1.2.2';
 
     /** Magic *****************************************************************/
 
@@ -269,7 +269,7 @@ class Video_Central {
         require( $this->includes_dir . 'core/functions.php'          );
         require( $this->includes_dir . 'core/options.php'            );
         require( $this->includes_dir . 'core/update.php'             );
-        require( $this->includes_dir . 'core/capabilities.php'          );
+        require( $this->includes_dir . 'core/capabilities.php'       );
         require( $this->includes_dir . 'core/template-functions.php' );
         require( $this->includes_dir . 'core/template-loader.php'    );
         require( $this->includes_dir . 'core/theme-compat.php'       );
@@ -277,7 +277,7 @@ class Video_Central {
         /** Components ********************************************************/
 
         // Common
-        require( $this->includes_dir . 'common/functions.php'      );
+        require( $this->includes_dir . 'common/functions.php'     );
         require( $this->includes_dir . 'common/template.php'      );
 
         //images
@@ -285,7 +285,7 @@ class Video_Central {
         require( $this->includes_dir . 'modules/resize.php' );
 
         // Videos
-        require( $this->includes_dir . 'videos/class.posttype.php'      );
+        require( $this->includes_dir . 'videos/class.posttype.php');
         require( $this->includes_dir . 'videos/capabilities.php'  );
         require( $this->includes_dir . 'videos/functions.php'     );
         require( $this->includes_dir . 'videos/template.php'      );
@@ -305,22 +305,24 @@ class Video_Central {
         //require( $this->includes_dir . 'users/options.php'        );
 
         // playlist
-        require( $this->includes_dir . 'playlist/class.posttype.php'      );
+        require( $this->includes_dir . 'playlist/class.posttype.php');
+        require( $this->includes_dir . 'playlist/class.admin.php'   );
         require( $this->includes_dir . 'playlist/functions.php'     );
         require( $this->includes_dir . 'playlist/template.php'      );
-        require( $this->includes_dir . 'playlist/post-meta.php'      );
+        require( $this->includes_dir . 'playlist/post-meta.php'     );
+        require( $this->includes_dir . 'playlist/ajax.php'          );
 
         //likes
         require( $this->includes_dir . 'modules/likes/functions.php' );
-        require( $this->includes_dir . 'modules/likes/ajax.php' );
+        require( $this->includes_dir . 'modules/likes/ajax.php'      );
 
         // Widgets
-        require( $this->includes_dir . 'widgets/widget-categories.php' );
-        require( $this->includes_dir . 'widgets/widget-featured.php' );
-        require( $this->includes_dir . 'widgets/widget-popular.php' );
-        require( $this->includes_dir . 'widgets/widget-recent.php' );
-        require( $this->includes_dir . 'widgets/widget-search.php' );
-        require( $this->includes_dir . 'widgets/widget-tags.php' );
+        require( $this->includes_dir . 'widgets/widget-categories.php'  );
+        require( $this->includes_dir . 'widgets/widget-featured.php'    );
+        require( $this->includes_dir . 'widgets/widget-popular.php'     );
+        require( $this->includes_dir . 'widgets/widget-recent.php'      );
+        require( $this->includes_dir . 'widgets/widget-search.php'      );
+        require( $this->includes_dir . 'widgets/widget-tags.php'        );
 
         //social
         require( $this->includes_dir . 'modules/social/share.php' );
@@ -331,7 +333,7 @@ class Video_Central {
         require( $this->includes_dir . 'core/filters.php' );
 
         //woosidebars integration
-        require( $this->includes_dir . 'modules/third-party/class.woosidebars.integration.php'      );
+        require( $this->includes_dir . 'modules/third-party/class.woosidebars.integration.php');
 
         /** Admin *************************************************************/
 
@@ -456,7 +458,8 @@ class Video_Central {
         if ( is_admin() ) :
 
             $this->metaboxes            = new Radium_Video_Metaboxes;
-            $this->playlist_metaboxes   = new Radium_Video_Playlist_Metaboxes;
+            //$this->playlist_metaboxes   = new Radium_Video_Playlist_Metaboxes;
+            $this->playlist_admin       = new Video_Central_Playlist_Admin;
 
             $this->import_thumbnails    = new Video_Central_Import_Thumbnails;
             //$this->auto_import_youtube  = new Video_Central_Youtube_Auto_Importer;
