@@ -386,7 +386,6 @@ class Video_Central_Admin
      */
     public function activation_notice()
     {
-        // @todo - something fun
     }
 
     /**

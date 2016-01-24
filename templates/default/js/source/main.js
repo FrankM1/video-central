@@ -102,7 +102,7 @@ var VideoCentral = {
 
             stage.jcarouselAutoscroll({
                 'interval': interval,
-                'autostart': true // TODO?: Do not autostart if first post media is video
+                'autostart': true 
             });
 
         }

@@ -91,8 +91,6 @@ function video_central_get_views()
 /**
  * Register a Video Central view.
  *
- * @todo Implement feeds
- *
  * @since 1.0.0
  *
  * @param string $view       View name

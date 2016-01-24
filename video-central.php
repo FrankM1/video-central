@@ -10,14 +10,14 @@ Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
 
-//TODO
+//To add later
 /**
  * 1. Channels
  * 2. Upload from frontend
  * 3. User accounts
  * 4. Subscriptions
  * 5. Watch Later
- * 6. Playlists - working on it
+ * 6. Playlists - in progress
  * 7. Choice of multiple players
  * 8. E-commerce
  * 9. Membership levels
@@ -685,7 +685,6 @@ class Video_Central
      *
      * @since 1.0.0
      *
-     * @todo Extract into an API
      */
     public static function add_rewrite_rules()
     {

@@ -46,8 +46,6 @@ if ( !class_exists( 'Radium_Video_Metaboxes_Field_Select' ) )
          *
          * @see "save" method for better understanding
          *
-         * TODO: A good way to ALWAYS save values in single entry in DB, while maintaining backward compatibility
-         *
          * @param $post_id
          * @param $saved
          * @param $field
@@ -69,8 +67,6 @@ if ( !class_exists( 'Radium_Video_Metaboxes_Field_Select' ) )
          * Save meta value
          * If field is cloneable, value is saved as a single entry in DB
          * Otherwise value is saved as multiple entries (for backward compatibility)
-         *
-         * TODO: A good way to ALWAYS save values in single entry in DB, while maintaining backward compatibility
          *
          * @param $new
          * @param $old
