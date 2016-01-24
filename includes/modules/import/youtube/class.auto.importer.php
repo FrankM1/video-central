@@ -237,10 +237,10 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
         );
         update_option( $this->last_updated, $update_data );
 
-        // get post type object
-        global $CBC_POST_TYPE;
+        $playlist_post_type = video_central_get_playlist_post_type();
+
         // get playlist data
-        $meta = get_post_meta( $playlist_id, $CBC_POST_TYPE->get_playlist_meta_name(), true);
+        $meta = get_post_meta( $playlist_id, '_video_playlist_video_ids', true);
 
         // if meta isn't found, bail out and issue error
         if( !$meta ){
@@ -318,7 +318,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
 
             // store the error returned by parent in playlist meta
             $meta['error'] = $items->get_error_message();
-            update_post_meta( $playlist_id , $CBC_POST_TYPE->get_playlist_meta_name(), $meta );
+            update_post_meta( $playlist_id , '_video_playlist_video_ids', $meta );
 
             // if error was issued by YouTube, remove playlist from queue
             if( video_central_is_youtube_api_error( $items ) && $this->options['unpublish_on_yt_error'] ){
@@ -388,7 +388,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
         do_action( 'video_central_before_auto_import' );
 
         // run the import
-        $response = $CBC_POST_TYPE->run_import( $items, $meta );
+        $response = $playlist_post_type->run_import( $items, $meta );
 
         // pass a debug message
         _video_central_debug_message( 'Import results: ' . print_r( $response, true ) );
@@ -400,7 +400,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
         $meta['page_token'] = $feed_info['next_page'];
         // remove error if any
         unset( $meta['error'] );
-        update_post_meta( $playlist_id, $CBC_POST_TYPE->get_playlist_meta_name(), $meta );
+        update_post_meta( $playlist_id, '_video_playlist_video_ids', $meta );
 
         // flag this update as finished
         $update_data['running_update'] = false;
@@ -564,7 +564,9 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
      * @param bool $set_timer - set the current time on the playlist
      */
     private function get_playlist_post_id( $set_timer = true ){
-        global $CBC_POST_TYPE;
+
+        $playlist_post_type = video_central_get_playlist_post_type();
+
         $option = get_option( $this->last_updated, array() );
 
         if( $option && isset( $option['post_id'] ) ){
@@ -579,7 +581,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
 
         // get all playlists
         $args = array(
-            'post_type'     => $CBC_POST_TYPE->get_playlist_post_type(),
+            'post_type'     => $playlist_post_type,
             'post_status'   => 'publish',
             'orderby'       => 'ID',
             'order'         => 'ASC',

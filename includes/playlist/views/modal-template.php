@@ -7,13 +7,12 @@
  * 'tmpl'. The wp.template method retrieves the contents of the script block and converts these blocks into compiled
  * templates to be used and reused in the application.
  */
-
 ?>
 <script type="text/html" id='tmpl-video-central-playlist-modal-window'>
     <div class="media-modal wp-core-ui">
         <div  class="media-modal-content">
 
-            <button type="button" class="button-link media-modal-close"><span class="media-modal-icon"><span class="screen-reader-text"><?php echo __( 'Close media panel', 'video_central' ); ?></span></span></button>
+            <button type="button" class="button-link media-modal-close"><span class="media-modal-icon"><span class="screen-reader-text"><?php echo __('Close media panel', 'video_central'); ?></span></span></button>
 
             <div class="backbone_modal-content media-frame mode-select wp-core-ui">
                 <div class="navigation-bar media-frame-menu">
@@ -23,7 +22,7 @@
                         </nav>
                     </div>
                 </div>
-                <div class="media-frame-title"><h1><?php echo __( 'Select Playlist Videos', 'video_central' ); ?></h1></div>
+                <div class="media-frame-title"><h1><?php echo __('Select Playlist Videos', 'video_central'); ?></h1></div>
                 <div class="media-frame-content" data-columns="5">
 
                     <div class="attachments-browser">
@@ -51,8 +50,8 @@
                 <div class="media-frame-toolbar">
                     <div class="media-toolbar">
                         <div class="media-toolbar-primary">
-                            <button id="btn-cancel" class="button button-large"><?php echo __( 'Cancel', 'video_central' ); ?></button>
-                            <button id="btn-ok" class="button button-primary button-large"><?php echo __( 'Save &amp; Continue', 'video_central' ); ?></button>
+                            <button id="btn-cancel" class="button button-large"><?php echo __('Cancel', 'video_central'); ?></button>
+                            <button id="btn-ok" class="button button-primary button-large"><?php echo __('Save &amp; Continue', 'video_central'); ?></button>
                         </div>
                     </div>
                 </div>
@@ -63,7 +62,7 @@
 
 <?php
 /**
- * The Modal Backdrop
+ * The Modal Backdrop.
  */
 ?>
 <script type="text/html" id='tmpl-video-central-playlist-modal-backdrop'>
