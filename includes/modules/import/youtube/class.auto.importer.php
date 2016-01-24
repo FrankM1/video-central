@@ -125,12 +125,12 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
                 // pass a debug message
                 _video_central_debug_message('Import by remote call',  "-----\n");
 
-                $r = wp_remote_get($url, array(
+                /* $r = wp_remote_get($url, array(
                     'sslverify' => false,
                     'blocking' => false,
                     'timeout' => 1,
                     'decompress' => false,
-                ));
+                )); */
 
                 $time_end = microtime(true);
                 $time = $time_end - $time_start;

@@ -194,7 +194,6 @@ class Video_Central_Admin
      */
     public function AdminMenus()
     {
-        $hooks = array();
 
         // Are settings enabled?
         if (!video_central_settings_integration() && current_user_can('video_central_settings_page')) {
@@ -604,15 +603,15 @@ class Video_Central_Admin
     public function suggest_video()
     {
 
-        // Try to get some topics
-        $topics = get_posts(array(
+        // Try to get some videos
+        $videos = get_posts(array(
             's' => like_escape($_REQUEST['q']),
             'post_type' => video_central_get_video_post_type(),
         ));
 
-        // If we found some topics, loop through and display them
-        if (!empty($video)) {
-            foreach ((array) $video as $post) {
+        // If we found some videos, loop through and display them
+        if (!empty($videos)) {
+            foreach ((array) $videos as $post) {
                 printf(esc_html__('%s - %s', 'video_central'), video_central_get_video_id($post->ID), video_central_get_video_title($post->ID)."\n");
             }
         }
