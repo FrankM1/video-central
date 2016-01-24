@@ -99,19 +99,19 @@ function video_central_has_search_results($args = '')
         //}
 
         // Add pagination to query object
-        $video_central->search_query->pagination_links = paginate_links(
-            apply_filters('video_central_search_results_pagination', array(
-                'base' => $base,
-                'format' => '',
-                'total' => ceil((int) $video_central->search_query->found_posts / (int) $r['posts_per_page']),
-                'current' => (int) $video_central->search_query->paged,
-                'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
-                'next_text' => is_rtl() ? '&larr;' : '&rarr;',
-                'mid_size' => 8,
-                'end_size' => 1,
-                'add_args' => $add_args,
-            ))
-        );
+        $pagination_links_args = apply_filters('video_central_search_results_pagination', array(
+            'base' => $base,
+            'format' => '',
+            'total' => ceil((int) $video_central->search_query->found_posts / (int) $r['posts_per_page']),
+            'current' => (int) $video_central->search_query->paged,
+            'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
+            'next_text' => is_rtl() ? '&larr;' : '&rarr;',
+            'mid_size' => 8,
+            'end_size' => 1,
+            'add_args' => $add_args,
+        ));
+
+        $video_central->search_query->pagination_links = paginate_links($pagination_links_arg);
 
         // Remove first page from pagination
         if ($wp_rewrite->using_permalinks()) {
@@ -119,6 +119,9 @@ function video_central_has_search_results($args = '')
         } else {
             $video_central->search_query->pagination_links = str_replace('&#038;paged=1', '', $video_central->search_query->pagination_links);
         }
+
+        $video_central->search_query->pagination_links = apply_filters('video_central_search_query_pagination_links', $video_central->search_query->pagination_links, $video_central->video_query, $base, $r);
+
     }
 
     // Return object

@@ -326,12 +326,11 @@ function video_central_has_videos($args = '')
             'prev_text' => is_rtl() ? '&rarr;' : '&larr;',
             'next_text' => is_rtl() ? '&larr;' : '&rarr;',
             'mid_size' => 8,
-               'end_size' => 1,
-
+            'end_size' => 1,
         ));
 
         // Add pagination to query object
-        $video_central->video_query->pagination_links = paginate_links($video_central_pagination);
+        $video_central->video_query->pagination_links = apply_filters('video_central_pagination_links', paginate_links($video_central_pagination), $video_central->video_query, $base, $r);
 
         // Remove first page from pagination
         $video_central->video_query->pagination_links = str_replace($wp_rewrite->pagination_base."/1/'", "'", $video_central->video_query->pagination_links);

@@ -15,7 +15,7 @@ $image_size = video_central_thumbnail_dimensions();
 
     <?php do_action( 'video_central_template_before_video_thumb' ); ?>
 
-	<a class="video-central-thumb" href="<?php video_central_video_permalink(); ?>">
+    <a class="video-central-thumb" href="<?php video_central_video_permalink(); ?>">
 
         <img src="<?php video_central_featured_image_url(); ?>" alt="" height="<?php echo $image_size['height']; ?>" width="<?php echo $image_size['width']; ?>"/>
 
@@ -28,9 +28,9 @@ $image_size = video_central_thumbnail_dimensions();
     <?php do_action( 'video_central_template_before_video_title' ); ?>
 
     <h3 class="entry-title">
-    	<a class="video-central-title" href="<?php video_central_video_permalink(); ?>">
-    		<?php video_central_video_short_title(); ?>
-    	</a>
+        <a class="video-central-title" href="<?php video_central_video_permalink(); ?>">
+            <?php video_central_video_short_title(); ?>
+        </a>
     </h3>
 
     <?php do_action( 'video_central_template_after_video_title' ); ?>
