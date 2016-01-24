@@ -584,7 +584,6 @@ class Video_Central_Admin
      */
     public function option_page_capability_video_central($capability = 'manage_options')
     {
-        $capability = 'manage_options'; //'keep_gate';
         return $capability;
     }
 
