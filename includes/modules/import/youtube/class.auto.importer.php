@@ -145,7 +145,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
      * Init callback, terminates page output
      */
     public function terminate(){
-        die();
+        wp_die();
     }
 
     /**
@@ -162,7 +162,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
         //*/
 
         // increase the time limit
-        @set_time_limit( 300 );
+        set_time_limit( 300 );
 
         // get playlist ID that should be updated
         $playlist_id = $this->get_playlist_post_id();
@@ -240,11 +240,8 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
         // get post type object
         global $CBC_POST_TYPE;
         // get playlist data
-        $meta = get_post_meta(
-            $playlist_id,
-            $CBC_POST_TYPE->get_playlist_meta_name(),
-            true
-        );
+        $meta = get_post_meta( $playlist_id, $CBC_POST_TYPE->get_playlist_meta_name(), true);
+
         // if meta isn't found, bail out and issue error
         if( !$meta ){
             if( !is_wp_error( $this->error ) ){
@@ -411,7 +408,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
 
         // kill the page if it's a cron call
         if( $this->_is_import_request() && !$this->_is_page_load_import() ){
-            die();
+            wp_die();
         }
     }
 

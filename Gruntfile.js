@@ -97,6 +97,8 @@ module.exports = function(grunt) {
                         'templates/default/js/vendor/jquery.jcarousel.js',
                         'templates/default/js/vendor/bootstrap.tabs.js',
                         'templates/default/js/vendor/fitvid.js',
+                        'templates/default/js/vendor/readmore.min.js',
+
                     ]
                 }
             },
@@ -142,8 +144,8 @@ module.exports = function(grunt) {
                     'assets/admin/js/meta.min.js':      'assets/admin/js/source/meta.js',
                     'assets/admin/js/debug-bar.min.js': 'assets/admin/js/source/debug-bar.js',
                     'assets/admin/js/mce-playlist-view.js': 'assets/admin/js/source/mce-playlist-view.js',
-                    'assets/admin/js/modal-playlist-view.js': 'assets/admin/js/source/modal-playlist-view.js'
-
+                    'assets/admin/js/modal-playlist-view.js': 'assets/admin/js/source/modal-playlist-view.js',
+                    'assets/admin/js/playlist.js': 'assets/admin/js/source/playlist.js'
                 }
             }
 

@@ -20,10 +20,10 @@ class Video_Central_Import_Thumbnails {
      */
     public $thumbnails_field = '_video_thumbnail';
 
-	/**
-	 * [$post_types description]
-	 * @var string
-	 */
+    /**
+     * [$post_types description]
+     * @var string
+     */
     public $post_types;
 
     /**
@@ -31,13 +31,13 @@ class Video_Central_Import_Thumbnails {
      */
     function __construct() {
 
-		$this->post_types = video_central_get_video_post_type();
+        $this->post_types = video_central_get_video_post_type();
 
         $this->custom_field = '_video_central_video_id';
 
-		$this->settings->options['save_media'] = true;
+        $this->settings->options['save_media'] = true;
 
-		$this->settings->options['set_featured'] = true;
+        $this->settings->options['set_featured'] = true;
 
         // Create provider array
         $this->providers = apply_filters( 'video_central_thumbnail_providers', $this->providers );
@@ -137,7 +137,7 @@ class Video_Central_Import_Thumbnails {
 
         foreach ( $providers as $key => $provider ) {
 
-	       	$provider_videos = $provider->scan_for_videos( $markup, $video_id );
+               $provider_videos = $provider->scan_for_videos( $markup, $video_id );
 
             if ( empty( $provider_videos ) ) continue;
 
@@ -152,7 +152,7 @@ class Video_Central_Import_Thumbnails {
         }
 
         usort( $videos, array( &$this, 'compare_by_offset' ) );
-				
+
         return $videos;
 
     }
@@ -167,12 +167,12 @@ class Video_Central_Import_Thumbnails {
         $thumbnail = null;
 
         $videos = $this->find_videos( $markup, $video_id );
-		
+
         foreach ( $videos as $video ) {
-			
+
             $thumbnail = $this->providers[$video['provider']]->get_thumbnail_url( $video['id'] );
-								
-            if ( $thumbnail != null ) break;
+
+            if ( $thumbnail !== null ) break;
 
         }
 
@@ -185,13 +185,13 @@ class Video_Central_Import_Thumbnails {
         $markup = $video_id = null;
 
         // Get the post ID if none is provided
-        if ( $post_id == null OR $post_id == '' ) $post_id = get_the_ID();
+        if ( $post_id === null || $post_id === '' ) $post_id = get_the_ID();
 
         // Check to see if thumbnail has already been found
         if( ( $thumbnail_meta = get_post_meta( $post_id, $this->thumbnails_field, true ) ) != '' ) {
             return $thumbnail_meta;
         }
-        
+
         // If the thumbnail isn't stored in custom meta, fetch a thumbnail
         else {
 
@@ -200,7 +200,7 @@ class Video_Central_Import_Thumbnails {
             // Filter for extensions to set thumbnail
             $new_thumbnail = apply_filters( 'video_central_new_video_thumbnail_url', $new_thumbnail, $post_id );
 
-            if ( $new_thumbnail == null ) {
+            if ( $new_thumbnail === null ) {
 
                 // Get the post or custom field to search
                 if ( $this->custom_field == '_video_central_video_id' ) {
@@ -222,13 +222,13 @@ class Video_Central_Import_Thumbnails {
                 // Filter for extensions to modify what markup is scanned
                 $markup     = apply_filters( 'video_central_thumbnail_markup', $markup, $post_id );
                 $video_id   = apply_filters( 'video_central_thumbnail_video_id', $video_id, $post_id );
-				
+
                 $new_thumbnail = $this->get_first_thumbnail_url( null, $video_id );
-				
+
             }
 
             // Return the new thumbnail variable and update meta if one is found
-            if ( $new_thumbnail != null && !is_wp_error( $new_thumbnail ) ) {
+            if ( $new_thumbnail !== null && !is_wp_error( $new_thumbnail ) ) {
 
                 // Save as Attachment if enabled
                 if ( $this->settings->options['save_media'] == 1 ) {
@@ -412,9 +412,9 @@ class Video_Central_Import_Thumbnails {
         echo '  document.getElementById(\'video-thumbnails-preview\').innerHTML=\'Working... <img src="' . home_url( 'wp-admin/images/loading.gif' ) . '"/>\';' . PHP_EOL;
         echo '  jQuery.post(ajaxurl, data, function(response){' . PHP_EOL;
         echo '    document.getElementById(\'video-thumbnails-preview\').innerHTML=response;' . PHP_EOL;
-        
+
         //echo 'console.log(response);' . PHP_EOL;
-        
+
         echo '  });' . PHP_EOL;
         echo '};' . PHP_EOL;
         echo '</script>' . PHP_EOL;
@@ -436,7 +436,7 @@ class Video_Central_Import_Thumbnails {
 
             echo $video_thumbnail->get_error_message();
 
-        } else if ( $video_thumbnail != null ) {
+        } else if ( $video_thumbnail !== null ) {
 
             echo '<img src="' . $video_thumbnail . '" style="max-width:100%;" />';
 
@@ -446,10 +446,10 @@ class Video_Central_Import_Thumbnails {
 
         }
 
-        die();
+        wp_die();
     }
 
-	//Bulk query posts
+    //Bulk query posts
     function bulk_posts_query_callback() {
 
         // Some default args
@@ -470,7 +470,7 @@ class Video_Central_Import_Thumbnails {
 
         echo json_encode( $query->posts );
 
-        die();
+        wp_die();
 
     }
 
@@ -503,7 +503,7 @@ class Video_Central_Import_Thumbnails {
 
         echo json_encode( $result );
 
-        die();
+        wp_die();
     }
 
 }
@@ -512,4 +512,3 @@ class Video_Central_Import_Thumbnails {
 function video_central_get_thumbnail( $post_id = null ) {
     return video_central()->import_thumbnails->get_video_thumbnail( $post_id );
 }
-

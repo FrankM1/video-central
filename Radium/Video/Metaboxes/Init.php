@@ -1,6 +1,4 @@
 <?php
-// Prevent loading this file directly
-defined( 'ABSPATH' ) || exit;
 
 // Meta Box Class
 if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )

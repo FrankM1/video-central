@@ -7,9 +7,6 @@
  * @subpackage Functions
  */
 
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
-
 /** Video Playlist *****************************************************************/
 
 /**
@@ -67,6 +64,8 @@ function video_central_playlist( $args = array() ) {
      *
      */
     function video_central_get_playlist( $args = array() ) {
+
+        $args['ids'] = get_post_meta( $args['id'], '_video_central_playlist_ids', true);
 
         if ( ! empty( $args['ids'] ) ) {
             $videos = explode(',', $args['ids'] );

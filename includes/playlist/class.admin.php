@@ -33,6 +33,7 @@ class Video_Central_Playlist_Admin
         add_action('wp_ajax_video_central_save_playlist_tracks', 'video_central_ajax_save_playlist_video_ids');
         add_action('wp_ajax_video_central_playlist_parse_shortcode', 'video_central_ajax_parse_shortcode');
         add_action('wp_ajax_video_central_get_playlist_video_list', array(&$this, 'ajax_videos'));
+        add_action('wp_ajax_video_central_get_playlist_video_details', array(&$this, 'video_data'));
 
         add_action('admin_footer-post-new.php', array(&$this, 'add_templates'));
         add_action('admin_footer-post.php',  array(&$this, 'add_templates'));
@@ -47,14 +48,7 @@ class Video_Central_Playlist_Admin
      */
     public function load_playlist_edit_screen($post)
     {
-        add_meta_box(
-            'videoplaylistshortcodediv',
-            __('Shortcode', 'video_central'),
-            array($this, 'display_playlist_shortcode_meta_box'),
-            video_central_get_playlist_post_type(),
-            'side',
-            'default'
-        );
+        add_meta_box( 'videoplaylistshortcodediv', __('Shortcode', 'video_central'), array($this, 'display_playlist_shortcode_meta_box'), video_central_get_playlist_post_type(), 'side', 'default' );
 
         add_action('admin_enqueue_scripts', array($this, 'enqueue_playlist_edit_assets'));
         add_action('edit_form_after_title', array($this, 'display_playlist_edit_view'));
@@ -74,30 +68,25 @@ class Video_Central_Playlist_Admin
 
         $base = Video_Central::get_url();
 
-        wp_enqueue_script(
-            'video-central-playlist-mce-c',
-            $base.'/assets/admin/js/modal-playlist-model.js',
+        /* wp_enqueue_script('video-central-playlist-mce-c', $base.'/assets/admin/js/modal-playlist-model.js',
             array('jquery', 'underscore'),
+            '1.2.2',
+            true
+        ); */
+
+        wp_enqueue_script('video_central_playlist_view', $base.'/assets/admin/js/source/modal-playlist-view.js',
+            array('jquery', 'backbone', 'underscore', 'wp-util'),
             '1.2.2',
             true
         );
 
-        wp_enqueue_script('backbone_modal', $base.'/assets/admin/js/source/modal-playlist-view.js', array(
-            'jquery',
-            'backbone',
-            'underscore',
-            'wp-util',
-        ));
-
-        wp_enqueue_script(
-            'video-central-playlist-mce-view',
-            $base.'/assets/admin/js/mce-playlist-view.js',
+        wp_enqueue_script('video-central-playlist-mce-view', $base.'/assets/admin/js/mce-playlist-view.js',
             array('jquery', 'mce-view', 'underscore'),
             '1.2.2',
             true
         );
 
-        wp_enqueue_style('backbone_modal', $base.'/assets/admin/css/playlist-modal.css');
+        wp_enqueue_style('video-central-playlist-modal', $base.'/assets/admin/css/playlist-modal.css');
     }
 
     /**
@@ -109,19 +98,24 @@ class Video_Central_Playlist_Admin
     {
         $post = get_post();
 
+        $base = Video_Central::get_url();
+
         wp_enqueue_style('video-central-playlist-admin', Video_Central::get_url().'/assets/admin/css/playlist.css', array('mediaelement'));
 
-        wp_enqueue_script(
-            'video-central-playlist-admin',
-            Video_Central::get_url().'/assets/admin/js/playlist.js',
-            array(
-                'backbone',
-                'jquery-ui-sortable',
-                'media-upload',
-                'media-views',
-                'mediaelement',
-                'wp-util',
-            ),
+        wp_enqueue_script('video-central-playlist-models', $base.'/assets/admin/js/source/playlist-models.js',
+            array('jquery', 'backbone', 'underscore', 'wp-util'),
+            '1.2.2',
+            true
+        );
+
+        wp_enqueue_script('video-central-playlist-sort-view', $base.'/assets/admin/js/source/playlist-sort-view.js',
+            array('jquery', 'backbone', 'underscore', 'wp-util'),
+            '1.2.2',
+            true
+        );
+
+        wp_enqueue_script('video-central-playlist-admin', Video_Central::get_url().'/assets/admin/js/source/playlist.js',
+            array('backbone', 'jquery-ui-sortable', 'media-upload', 'media-views', 'mediaelement', 'wp-util'),
             '1.2.2',
             true
         );
@@ -195,7 +189,7 @@ class Video_Central_Playlist_Admin
         ?>
         </p>
         <p>
-            <input type="text" value="<?php echo esc_attr('[video_central_playlist id="'.$post->ID.'"]');
+            <input type="text" value="<?php echo esc_attr('[video-central-playlist id="'.$post->ID.'"]');
         ?>" readonly>
         </p>
         <?php
@@ -266,7 +260,7 @@ class Video_Central_Playlist_Admin
      */
     public function print_playlist_edit_templates()
     {
-        include Video_Central::get_dir().'includes/playlist/templates.php';
+        include Video_Central::get_dir().'includes/playlist/views/playlist-edit.php';
     }
 
     /**
@@ -371,13 +365,13 @@ class Video_Central_Playlist_Admin
 
         if (video_central_has_videos(array('posts_per_page' => $posts_per_page, 'paged' => $page))) :
 
-            $items = '';
+        $items = '';
         $i = 0;
 
         $image_sizes = array(
-                'width' => 300,
-                'height' => 169,
-            );
+            'width' => 300,
+            'height' => 169,
+        );
         $image_args['wrap'] = '<img %SRC% %IMG_CLASS% %SIZE% %ALT% %IMG_TITLE% />';
 
         while (video_central_videos()): video_central_the_video();
@@ -401,6 +395,21 @@ class Video_Central_Playlist_Admin
         endif;
 
         // Return the String
-        die(json_encode($output));
+        wp_die(json_encode($output));
     }
+
+    public function video_data() {
+
+        $id = video_central_get_video_id($_GET['post_id']);
+
+        $data =  array(
+            'title' => video_central_get_video_title( $id ),
+            'thumbnail' => ''
+        );
+
+        // Return the String
+        wp_die(json_encode($data));
+
+    }
+
 }

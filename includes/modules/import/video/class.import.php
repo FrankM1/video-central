@@ -55,8 +55,8 @@ abstract class Video_Central_Video_Importer {
         //add on load event
         add_action( 'load-video_page_video_central_import', array(&$this, 'import_onload') );
 
-		// response to new video ajax query
-		add_action('wp_ajax_video_central_check_remote_video_status', array(&$this, 'ajax_check_remote_status'));
+        // response to new video ajax query
+        add_action('wp_ajax_video_central_check_remote_video_status', array(&$this, 'ajax_check_remote_status'));
 
     }
 
@@ -106,10 +106,10 @@ abstract class Video_Central_Video_Importer {
      * Import a single video based on the passed data
      */
     protected function import_video( $args = array() ){
-		
-		// Add Remove sample permalink filter
-		remove_filter( 'post_type_link', 'video_central_filter_sample_permalink', 10, 4 );
-		
+
+        // Add Remove sample permalink filter
+        remove_filter( 'post_type_link', 'video_central_filter_sample_permalink', 10, 4 );
+
         $defaults = array(
             'video'             => array(), // video details retrieved from YouTube
             'category'          => false, // category name (if any) - will be created if category_id is false
@@ -145,7 +145,7 @@ abstract class Video_Central_Video_Importer {
         if( !$category && video_central_import_categories() && !empty($video['category']) ){
             $cat = term_exists( $video['category'], $taxonomy );
             // if not existing, create it
-            if( 0 == $cat || null == $cat ){
+            if( 0 === $cat || null === $cat ){
                 $cat = wp_insert_term($video['category'], $taxonomy);
             }
             // set category to newly inserted term
@@ -161,9 +161,9 @@ abstract class Video_Central_Video_Importer {
          * @param bool - import description value as set by the user in plugin settings
          *
          */
-         
+
        $description = isset($video['description']) ? $video['description'] : '';
-       
+
        $description = apply_filters('video_central_import_video_description', $description, video_central_import_video_description() );
 
         // post content
@@ -171,7 +171,7 @@ abstract class Video_Central_Video_Importer {
         if( ('content' == video_central_import_description_key() || 'content_excerpt' == video_central_import_description_key() ) && video_central_import_video_description() ){
             $post_content = $description;
         }
-        
+
         // post excerpt
         $post_excerpt = '';
         if( ('excerpt' == video_central_import_description_key() || 'content_excerpt' == video_central_import_description_key() ) && video_central_import_video_description() ){
@@ -235,7 +235,7 @@ abstract class Video_Central_Video_Importer {
         if( $user ){
             $post_data['post_author'] = $user;
         }
-                
+
         $post_id = wp_insert_post( $post_data, true );
 
         // set post format
@@ -245,7 +245,7 @@ abstract class Video_Central_Video_Importer {
 
         // check if post was created
         if( !is_wp_error($post_id) ){
-           
+
             // set post category
             if( $category ){
                 wp_set_post_terms( $post_id, array($category), $taxonomy );
@@ -300,55 +300,55 @@ abstract class Video_Central_Video_Importer {
                 }
             }
 
-	
-          	// set video URL; most likely it will be needed by other plugins
+
+              // set video URL; most likely it will be needed by other plugins
             if( $video['source'] == 'youtube' ) {
-           		
-           		// set video ID meta to identify the video as imported
-           		update_post_meta($post_id, '_video_central_video_id', $video['video_id']);
-           		update_post_meta($post_id, '_video_central_video_url', 'https://www.youtube.com/watch?v='.$video['video_id']);
-            	$this->import_featured_image( $post_id );
+
+                   // set video ID meta to identify the video as imported
+                   update_post_meta($post_id, '_video_central_video_id', $video['video_id']);
+                   update_post_meta($post_id, '_video_central_video_url', 'https://www.youtube.com/watch?v='.$video['video_id']);
+                $this->import_featured_image( $post_id );
 
             } elseif( $video['source'] == 'vimeo' ) {
-            	
-            	// set video ID meta to identify the video as imported
-        		update_post_meta($post_id, '_video_central_video_id', $video['video_id']);
-        		update_post_meta($post_id, '_video_central_video_url', 'https://www.youtube.com/watch?v='.$video['video_id']);
-            	$this->import_featured_image( $post_id );
-        		
+
+                // set video ID meta to identify the video as imported
+                update_post_meta($post_id, '_video_central_video_id', $video['video_id']);
+                update_post_meta($post_id, '_video_central_video_url', 'https://www.youtube.com/watch?v='.$video['video_id']);
+                $this->import_featured_image( $post_id );
+
             } else {
-            
+
               update_post_meta($post_id, '_video_central_video_url', $video['video_url']);
-              
+
               if( !empty($video['poster'] ) ) {
-             	$this->upload_featured_image( $post_id, $video['poster'] ); 
+                 $this->upload_featured_image( $post_id, $video['poster'] );
               }
-              
+
             }
-            
-			if( video_central_import_description_key() == '_video_central_description' && video_central_import_video_description() ) {
-								
+
+            if( video_central_import_description_key() == '_video_central_description' && video_central_import_video_description() ) {
+
                 update_post_meta($post_id, '_video_central_description', $description );
 
             }
-            
+
             // if imported as regular post, flag it as video
             if( !$theme_import && video_central_import_as_post() ){
                 // flag post as video post
                 update_post_meta($post_id, '_video_central_is_video', true);
             }
-           
-            update_post_meta($post_id, '_video_central_video_duration', $video['duration']);
-			update_post_meta($post_id, '_video_central_source', $video['source']);
-			update_post_meta($post_id, '_video_central_remote_status', $video['status']);
 
-    		// store the video data for later use
-    		update_post_meta($post_id, '_video_central_video_data', $video);
-  
+            update_post_meta($post_id, '_video_central_video_duration', $video['duration']);
+            update_post_meta($post_id, '_video_central_source', $video['source']);
+            update_post_meta($post_id, '_video_central_remote_status', $video['status']);
+
+            // store the video data for later use
+            update_post_meta($post_id, '_video_central_video_data', $video);
+
             return true;
-            
+
         }// end checking if not wp error on post insert
-        
+
         return false;
     }
 
@@ -360,16 +360,16 @@ abstract class Video_Central_Video_Importer {
     function import_featured_image( $post_id ) {
         video_central_get_thumbnail( $post_id );
     }
-    
+
     /**
      * Upload and Import Featured Image
      *
      * @since 1.2.1
      */
     function upload_featured_image( $post_id, $image_url ) {
-     
-     	Video_Central_Import_Thumbnails::save_to_media_library( $image_url, $post_id ); 
-   
+
+         Video_Central_Import_Thumbnails::save_to_media_library( $image_url, $post_id );
+
     }
 
     /**
@@ -448,7 +448,7 @@ abstract class Video_Central_Video_Importer {
 
         echo json_encode( $response );
 
-        die();
+        wp_die();
     }
 
     /**
@@ -462,43 +462,43 @@ abstract class Video_Central_Video_Importer {
 
         echo json_encode( $result );
 
-        die();
+        wp_die();
 
     }
-	
-	/**
+
+    /**
      * Check video import progress
      *
      * @since 1.0.0
      */
     public function ajax_check_remote_status(){
-		
-		
-        die();
+
+
+        wp_die();
 
     }
-    
+
     /**
      * Check remote video status
      *
      * @since 1.0.0
      */
     public function check_remote_status( $url ){
-		
-		$headers = @get_headers($url);
-		
-		if( strpos($headers[0], '200') === false ) {
-		
-			$exists = false;
-		
-		} else {
-		
-		 $exists = true;
-		
-		}
+
+        $headers = @get_headers($url);
+
+        if( strpos($headers[0], '200') === false ) {
+
+            $exists = false;
+
+        } else {
+
+         $exists = true;
+
+        }
 
     }
-	    
+
     /**
      * Return post type
      *

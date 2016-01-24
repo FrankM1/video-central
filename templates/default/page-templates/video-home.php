@@ -26,7 +26,7 @@ do_action('video_central_before_page');
             <div id="video-central-front" class="video-central-front">
 
                 <?php if( video_central_show_slider_on_root() && $paged <= 1) { ?>
-                	<?php echo do_shortcode('[video-central-slider-grid]'); ?>
+                    <?php echo do_shortcode('[video-central-slider-grid]'); ?>
                 <?php } ?>
 
                 <?php echo do_shortcode('[video-central-index]'); ?>

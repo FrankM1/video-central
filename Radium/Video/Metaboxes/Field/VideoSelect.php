@@ -1,6 +1,4 @@
 <?php
-// Prevent loading this file directly
-defined( 'ABSPATH' ) || exit;
 
 class Radium_Video_Metaboxes_Field_VideoSelect extends Radium_Video_Metaboxes_Field_Select {
     /**

@@ -7,9 +7,6 @@
  * @subpackage Shortcodes
  */
 
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
-
 if ( !class_exists( 'Radium_Video_Shortcodes' ) ) :
 
 /**
@@ -61,15 +58,15 @@ class Radium_Video_Shortcodes {
             'video-central-playlist'         => array( $this, 'display_playlist'    ), // Video Player playlist
             'video-central-slider-grid'      => array( $this, 'video_slider_grid'     ), // Video Player shortcode
 
-			/** Video Category ****************************************************/
+            /** Video Category ****************************************************/
 
-			'video-central-video-categories'       => array( $this, 'display_video_categories'    ), // All video categories in a cloud
-			'video-central-single-category'       => array( $this, 'display_videos_of_category' ), // Videos of category
+            'video-central-video-categories'       => array( $this, 'display_video_categories'    ), // All video categories in a cloud
+            'video-central-single-category'       => array( $this, 'display_videos_of_category' ), // Videos of category
 
-			/** Video Tags ****************************************************/
+            /** Video Tags ****************************************************/
 
-			'video-central-video-tags'       => array( $this, 'display_video_tags'    ), // All video tags in a cloud
-			'video-central-single-tag'       => array( $this, 'display_videos_of_tag' ), // Videos of Tag
+            'video-central-video-tags'       => array( $this, 'display_video_tags'    ), // All video tags in a cloud
+            'video-central-single-tag'       => array( $this, 'display_videos_of_tag' ), // Videos of Tag
 
             /** Views *********************************************************/
             'video-central-search'			=> array( $this, 'display_search' ), // search view
@@ -324,69 +321,69 @@ class Radium_Video_Shortcodes {
 
     /** Video Categories ************************************************************/
 
- 	/**
- 	 * Display a tag cloud of all video categories in an output buffer and return to
- 	 * ensure that post/page contents are displayed first.
- 	 *
- 	 * @since 1.0.0
- 	 *
- 	 * @return string
- 	 */
- 	public function display_video_categories($attr, $content = '') {
+     /**
+      * Display a tag cloud of all video categories in an output buffer and return to
+      * ensure that post/page contents are displayed first.
+      *
+      * @since 1.0.0
+      *
+      * @return string
+      */
+     public function display_video_categories($attr, $content = '') {
 
- 		extract(shortcode_atts(array(
-			'show_count'   => true,
-			'hierarchical' => true,
-			'dropdown' => false,
-			'title_li' => '',
-			'show_option_none' => __('Select Category', "video_central" )
-	    ), $attr));
+         extract(shortcode_atts(array(
+            'show_count'   => true,
+            'hierarchical' => true,
+            'dropdown' => false,
+            'title_li' => '',
+            'show_option_none' => __('Select Category', "video_central" )
+        ), $attr));
 
- 		// Unset globals
- 		$this->unset_globals();
+         // Unset globals
+         $this->unset_globals();
 
- 		// Start output buffer
- 		$this->start( 'video_central_video_categories' );
+         // Start output buffer
+         $this->start( 'video_central_video_categories' );
 
-		$args = array(
-			'taxonomy' => video_central_get_video_category_tax_id(),
-			'orderby' => 'name',
-			'show_count' => $show_count,
-			'hierarchical' => $hierarchical
-		);
+        $args = array(
+            'taxonomy' => video_central_get_video_category_tax_id(),
+            'orderby' => 'name',
+            'show_count' => $show_count,
+            'hierarchical' => $hierarchical
+        );
 
-		if ( $dropdown ) {
+        if ( $dropdown ) {
 
-			$args['show_option_none'] = $show_option_none;
-			wp_dropdown_categories(apply_filters('video_central_shortcode_video_categories_dropdown_args', $args));
+            $args['show_option_none'] = $show_option_none;
+            wp_dropdown_categories(apply_filters('video_central_shortcode_video_categories_dropdown_args', $args));
 
- 		?>
- 		<script type='text/javascript'>
- 		/* <![CDATA[ */
- 			var dropdown = document.getElementById("cat");
- 			function onCatChange() {
- 				if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
- 					location.href = "<?php echo home_url(); ?>/?video_category="+dropdown.options[dropdown.selectedIndex].value;
- 				}
- 			}
- 			dropdown.onchange = onCatChange;
- 		/* ]]> */
- 		</script>
- 		<?php } else { ?><ul><?php
- 				$args['title_li'] = $title_li;
+         ?>
+         <script type='text/javascript'>
+         /* <![CDATA[ */
+             var dropdown = document.getElementById("cat");
+             function onCatChange() {
+                 if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
+                     location.href = "<?php echo home_url(); ?>/?video_category="+dropdown.options[dropdown.selectedIndex].value;
+                 }
+             }
+             dropdown.onchange = onCatChange;
+         /* ]]> */
+         </script>
+         <?php } else { ?><ul><?php
+                 $args['title_li'] = $title_li;
 
- 				wp_list_categories(apply_filters('video_central_shortcode_video_categories_args', $args));
- 		?>
- 				</ul>
- 		<?php
+                 wp_list_categories(apply_filters('video_central_shortcode_video_categories_args', $args));
+         ?>
+                 </ul>
+         <?php
 
- 		}
+         }
 
- 		// Return contents of output buffer
- 		return $this->end();
- 	}
+         // Return contents of output buffer
+         return $this->end();
+     }
 
- 	/**
+     /**
      * Filter the query for video categories
      *
      * @since 1.0.0
@@ -407,73 +404,73 @@ class Radium_Video_Shortcodes {
     }
 
     /**
-	 * Display the contents of a specific video categories in an output buffer
-	 * and return to ensure that post/page contents are displayed first.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $attr
-	 * @param string $content
-	 * @uses get_template_part()
-	 * @return string
-	 */
-	public function display_videos_of_category( $attr, $content = '' ) {
+     * Display the contents of a specific video categories in an output buffer
+     * and return to ensure that post/page contents are displayed first.
+     *
+     * @since 1.0.0
+     *
+     * @param array $attr
+     * @param string $content
+     * @uses get_template_part()
+     * @return string
+     */
+    public function display_videos_of_category( $attr, $content = '' ) {
 
-		// Sanity check required info
-		if ( !empty( $content ) || ( empty( $attr['id'] ) || !is_numeric( $attr['id'] ) ) )
-			return $content;
+        // Sanity check required info
+        if ( !empty( $content ) || ( empty( $attr['id'] ) || !is_numeric( $attr['id'] ) ) )
+            return $content;
 
-		// Unset globals
-		$this->unset_globals();
+        // Unset globals
+        $this->unset_globals();
 
-		// Filter the query
-		if ( ! video_central_is_video_category() ) {
-			add_filter( 'video_central_before_has_videos_parse_args', array( $this, 'display_videos_of_category_query' ) );
-		}
+        // Filter the query
+        if ( ! video_central_is_video_category() ) {
+            add_filter( 'video_central_before_has_videos_parse_args', array( $this, 'display_videos_of_category_query' ) );
+        }
 
-		// Start output buffer
-		$this->start( 'video_central_video_category' );
+        // Start output buffer
+        $this->start( 'video_central_video_category' );
 
-		// Set passed attribute to $category_id for clarity
-		video_central()->current_video_category_id = $category_id = $attr['id'];
+        // Set passed attribute to $category_id for clarity
+        video_central()->current_video_category_id = $category_id = $attr['id'];
 
-		// Output template
-		video_central_get_template_part( 'content', 'archive-video' );
+        // Output template
+        video_central_get_template_part( 'content', 'archive-video' );
 
-		// Return contents of output buffer
-		return $this->end();
-	}
+        // Return contents of output buffer
+        return $this->end();
+    }
 
 
     /** Video Tags ************************************************************/
 
-	/**
-	 * Display a tag cloud of all video tags in an output buffer and return to
-	 * ensure that post/page contents are displayed first.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string
-	 */
-	public function display_video_tags() {
+    /**
+     * Display a tag cloud of all video tags in an output buffer and return to
+     * ensure that post/page contents are displayed first.
+     *
+     * @since 1.0.0
+     *
+     * @return string
+     */
+    public function display_video_tags() {
 
-		// Unset globals
-		$this->unset_globals();
+        // Unset globals
+        $this->unset_globals();
 
-		// Start output buffer
-		$this->start( 'video_central_video_tags' );
+        // Start output buffer
+        $this->start( 'video_central_video_tags' );
 
-		// Output the video tags
-		wp_tag_cloud( array(
-			'smallest' => 9,
-			'largest'  => 38,
-			'number'   => 80,
-			'taxonomy' => video_central_get_video_tag_tax_id()
-		) );
+        // Output the video tags
+        wp_tag_cloud( array(
+            'smallest' => 9,
+            'largest'  => 38,
+            'number'   => 80,
+            'taxonomy' => video_central_get_video_tag_tax_id()
+        ) );
 
-		// Return contents of output buffer
-		return $this->end();
-	}
+        // Return contents of output buffer
+        return $this->end();
+    }
 
 
     /**
@@ -497,42 +494,42 @@ class Radium_Video_Shortcodes {
     }
 
     /**
-	 * Display the contents of a specific video tag in an output buffer
-	 * and return to ensure that post/page contents are displayed first.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $attr
-	 * @param string $content
-	 * @uses get_template_part()
-	 * @return string
-	 */
-	public function display_videos_of_tag( $attr, $content = '' ) {
+     * Display the contents of a specific video tag in an output buffer
+     * and return to ensure that post/page contents are displayed first.
+     *
+     * @since 1.0.0
+     *
+     * @param array $attr
+     * @param string $content
+     * @uses get_template_part()
+     * @return string
+     */
+    public function display_videos_of_tag( $attr, $content = '' ) {
 
-		// Sanity check required info
-		if ( !empty( $content ) || ( empty( $attr['id'] ) || !is_numeric( $attr['id'] ) ) )
-			return $content;
+        // Sanity check required info
+        if ( !empty( $content ) || ( empty( $attr['id'] ) || !is_numeric( $attr['id'] ) ) )
+            return $content;
 
-		// Unset globals
-		$this->unset_globals();
+        // Unset globals
+        $this->unset_globals();
 
-		// Filter the query
-		if ( ! video_central_is_video_tag() ) {
-			add_filter( 'video_central_before_has_videos_parse_args', array( $this, 'display_videos_of_tag_query' ) );
-		}
+        // Filter the query
+        if ( ! video_central_is_video_tag() ) {
+            add_filter( 'video_central_before_has_videos_parse_args', array( $this, 'display_videos_of_tag_query' ) );
+        }
 
-		// Start output buffer
-		$this->start( 'video_central_video_tag' );
+        // Start output buffer
+        $this->start( 'video_central_video_tag' );
 
-		// Set passed attribute to $tag_id for clarity
-		video_central()->current_video_tag_id = $tag_id = $attr['id'];
+        // Set passed attribute to $tag_id for clarity
+        video_central()->current_video_tag_id = $tag_id = $attr['id'];
 
-		// Output template
-		video_central_get_template_part( 'content', 'archive-video' );
+        // Output template
+        video_central_get_template_part( 'content', 'archive-video' );
 
-		// Return contents of output buffer
-		return $this->end();
-	}
+        // Return contents of output buffer
+        return $this->end();
+    }
 
     /* The [video-central] or [videojs] shortcode */
     function player($atts, $content=null){
@@ -871,79 +868,79 @@ _end_;
 
     }
 
-	/** Search ****************************************************************/
+    /** Search ****************************************************************/
 
-	/**
-	 * Display the search form in an output buffer and return to ensure
-	 * post/page contents are displayed first.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @uses get_template_part()
-	 */
-	public function display_search_form() {
+    /**
+     * Display the search form in an output buffer and return to ensure
+     * post/page contents are displayed first.
+     *
+     * @since 1.0.0
+     *
+     * @uses get_template_part()
+     */
+    public function display_search_form() {
 
-		// Bail if search is disabled
-		if ( ! video_central_allow_search() ) {
-			return;
-		}
+        // Bail if search is disabled
+        if ( ! video_central_allow_search() ) {
+            return;
+        }
 
-		// Start output buffer
-		$this->start( 'video_central_search_form' );
+        // Start output buffer
+        $this->start( 'video_central_search_form' );
 
-		// Output templates
-		video_central_get_template_part( 'form', 'search' );
+        // Output templates
+        video_central_get_template_part( 'form', 'search' );
 
-		// Return contents of output buffer
-		return $this->end();
-	}
+        // Return contents of output buffer
+        return $this->end();
+    }
 
-	/**
-	 * Display the contents of search results in an output buffer and return to
-	 * ensure that post/page contents are displayed first.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $attr
-	 * @param string $content
-	 * @uses video_central_search_query()
-	 * @uses get_template_part()
-	 */
-	public function display_search( $attr, $content = '' ) {
+    /**
+     * Display the contents of search results in an output buffer and return to
+     * ensure that post/page contents are displayed first.
+     *
+     * @since 1.0.0
+     *
+     * @param array $attr
+     * @param string $content
+     * @uses video_central_search_query()
+     * @uses get_template_part()
+     */
+    public function display_search( $attr, $content = '' ) {
 
-		// Sanity check required info
-		if ( !empty( $content ) ) {
-			return $content;
-		}
+        // Sanity check required info
+        if ( !empty( $content ) ) {
+            return $content;
+        }
 
-		// Bail if search is disabled
-		if ( ! video_central_allow_search() ) {
-			return;
-		}
+        // Bail if search is disabled
+        if ( ! video_central_allow_search() ) {
+            return;
+        }
 
-		// Trim search attribute if it's set
-		if ( isset( $attr['search'] ) ) {
-			$attr['search'] = trim( $attr['search'] );
-		}
+        // Trim search attribute if it's set
+        if ( isset( $attr['search'] ) ) {
+            $attr['search'] = trim( $attr['search'] );
+        }
 
-		// Set passed attribute to $search_terms for clarity
-		$search_terms = empty( $attr['search'] ) ? video_central_get_search_terms() : $attr['search'];
+        // Set passed attribute to $search_terms for clarity
+        $search_terms = empty( $attr['search'] ) ? video_central_get_search_terms() : $attr['search'];
 
-		// Unset globals
-		$this->unset_globals();
+        // Unset globals
+        $this->unset_globals();
 
-		// Set terms for query
-		set_query_var( video_central_get_search_rewrite_id(), $search_terms );
+        // Set terms for query
+        set_query_var( video_central_get_search_rewrite_id(), $search_terms );
 
-		// Start output buffer
-		$this->start( video_central_get_search_rewrite_id() );
+        // Start output buffer
+        $this->start( video_central_get_search_rewrite_id() );
 
-		// Output template
-		video_central_get_template_part( 'content', 'search' );
+        // Output template
+        video_central_get_template_part( 'content', 'search' );
 
-		// Return contents of output buffer
-		return $this->end();
-	}
+        // Return contents of output buffer
+        return $this->end();
+    }
 
      /**
      * Display the contents of a specific video ID in an output buffer
@@ -960,19 +957,16 @@ _end_;
     public function display_playlist( $attr, $content = '' ) {
 
         // Sanity check required info
-        if ( !empty( $content ) || ( empty( $attr['ids'] ) ) )
+        if ( !empty( $content ) || ( empty( $attr['id'] ) ) )
             return $content;
 
-        // Set passed attribute to $video_id for clarity
-        $video_id = video_central()->current_video_id = $attr['ids'];
-
-        $post = get_post();
+        $playlist_id = video_central()->current_playlist_id = $attr['id'];
 
         $playlist_instance = 0;
         video_central()->playlist_instance++;
 
         // check if attr is set
-        if( !is_array( $attr ) || !array_key_exists('ids', $attr) ){
+        if( !is_array( $attr ) || !array_key_exists('id', $attr) ){
             return;
         }
 
@@ -995,10 +989,9 @@ _end_;
         }
 
         $attr = shortcode_atts( array(
-            'ids'       => '',
+            'id'        => '',
             'order'     => 'ASC',
             'orderby'   => 'menu_order ID',
-            'id'        => $post ? $post->ID : 0,
             'style'     => 'light',
         ), $attr, 'video_central_playlist' );
 
@@ -1023,4 +1016,3 @@ _end_;
 }
 
 endif;
-

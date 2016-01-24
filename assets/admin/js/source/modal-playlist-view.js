@@ -27,7 +27,6 @@ Playlist.video_central_modal.Application = Backbone.View.extend({
 
     selectedVideos: [],
 
-
     /**
      * Simple object to store any UI elements we need to use over the life of the application.
      */

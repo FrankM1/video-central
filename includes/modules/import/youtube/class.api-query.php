@@ -461,7 +461,7 @@ class Video_Central_Youtube_API_Query {
                     // rating no longer available in API V3
                     'rating'        => 0,
                     'rating_count'  => 0,
-                    'comments'      => $video['statistics']['commentCount'],
+                    'comments'      => '',
                     'comments_feed' => '',
                     'views'         => $video['statistics']['viewCount'],
                     'likes'         => $video['statistics']['likeCount'],

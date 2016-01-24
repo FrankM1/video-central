@@ -45,192 +45,192 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table {
      */
     private $prev_token = '';
 
-	/**
-	 * Constructor. Hooks all interactions to initialize the class.
-	 *
-	 * @since 1.0.0
-	 */
-	function __construct( $args = array() ){
-
-		parent::__construct( array(
-			'singular' => 'video',
-			'plural'   => 'videos',
-			'screen'   => isset( $args['screen'] ) ? $args['screen'] : null,
-		) );
-
-	}
-
-	/**
-	 * Default column
-	 * @param array $item
-	 * @param string $column
+    /**
+     * Constructor. Hooks all interactions to initialize the class.
      *
      * @since 1.0.0
-	 */
-	function column_default( $item, $column ){
+     */
+    function __construct( $args = array() ){
 
-		if( array_key_exists($column, $item) ){
+        parent::__construct( array(
+            'singular' => 'video',
+            'plural'   => 'videos',
+            'screen'   => isset( $args['screen'] ) ? $args['screen'] : null,
+        ) );
 
-			return $item[ $column ];
+    }
 
-		} else {
-
-			return '<span style="color:red">'.sprintf( __('Column <em>%s</em> was not found.', 'video_central'), $column ).'</span>';
-		}
-
-	}
-
-	/**
-	 * Checkbox column
-	 * @param array $item
+    /**
+     * Default column
+     * @param array $item
+     * @param string $column
      *
      * @since 1.0.0
-	 */
-	function column_cb( $item ){
+     */
+    function column_default( $item, $column ){
 
-		$output = sprintf( '<input type="checkbox" name="video_central_import[]" value="%1$s" id="video_central_%1$s" />', $item['video_id'] );
-		return $output;
+        if( array_key_exists($column, $item) ){
 
-	}
+            return $item[ $column ];
 
-	/**
-	 * Title column
-	 * @param array $item
+        } else {
+
+            return '<span style="color:red">'.sprintf( __('Column <em>%s</em> was not found.', 'video_central'), $column ).'</span>';
+        }
+
+    }
+
+    /**
+     * Checkbox column
+     * @param array $item
      *
      * @since 1.0.0
-	 */
-	function column_title( $item ){
+     */
+    function column_cb( $item ){
 
-		$label = sprintf( '<label for="video_central_%1$s" class="video_central_label">%2$s</label>', $item['video_id'], $item['title'] );
+        $output = sprintf( '<input type="checkbox" name="video_central_import[]" value="%1$s" id="video_central_%1$s" />', $item['video_id'] );
+        return $output;
 
-		// row actions
-    	$actions = array(
-    		'view' 		=> sprintf( '<a href="http://www.youtube.com/watch?v=%1$s" target="_video_central_youtube_open">%2$s</a>', $item['video_id'], __('View on YouTube', 'video_central') ),
-    	);
+    }
 
-    	return sprintf('%1$s %2$s',
-    		$label,
-    		$this->row_actions( $actions )
-    	);
-	}
-
-	/**
-	 * Column for video duration
-	 * @param array $item
+    /**
+     * Title column
+     * @param array $item
      *
      * @since 1.0.0
-	 */
-	function column_duration( $item ){
-		return video_central_human_time( $item['duration'] );
-	}
+     */
+    function column_title( $item ){
 
-	/**
-	 * Rating column
-	 * @param array $item
+        $label = sprintf( '<label for="video_central_%1$s" class="video_central_label">%2$s</label>', $item['video_id'], $item['title'] );
+
+        // row actions
+        $actions = array(
+            'view' 		=> sprintf( '<a href="http://www.youtube.com/watch?v=%1$s" target="_video_central_youtube_open">%2$s</a>', $item['video_id'], __('View on YouTube', 'video_central') ),
+        );
+
+        return sprintf('%1$s %2$s',
+            $label,
+            $this->row_actions( $actions )
+        );
+    }
+
+    /**
+     * Column for video duration
+     * @param array $item
+     *
      * @since 1.0.0
-	 */
-	function column_rating( $item ){
-		if( 0 == $item['stats']['rating_count'] ){
-			return '-';
-		}
+     */
+    function column_duration( $item ){
+        return video_central_human_time( $item['duration'] );
+    }
 
-		return number_format( $item['stats']['rating'], 2 ) . sprintf( __(' (%d votes)', 'video_central'), $item['stats']['rating_count'] );
-	}
-
-	/**
-	 * Views column
-	 * @param array $item
+    /**
+     * Rating column
+     * @param array $item
      * @since 1.0.0
-	 */
-	function column_views( $item ){
-		if( 0 == $item['stats']['views'] ){
-			return '-';
-		}
-		return number_format( $item['stats']['views'], 0, '.', ',');
-	}
+     */
+    function column_rating( $item ){
+        if( 0 == $item['stats']['rating_count'] ){
+            return '-';
+        }
 
-	/**
-	 * Date when the video was published
-	 * @param array $item
-	 */
-	function column_date( $item ){
-		$time = strtotime( $item['published'] );
-		return date('M dS, Y @ H:i:s', $time);
-	}
+        return number_format( $item['stats']['rating'], 2 ) . sprintf( __(' (%d votes)', 'video_central'), $item['stats']['rating_count'] );
+    }
 
-	/**
+    /**
+     * Views column
+     * @param array $item
+     * @since 1.0.0
+     */
+    function column_views( $item ){
+        if( 0 == $item['stats']['views'] ){
+            return '-';
+        }
+        return number_format( $item['stats']['views'], 0, '.', ',');
+    }
+
+    /**
+     * Date when the video was published
+     * @param array $item
+     */
+    function column_date( $item ){
+        $time = strtotime( $item['published'] );
+        return date('M dS, Y @ H:i:s', $time);
+    }
+
+    /**
      * (non-PHPdoc)
      * @see WP_List_Table::get_bulk_actions()
      */
     function get_bulk_actions() {
-    	$actions = array(
-    		/*'import' => __('Import', 'video_central')*/
-    	);
+        $actions = array(
+            /*'import' => __('Import', 'video_central')*/
+        );
 
-    	return $actions;
+        return $actions;
     }
 
-	/**
+    /**
      * Returns the columns of the table as specified
      */
     function get_columns(){
 
-		$columns = array(
-			'cb'		=> '<input type="checkbox" />',
-			'title'		=> __('Title', 		'video_central'),
-			'category'	=> __('Category', 	'video_central'),
-			'video_id'	=> __('Video ID', 	'video_central'),
-			'duration'	=> __('Duration', 	'video_central'),
-			'rating'	=> __('Rating', 	'video_central'),
-			'views'		=> __('Views', 		'video_central'),
-			'date'      => __('Date', 	'video_central'),
-		);
-    	return $columns;
+        $columns = array(
+            'cb'		=> '<input type="checkbox" />',
+            'title'		=> __('Title', 		'video_central'),
+            'category'	=> __('Category', 	'video_central'),
+            'video_id'	=> __('Video ID', 	'video_central'),
+            'duration'	=> __('Duration', 	'video_central'),
+            'rating'	=> __('Rating', 	'video_central'),
+            'views'		=> __('Views', 		'video_central'),
+            'date'      => __('Date', 	'video_central'),
+        );
+        return $columns;
     }
 
     function extra_tablenav( $which ){
 
-    	$suffix = 'top' == $which ? '_top' : '2';
+        $suffix = 'top' == $which ? '_top' : '2';
 
-   		$selected = false;
+           $selected = false;
 
-		if( isset( $_GET['cat'] ) ){
-			$selected = $_GET['cat'];
-		}
+        if( isset( $_GET['cat'] ) ){
+            $selected = $_GET['cat'];
+        }
 
-    	$args = array(
-			'show_count' 	=> true,
-    		'hide_empty'	=> 0,
-			'taxonomy' 		=> video_central_get_video_category_tax_id(),
-			'name'			=> 'cat'.$suffix,
-			'id'			=> 'video_central_categories'.$suffix,
-			'selected'		=> $selected,
-    		'hide_if_empty' => true,
-    		'echo'			=> false,
-    		'orderby' 		=> 'NAME'
-		);
+        $args = array(
+            'show_count' 	=> true,
+            'hide_empty'	=> 0,
+            'taxonomy' 		=> video_central_get_video_category_tax_id(),
+            'name'			=> 'cat'.$suffix,
+            'id'			=> 'video_central_categories'.$suffix,
+            'selected'		=> $selected,
+            'hide_if_empty' => true,
+            'echo'			=> false,
+            'orderby' 		=> 'NAME'
+        );
 
-		if ( video_central_import_categories() ) {
-			$args['show_option_all'] = __('Create categories from YouTube', 'video_central');
-		} else {
-			$args['show_option_all'] = __('Select category (optional)', 'video_central');
-		}
+        if ( video_central_import_categories() ) {
+            $args['show_option_all'] = __('Create categories from YouTube', 'video_central');
+        } else {
+            $args['show_option_all'] = __('Select category (optional)', 'video_central');
+        }
 
-		// get dropdown output
-		$category_select = wp_dropdown_categories($args);
+        // get dropdown output
+        $category_select = wp_dropdown_categories($args);
 
-    	?>
-    	<select name="action<?php echo $suffix;?>" id="action_<?php echo $which;?>">
-    		<option value="-1"><?php _e('Bulk actions', 'video_central');?></option>
-    		<option value="import" selected="selected"><?php _e('Import', 'video_central');?></option>
-    	</select>
+        ?>
+        <select name="action<?php echo $suffix;?>" id="action_<?php echo $which;?>">
+            <option value="-1"><?php _e('Bulk actions', 'video_central');?></option>
+            <option value="import" selected="selected"><?php _e('Import', 'video_central');?></option>
+        </select>
 
-    	<?php if( $category_select ): ?>
-    		<label for="video_central_categories<?php echo $suffix;?>"><?php _e('Import into category', 'video_central');?> :</label>
-			<?php echo $category_select; ?>
-		<?php endif;?>
+        <?php if( $category_select ): ?>
+            <label for="video_central_categories<?php echo $suffix;?>"><?php _e('Import into category', 'video_central');?> :</label>
+            <?php echo $category_select; ?>
+        <?php endif;?>
 
-		<?php submit_button( __( 'Apply', 'video_central' ), 'action', false, false, array( 'id' => "doaction$suffix" ) );
+        <?php submit_button( __( 'Apply', 'video_central' ), 'action', false, false, array( 'id' => "doaction$suffix" ) );
 
     }
 

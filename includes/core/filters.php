@@ -1,27 +1,13 @@
 <?php
 
 /**
- * Video Central Filters
+ * Video Central Filters.
  *
- * @package Video Central
- * @subpackage Core
- *
- * This file contains the filters that are used through-out Video Central. They are
- * consolidated here to make searching for them easier, and to help developers
- * understand at a glance the order in which things occur.
- *
- * There are a few common places that additional filters can currently be found
- *
- *  - Video Central: In {@link Video Central::setup_actions()} in video-central.php
- *  - Admin: More in {@link video_central_Admin::setup_actions()} in admin.php
  *
  * @see /core/actions.php
  */
 
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
-
-/**
+/*
  * Attach Video Central to WordPress
  *
  * Video Central uses its own internal actions to help aid in third-party plugin
@@ -37,40 +23,40 @@ if ( !defined( 'ABSPATH' ) ) exit;
  *
  *           v--WordPress Actions       v--Video Central Sub-actions
  */
-add_filter( 'template_include',        'video_central_template_include',     10    );
-add_filter( 'wp_title',                'video_central_title',                10, 3 );
-add_filter( 'body_class',              'video_central_body_class',         	 10, 2 );
-add_filter( 'map_meta_cap',            'video_central_map_meta_caps',        10, 4 );
-add_filter( 'allowed_themes',          'video_central_allowed_themes',       10    );
-add_filter( 'redirect_canonical',      'video_central_redirect_canonical',   10    );
-add_filter( 'plugin_locale',           'video_central_plugin_locale',        10, 2 );
+add_filter('template_include',        'video_central_template_include',     10);
+add_filter('wp_title',                'video_central_title',                10, 3);
+add_filter('body_class',              'video_central_body_class',              10, 2);
+add_filter('map_meta_cap',            'video_central_map_meta_caps',        10, 4);
+add_filter('allowed_themes',          'video_central_allowed_themes',       10);
+add_filter('redirect_canonical',      'video_central_redirect_canonical',   10);
+add_filter('plugin_locale',           'video_central_plugin_locale',        10, 2);
 
-/**
+/*
  * Template Compatibility
  *
  * If you want to completely bypass this and manage your own custom Video Central
  * template hierarchy, start here by removing this filter, then look at how
  * video_central_template_include() works and do something similar. :)
  */
-add_filter( 'video_central_template_include',   'video_central_template_include_theme_supports', 2, 1 );
-add_filter( 'video_central_template_include',   'video_central_template_include_theme_compat',   4, 2 );
+add_filter('video_central_template_include',   'video_central_template_include_theme_supports', 2, 1);
+add_filter('video_central_template_include',   'video_central_template_include_theme_compat',   4, 2);
 
 // Force comments_status on video central post types
-add_filter( 'comments_open', 'video_central_force_comment_status' );
+add_filter('comments_open', 'video_central_force_comment_status');
 
 // Filter Video Central template locations
-add_filter( 'video_central_get_template_stack', 'video_central_add_template_stack_locations'          );
+add_filter('video_central_get_template_stack', 'video_central_add_template_stack_locations');
 
 //Custom Video order
-add_filter( 'video_central_before_has_videos_parse_args', 'video_central_get_custom_video_order', 1, 10);
+add_filter('video_central_before_has_videos_parse_args', 'video_central_get_custom_video_order', 1, 10);
 
 //make urls in description clickable
-add_filter( 'video_central_get_content_urls', 'video_central_url_make_clickable', 2, 10);
+add_filter('video_central_get_content_urls', 'video_central_url_make_clickable', 2, 10);
 
 //override wordpress video shortcode
 //add_filter( 'wp_video_shortcode_handler', 'video_central_shortcode' , 99);
 //add_filter( 'video_central_shortcode_class', 'video-central-shortcode' );
 
 // Capabilities
-add_filter( 'video_central_map_meta_caps', 'video_central_map_primary_meta_caps',   10, 4 ); // Primary caps
-add_filter( 'video_central_map_meta_caps', 'video_central_map_video_meta_caps',     10, 4 ); // Videos
+add_filter('video_central_map_meta_caps', 'video_central_map_primary_meta_caps',   10, 4); // Primary caps
+add_filter('video_central_map_meta_caps', 'video_central_map_video_meta_caps',     10, 4); // Videos

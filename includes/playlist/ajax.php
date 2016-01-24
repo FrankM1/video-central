@@ -16,7 +16,7 @@
  */
 function video_central_ajax_get_playlist()
 {
-    wp_send_json_success(get_cue_playlist_tracks($_POST['post_id'], 'edit'));
+    wp_send_json_success( video_central_get_laylist_video_ids($_POST['post_id'], 'edit'));
 }
 
 /**

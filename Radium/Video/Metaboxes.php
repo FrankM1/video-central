@@ -10,27 +10,27 @@
 
 class Radium_Video_Metaboxes {
 
-	/**
-	 * Holds a copy of the object for easy reference.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var object
-	 */
-	private static $instance;
+    /**
+     * Holds a copy of the object for easy reference.
+     *
+     * @since 1.0.0
+     *
+     * @var object
+     */
+    private static $instance;
 
-	/**
-	 * Constructor. Hooks all interactions to initialize the class.
-	 *
-	 * @since 1.0.0
-	 */
-	public function __construct() {
+    /**
+     * Constructor. Hooks all interactions to initialize the class.
+     *
+     * @since 1.0.0
+     */
+    public function __construct() {
 
-		self::$instance = $this;
+        self::$instance = $this;
 
         add_action( 'admin_init', array( $this, 'register_meta_boxes') );
 
-	}
+    }
 
     /**
      * Register meta boxes
@@ -45,20 +45,20 @@ class Radium_Video_Metaboxes {
         /* ---------------------------------------------------------------------- */
          $arg = array(
 
-				array(
-				    'name' =>__('Featured Video','video_central'),
-				    'desc' => __('','video_central'),
-				    'id'   => '_video_central_featured_video',
-				    'std'  => 0,
-				    'type' => 'Checkbox',
-				),
+                array(
+                    'name' =>__('Featured Video','video_central'),
+                    'desc' => __('','video_central'),
+                    'id'   => '_video_central_featured_video',
+                    'std'  => 0,
+                    'type' => 'Checkbox',
+                ),
 
-				array(
-				    'name' =>__('Video Description','video_central'),
-				    'desc' => __('','video_central'),
-				    'id'   => '_video_central_description',
-				    'type' => 'TextArea',
-				),
+                array(
+                    'name' =>__('Video Description','video_central'),
+                    'desc' => __('','video_central'),
+                    'id'   => '_video_central_description',
+                    'type' => 'TextArea',
+                ),
 
                 array(
                     'name' =>__('Video Url (.mp4)','video_central'),
@@ -66,7 +66,7 @@ class Radium_Video_Metaboxes {
                     'id'   => '_video_central_mp4',
                     'std'  => '',
                     'type' => 'FileAdvanced',
-				    'max_file_uploads' => 1
+                    'max_file_uploads' => 1
                 ),
 
                 array(
@@ -75,7 +75,7 @@ class Radium_Video_Metaboxes {
                     'id'   => '_video_central_webm',
                     'std'  => '',
                     'type' => 'FileAdvanced',
-				    'max_file_uploads' => 1
+                    'max_file_uploads' => 1
                 ),
 
                 array(
@@ -84,9 +84,9 @@ class Radium_Video_Metaboxes {
                     'id'   => '_video_central_ogg',
                     'std'  => '',
                     'type' => 'FileAdvanced',
-				    'max_file_uploads' => 1
+                    'max_file_uploads' => 1
                 ),
-                
+
                 array(
                     'name' =>__('Video Url (.flv)', 'video_central'),
                     'desc' => __('','video_central'),
@@ -96,14 +96,14 @@ class Radium_Video_Metaboxes {
                     'max_file_uploads' => 1
                 ),
 
-				array(
-				    'name' =>__('Custom Thumbnail','video_central'),
-				    'desc' => __('This will override the auto generated video thumbnail','video_central'),
-				    'id'   => '_video_poster',
-				    'std'  => '',
-				    'type' => 'ImageAdvanced',
-				    'max_file_uploads' => 1
-				),
+                array(
+                    'name' =>__('Custom Thumbnail','video_central'),
+                    'desc' => __('This will override the auto generated video thumbnail','video_central'),
+                    'id'   => '_video_poster',
+                    'std'  => '',
+                    'type' => 'ImageAdvanced',
+                    'max_file_uploads' => 1
+                ),
 
                 array(
                     'name' =>__('Video ID','video_central'),
@@ -127,13 +127,13 @@ class Radium_Video_Metaboxes {
                     'id'   => '_video_central_source',
                     'type' => 'Select',
                     'options' => array(
-                    	'vimeo' 	=> 'Vimeo',
-                    	'youtube' 	=> 'Youtube',
-                    	'self' 		=> __('Self Hosted', 'video_central'),
-                    	'embed' 	=> __('Embed Code', 'video_central'),
+                        'vimeo' 	=> 'Vimeo',
+                        'youtube' 	=> 'Youtube',
+                        'self' 		=> __('Self Hosted', 'video_central'),
+                        'embed' 	=> __('Embed Code', 'video_central'),
                     ),
                     'multiple'  => false,
-                    'std'       => array( 'self' )
+                    'std'       => array( 'youtube' )
                 ),
 
         );
@@ -149,9 +149,7 @@ class Radium_Video_Metaboxes {
 
         // Make sure there's no errors when the plugin is deactivated or during upgrade
         foreach ( $meta_boxes as $meta_box ) {
-
             new Radium_Video_Metaboxes_Init( $meta_box );
-
         }
 
     }

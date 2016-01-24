@@ -1,6 +1,4 @@
 <?php
-// Prevent loading this file directly
-defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Radium_Video_Metaboxes_Field_RadioImage' ) )
 {
