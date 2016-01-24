@@ -45,10 +45,6 @@ function video_central_format_youtube_video_entry($raw_entry)
 
     // permissions
     $entry = array();
-    $permissions = array();
-    foreach ($raw_entry['accessControl'] as $k => $p) {
-        $permissions[ $k ] = 'allowed' == $p;
-    }
 
     $thumbnails = array();
     foreach ($raw_entry['thumbnail'] as $thumbnail) {

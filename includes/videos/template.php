@@ -275,17 +275,6 @@ function video_central_has_videos($args = '')
         $default_post_parent = video_central_get_video_id();
     }
 
-    // Parse arguments with default video query for most circumstances
-    $video_central_f = video_central_parse_args($args, array(
-        'post_type' => video_central_get_video_post_type(),
-        'post_parent' => $default_post_parent,
-        'post_status' => 'publish',
-        'posts_per_page' => get_option('_video_central_videos_per_page', 50),
-        'ignore_sticky_posts' => true,
-        'orderby' => 'menu_order title',
-        'order' => 'ASC',
-    ), 'has_videos');
-
     // Only add pagination if query returned results
     if (((int) $video_central->video_query->post_count || (int) $video_central->video_query->found_posts) && (int) $video_central->video_query->posts_per_page) {
 
@@ -901,7 +890,7 @@ function video_central_list_videos($args = '')
 {
 
     // Define used variables
-    $output = $sub_videos = $video_count = $video_count = $counts = '';
+    $output = $sub_videos = $counts = '';
     $i = 0;
     $count = array();
 
@@ -1813,8 +1802,7 @@ function video_central_featured_image_url($video_id = 0, $image_size = array())
         $attachments = get_children($args);
 
         if ($attachments) {
-            
-            $count = count($attachments);
+
             $first_attachment = array_shift($attachments);
 
             if ($first_attachment) {
@@ -1826,8 +1814,6 @@ function video_central_featured_image_url($video_id = 0, $image_size = array())
             ob_end_clean();
 
             if (preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches)) {
-                $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
-
                 $first_img = $matches[1][0];
             }
         }
@@ -1978,7 +1964,6 @@ function video_central_has_related_videos($args = '')
 
     $taxes = array_unique(array_merge(array($video_central->video_cat_tax_id, $video_central->video_tag_tax_id), $taxes));
 
-    $tax_query = array();
     $in_tax_query_array = array();
     $and_tax_query_array = array();
     $post_format_query_array = null;
@@ -2062,13 +2047,6 @@ function video_central_has_related_videos($args = '')
             $found_posts[] = $post->ID;
         }
     }
-
-    $post_format_query = array(
-        'taxonomy' => 'post_format',
-        'field' => 'slug',
-        'terms' => get_post_format(),
-        'operator' => 'IN',
-    );
 
     // Foreach Each Taxonomy Query: operator = AND
     if (count($found_posts) < $number) {

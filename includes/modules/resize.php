@@ -142,7 +142,6 @@ function video_central_resize($url, $width, $height = null, $crop = null, $singl
 
     //get image size after cropping
     $dims_x2 = image_resize_dimensions($orig_w, $orig_h, $retina_w, $retina_h, $crop);
-    $dst_x2_w = $dims_x2[4];
     $dst_x2_h = $dims_x2[5];
 
     // If possible lets make the @2x image

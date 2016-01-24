@@ -36,7 +36,6 @@ class Video_Central_Playlist_Posttype
 
     public function playlist_init()
     {
-        $video_central = video_central();
 
         // Register playlist content type
         register_post_type(

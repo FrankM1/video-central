@@ -365,14 +365,10 @@ class Video_Central_Playlist_Admin
 
         if (video_central_has_videos(array('posts_per_page' => $posts_per_page, 'paged' => $page))) :
 
-        $items = '';
-        $i = 0;
-
         $image_sizes = array(
             'width' => 300,
             'height' => 169,
         );
-        $image_args['wrap'] = '<img %SRC% %IMG_CLASS% %SIZE% %ALT% %IMG_TITLE% />';
 
         while (video_central_videos()): video_central_the_video();
 

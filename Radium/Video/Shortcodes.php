@@ -960,8 +960,6 @@ _end_;
         if ( !empty( $content ) || ( empty( $attr['id'] ) ) )
             return $content;
 
-        $playlist_id = video_central()->current_playlist_id = $attr['id'];
-
         $playlist_instance = 0;
         video_central()->playlist_instance++;
 

@@ -11,13 +11,7 @@
  */
 class Video_Central_Integration_Woosidebars
 {
-    /**
-     * Taxonomies.
-     *
-     * @since  1.1.0
-     */
-    private $taxonomies = array();
-
+    
     /**
      * Constructor.
      *

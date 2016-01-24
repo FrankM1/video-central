@@ -28,7 +28,6 @@ class Radium_Video_Widget extends WP_Widget
     /*--------------------------------------------------------------------*/
     public function widget($args, $instance)
     {
-        $rv = video_central();
 
         extract($args);
 

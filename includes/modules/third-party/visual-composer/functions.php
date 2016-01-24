@@ -97,7 +97,7 @@ function radium_builder_get_registered_video_views_selection_data()
 
     $views = video_central()->views;
 
-    foreach (video_central()->views as $key => $data) {
+    foreach ($views as $key => $data) {
         $options[$data['title']] = $key;
     }
 

@@ -391,7 +391,6 @@ class Video_Central_Import_Thumbnails
     // Ajax reset callback
     public function ajax_reset_callback()
     {
-        global $wpdb; // this is how you get access to the database
 
         $post_id = $_POST['post_id'];
 

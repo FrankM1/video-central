@@ -221,7 +221,6 @@ class Video_Central_Popular_Widget extends WP_Widget
         ?>" name="<?php echo $this->get_field_name('thumbnail_size');
         ?>" class="widefat">
                 <?php
-                $i = 0;
         $options = array('small-left', 'large', 'small-right');
         foreach ($options as $option) {
             $selected = $thumbnail_size == $option ? 'selected="selected"' : '';

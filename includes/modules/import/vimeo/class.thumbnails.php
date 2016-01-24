@@ -108,7 +108,6 @@ class Video_Central_Vimeo_Thumbnails extends Video_Central_Thumbnails_Providers
         $response = wp_remote_get($url, array('timeout' => 30));
 
         if (!is_wp_error($response) && $response['response']['code'] == '200') {
-            $result = $maxres;
 
             $xml = wp_remote_retrieve_body($response);
 
