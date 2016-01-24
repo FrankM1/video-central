@@ -535,12 +535,9 @@ class Video_Central_Youtube_API_Query
         }
 
         // make the request
-        $response = wp_remote_get(
-            $url,
-            array(
-                'headers' => $headers,
-            )
-        );
+        $remote_args = array( 'timeout' => 60, 'headers' => $headers);
+        $response = wp_remote_get( $url, $remote_args );
+
         // if something went wrong, return the error
         if (is_wp_error($response)) {
             return $response;

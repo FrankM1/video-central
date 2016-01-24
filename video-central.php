@@ -102,7 +102,7 @@ class Video_Central
             $instance = new self();
             $instance->setup_globals();
             $instance->includes();
-            $instance->SetupActions();
+            $instance->setup_actions();
         }
 
         // Always return the instance
@@ -375,16 +375,16 @@ class Video_Central
                 require_once ABSPATH.'wp-admin/includes/class-wp-list-table.php';
         endif;
 
-            //Modules (Modules can run as 'independent' plugins to enhance or add features)
-            include_once $this->includes_dir.'modules/import/options.php';
+        //Modules (Modules can run as 'independent' plugins to enhance or add features)
+        include_once $this->includes_dir.'modules/import/options.php';
 
         include_once $this->includes_dir.'modules/import/video/class.settings.php';
         include_once $this->includes_dir.'modules/import/video/class.thumbnails-providers.php';
         include_once $this->includes_dir.'modules/import/video/class.wizard.php';
-        include_once $this->includes_dir.'modules/import/video/class.import.php';
+        include_once $this->includes_dir.'modules/import/video/class.importer.php';
 
-            //import youtube videos
-            include_once $this->includes_dir.'modules/import/youtube/functions.php';
+        //import youtube videos
+        include_once $this->includes_dir.'modules/import/youtube/functions.php';
         include_once $this->includes_dir.'modules/import/youtube/class.api-query.php';
         include_once $this->includes_dir.'modules/import/youtube/class.importer.php';
         include_once $this->includes_dir.'modules/import/youtube/class.auto.importer.php';
@@ -392,13 +392,13 @@ class Video_Central
         include_once $this->includes_dir.'modules/import/youtube/class.wizard.php';
         include_once $this->includes_dir.'modules/import/youtube/class.list-table.php';
 
-            //import youtube videos
-           // include_once $this->includes_dir.'modules/import/vimeo/functions.php';
-            //include_once $this->includes_dir.'modules/import/vimeo/class.importer.php';
-            //include_once $this->includes_dir.'modules/import/vimeo/class.importer-data.php';
-            include_once $this->includes_dir.'modules/import/vimeo/class.thumbnails.php';
-            //include_once $this->includes_dir.'modules/import/vimeo/class.wizard.php';
-            //include_once $this->includes_dir.'modules/import/vimeo/class.list-table.php';
+        //import youtube videos
+        //include_once $this->includes_dir.'modules/import/vimeo/functions.php';
+        //include_once $this->includes_dir.'modules/import/vimeo/class.importer.php';
+        //include_once $this->includes_dir.'modules/import/vimeo/class.importer-data.php';
+        include_once $this->includes_dir.'modules/import/vimeo/class.thumbnails.php';
+        //include_once $this->includes_dir.'modules/import/vimeo/class.wizard.php';
+        //include_once $this->includes_dir.'modules/import/vimeo/class.list-table.php';
 
         else :
 
@@ -413,7 +413,7 @@ class Video_Central
      *
      * @since 1.0.0
      */
-    public function SetupActions()
+    public function setup_actions()
     {
 
         // Add actions to plugin activation and deactivation hooks
@@ -684,7 +684,6 @@ class Video_Central
      * - User profiles.
      *
      * @since 1.0.0
-     *
      */
     public static function add_rewrite_rules()
     {

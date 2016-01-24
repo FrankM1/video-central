@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Video Central Images Importer
+ *
+ */
 class Video_Central_Import_Thumbnails
 {
     /**
@@ -46,9 +49,6 @@ class Video_Central_Import_Thumbnails
         // Create provider array
         $this->providers = apply_filters('video_central_thumbnail_providers', $this->providers);
 
-        // Settings
-        //$this->settings = new Video_Thumbnails_Settings();
-
         // Initialize meta box
         add_action('admin_init', array(&$this, 'meta_box_init'));
 
@@ -61,7 +61,7 @@ class Video_Central_Import_Thumbnails
         }
 
         // Add action for Ajax reset callback
-        add_action('wp_ajax_reset_video_thumbnail', array(&$this, 'ajax_reset_callback'));
+        add_action('wp_ajax_vide_central_reset_video_thumbnail', array(&$this, 'ajax_reset_callback'));
 
         // Get the posts to be scanned in bulk
         add_action('wp_ajax_video_thumbnails_bulk_posts_query', array(&$this, 'bulk_posts_query_callback'));
@@ -130,6 +130,7 @@ class Video_Central_Import_Thumbnails
         $providers = apply_filters('video_central_thumbnail_providers_pre_scan', $this->providers);
 
         foreach ($providers as $key => $provider) {
+
             $provider_videos = $provider->scan_for_videos($markup, $video_id);
 
             if (empty($provider_videos)) {
@@ -157,14 +158,18 @@ class Video_Central_Import_Thumbnails
      *
      * @return mixed Null if no thumbnail or a string with a remote URL
      */
-    public function get_first_thumbnail_url($markup, $video_id = null)
+    public function get_first_thumbnail_url($markup, $video_id = null, $provider = null)
     {
         $thumbnail = null;
 
         $videos = $this->find_videos($markup, $video_id);
 
         foreach ($videos as $video) {
-            $thumbnail = $this->providers[$video['provider']]->get_thumbnail_url($video['id']);
+
+            //override provider
+            $provider = $provider ? $provider : $video['provider'];
+
+            $thumbnail = $this->providers[$provider]->get_thumbnail_url($video['id']);
 
             if ($thumbnail !== null) {
                 break;
@@ -188,9 +193,9 @@ class Video_Central_Import_Thumbnails
         if (($thumbnail_meta = get_post_meta($post_id, $this->thumbnails_field, true)) != '') {
             return $thumbnail_meta;
         }
-
         // If the thumbnail isn't stored in custom meta, fetch a thumbnail
         else {
+
             $new_thumbnail = null;
 
             // Filter for extensions to set thumbnail
@@ -201,6 +206,7 @@ class Video_Central_Import_Thumbnails
                 // Get the post or custom field to search
                 if ($this->custom_field == '_video_central_video_id') {
                     $video_id = get_post_meta($post_id, $this->custom_field, true);
+                    $provider = get_post_meta($post_id, '_video_central_source', true);
                 } elseif ($this->custom_field) {
                     $markup = get_post_meta($post_id, $this->custom_field, true);
                 } else {
@@ -213,11 +219,12 @@ class Video_Central_Import_Thumbnails
                 $markup = apply_filters('video_central_thumbnail_markup', $markup, $post_id);
                 $video_id = apply_filters('video_central_thumbnail_video_id', $video_id, $post_id);
 
-                $new_thumbnail = $this->get_first_thumbnail_url(null, $video_id);
+                $new_thumbnail = $this->get_first_thumbnail_url(null, $video_id, $provider);
+
             }
 
             // Return the new thumbnail variable and update meta if one is found
-            if ($new_thumbnail !== null && !is_wp_error($new_thumbnail)) {
+            if ( $new_thumbnail !== null && !is_wp_error($new_thumbnail)) {
 
                 // Save as Attachment if enabled
                 if ($this->settings->options['save_media'] == 1) {
@@ -374,7 +381,7 @@ class Video_Central_Import_Thumbnails
         echo '<script type="text/javascript">'.PHP_EOL;
         echo 'function video_thumbnails_reset(id) {'.PHP_EOL;
         echo '  var data = {'.PHP_EOL;
-        echo '    action: "reset_video_thumbnail",'.PHP_EOL;
+        echo '    action: "vide_central_reset_video_thumbnail",'.PHP_EOL;
         echo '    post_id: id'.PHP_EOL;
         echo '  };'.PHP_EOL;
         echo '  document.getElementById(\'video-thumbnails-preview\').innerHTML=\'Working... <img src="'.home_url('wp-admin/images/loading.gif').'"/>\';'.PHP_EOL;

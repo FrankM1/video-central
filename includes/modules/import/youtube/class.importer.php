@@ -125,6 +125,7 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
         $counter = 1;
 
         $videos = video_central_youtube_api_get_videos($video_ids);
+
         if (is_wp_error($videos)) {
             return $videos;
         }
@@ -139,7 +140,7 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
                 'post_status' => array('publish', 'pending', 'draft', 'future', 'private'),
             ));
 
-        $import_progress['current'] = $counter++;
+            $import_progress['current'] = $counter++;
 
             //log progress
             set_transient('video_central_import_progress', $import_progress, 60 * 5);
@@ -150,15 +151,21 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
                 continue;
             }
 
-        $video_id = $video['video_id'];
-        if (isset($_POST['video_cental_title'][ $video_id ])) {
-            $video['title'] = $_POST['video_cental_title'][ $video_id ];
-        }
-        if (isset($_POST['video_cental_text'][ $video_id ])) {
-            $video['description'] = $_POST['video_cental_text'][ $video_id ];
-        }
+            if (isset($_POST['video_central_source'])) {
+                $video['source'] = $_POST['video_central_source'];
+            }
 
-        $r = $this->import_video(array(
+            $video_id = $video['video_id'];
+
+            if (isset($_POST['video_cental_title'][ $video_id ])) {
+                $video['title'] = $_POST['video_cental_title'][ $video_id ];
+            }
+
+            if (isset($_POST['video_cental_text'][ $video_id ])) {
+                $video['description'] = $_POST['video_cental_text'][ $video_id ];
+            }
+
+            $this->import_video(array(
                 'video' => $video, // video details retrieved from YouTube
                 'category' => $category, // category name (if any); if false, it will create categories from YouTube
                 'post_type' => $this->post_type, // what post type to import as
@@ -169,7 +176,7 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
                 'theme_import' => $theme_import, // to check in callbacks if importing as theme post
             ));
 
-        $this->result['imported'] += 1;
+            $this->result['imported'] += 1;
 
         endforeach;
 

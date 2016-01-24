@@ -67,16 +67,13 @@ class Video_Central_YouTube_Thumbnails extends Video_Central_Thumbnails_Provider
     // Thumbnail URL
     public function get_thumbnail_url($id)
     {
-        $maxres = 'http://img.youtube.com/vi/'.$id.'/maxresdefault.jpg';
-
-        $response = wp_remote_head($maxres);
-
-        if (!is_wp_error($response) && $response['response']['code'] == '200') {
+        $maxres = 'http://img.youtube.com/vi/' . $id . '/maxresdefault.jpg';
+        $response = wp_remote_head( $maxres );
+        if ( !is_wp_error( $response ) && $response['response']['code'] == '200' ) {
             $result = $maxres;
         } else {
-            $result = 'http://img.youtube.com/vi/'.$id.'/0.jpg';
+            $result = 'http://img.youtube.com/vi/' . $id . '/0.jpg';
         }
-
         return $result;
     }
 }

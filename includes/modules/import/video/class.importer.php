@@ -121,6 +121,7 @@ abstract class Video_Central_Video_Importer
             'theme_import' => false,
         );
         extract(wp_parse_args($args, $defaults), EXTR_SKIP);
+
         // if no video details or post type, bail out
         if (!$video || !$post_type) {
             return false;
@@ -162,7 +163,7 @@ abstract class Video_Central_Video_Importer
          *
          */
 
-       $description = isset($video['description']) ? $video['description'] : '';
+        $description = isset($video['description']) ? $video['description'] : '';
 
         $description = apply_filters('video_central_import_video_description', $description, video_central_import_video_description());
 
@@ -258,7 +259,11 @@ abstract class Video_Central_Video_Importer
             if ($theme_import) {
 
                 // video URL
-                $url = 'https://www.youtube.com/watch?v='.$video['video_id'];
+                if( $video['source'] == 'youtube') {
+                    $video_url = 'https://www.youtube.com/watch?v='.$video['video_id'];
+                } elseif( $video['source'] == 'vimeo' ) {
+                    $video_url = 'https://www.vimeo.com/'.$video['video_id'];
+                }
 
                 // video thumbnail
                 $thumb = end($video['thumbnails']);
@@ -288,7 +293,7 @@ abstract class Video_Central_Video_Importer
                 foreach ($theme_import['post_meta'] as $k => $meta_key) {
                     switch ($k) {
                         case 'url' :
-                            update_post_meta($post_id, $meta_key, $url);
+                            update_post_meta($post_id, $meta_key, $video_url);
                         break;
                         case 'thumbnail':
                             update_post_meta($post_id, $meta_key, $thumbnail);
@@ -300,25 +305,32 @@ abstract class Video_Central_Video_Importer
                 }
             }
 
+            //set source first before image import
+            update_post_meta($post_id, '_video_central_source', $video['source']);
+
               // set video URL; most likely it will be needed by other plugins
             if ($video['source'] == 'youtube') {
 
                    // set video ID meta to identify the video as imported
                    update_post_meta($post_id, '_video_central_video_id', $video['video_id']);
-                update_post_meta($post_id, '_video_central_video_url', 'https://www.youtube.com/watch?v='.$video['video_id']);
-                $this->import_featured_image($post_id);
+                   update_post_meta($post_id, '_video_central_video_url', 'https://www.youtube.com/watch?v='.$video['video_id']);
+                   $this->import_featured_image($post_id);
+
             } elseif ($video['source'] == 'vimeo') {
 
                 // set video ID meta to identify the video as imported
                 update_post_meta($post_id, '_video_central_video_id', $video['video_id']);
                 update_post_meta($post_id, '_video_central_video_url', 'https://www.youtube.com/watch?v='.$video['video_id']);
                 $this->import_featured_image($post_id);
+
             } else {
+
                 update_post_meta($post_id, '_video_central_video_url', $video['video_url']);
 
                 if (!empty($video['poster'])) {
                     $this->upload_featured_image($post_id, $video['poster']);
                 }
+
             }
 
             if (video_central_import_description_key() == '_video_central_description' && video_central_import_video_description()) {
@@ -332,13 +344,13 @@ abstract class Video_Central_Video_Importer
             }
 
             update_post_meta($post_id, '_video_central_video_duration', $video['duration']);
-            update_post_meta($post_id, '_video_central_source', $video['source']);
-            update_post_meta($post_id, '_video_central_remote_status', $video['status']);
+            update_post_meta($post_id, '_video_central_remote_status', $video['privacy']['status']);
 
             // store the video data for later use
             update_post_meta($post_id, '_video_central_video_data', $video);
 
             return true;
+
         }// end checking if not wp error on post insert
 
         return false;
@@ -401,6 +413,8 @@ abstract class Video_Central_Video_Importer
             if (check_admin_referer('video-central-import-videos-to-wp', 'video_central_import_nonce')) {
                 if ('import' == $_REQUEST['action_top'] || 'import' == $_REQUEST['action2']) {
                     $this->result = $this->import_videos();
+
+                    echo json_encode($this->result);
 
                     if ($this->result) {
                         $response['success'] = sprintf(
