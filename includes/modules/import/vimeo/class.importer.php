@@ -115,7 +115,7 @@ class Video_Central_Vimeo_Importer
 
                 wp_redirect('edit.php?post_status='.video_central_import_status().'&post_type='.$this->post_type);
 
-                exit();
+                wp_die();
             }
         }
     }

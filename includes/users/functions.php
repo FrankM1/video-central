@@ -553,7 +553,7 @@ function video_central_favorites_handler($action = '')
         wp_safe_redirect($redirect);
 
         // For good measure
-        exit();
+        wp_die();
 
     // Fail! Handle errors
     } elseif (true === $is_favorite && 'video_central_favorite_remove' === $action) {
@@ -1058,7 +1058,7 @@ function video_central_video_subscriptions_handler($action = '')
         wp_safe_redirect($redirect);
 
         // For good measure
-        exit();
+        wp_die();
 
     // Fail! Handle errors
     } elseif (true === $is_subscription && 'video_central_unsubscribe' === $action) {
@@ -1165,7 +1165,7 @@ function video_central_subscriptions_handler($action = '')
         wp_safe_redirect($redirect);
 
         // For good measure
-        exit();
+        wp_die();
 
     // Fail! Handle errors
     } elseif (true === $is_subscription && 'video_central_unsubscribe' === $action) {
@@ -1237,14 +1237,14 @@ function video_central_edit_user_handler($action = '')
             delete_option($user_id.'_new_email');
 
             wp_safe_redirect(add_query_arg(array('updated' => 'true'), video_central_get_user_profile_edit_url($user_id)));
-            exit();
+            wp_die();
         }
 
     // Delete new email address from user options
     } elseif (is_multisite() && video_central_is_user_home_edit() && !empty($_GET['dismiss']) && ($user_id.'_new_email' === $_GET['dismiss'])) {
         delete_option($user_id.'_new_email');
         wp_safe_redirect(add_query_arg(array('updated' => 'true'), video_central_get_user_profile_edit_url($user_id)));
-        exit();
+        wp_die();
     }
 
     // Nonce check
@@ -1406,7 +1406,7 @@ function video_central_check_user_edit()
     // Maybe redirect back to profile page
     if (true === $redirect) {
         wp_safe_redirect(video_central_get_user_profile_url(video_central_get_displayed_user_id()));
-        exit();
+        wp_die();
     }
 }
 

@@ -43,7 +43,7 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer {
 
                 wp_redirect('edit.php?post_status='.video_central_import_status().'&post_type='.$this->post_type);
 
-                exit();
+                wp_die();
 
             }
 
@@ -114,7 +114,7 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer {
         //set category
         if( isset( $_REQUEST['cat_top'] ) && 'import' == $_REQUEST['action_top'] ){
 
-			$category = $_REQUEST['cat_top'];
+            $category = $_REQUEST['cat_top'];
 
         } elseif ( isset($_REQUEST['cat2']) && 'import' == $_REQUEST['action2']){
 

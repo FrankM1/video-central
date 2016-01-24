@@ -82,5 +82,5 @@ function video_central_search_results_redirect()
 
     // Redirect and bail
     wp_safe_redirect($redirect_to);
-    exit();
+    wp_die();
 }
