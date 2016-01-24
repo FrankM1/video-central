@@ -358,8 +358,8 @@ class Video_Central
         require $this->includes_dir.'modules/third-party/class.woosidebars.integration.php';
 
         //Visual Composer
-        require $this->includes_dir.'modules/visual-composer/functions.php';
-        require $this->includes_dir.'modules/visual-composer/integrate.php';
+        require $this->includes_dir.'modules/third-party/visual-composer/functions.php';
+        require $this->includes_dir.'modules/third-party/visual-composer/integrate.php';
 
         /* Admin *************************************************************/
 
