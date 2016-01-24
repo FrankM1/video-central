@@ -522,7 +522,7 @@ class Radium_Video_Shortcodes {
         $this->start( 'video_central_video_tag' );
 
         // Set passed attribute to $tag_id for clarity
-        video_central()->current_video_tag_id = $tag_id = $attr['id'];
+        video_central()->current_video_tag_id = $attr['id'];
 
         // Output template
         video_central_get_template_part( 'content', 'archive-video' );
@@ -739,14 +739,9 @@ _end_;
 
         $primary = false;
 
-        $remote_src = $src;
-
         if ( ! empty( $src ) ) {
 
             $type = wp_check_filetype( $src, wp_get_mime_types() );
-
-           // if ( ! in_array( $type['ext'], $default_types ) )
-                //return sprintf( '<a class="wp-embedded-video" href="%s">%s</a>', esc_url( $src ), esc_html( $src ) );
 
             $primary = true;
 

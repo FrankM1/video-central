@@ -90,7 +90,6 @@ class Video_Central_Video_Posttype
 
     public function video_init()
     {
-        $video_central = video_central();
 
         // Register Video content type
         register_post_type(

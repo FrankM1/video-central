@@ -266,7 +266,7 @@ class Radium_MediaElements_Helper
         }
 
         //$width = get_post_meta($postid, '_video_central_width', true);
-        $height = get_post_meta($postid, '_video_central_height', true);
+        //$height = get_post_meta($postid, '_video_central_height', true);
         $poster = get_post_meta($postid, '_video_central_poster', true);
 
         if ($video_file_url):

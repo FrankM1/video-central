@@ -433,7 +433,6 @@ function video_central_set_404()
  */
 function video_central_log_hit_stat($video_id)
 {
-    $video_id = video_central_get_video_id();
 }
 
 /**
