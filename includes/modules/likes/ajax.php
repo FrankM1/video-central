@@ -45,7 +45,7 @@ class Video_Central_Likes_Ajax
 
         if (!isset($_POST['nonce']) ||
                 !wp_verify_nonce($_POST['nonce'], 'likes-nonce')) {
-            exit(json_encode(array(
+            wp_die(json_encode(array(
                 'success' => false,
                 'time' => time(),
                 'count' => 0,
@@ -92,7 +92,7 @@ class Video_Central_Likes_Ajax
 
         if (!isset($_POST['nonce']) ||
                 !wp_verify_nonce($_POST['nonce'], 'likes-nonce')) {
-            exit(json_encode(array(
+            wp_die(json_encode(array(
                 'success' => false,
                 'time' => time(),
                 'count' => 0,
@@ -143,7 +143,7 @@ class Video_Central_Likes_Ajax
         // check nonce
         if (!isset($_POST['nonce']) ||
                 !wp_verify_nonce($_POST['nonce'], 'likes-nonce')) {
-            exit(json_encode(array(
+            wp_die(json_encode(array(
                 'success' => false,
                 'message' => 'invalid nonce',
             )));
