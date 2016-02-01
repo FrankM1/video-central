@@ -479,6 +479,8 @@ abstract class Video_Central_Video_Importer
         } else {
             $exists = true;
         }
+
+        return $exists;
     }
 
     /**

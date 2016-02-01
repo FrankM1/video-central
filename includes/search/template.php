@@ -111,7 +111,7 @@ function video_central_has_search_results($args = '')
             'add_args' => $add_args,
         ));
 
-        $video_central->search_query->pagination_links = paginate_links($pagination_links_arg);
+        $video_central->search_query->pagination_links = paginate_links($pagination_links_args);
 
         // Remove first page from pagination
         if ($wp_rewrite->using_permalinks()) {
