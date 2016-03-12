@@ -521,7 +521,7 @@ class Radium_Video_Shortcodes {
         // Start output buffer
         $this->start( 'video_central_video_tag' );
 
-        // Set passed attribute to $tag_id for clarity
+        // Set passed attribute to video_central()->current_video_tag_id for clarity
         video_central()->current_video_tag_id = $attr['id'];
 
         // Output template
@@ -532,7 +532,7 @@ class Radium_Video_Shortcodes {
     }
 
     /* The [video-central] or [videojs] shortcode */
-    function player($atts, $content=null){
+    function player( $atts, $content=null ) {
 
         //video_central__player_js_swf();
 
@@ -617,7 +617,7 @@ class Radium_Video_Shortcodes {
             $class = ' ' . $class;
 
         // Muted?
-        if ($muted == "true")
+        if ( $muted == "true" )
             $muted_attribute = " muted";
         else
             $muted_attribute = "";
