@@ -33,6 +33,8 @@ module.exports = function(grunt) {
                     'assets/admin/css/metaboxes/select.css': 'assets/admin/scss/metaboxes/select.scss',
                     'assets/admin/css/metaboxes/style.css': 'assets/admin/scss/metaboxes/style.scss',
                     'assets/admin/css/metaboxes/wysiwyg.css': 'assets/admin/scss/metaboxes/wysiwyg.scss',
+                    'assets/admin/css/playlist.css': 'assets/admin/scss/playlist.scss',
+                    'assets/admin/css/playlist-modal.css': 'assets/admin/scss/playlist-modal.scss',
 
                     'assets/frontend/css/video-js.css': 'assets/frontend/scss/video-js.scss',
 
@@ -46,7 +48,7 @@ module.exports = function(grunt) {
         //css sprites
         sprites: {
 
-           sprite: {
+            sprite: {
                 src: ['templates/default/img/sprites-source/*.png'],
                 css: 'templates/default/scss/_sprites-source.scss',
                 map: 'templates/default/img/sprite.png',
@@ -95,6 +97,8 @@ module.exports = function(grunt) {
                         'templates/default/js/vendor/jquery.jcarousel.js',
                         'templates/default/js/vendor/bootstrap.tabs.js',
                         'templates/default/js/vendor/fitvid.js',
+                        'templates/default/js/vendor/readmore.min.js',
+
                     ]
                 }
             },
@@ -108,25 +112,15 @@ module.exports = function(grunt) {
                 }
             },
 
-            video_central: {
-
-                files: {
-                    'assets/frontend/js/video-central.min.js': [
-                        'assets/frontend/js/source/video-central.js',
-                    ]
-                }
-            },
-
             videojs: {
 
                 files: {
-                  	'assets/frontend/js/video-js.js': 'assets/frontend/js/vendor/video.dev.js',
-                    'assets/frontend/js/video-js.plugins.min.js': [
-                        'assets/frontend/js/vendor/videojs.persistvolume.js',
-                        'assets/frontend/js/vendor/videojs.progressiveTips.js',
-                        'assets/frontend/js/vendor/vjs.vimeo.js',
-                		'assets/frontend/js/vendor/vjs.youtube.js',
-                     ]
+                    'assets/frontend/js/video-js.js': [
+                        'bower_components/video.js/dist/video.js',
+                        'bower_components/videojs-vimeo/vjs.vimeo.js',
+                        'bower_components/videojs-youtube/dist/Youtube.js',
+                        'assets/frontend/js/source/video-central.js'
+                    ]
                 }
 
             }, //careful here. Minified video-js doesn't work properly
@@ -134,10 +128,13 @@ module.exports = function(grunt) {
             admin_js: {
 
                 files: {
-                  	'assets/admin/js/import.min.js': 'assets/admin/js/source/import.js',
-                    'assets/admin/js/sort.min.js': 'assets/admin/js/source/sort.js',
-                    'assets/admin/js/meta.min.js': 'assets/admin/js/source/meta.js',
-                   	'assets/admin/js/debug-bar.min.js': 'assets/admin/js/source/debug-bar.js'
+                    'assets/admin/js/import.min.js':    'assets/admin/js/source/import.js',
+                    'assets/admin/js/sort.min.js':      'assets/admin/js/source/sort.js',
+                    'assets/admin/js/meta.min.js':      'assets/admin/js/source/meta.js',
+                    'assets/admin/js/debug-bar.min.js': 'assets/admin/js/source/debug-bar.js',
+                    'assets/admin/js/mce-playlist-view.js': 'assets/admin/js/source/mce-playlist-view.js',
+                    'assets/admin/js/modal-playlist-view.js': 'assets/admin/js/source/modal-playlist-view.js',
+                    'assets/admin/js/playlist.js': 'assets/admin/js/source/playlist.js'
                 }
             }
 
@@ -156,14 +153,12 @@ module.exports = function(grunt) {
                     cwd: 'assets/frontend/images/',
                     src: ['assets/frontend/*.{png,jpg,gif}'],
                     dest: 'assets/frontend/images/'
-                },
-                {
+                }, {
                     expand: true,
                     cwd: 'assets/admin/images/',
                     src: ['assets/admin/*.{png,jpg,gif}'],
                     dest: 'assets/admin/images/'
-                },
-                {
+                }, {
                     expand: true,
                     cwd: 'templates/default/img/',
                     src: ['templates/default/*.{png,jpg,gif}'],
@@ -171,67 +166,84 @@ module.exports = function(grunt) {
                 }]
             }
         },
-        
+
         checktextdomain: {
-	    	options: {
-	    		correct_domain: false,
-	    		text_domain: 'video_central',
-	    		keywords: [
-	    			'__:1,2d',
-	    			'_e:1,2d',
-	    			'_x:1,2c,3d',
-	    			'_n:1,2,4d',
-	    			'_ex:1,2c,3d',
-	    			'_nx:1,2,4c,5d',
-	    			'esc_attr__:1,2d',
-	    			'esc_attr_e:1,2d',
-	    			'esc_attr_x:1,2c,3d',
-	    			'esc_html__:1,2d',
-	    			'esc_html_e:1,2d',
-	    			'esc_html_x:1,2c,3d',
-	    			'_n_noop:1,2,3d',
-	    			'_nx_noop:1,2,3c,4d'
-	    		]
-	    	},
-	    	files: {
-	    		src: '**/*.php',
-	    		expand: true
-	    	}
-	    },
-	
-	    addtextdomain: {
-	    	options: {
-		            textdomain: 'video_central',    // Project text domain.
-	        },
-	
-	        target: {
-	            files: {
-	                src: ['*.php', '**/*.php', '!node_modules/**']
-	            }
-	        }
-	    },
-	
-	    makepot: {
-	    	target: {
-	    		options: {
-	     			domainPath: 'languages',
-	    			mainFile: 'video-central.php',
-	    			potFilename: 'video_central-en_US.po',
-	    			processPot: function( pot ) {
-	    				pot.headers['report-msgid-bugs-to'] = 'frank@radiumthemes.com';
-	                	pot.headers['language-team'] = 'RadiumThemes <http://radiumthemes.com>';
-	                	pot.headers['Last-Translator'] = 'Franklin Gitonga <frank@radiumthemes.com>';
-	    				return pot;
-	    			},
-	    			type: 'wp-plugin'
-	    		}
-	    	}
-	    },
+            options: {
+                correct_domain: false,
+                text_domain: 'video_central',
+                keywords: [
+                    '__:1,2d',
+                    '_e:1,2d',
+                    '_x:1,2c,3d',
+                    '_n:1,2,4d',
+                    '_ex:1,2c,3d',
+                    '_nx:1,2,4c,5d',
+                    'esc_attr__:1,2d',
+                    'esc_attr_e:1,2d',
+                    'esc_attr_x:1,2c,3d',
+                    'esc_html__:1,2d',
+                    'esc_html_e:1,2d',
+                    'esc_html_x:1,2c,3d',
+                    '_n_noop:1,2,3d',
+                    '_nx_noop:1,2,3c,4d'
+                ]
+            },
+            files: {
+                src: '**/*.php',
+                expand: true
+            }
+        },
+
+        addtextdomain: {
+            options: {
+                textdomain: 'video_central', // Project text domain.
+            },
+
+            target: {
+                files: {
+                    src: ['*.php', '**/*.php', '!node_modules/**']
+                }
+            }
+        },
+
+        makepot: {
+            target: {
+                options: {
+                    domainPath: 'languages',
+                    mainFile: 'video-central.php',
+                    potFilename: 'video_central-en_US.po',
+                    processPot: function(pot) {
+                        pot.headers['report-msgid-bugs-to'] = 'frank@radiumthemes.com';
+                        pot.headers['language-team'] = 'RadiumThemes <http://radiumthemes.com>';
+                        pot.headers['Last-Translator'] = 'Franklin Gitonga <frank@radiumthemes.com>';
+                        return pot;
+                    },
+                    type: 'wp-plugin'
+                }
+            }
+        },
+
+        devUpdate: {
+          main: {
+              options: {
+                  updateType: 'prompt', //just report outdated packages
+                  reportUpdated: false, //don't report up-to-date packages
+                  semver: false, // update regardless of package.json
+                  packages: {
+                      devDependencies: true, //only check for devDependencies
+                      dependencies: false
+                  },
+                  packageJson: null, //use matchdep default findup to locate package.json
+                  reportOnlyPkgs: [] //use updateType action on all packages
+              }
+          }
+      }
 
     });
 
     // register task
     grunt.registerTask('build', ['sass', 'sprites', 'autoprefixer', 'jshint', 'uglify', 'watch']);
-	grunt.registerTask('build-lang',  ['checktextdomain', 'makepot' ] );
+    grunt.registerTask('build-lang', ['checktextdomain', 'makepot']);
+    grunt.registerTask('update-packages', ['devUpdate']);
 
 };

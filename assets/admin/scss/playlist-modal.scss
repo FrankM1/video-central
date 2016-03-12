@@ -1,0 +1,19 @@
+/*
+    The styles below were ripped from the Media Modal in WordPress 3.5
+    ~~ Thanks for building a beautiful Modal UI ( that I could steal )
+*/
+#backbone_modal_dialog {
+
+    .media-frame-title {
+        top: 0;
+    }
+
+    .media-frame-content {
+        top: 50px;
+    }
+
+    .attachments-browser .attachments {
+        top: 0;
+    }
+
+}

@@ -1,4 +1,4 @@
-.rwmb-image-select {
+.video-central-metaboxes-image-select {
 	display: inline-block;
 	width: 80px;
 	height: 80px;
@@ -8,14 +8,14 @@
 	border-radius: 3px;
 	padding: 1px;
 }
-.rwmb-image-select img {
+.video-central-metaboxes-image-select img {
 	width: 100%;
 	height: 100%;
 }
-.rwmb-image-select:hover,
-.rwmb-image-select.rwmb-active {
+.video-central-metaboxes-image-select:hover,
+.video-central-metaboxes-image-select.video-central-metaboxes-active {
 	border-color: #21759b;
 }
-.rwmb-image-select input {
+.video-central-metaboxes-image-select input {
 	display: none;
 }

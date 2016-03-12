@@ -9,6 +9,7 @@ jQuery(document).ready(function() {
         _video_central_webm = '._video_central_webm',
         _video_central_mp4 = '._video_central_mp4',
         _video_central_ogg = '._video_central_ogg',
+        _video_central_flv = '._video_central_flv',
         _video_central_embed_code = '._video_central_embed_code';
         
 	currentType = jQuery(VideoCentralTypeTrigger).val();
@@ -22,6 +23,7 @@ jQuery(document).ready(function() {
      	jQuery( _video_central_webm ).show();
      	jQuery( _video_central_mp4 ).show();
      	jQuery( _video_central_ogg ).show();
+     	jQuery( _video_central_flv ).show();
     	
     }
     
@@ -30,6 +32,8 @@ jQuery(document).ready(function() {
 		jQuery( _video_central_webm ).hide();
 		jQuery( _video_central_mp4 ).hide();
 		jQuery( _video_central_ogg ).hide();
+		jQuery( _video_central_flv ).hide();
+
 		jQuery( _video_central_embed_code ).hide();
 
     	jQuery( _video_thumbnail ).show();
@@ -42,6 +46,7 @@ jQuery(document).ready(function() {
     		jQuery( _video_central_webm ).hide();
     		jQuery( _video_central_mp4 ).hide();
     		jQuery( _video_central_ogg ).hide();
+			jQuery( _video_central_flv ).hide();
          	jQuery( _video_thumbnail ).hide();
         	jQuery( _video_central_video_id ).hide();
         	

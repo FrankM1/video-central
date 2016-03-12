@@ -1,47 +1,43 @@
 <?php
 
 /**
- * Video Central Template Functions
+ * Video Central Template Functions.
  *
  * This file contains functions necessary to mirror the WordPress core template
  * loading process. Many of those functions are not filterable, and even then
  * would not be robust enough to predict where Video Central templates might exist.
- *
- * @package Video Central
- * @subpackage TemplateFunctions
  */
 
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
-
 /**
- * Adds Video Central theme support to any active WordPress theme
+ * Adds Video Central theme support to any active WordPress theme.
  *
  * @since 1.0.0
  *
- *
  * @param string $slug
  * @param string $name Optional. Default null
+ *
  * @uses video_central_locate_template()
  * @uses load_template()
  * @uses get_template_part()
  */
-function video_central_get_template_part( $slug, $name = null ) {
+function video_central_get_template_part($slug, $name = null)
+{
 
-	// Execute code for this part
-	do_action( 'get_template_part_' . $slug, $slug, $name );
+    // Execute code for this part
+    do_action('get_template_part_'.$slug, $slug, $name);
 
-	// Setup possible parts
-	$templates = array();
-	if ( isset( $name ) )
-		$templates[] = $slug . '-' . $name . '.php';
-	$templates[] = $slug . '.php';
+    // Setup possible parts
+    $templates = array();
+    if (isset($name)) {
+        $templates[] = $slug.'-'.$name.'.php';
+    }
+    $templates[] = $slug.'.php';
 
-	// Allow template parst to be filtered
-	$templates = apply_filters( __FUNCTION__, $templates, $slug, $name );
+    // Allow template parst to be filtered
+    $templates = apply_filters(__FUNCTION__, $templates, $slug, $name);
 
-	// Return the part that is found
-	return video_central_locate_template( $templates, true, false );
+    // Return the part that is found
+    return video_central_locate_template($templates, true, false);
 }
 
 /**
@@ -54,59 +50,61 @@ function video_central_get_template_part( $slug, $name = null ) {
  * @since 1.0.0
  *
  * @param string|array $template_names Template file(s) to search for, in order.
- * @param bool $load If true the template file will be loaded if it is found.
- * @param bool $require_once Whether to require_once or require. Default true.
- *                            Has no effect if $load is false.
+ * @param bool         $load           If true the template file will be loaded if it is found.
+ * @param bool         $require_once   Whether to require_once or require. Default true.
+ *                                     Has no effect if $load is false.
+ *
  * @return string The template filename if one is located.
  */
-function video_central_locate_template( $template_names, $load = false, $require_once = true ) {
+function video_central_locate_template($template_names, $load = false, $require_once = true)
+{
 
-	// No file found yet
-	$located            = false;
-	$template_locations = video_central_get_template_stack();
+    // No file found yet
+    $located = false;
+    $template_locations = video_central_get_template_stack();
 
-	// Try to find a template file
-	foreach ( (array) $template_names as $template_name ) {
+    // Try to find a template file
+    foreach ((array) $template_names as $template_name) {
 
-		// Continue if template is empty
-		if ( empty( $template_name ) ) {
-			continue;
-		}
+        // Continue if template is empty
+        if (empty($template_name)) {
+            continue;
+        }
 
-		// Trim off any slashes from the template name
-		$template_name  = ltrim( $template_name, '/' );
+        // Trim off any slashes from the template name
+        $template_name = ltrim($template_name, '/');
 
-		// Loop through template stack
-		foreach ( (array) $template_locations as $template_location ) {
+        // Loop through template stack
+        foreach ((array) $template_locations as $template_location) {
 
-			// Continue if $template_location is empty
-			if ( empty( $template_location ) ) {
-				continue;
-			}
+            // Continue if $template_location is empty
+            if (empty($template_location)) {
+                continue;
+            }
 
-			// Check child theme first
-			if ( file_exists( trailingslashit( $template_location ) . $template_name ) ) {
-				$located = trailingslashit( $template_location ) . $template_name;
-				break 2;
-			}
-		}
-	}
+            // Check child theme first
+            if (file_exists(trailingslashit($template_location).$template_name)) {
+                $located = trailingslashit($template_location).$template_name;
+                break 2;
+            }
+        }
+    }
 
-	/**
-	 * This action exists only to follow the standard Video Central coding convention,
-	 * and should not be used to short-circuit any part of the template locator.
-	 *
-	 * If you want to override a specific template part, please either filter
-	 * 'video_central_get_template_part' or add a new location to the template stack.
-	 */
-	do_action( 'video_central_locate_template', $located, $template_name, $template_names, $template_locations, $load, $require_once );
+    /*
+     * This action exists only to follow the standard Video Central coding convention,
+     * and should not be used to short-circuit any part of the template locator.
+     *
+     * If you want to override a specific template part, please either filter
+     * 'video_central_get_template_part' or add a new location to the template stack.
+     */
+    do_action('video_central_locate_template', $located, $template_name, $template_names, $template_locations, $load, $require_once);
 
-	// Maybe load the template if one was located
-	if ( ( true === $load ) && !empty( $located ) ) {
-		load_template( $located, $require_once );
-	}
+    // Maybe load the template if one was located
+    if ((true === $load) && !empty($located)) {
+        load_template($located, $require_once);
+    }
 
-	return $located;
+    return $located;
 }
 
 /**
@@ -115,7 +113,6 @@ function video_central_locate_template( $template_names, $load = false, $require
  * Registers the style if file provided (does NOT overwrite) and enqueues.
  *
  * @since 1.0.0
- *
  *
  * @param string      $handle Name of the stylesheet.
  * @param string|bool $file   Relative path to stylesheet. Example: '/css/mystyle.css'.
@@ -129,54 +126,54 @@ function video_central_locate_template( $template_names, $load = false, $require
  *
  * @return string The style filename if one is located.
  */
-function video_central_enqueue_style( $handle = '', $file = '', $dependencies = array(), $version = false, $media = 'all' ) {
+function video_central_enqueue_style($handle = '', $file = '', $dependencies = array(), $version = false, $media = 'all')
+{
 
-	// No file found yet
-	$located = false;
+    // No file found yet
+    $located = false;
 
-	// Trim off any slashes from the template name
-	$file = ltrim( $file, '/' );
+    // Trim off any slashes from the template name
+    $file = ltrim($file, '/');
 
-	// Make sure there is always a version
-	if ( empty( $version ) ) {
-		$version = video_central_get_version();
-	}
+    // Make sure there is always a version
+    if (empty($version)) {
+        $version = video_central_get_version();
+    }
 
-	// Loop through template stack
-	foreach ( (array) video_central_get_template_stack() as $template_location ) {
+    // Loop through template stack
+    foreach ((array) video_central_get_template_stack() as $template_location) {
 
-		// Continue if $template_location is empty
-		if ( empty( $template_location ) ) {
-			continue;
-		}
+        // Continue if $template_location is empty
+        if (empty($template_location)) {
+            continue;
+        }
 
-		// Check child theme first
-		if ( file_exists( trailingslashit( $template_location ) . $file ) ) {
-			$located = trailingslashit( $template_location ) . $file;
-			break;
-		}
-	}
+        // Check child theme first
+        if (file_exists(trailingslashit($template_location).$file)) {
+            $located = trailingslashit($template_location).$file;
+            break;
+        }
+    }
 
-	// Enqueue if located
-	if ( !empty( $located ) ) {
+    // Enqueue if located
+    if (!empty($located)) {
+        $content_dir = constant('WP_CONTENT_DIR');
 
-		$content_dir = constant( 'WP_CONTENT_DIR' );
+        // IIS (Windows) here
+        // Replace back slashes with forward slash
+        if (strpos($located, '\\') !== false) {
+            $located = str_replace('\\', '/', $located);
+            $content_dir = str_replace('\\', '/', $content_dir);
+        }
 
-		// IIS (Windows) here
-		// Replace back slashes with forward slash
-		if ( strpos( $located, '\\' ) !== false ) {
-			$located     = str_replace( '\\', '/', $located     );
-			$content_dir = str_replace( '\\', '/', $content_dir );
-		}
+        // Make path to file relative to site URL
+        $located = str_replace($content_dir, WP_CONTENT_URL, $located);
 
- 		// Make path to file relative to site URL
-		$located = str_replace( $content_dir, WP_CONTENT_URL, $located );
+        // Enqueue the style
+        wp_enqueue_style($handle, $located, $dependencies, $version, $media);
+    }
 
-		// Enqueue the style
-		wp_enqueue_style( $handle, $located, $dependencies, $version, $media );
-	}
-
-	return $located;
+    return $located;
 }
 
 /**
@@ -197,54 +194,54 @@ function video_central_enqueue_style( $handle = '', $file = '', $dependencies = 
  *
  * @return string The script filename if one is located.
  */
-function video_central_enqueue_script( $handle = '', $file = '', $dependencies = array(), $version = false, $in_footer = 'all' ) {
+function video_central_enqueue_script($handle = '', $file = '', $dependencies = array(), $version = false, $in_footer = 'all')
+{
 
-	// No file found yet
-	$located = false;
+    // No file found yet
+    $located = false;
 
-	// Trim off any slashes from the template name
-	$file = ltrim( $file, '/' );
+    // Trim off any slashes from the template name
+    $file = ltrim($file, '/');
 
-	// Make sure there is always a version
-	if ( empty( $version ) ) {
-		$version = video_central_get_version();
-	}
+    // Make sure there is always a version
+    if (empty($version)) {
+        $version = video_central_get_version();
+    }
 
-	// Loop through template stack
-	foreach ( (array) video_central_get_template_stack() as $template_location ) {
+    // Loop through template stack
+    foreach ((array) video_central_get_template_stack() as $template_location) {
 
-		// Continue if $template_location is empty
-		if ( empty( $template_location ) ) {
-			continue;
-		}
+        // Continue if $template_location is empty
+        if (empty($template_location)) {
+            continue;
+        }
 
-		// Check child theme first
-		if ( file_exists( trailingslashit( $template_location ) . $file ) ) {
-			$located = trailingslashit( $template_location ) . $file;
-			break;
-		}
-	}
+        // Check child theme first
+        if (file_exists(trailingslashit($template_location).$file)) {
+            $located = trailingslashit($template_location).$file;
+            break;
+        }
+    }
 
-	// Enqueue if located
-	if ( !empty( $located ) ) {
+    // Enqueue if located
+    if (!empty($located)) {
+        $content_dir = constant('WP_CONTENT_DIR');
 
-		$content_dir = constant( 'WP_CONTENT_DIR' );
+        // IIS (Windows) here
+        // Replace back slashes with forward slash
+        if (strpos($located, '\\') !== false) {
+            $located = str_replace('\\', '/', $located);
+            $content_dir = str_replace('\\', '/', $content_dir);
+        }
 
-		// IIS (Windows) here
-		// Replace back slashes with forward slash
-		if ( strpos( $located, '\\' ) !== false ) {
-			$located     = str_replace( '\\', '/', $located     );
-			$content_dir = str_replace( '\\', '/', $content_dir );
-		}
+        // Make path to file relative to site URL
+        $located = str_replace($content_dir, WP_CONTENT_URL, $located);
 
- 		// Make path to file relative to site URL
-		$located = str_replace( $content_dir, WP_CONTENT_URL, $located );
+        // Enqueue the style
+        wp_enqueue_script($handle, $located, $dependencies, $version, $in_footer);
+    }
 
-		// Enqueue the style
-		wp_enqueue_script( $handle, $located, $dependencies, $version, $in_footer );
-	}
-
-	return $located;
+    return $located;
 }
 
 /**
@@ -258,16 +255,18 @@ function video_central_enqueue_script( $handle = '', $file = '', $dependencies =
  * @since 1.0.0
  *
  * @param string $location Callback function that returns the
- * @param int $priority
+ * @param int    $priority
  */
-function video_central_register_template_stack( $location_callback = '', $priority = 10 ) {
+function video_central_register_template_stack($location_callback = '', $priority = 10)
+{
 
-	// Bail if no location, or function does not exist
-	if ( empty( $location_callback ) || ! function_exists( $location_callback ) )
-		return false;
+    // Bail if no location, or function does not exist
+    if (empty($location_callback) || !function_exists($location_callback)) {
+        return false;
+    }
 
-	// Add location callback to template stack
-	return add_filter( 'video_central_template_stack', $location_callback, (int) $priority );
+    // Add location callback to template stack
+    return add_filter('video_central_template_stack', $location_callback, (int) $priority);
 }
 
 /**
@@ -276,17 +275,20 @@ function video_central_register_template_stack( $location_callback = '', $priori
  * @since 1.0.0
  *
  * @param string $location Callback function that returns the
- * @param int $priority
+ * @param int    $priority
+ *
  * @see video_central_register_template_stack()
  */
-function video_central_deregister_template_stack( $location_callback = '', $priority = 10 ) {
+function video_central_deregister_template_stack($location_callback = '', $priority = 10)
+{
 
-	// Bail if no location, or function does not exist
-	if ( empty( $location_callback ) || ! function_exists( $location_callback ) )
-		return false;
+    // Bail if no location, or function does not exist
+    if (empty($location_callback) || !function_exists($location_callback)) {
+        return false;
+    }
 
-	// Remove location callback to template stack
-	return remove_filter( 'video_central_template_stack', $location_callback, (int) $priority );
+    // Remove location callback to template stack
+    return remove_filter('video_central_template_stack', $location_callback, (int) $priority);
 }
 
 /**
@@ -294,7 +296,6 @@ function video_central_deregister_template_stack( $location_callback = '', $prio
  * an array of the template locations.
  *
  * @see video_central_register_template_stack()
- *
  * @since 1.0.0
  *
  * @global array $wp_filter Stores all of the filters
@@ -303,71 +304,74 @@ function video_central_deregister_template_stack( $location_callback = '', $prio
  *
  * @return array The filtered value after all hooked functions are applied to it.
  */
-function video_central_get_template_stack() {
-	global $wp_filter, $merged_filters, $wp_current_filter;
+function video_central_get_template_stack()
+{
+    global $wp_filter, $merged_filters, $wp_current_filter;
 
-	// Setup some default variables
-	$tag  = 'video_central_template_stack';
-	$args = $stack = array();
+    // Setup some default variables
+    $tag = 'video_central_template_stack';
+    $args = $stack = array();
 
-	// Add 'video_central_template_stack' to the current filter array
-	$wp_current_filter[] = $tag;
+    // Add 'video_central_template_stack' to the current filter array
+    $wp_current_filter[] = $tag;
 
-	// Sort
-	if ( ! isset( $merged_filters[ $tag ] ) ) {
-		ksort( $wp_filter[$tag] );
-		$merged_filters[ $tag ] = true;
-	}
+    // Sort
+    if (!isset($merged_filters[ $tag ])) {
+        ksort($wp_filter[$tag]);
+        $merged_filters[ $tag ] = true;
+    }
 
-	// Ensure we're always at the beginning of the filter array
-	reset( $wp_filter[ $tag ] );
+    // Ensure we're always at the beginning of the filter array
+    reset($wp_filter[ $tag ]);
 
-	// Loop through 'video_central_template_stack' filters, and call callback functions
-	do {
-		foreach ( (array) current( $wp_filter[$tag] ) as $the_ ) {
-			if ( ! is_null( $the_['function'] ) ) {
-				$args[1] = $stack;
-				$stack[] = call_user_func_array( $the_['function'], array_slice( $args, 1, (int) $the_['accepted_args'] ) );
-			}
-		}
-	} while ( next( $wp_filter[$tag] ) !== false );
+    // Loop through 'video_central_template_stack' filters, and call callback functions
+    do {
+        foreach ((array) current($wp_filter[$tag]) as $the_) {
+            if (!is_null($the_['function'])) {
+                $args[1] = $stack;
+                $stack[] = call_user_func_array($the_['function'], array_slice($args, 1, (int) $the_['accepted_args']));
+            }
+        }
+    } while (next($wp_filter[$tag]) !== false);
 
-	// Remove 'video_central_template_stack' from the current filter array
-	array_pop( $wp_current_filter );
+    // Remove 'video_central_template_stack' from the current filter array
+    array_pop($wp_current_filter);
 
-	// Remove empties and duplicates
-	$stack = array_unique( array_filter( $stack ) );
+    // Remove empties and duplicates
+    $stack = array_unique(array_filter($stack));
 
-	return (array) apply_filters( __FUNCTION__, $stack ) ;
+    return (array) apply_filters(__FUNCTION__, $stack);
 }
 
 /**
- * Get a template part in an output buffer, and return it
+ * Get a template part in an output buffer, and return it.
  *
  * @since 1.0.0
  *
  * @param string $slug
  * @param string $name
+ *
  * @return string
  */
-function video_central_buffer_template_part( $slug, $name = null, $echo = true ) {
-	ob_start();
+function video_central_buffer_template_part($slug, $name = null, $echo = true)
+{
+    ob_start();
 
-	video_central_get_template_part( $slug, $name );
+    video_central_get_template_part($slug, $name);
 
-	// Get the output buffer contents
-	$output = ob_get_clean();
+    // Get the output buffer contents
+    $output = ob_get_clean();
 
-	// Echo or return the output buffer contents
-	if ( true === $echo ) {
-		echo $output;
-	} else {
-		return $output;
-	}
+    // Echo or return the output buffer contents
+    if (true === $echo) {
+        echo $output;
+    } else {
+        return $output;
+    }
 }
 
 /**
- * Retrieve path to a template
+ * Retrieve path to a template.
  *
  * Used to quickly retrieve the path of a template without including the file
  * extension. It will also check the parent theme and theme-compat theme with
@@ -376,69 +380,79 @@ function video_central_buffer_template_part( $slug, $name = null, $echo = true )
  *
  * @since 1.0.0
  *
- * @param string $type Filename without extension.
- * @param array $templates An optional list of template candidates
+ * @param string $type      Filename without extension.
+ * @param array  $templates An optional list of template candidates
+ *
  * @uses video_central_set_theme_compat_templates()
  * @uses video_central_locate_template()
  * @uses video_central_set_theme_compat_template()
+ *
  * @return string Full path to file.
  */
-function video_central_get_query_template( $type, $templates = array() ) {
-	$type = preg_replace( '|[^a-z0-9-]+|', '', $type );
-	if ( empty( $templates ) )
-		$templates = array( "{$type}.php" );
+function video_central_get_query_template($type, $templates = array())
+{
+    $type = preg_replace('|[^a-z0-9-]+|', '', $type);
+    if (empty($templates)) {
+        $templates = array("{$type}.php");
+    }
 
-	// Filter possible templates, try to match one, and set any Video Central theme
-	// compat properties so they can be cross-checked later.
-	$templates = apply_filters( "video_central_get_{$type}_template", $templates );
-	$templates = video_central_set_theme_compat_templates( $templates );
-	$template  = video_central_locate_template( $templates );
-	$template  = video_central_set_theme_compat_template( $template );
+    // Filter possible templates, try to match one, and set any Video Central theme
+    // compat properties so they can be cross-checked later.
+    $templates = apply_filters("video_central_get_{$type}_template", $templates);
+    $templates = video_central_set_theme_compat_templates($templates);
+    $template = video_central_locate_template($templates);
+    $template = video_central_set_theme_compat_template($template);
 
-	return apply_filters( "video_central_{$type}_template", $template );
+    return apply_filters("video_central_{$type}_template", $template);
 }
 
 /**
- * Get the possible subdirectories to check for templates in
+ * Get the possible subdirectories to check for templates in.
  *
  * @since 1.0.0
  *
  * @param array $templates Templates we are looking for
+ *
  * @return array Possible subfolders to look in
  */
-function video_central_get_template_locations( $templates = array() ) {
-	$locations = array(
-		'videos',
-		''
-	);
-	return apply_filters( __FUNCTION__, $locations, $templates );
+function video_central_get_template_locations($templates = array())
+{
+    $locations = array(
+        'videos',
+        '',
+    );
+
+    return apply_filters(__FUNCTION__, $locations, $templates);
 }
 
 /**
- * Add template locations to template files being searched for
+ * Add template locations to template files being searched for.
  *
  * @since 1.0.0
  *
  * @param array $templates
+ *
  * @return array()
  */
-function video_central_add_template_stack_locations( $stacks = array() ) {
-	$retval = array();
+function video_central_add_template_stack_locations($stacks = array())
+{
+    $retval = array();
 
-	// Get alternate locations
-	$locations = video_central_get_template_locations();
+    // Get alternate locations
+    $locations = video_central_get_template_locations();
 
-	// Loop through locations and stacks and combine
-	foreach ( (array) $stacks as $stack )
-		foreach ( (array) $locations as $custom_location )
-			$retval[] = untrailingslashit( trailingslashit( $stack ) . $custom_location );
+    // Loop through locations and stacks and combine
+    foreach ((array) $stacks as $stack) {
+        foreach ((array) $locations as $custom_location) {
+            $retval[] = untrailingslashit(trailingslashit($stack).$custom_location);
+        }
+    }
 
-	return apply_filters( __FUNCTION__, array_unique( $retval ), $stacks );
+    return apply_filters(__FUNCTION__, array_unique($retval), $stacks);
 }
 
-
 /**
- * Add checks for Video Central conditions to parse_query action
+ * Add checks for Video Central conditions to parse_query action.
  *
  * If it's a user page, WP_Query::video_central_is_single_user is set to true.
  * If it's a user edit page, WP_Query::video_central_is_single_user_edit is set to true
@@ -468,97 +482,102 @@ function video_central_add_template_stack_locations( $stacks = array() ) {
  * @uses video_central_get_video_post_type() To get the video post type
  * @uses remove_action() To remove the auto save post revision action
  */
-function video_central_parse_query( $posts_query ) {
+function video_central_parse_query($posts_query)
+{
 
     // Bail if $posts_query is not the main loop
-    if ( ! $posts_query->is_main_query() )
+    if (!$posts_query->is_main_query()) {
         return;
+    }
 
     // Bail if filters are suppressed on this query
-    if ( true === $posts_query->get( 'suppress_filters' ) )
+    if (true === $posts_query->get('suppress_filters')) {
         return;
+    }
 
     // Bail if in admin
-    if ( is_admin() )
+    if (is_admin()) {
         return;
+    }
 
     // Get query variables
-    $video_central_view = $posts_query->get( video_central_get_view_rewrite_id() );
-    $video_central_user = $posts_query->get( video_central_get_user_rewrite_id() );
-    $is_edit  = $posts_query->get( video_central_get_edit_rewrite_id() );
-		
-    // It is a user page - We'll also check if it is user edit
-    if ( !empty( $video_central_user ) ) {
+    $video_central_view = $posts_query->get(video_central_get_view_rewrite_id());
+    $video_central_user = $posts_query->get(video_central_get_user_rewrite_id());
+    $is_edit = $posts_query->get(video_central_get_edit_rewrite_id());
 
-        /** Find User *********************************************************/
+    // It is a user page - We'll also check if it is user edit
+    if (!empty($video_central_user)) {
+
+        /* Find User *********************************************************/
 
         // Setup the default user variable
         $the_user = false;
 
         // If using pretty permalinks, use the email or slug
-        if ( get_option( 'permalink_structure' ) ) {
+        if (get_option('permalink_structure')) {
 
             // Email was passed
-            if ( is_email( $video_central_user ) ) {
-                $the_user = get_user_by( 'email', $video_central_user );
+            if (is_email($video_central_user)) {
+                $the_user = get_user_by('email', $video_central_user);
 
             // Try nicename
             } else {
-                $the_user = get_user_by( 'slug', $video_central_user );
+                $the_user = get_user_by('slug', $video_central_user);
             }
         }
 
         // No user found by slug/email, so try the ID if it's numeric
-        if ( empty( $the_user ) && is_numeric( $video_central_user ) ) {
-            $the_user = get_user_by( 'id', $video_central_user );
+        if (empty($the_user) && is_numeric($video_central_user)) {
+            $the_user = get_user_by('id', $video_central_user);
         }
 
         // 404 and bail if user does not have a profile
-        if ( empty( $the_user->ID ) || ! video_central_user_has_profile( $the_user->ID ) ) {
+        if (empty($the_user->ID) || !video_central_user_has_profile($the_user->ID)) {
             $posts_query->set_404();
+
             return;
         }
 
-        /** User Exists *******************************************************/
+        /* User Exists *******************************************************/
 
-        $is_favs    = $posts_query->get( video_central_get_user_favorites_rewrite_id()     );
-        $is_subs    = $posts_query->get( video_central_get_user_subscriptions_rewrite_id() );
-        $is_videos  = $posts_query->get( video_central_get_user_videos_rewrite_id()        );
+        $is_favs = $posts_query->get(video_central_get_user_favorites_rewrite_id());
+        $is_subs = $posts_query->get(video_central_get_user_subscriptions_rewrite_id());
+        $is_videos = $posts_query->get(video_central_get_user_videos_rewrite_id());
 
         // View or edit?
-        if ( !empty( $is_edit ) ) {
+        if (!empty($is_edit)) {
 
             // We are editing a profile
             $posts_query->video_central_is_single_user_edit = true;
 
             // Load the core WordPress contact methods
-            if ( !function_exists( '_wp_get_user_contactmethods' ) ) {
-                include_once( ABSPATH . 'wp-includes/registration.php' );
+            if (!function_exists('_wp_get_user_contactmethods')) {
+                include_once ABSPATH.'wp-includes/registration.php';
             }
 
             // Load the edit_user functions
-            if ( !function_exists( 'edit_user' ) ) {
-                require_once( ABSPATH . 'wp-admin/includes/user.php' );
+            if (!function_exists('edit_user')) {
+                require_once ABSPATH.'wp-admin/includes/user.php';
             }
 
             // Load the grant/revoke super admin functions
-            if ( is_multisite() && !function_exists( 'revoke_super_admin' ) ) {
-                require_once( ABSPATH . 'wp-admin/includes/ms.php' );
+            if (is_multisite() && !function_exists('revoke_super_admin')) {
+                require_once ABSPATH.'wp-admin/includes/ms.php';
             }
 
             // Editing a user
             $posts_query->video_central_is_edit = true;
 
         // User favorites
-        } elseif ( ! empty( $is_favs ) ) {
+        } elseif (!empty($is_favs)) {
             $posts_query->video_central_is_single_user_favs = true;
 
         // User subscriptions
-        } elseif ( ! empty( $is_subs ) ) {
+        } elseif (!empty($is_subs)) {
             $posts_query->video_central_is_single_user_subs = true;
 
         // User videos
-        } elseif ( ! empty( $is_videos ) ) {
+        } elseif (!empty($is_videos)) {
             $posts_query->video_central_is_single_user_videos = true;
 
         // User profile
@@ -570,50 +589,52 @@ function video_central_parse_query( $posts_query ) {
         $posts_query->video_central_is_single_user = true;
 
         // Make sure 404 is not set
-        $posts_query->is_404  = false;
+        $posts_query->is_404 = false;
 
         // Correct is_home variable
         $posts_query->is_home = false;
 
         // User is looking at their own profile
-        if ( get_current_user_id() === $the_user->ID ) {
+        if (get_current_user_id() === $the_user->ID) {
             $posts_query->video_central_is_single_user_home = true;
         }
 
         // Set video_central_user_id for future reference
-        $posts_query->set( 'video_central_user_id', $the_user->ID );
+        $posts_query->set('video_central_user_id', $the_user->ID);
 
         // Set author_name as current user's nicename to get correct posts
-        $posts_query->set( 'author_name', $the_user->user_nicename );
+        $posts_query->set('author_name', $the_user->user_nicename);
 
         // Set the displayed user global to this user
         video_central()->displayed_user = $the_user;
 
     // View Page
-	} elseif ( !empty( $video_central_view ) ) {
+    } elseif (!empty($video_central_view)) {
 
-		// Check if the view exists by checking if there are query args are set
-		$view_args = video_central_get_view_query_args( $video_central_view );
+        // Check if the view exists by checking if there are query args are set
+        $view_args = video_central_get_view_query_args($video_central_view);
 
-		// Bail if view args is false (view isn't registered)
-		if ( false === $view_args ) {
-			$posts_query->set_404();
-			return;
-		}
+        // Bail if view args is false (view isn't registered)
+        if (false === $view_args) {
+            $posts_query->set_404();
 
-		// Correct is_home variable
-		$posts_query->is_home     = false;
+            return;
+        }
 
-		// We are in a custom topic view
-		$posts_query->video_central_is_view = true;
+        // Correct is_home variable
+        $posts_query->is_home = false;
+
+        // We are in a custom topic view
+        $posts_query->video_central_is_view = true;
 
     // Search Page
-    } elseif ( isset( $posts_query->query_vars[ video_central_get_search_rewrite_id() ] ) ) {
+    } elseif (isset($posts_query->query_vars[ video_central_get_search_rewrite_id() ])) {
 
         // Check if there are search query args set
         $search_terms = video_central_get_search_terms();
-        if ( !empty( $search_terms ) )
+        if (!empty($search_terms)) {
             $posts_query->video_central_search_terms = $search_terms;
+        }
 
         // Correct is_home variable
         $posts_query->is_home = false;
@@ -622,54 +643,52 @@ function video_central_parse_query( $posts_query ) {
         $posts_query->video_central_is_search = true;
 
     // Video Edit Page
-    } elseif ( !empty( $is_edit ) ) {
+    } elseif (!empty($is_edit)) {
 
         // Get the post type from the main query loop
-        $post_type = $posts_query->get( 'post_type' );
+        $post_type = $posts_query->get('post_type');
 
         // Check which post_type we are editing, if any
-        if ( !empty( $post_type ) ) {
-            switch( $post_type ) {
+        if (!empty($post_type)) {
+            switch ($post_type) {
 
                 // We are editing a video
                 case video_central_get_video_post_type() :
                     $posts_query->video_central_is_video_edit = true;
-                    $posts_query->video_central_is_edit       = true;
+                    $posts_query->video_central_is_edit = true;
                     break;
 
             }
 
         // We are editing a video tag
-        } elseif ( video_central_is_video_tag() ) {
+        } elseif (video_central_is_video_tag()) {
             $posts_query->video_central_is_video_tag_edit = true;
-            $posts_query->video_central_is_edit           = true;
+            $posts_query->video_central_is_edit = true;
         }
-        
+
         // We are editing a video category
-        elseif ( video_central_is_video_category() ) {
+        elseif (video_central_is_video_category()) {
             $posts_query->video_central_is_video_category_edit = true;
-            $posts_query->video_central_is_edit           = true;
+            $posts_query->video_central_is_edit = true;
         }
 
         // We save post revisions on our own
-        remove_action( 'pre_post_update', 'wp_save_post_revision' );
+        remove_action('pre_post_update', 'wp_save_post_revision');
 
     // Videos tag page
-    } elseif ( video_central_is_video_tag() ) {
-        $posts_query->set( 'video_central_tag',  get_query_var( 'term' )   );
-        $posts_query->set( 'post_type',      video_central_get_video_post_type() );
-        $posts_query->set( 'posts_per_page', video_central_get_videos_per_page() );
-	
-	// Videos tag page
-	} elseif ( video_central_is_video_category() ) {
-	
-	    $posts_query->set( 'video_central_category',  get_query_var( 'term' )   );
-	    $posts_query->set( 'post_type',      video_central_get_video_post_type() );
-	    $posts_query->set( 'posts_per_page', video_central_get_videos_per_page() );
+    } elseif (video_central_is_video_tag()) {
+        $posts_query->set('video_central_tag',  get_query_var('term'));
+        $posts_query->set('post_type',      video_central_get_video_post_type());
+        $posts_query->set('posts_per_page', video_central_get_videos_per_page());
+
+    // Videos tag page
+    } elseif (video_central_is_video_category()) {
+        $posts_query->set('video_central_category',  get_query_var('term'));
+        $posts_query->set('post_type',      video_central_get_video_post_type());
+        $posts_query->set('posts_per_page', video_central_get_videos_per_page());
 
     // show videos on root
-    } elseif ( is_post_type_archive( array( video_central_get_video_post_type() ) ) && ( 'videos' === video_central_show_on_root() ) ) {
+    } elseif (is_post_type_archive(array(video_central_get_video_post_type())) && ('videos' === video_central_show_on_root())) {
         $posts_query->video_central_show_videos_on_root = true;
     }
-    
 }

@@ -14,4 +14,3 @@ deploy.sh
 !.travis.yml
 !.gitattributes
 !.htaccess
-*~
