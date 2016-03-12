@@ -4,7 +4,7 @@ jQuery( function( $ )
 	{
 		if ( typeof s.data != 'undefined' &&  -1 != s.data.indexOf( 'action=autosave' ) )
 		{
-			$( '.rwmb-meta-box').each( function()
+			$( '.video-central-metaboxes-meta-box').each( function()
 			{
 				var $meta_box = $( this );
 				if ( $meta_box.data( 'autosave' ) == true )

@@ -8,7 +8,7 @@ class Radium_Video_Metaboxes_Field_VideoSelect extends Radium_Video_Metaboxes_Fi
      */
     static function admin_enqueue_scripts()
     {
-        wp_enqueue_style( 'rwmb-select', video_central()->admin->css_url  . 'metaboxes/select.css', array(), video_central()->version );
+        wp_enqueue_style( 'video-central-admin-select', video_central()->admin->css_url  . 'metaboxes/select.css', array(), video_central()->version );
 
     }
 
@@ -115,8 +115,8 @@ class Radium_Video_Metaboxes_Field_VideoSelect extends Radium_Video_Metaboxes_Fi
             while ( $query->have_posts() )
             {
                 $post               = $query->next_post();
-                $title 				= apply_filters( 'rwmb_post_field_title', $post->post_title, $post );
-                $title 				= apply_filters( "rwmb_{$field['id']}_field_title", $title, $post );
+                $title 				= apply_filters( 'video_central_metaboxes_post_field_title', $post->post_title, $post );
+                $title 				= apply_filters( "video_central_metaboxes_{$field['id']}_field_title", $title, $post );
                 $options[$post->ID] = $post->post_title;
             }
         }

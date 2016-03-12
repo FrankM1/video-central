@@ -951,6 +951,8 @@ _end_;
      */
     public function display_playlist( $attr, $content = '' ) {
 
+        if(!function_exists('video_central_get_playlist_id')) return __('Playlist feature not available', 'video_central');
+
         // Sanity check required info
         if ( !empty( $content ) || ( empty( $attr['id'] ) ) )
             return $content;

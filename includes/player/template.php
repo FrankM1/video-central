@@ -29,6 +29,9 @@ function video_central_player($video_id = 0)
      */
     function video_central_get_player($video_id = 0)
     {
+
+        $source = null;
+
         $video_id = video_central_get_video_id($video_id);
 
         $upload_video_id = get_post_meta($video_id, '_video_central_video_id',    true);
@@ -62,9 +65,13 @@ _end_;
 _end_;
 
             return $output;
+
         } elseif ($upload_source == 'embed') {
+
             return $embed_code;
+
         } else {
+
             $file_id_mp4 = get_post_meta($video_id, '_video_central_mp4', true);
             $file_id_webm = get_post_meta($video_id, '_video_central_webm', true);
             $file_id_ogg = get_post_meta($video_id, '_video_central_ogg', true);
@@ -76,6 +83,13 @@ _end_;
             $file_ogg = wp_get_attachment_url($file_id_ogg);
             $file_flv = wp_get_attachment_url($file_id_flv);
 
+            $dataSetup['fluid']     = 'true';
+            $dataSetup['controls']  = 'true';
+            $dataSetup['preload']   = 'auto';
+            $dataSetup['poster']    = $poster;
+            $dataSetup['width']     = 'auto';
+            $dataSetup['height']    = 'auto';
+
             if ($file_extension == 'flv') {
                 $video_url = get_post_meta($video_id, '_video_central_video_url', true);
 
@@ -85,26 +99,39 @@ _end_;
 
                 $video_url = $file_flv ? $file_flv : $video_url;
 
-                $output = '<video class="video-js vjs-default-skin" controls preload="none" width="auto" height="auto" poster="'.$poster.'" data-setup="{'.$jsonDataSetup.'}">';
                 if ($video_url) {
-                    $output .= '<source src="'.$video_url.'" type="video/flv" />';
+                    $source = '<source src="'.$video_url.'" type="video/flv" />';
                 }
 
-                $output .= '</video>';
             } else {
-                $output = '<video class="video-js vjs-default-skin" controls preload="none" width="auto" height="auto" poster="'.$poster.'" data-setup="{}">';
+
                 if ($file_mp4) {
-                    $output .= '<source src="'.$file_mp4.'" type="video/mp4" />';
+                    $source .= '<source src="'.$file_mp4.'" type="video/mp4" />';
                 }
                 if ($file_webm) {
-                    $output .= '<source src="'.$file_webm.'" type="video/webm" />';
+                    $source .= '<source src="'.$file_webm.'" type="video/webm" />';
                 }
                 if ($file_ogg) {
-                    $output .= '<source src="'.$file_ogg.'" type="video/ogg" />';
+                    $source .= '<source src="'.$file_ogg.'" type="video/ogg" />';
                 }
 
-                $output .= '</video>';
             }
+
+            $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
+
+            if( $source ) {
+
+                $output = "<video class='video-js vjs-default-skin' data-setup='".$jsonDataSetup."'>";
+                    $output .= $source;
+
+                $output .= '</video>';
+                
+            } else {
+
+                $output = '<div class="alert error">'. __('Failed to retrieve video file', 'video_central') .'</div>';
+
+            }
+
         }
 
         return do_shortcode($output);

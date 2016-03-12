@@ -12,7 +12,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_RadioImage' ) )
         static function admin_enqueue_scripts()
         {
 
-            wp_enqueue_script( 'rwmb-radio-image', video_central()->admin->js_url  . 'metaboxes/radio-image.js', array( 'jquery' ), video_central()->version, true );
+            wp_enqueue_script( 'video-central-admin-radio-image', video_central()->admin->js_url  . 'metaboxes/radio-image.js', array( 'jquery' ), video_central()->version, true );
 
         }
 
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_RadioImage' ) )
                 $id       = " id='{$id}'";
                 $name     = "name='{$field['field_name']}'";
                 $val      = " value='{$key}'";
-                $html    .= "<label class='rwmb-label-radio-image{$selected}'><input type='radio' class='rwmb-radio-image'{$name}{$id}{$val}{$checked} /> {$value}</label> ";
+                $html    .= "<label class='video-central-metaboxes-label-radio-image{$selected}'><input type='radio' class='video-central-metaboxes-radio-image'{$name}{$id}{$val}{$checked} /> {$value}</label> ";
             }
 
             return $html;

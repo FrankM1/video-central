@@ -84,7 +84,7 @@ class Video_Central_Playlist_Posttype
             'pages' => array(video_central_get_playlist_post_type()),
             'context' => 'normal',
             'priority' => 'high',
-            'fields' => apply_filters('video_central_metaboxes', $arg),
+            'fields' => apply_filters('video_central_metaboxes_playlist', $arg),
         );
 
         // Make sure there's no errors when the plugin is deactivated or during upgrade

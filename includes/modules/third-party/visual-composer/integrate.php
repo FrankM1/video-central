@@ -77,7 +77,7 @@ class Video_Central_Map_Shortcode
             'icon' => 'icon-wpb-separator',
             'allowed_container_element' => 'vc_row',
             'category' => __('Video Central Elements', 'radium'),
-            'description' => __('Display latest posts', 'radium'),
+            'description' => __('Display latest videos', 'radium'),
             'params' => $params,
         );
 

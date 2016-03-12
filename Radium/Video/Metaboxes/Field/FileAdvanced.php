@@ -16,8 +16,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_FileAdvanced' ) )
 
             // Make sure scripts for new media uploader in WordPress 3.5 is enqueued
             wp_enqueue_media();
-            wp_enqueue_script( 'rwmb-file-advanced', video_central()->admin->js_url  . 'metaboxes/file-advanced.js', array( 'jquery', 'underscore' ), video_central()->version, true );
-            wp_localize_script( 'rwmb-file-advanced', 'rwmbFileAdvanced', array(
+            wp_enqueue_script( 'video-central-admin-file-advanced', video_central()->admin->js_url  . 'metaboxes/file-advanced.js', array( 'jquery', 'underscore' ), video_central()->version, true );
+            wp_localize_script( 'video-central-admin-file-advanced', 'VideoCentralMetaboxesFileAdvanced', array(
                 'frameTitle' => __( 'Select Files', 'video_central' ),
             ) );
         }
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_FileAdvanced' ) )
             parent::add_actions();
 
             // Attach images via Ajax
-            add_action( 'wp_ajax_rwmb_attach_file', array( __CLASS__, 'wp_ajax_attach_file' ) );
+            add_action( 'wp_ajax_video_central_metaboxes_attach_file', array( __CLASS__, 'wp_ajax_attach_file' ) );
             add_action( 'print_media_templates', array( __CLASS__, 'print_templates' ) );
         }
 
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_FileAdvanced' ) )
             $field_id = isset( $_POST['field_id'] ) ? $_POST['field_id'] : 0;
             $attachment_ids = isset( $_POST['attachment_ids'] ) ? $_POST['attachment_ids'] : array();
 
-            check_ajax_referer( "rwmb-attach-file_{$field_id}" );
+            check_ajax_referer( "video-central-metaboxes-attach-file_{$field_id}" );
             foreach( $attachment_ids as $attachment_id )
                 add_post_meta( $post_id, $field_id, $attachment_id, false );
 
@@ -59,14 +59,14 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_FileAdvanced' ) )
          */
         static function html( $meta, $field )
         {
-            $i18n_title  = apply_filters( 'rwmb_file_advanced_select_string', _x( 'Select or Upload Files', 'file upload', 'video_central' ), $field );
-            $attach_nonce = wp_create_nonce( "rwmb-attach-file_{$field['id']}" );
+            $i18n_title  = apply_filters( 'video_central_metaboxes_file_advanced_select_string', _x( 'Select or Upload Files', 'file upload', 'video_central' ), $field );
+            $attach_nonce = wp_create_nonce( "video-central-metaboxes-attach-file_{$field['id']}" );
 
             // Uploaded files
             $html = self::get_uploaded_files( $meta, $field );
 
             // Show form upload
-            $classes = array( 'button', 'rwmb-file-advanced-upload', 'hide-if-no-js', 'new-files' );
+            $classes = array( 'button', 'video-central-metaboxes-file-advanced-upload', 'hide-if-no-js', 'new-files' );
             if ( ! empty( $field['max_file_uploads'] ) && count( $meta ) >= (int) $field['max_file_uploads'] )
                 $classes[] = 'hidden';
 
@@ -95,18 +95,18 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_FileAdvanced' ) )
 
         static function print_templates()
         {
-            $i18n_delete = apply_filters( 'rwmb_file_delete_string', _x( 'Delete', 'file upload', 'video_central' ) );
-            $i18n_edit   = apply_filters( 'rwmb_file_edit_string', _x( 'Edit', 'file upload', 'video_central' ) );
+            $i18n_delete = apply_filters( 'video_central_metaboxes_file_delete_string', _x( 'Delete', 'file upload', 'video_central' ) );
+            $i18n_edit   = apply_filters( 'video_central_metaboxes_file_edit_string', _x( 'Edit', 'file upload', 'video_central' ) );
             ?>
-            <script id="tmpl-rwmb-file-advanced" type="text/html">
+            <script id="tmpl-video-central-admin-file-advanced" type="text/html">
                 <# _.each( attachments, function( attachment ) { #>
                 <li>
-                    <div class="rwmb-icon"><img src="<# if ( attachment.type == 'image' ){ #>{{{ attachment.sizes.thumbnail.url }}}<# } else { #>{{{ attachment.icon }}}<# } #>"></div>
-                    <div class="rwmb-info">
+                    <div class="video-central-metaboxes-icon"><img src="<# if ( attachment.type == 'image' ){ #>{{{ attachment.sizes.thumbnail.url }}}<# } else { #>{{{ attachment.icon }}}<# } #>"></div>
+                    <div class="video-central-metaboxes-info">
                         <a href="{{{ attachment.url }}}" target="_blank">{{{ attachment.title }}}</a>
                         <p>{{{ attachment.mime }}}</p>
                         <a title="<?php echo $i18n_edit; ?>" href="{{{ attachment.editLink }}}" target="_blank"><?php echo $i18n_edit; ?></a> |
-                        <a title="<?php echo $i18n_delete; ?>" class="rwmb-delete-file" href="#" data-attachment_id="{{{ attachment.id }}}"><?php echo $i18n_delete; ?></a>
+                        <a title="<?php echo $i18n_delete; ?>" class="video-central-metaboxes-delete-file" href="#" data-attachment_id="{{{ attachment.id }}}"><?php echo $i18n_delete; ?></a>
                     </div>
                 </li>
                 <# } ); #>

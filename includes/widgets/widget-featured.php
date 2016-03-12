@@ -191,7 +191,7 @@ class Video_Central_Featured_Widget extends WP_Widget
 
         // Get widget settings
         $settings = $this->parse_settings($instance);
-        $thumbnail_size = $settings['thumbnail_size'];
+        $thumbnail_size = isset($settings['thumbnail_size']) ? $settings['thumbnail_size'] : 'small-left';
         ?>
 
         <p>

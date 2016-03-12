@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Video Central Common Functions.
  */
@@ -243,7 +242,7 @@ function video_central_url_make_clickable($content, $args = array())
         'target' => 'blank',
     ), 'url_make_clickable');
 
-    if ($r['nofollow']) {
+    if ( $r['nofollow'] ) {
         $attribs = ' rel="nofollow"';
     }
     if ($r['enable_target']) {

@@ -14,7 +14,7 @@ if (!class_exists('Radium_Video_Metaboxes_Field_TextArea')) {
         public static function html($meta, $field)
         {
             return sprintf(
-                '<textarea class="rwmb-textarea large-text" name="%s" id="%s" cols="%s" rows="%s" placeholder="%s">%s</textarea>',
+                '<textarea class="video-central-metaboxes-textarea large-text" name="%s" id="%s" cols="%s" rows="%s" placeholder="%s">%s</textarea>',
                 $field['field_name'],
                 $field['id'],
                 $field['cols'],

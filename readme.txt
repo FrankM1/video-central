@@ -5,7 +5,7 @@ License: GPLv2+
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: Video, Media, Shortcode, Youtube, Vimeo, Comments, Widget
 Requires at least: 3.3
-Tested up to: 4.3.1
+Tested up to: 4.4.2
 Stable tag: 1.1.3
 
 Video Central is the ultimate video manager for WordPress.
@@ -70,7 +70,8 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 == Changelog ==
 
 = 1.2.2 =
-* New - Create playist
+* New - Create playlist
+* New - Made Links in description clickabe by default
 
 = 1.2.0 =
 

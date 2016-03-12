@@ -8,7 +8,7 @@ if (!class_exists('Radium_Video_Metaboxes_Field_Wysiwyg')) {
          */
         public static function admin_enqueue_scripts()
         {
-            wp_enqueue_style('rwmb-meta-box-wysiwyg', video_central()->admin->css_url.'metaboxes/wysiwyg.css', array(), video_central()->version);
+            wp_enqueue_style('video-central-admin-wysiwyg', video_central()->admin->css_url.'metaboxes/wysiwyg.css', array(), video_central()->version);
         }
 
         /**
@@ -62,12 +62,12 @@ if (!class_exists('Radium_Video_Metaboxes_Field_Wysiwyg')) {
             ));
 
             $field['options'] = wp_parse_args($field['options'], array(
-                'editor_class' => 'rwmb-wysiwyg',
+                'editor_class' => 'video-central-metaboxes-wysiwyg',
                 'dfw' => true, // Use default WordPress full screen UI
             ));
 
             // Keep the filter to be compatible with previous versions
-            $field['options'] = apply_filters('rwmb_wysiwyg_settings', $field['options']);
+            $field['options'] = apply_filters('video_central_metaboxes_wysiwyg_settings', $field['options']);
 
             return $field;
         }

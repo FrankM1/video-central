@@ -11,7 +11,7 @@ if ( !class_exists( 'Radium_Video_Metaboxes_Field_Select' ) )
          */
         static function admin_enqueue_scripts()
         {
-            wp_enqueue_style( 'rwmb-select', video_central()->admin->css_url  . 'metaboxes/select.css', array(), video_central()->version );
+            wp_enqueue_style( 'video-central-admin-select', video_central()->admin->css_url  . 'metaboxes/select.css', array(), video_central()->version );
         }
 
         /**
@@ -25,7 +25,7 @@ if ( !class_exists( 'Radium_Video_Metaboxes_Field_Select' ) )
         static function html( $meta, $field )
         {
             $html = sprintf(
-                '<select class="rwmb-select" name="%s" id="%s" size="%s"%s>',
+                '<select class="video-central-metaboxes-select" name="%s" id="%s" size="%s"%s>',
                 $field['field_name'],
                 $field['id'],
                 $field['size'],

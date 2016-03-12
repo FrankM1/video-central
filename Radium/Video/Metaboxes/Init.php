@@ -60,8 +60,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
             // 1st action applies to all meta boxes
             // 2nd action applies to only current meta box
             $show = true;
-            $show = apply_filters( 'rwmb_show', $show, $this->meta_box );
-            $show = apply_filters( "rwmb_show_{$this->meta_box['id']}", $show, $this->meta_box );
+            $show = apply_filters( 'video_central_metaboxes_show', $show, $this->meta_box );
+            $show = apply_filters( "video_central_metaboxes_show_{$this->meta_box['id']}", $show, $this->meta_box );
             if ( !$show )
                 return;
 
@@ -119,17 +119,17 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
             }
 
             if ( $has_clone )
-                wp_enqueue_script( 'rwmb-clone', video_central()->admin->js_url  . 'metaboxes/clone.js', array( 'jquery' ), video_central()->version, true );
+                wp_enqueue_script( 'video-central-metaboxes-clone', video_central()->admin->js_url  . 'metaboxes/clone.js', array( 'jquery' ), video_central()->version, true );
 
             if ( $this->validation )
             {
                 wp_enqueue_script( 'jquery-validate', video_central()->admin->js_url  . 'metaboxes/jquery.validate.min.js', array( 'jquery' ), video_central()->version, true );
-                wp_enqueue_script( 'rwmb-validate',video_central()->admin->js_url  . 'metaboxes/validate.js', array( 'jquery-validate' ), video_central()->version, true );
+                wp_enqueue_script( 'video-central-metaboxes-validate',video_central()->admin->js_url  . 'metaboxes/validate.js', array( 'jquery-validate' ), video_central()->version, true );
             }
 
             // Auto save
             if ( $this->meta_box['autosave'] )
-                wp_enqueue_script( 'rwmb-autosave', video_central()->admin->js_url  . 'metaboxes/autosave.js', array( 'jquery' ), video_central()->version, true );
+                wp_enqueue_script( 'video-central-metaboxes-autosave', video_central()->admin->js_url  . 'metaboxes/autosave.js', array( 'jquery' ), video_central()->version, true );
         }
 
         /**
@@ -210,17 +210,17 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
 
             // Container
             printf(
-                '<div class="rwmb-meta-box" data-autosave="%s">',
+                '<div class="video-central-metaboxes-meta-box" data-autosave="%s">',
                 $this->meta_box['autosave']  ? 'true' : 'false'
             );
 
-            wp_nonce_field( "rwmb-save-{$this->meta_box['id']}", "nonce_{$this->meta_box['id']}" );
+            wp_nonce_field( "video-central-metaboxes-save-{$this->meta_box['id']}", "nonce_{$this->meta_box['id']}" );
 
             // Allow users to add custom code before meta box content
             // 1st action applies to all meta boxes
             // 2nd action applies to only current meta box
-            do_action( 'rwmb_before' );
-            do_action( "rwmb_before_{$this->meta_box['id']}" );
+            do_action( 'video_central_metaboxes_before' );
+            do_action( "video_central_metaboxes_before_{$this->meta_box['id']}" );
 
             foreach ( $this->fields as $field )
             {
@@ -232,9 +232,9 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
             {
                 echo '
                     <script>
-                    if ( typeof rwmb == "undefined" )
+                    if ( typeof VideoCentralMetaboxes == "undefined" )
                     {
-                        var rwmb = {
+                        var VideoCentralMetaboxes = {
                             validationOptions : jQuery.parseJSON( \'' . json_encode( $this->validation ) . '\' ),
                             summaryMessage : "' . __( 'Please correct the errors highlighted below and try again.', 'video_central' ) . '"
                         };
@@ -242,7 +242,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
                     else
                     {
                         var tempOptions = jQuery.parseJSON( \'' . json_encode( $this->validation ) . '\' );
-                        jQuery.extend( true, rwmb.validationOptions, tempOptions );
+                        jQuery.extend( true, VideoCentralMetaboxes.validationOptions, tempOptions );
                     };
                     </script>
                 ';
@@ -251,8 +251,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
             // Allow users to add custom code after meta box content
             // 1st action applies to all meta boxes
             // 2nd action applies to only current meta box
-            do_action( 'rwmb_after' );
-            do_action( "rwmb_after_{$this->meta_box['id']}" );
+            do_action( 'video_central_metaboxes_after' );
+            do_action( "video_central_metaboxes_after_{$this->meta_box['id']}" );
 
             // End container
             echo '</div>';
@@ -278,7 +278,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
 
             // Check whether form is submitted properly
             $id = $this->meta_box['id'];
-            if ( empty( $_POST["nonce_{$id}"] ) || !wp_verify_nonce( $_POST["nonce_{$id}"], "rwmb-save-{$id}" ) )
+            if ( empty( $_POST["nonce_{$id}"] ) || !wp_verify_nonce( $_POST["nonce_{$id}"], "video-central-metaboxes-save-{$id}" ) )
                 return;
 
             // Autosave
@@ -290,8 +290,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
                 $post_id = $the_post;
 
             // Before save action
-            do_action( 'rwmb_before_save_post', $post_id );
-            do_action( "rwmb_{$this->meta_box['id']}_before_save_post", $post_id );
+            do_action( 'video_central_metaboxes_before_save_post', $post_id );
+            do_action( "video_central_metaboxes_{$this->meta_box['id']}_before_save_post", $post_id );
 
             foreach ( $this->fields as $field )
             {
@@ -305,16 +305,16 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Init' ) )
                 // Use filter to change field value
                 // 1st filter applies to all fields with the same type
                 // 2nd filter applies to current field only
-                $new = apply_filters( "rwmb_{$field['type']}_value", $new, $field, $old );
-                $new = apply_filters( "rwmb_{$name}_value", $new, $field, $old );
+                $new = apply_filters( "video_central_metaboxes_{$field['type']}_value", $new, $field, $old );
+                $new = apply_filters( "video_central_metaboxes_{$name}_value", $new, $field, $old );
 
                 // Call defined method to save meta value, if there's no methods, call common one
                 call_user_func( array( self::get_class_name( $field ), 'save' ), $new, $old, $post_id, $field );
             }
 
             // After save action
-            do_action( 'rwmb_after_save_post', $post_id );
-            do_action( "rwmb_{$this->meta_box['id']}_after_save_post", $post_id );
+            do_action( 'video_central_metaboxes_after_save_post', $post_id );
+            do_action( "video_central_metaboxes_{$this->meta_box['id']}_after_save_post", $post_id );
 
             // Done saving post meta
             $called = false;

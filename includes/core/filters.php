@@ -51,7 +51,7 @@ add_filter('video_central_get_template_stack', 'video_central_add_template_stack
 add_filter('video_central_before_has_videos_parse_args', 'video_central_get_custom_video_order', 1, 10);
 
 //make urls in description clickable
-add_filter('video_central_get_content_urls', 'video_central_url_make_clickable', 2, 10);
+add_filter('video_central_get_content', 'video_central_url_make_clickable', 2, 10);
 
 //override wordpress video shortcode
 //add_filter( 'wp_video_shortcode_handler', 'video_central_shortcode' , 99);

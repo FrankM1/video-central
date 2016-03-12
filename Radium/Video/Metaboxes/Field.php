@@ -41,9 +41,9 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
             // 1st filter applies to all fields
             // 2nd filter applies to all fields with the same type
             // 3rd filter applies to current field only
-            $begin = apply_filters('rwmb_begin_html', $begin, $field, $meta);
-            $begin = apply_filters("rwmb_{$type}_begin_html", $begin, $field, $meta);
-            $begin = apply_filters("rwmb_{$id}_begin_html", $begin, $field, $meta);
+            $begin = apply_filters('video_central_metaboxes_begin_html', $begin, $field, $meta);
+            $begin = apply_filters("video_central_metaboxes_{$type}_begin_html", $begin, $field, $meta);
+            $begin = apply_filters("video_central_metaboxes_{$id}_begin_html", $begin, $field, $meta);
 
             // Separate code for cloneable and non-cloneable fields to make easy to maintain
 
@@ -64,8 +64,8 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
                         $sub_field['field_name'] .= '[]';
                     }
 
-                    // Wrap field HTML in a div with class="rwmb-clone" if needed
-                    $input_html = '<div class="rwmb-clone">';
+                    // Wrap field HTML in a div with class="video-central-metaboxes-clone" if needed
+                    $input_html = '<div class="video-central-metaboxes-clone">';
 
                     // Call separated methods for displaying each type of field
                     $input_html .= call_user_func(self::get_method_callback($field, 'html'), $sub_meta, $sub_field);
@@ -73,8 +73,8 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
                     // Apply filter to field HTML
                     // 1st filter applies to all fields with the same type
                     // 2nd filter applies to current field only
-                    $input_html = apply_filters("rwmb_{$type}_html", $input_html, $field, $sub_meta);
-                    $input_html = apply_filters("rwmb_{$id}_html", $input_html, $field, $sub_meta);
+                    $input_html = apply_filters("video_central_metaboxes_{$type}_html", $input_html, $field, $sub_meta);
+                    $input_html = apply_filters("video_central_metaboxes_{$id}_html", $input_html, $field, $sub_meta);
 
                     // Add clone button
                     $input_html .= self::clone_button();
@@ -92,8 +92,8 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
                 // Apply filter to field HTML
                 // 1st filter applies to all fields with the same type
                 // 2nd filter applies to current field only
-                $field_html = apply_filters("rwmb_{$type}_html", $field_html, $field, $meta);
-                $field_html = apply_filters("rwmb_{$id}_html", $field_html, $field, $meta);
+                $field_html = apply_filters("video_central_metaboxes_{$type}_html", $field_html, $field, $meta);
+                $field_html = apply_filters("video_central_metaboxes_{$id}_html", $field_html, $field, $meta);
             }
 
             $end = call_user_func(self::get_method_callback($field, 'end_html'), $meta, $field);
@@ -102,19 +102,19 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
             // 1st filter applies to all fields
             // 2nd filter applies to all fields with the same type
             // 3rd filter applies to current field only
-            $end = apply_filters('rwmb_end_html', $end, $field, $meta);
-            $end = apply_filters("rwmb_{$type}_end_html", $end, $field, $meta);
-            $end = apply_filters("rwmb_{$id}_end_html", $end, $field, $meta);
+            $end = apply_filters('video_central_metaboxes_end_html', $end, $field, $meta);
+            $end = apply_filters("video_central_metaboxes_{$type}_end_html", $end, $field, $meta);
+            $end = apply_filters("video_central_metaboxes_{$id}_end_html", $end, $field, $meta);
 
             // Apply filter to field wrapper
             // This allow users to change whole HTML markup of the field wrapper (i.e. table row)
             // 1st filter applies to all fields with the same type
             // 2nd filter applies to current field only
-            $html = apply_filters("rwmb_{$type}_wrapper_html", "{$begin}{$field_html}{$end}", $field, $meta);
-            $html = apply_filters("rwmb_{$id}_wrapper_html", $html, $field, $meta);
+            $html = apply_filters("video_central_metaboxes_{$type}_wrapper_html", "{$begin}{$field_html}{$end}", $field, $meta);
+            $html = apply_filters("video_central_metaboxes_{$id}_wrapper_html", $html, $field, $meta);
 
             // Display label and input in DIV and allow user-defined classes to be appended
-            $classes = array('rwmb-field', "rwmb-{$type}-wrapper");
+            $classes = array('video-central-metaboxes-field', "video-central-metaboxes-{$type}-wrapper");
             if ('hidden' === $field['type']) {
                 $classes[] = 'hidden';
             }
@@ -159,14 +159,14 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
         public static function begin_html($meta, $field)
         {
             if (empty($field['name'])) {
-                return '<div class="rwmb-input">';
+                return '<div class="video-central-metaboxes-input">';
             }
 
             return sprintf(
-                '<div class="rwmb-label">
+                '<div class="video-central-metaboxes-label">
                     <label for="%s">%s</label>
                 </div>
-                <div class="rwmb-input">',
+                <div class="video-central-metaboxes-input">',
                 $field['id'],
                 $field['name']
             );
@@ -186,7 +186,7 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
 
             $button = '';
             if ($field['clone']) {
-                $button = '<a href="#" class="rwmb-button button-primary add-clone">'.__('+', 'video_central').'</a>';
+                $button = '<a href="#" class="video-central-metaboxes-button button-primary add-clone">'.__('+', 'video_central').'</a>';
             }
 
             $desc = !empty($field['desc']) ? "<p id='{$id}_description' class='description'>{$field['desc']}</p>" : '';
@@ -204,7 +204,7 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
          */
         public static function clone_button()
         {
-            return '<a href="#" class="rwmb-button button remove-clone">'.__('&#8211;', 'video_central').'</a>';
+            return '<a href="#" class="video-central-metaboxes-button button remove-clone">'.__('&#8211;', 'video_central').'</a>';
         }
 
         /**
@@ -228,8 +228,8 @@ if (!class_exists('Radium_Video_Metaboxes_Field ')) {
                 $meta = is_array($meta) ? array_map('esc_attr', $meta) : esc_attr($meta);
             }
 
-            $meta = apply_filters("rwmb_{$field['type']}_meta", $meta);
-            $meta = apply_filters("rwmb_{$field['id']}_meta", $meta);
+            $meta = apply_filters("video_central_metaboxes_{$field['type']}_meta", $meta);
+            $meta = apply_filters("video_central_metaboxes_{$field['id']}_meta", $meta);
 
             return $meta;
         }

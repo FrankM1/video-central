@@ -144,7 +144,7 @@ class Radium_Video_Metaboxes {
             'pages'    => array( video_central_get_video_post_type() ),
             'context'  => 'normal',
             'priority' => 'high',
-            'fields'   => apply_filters( 'video_central_metaboxes', $arg )
+            'fields'   => apply_filters( 'video_central_metaboxes_video', $arg )
         );
 
         // Make sure there's no errors when the plugin is deactivated or during upgrade

@@ -1,50 +1,50 @@
 /* =Styles for 'normal' meta boxes
 -------------------------------------------------------------- */
 
-.rwmb-field {
+.video-central-metaboxes-field {
 	margin: 10px 0;
 }
-.rwmb-label,
-.rwmb-input {
+.video-central-metaboxes-label,
+.video-central-metaboxes-input {
 	display: inline-block;
 	vertical-align: top;
 }
-.rwmb-label {
+.video-central-metaboxes-label {
 	width: 24%;
 }
-.rwmb-label.required > span {
+.video-central-metaboxes-label.required > span {
 	color: #c00;
 	font-weight: bold;
 }
 
 /* 75% if field has label, 100% if no label */
-.rwmb-input {
+.video-central-metaboxes-input {
 	width: 100%;
 }
-.rwmb-label ~ .rwmb-input {
+.video-central-metaboxes-label ~ .video-central-metaboxes-input {
 	width: 75%;
 }
-.rwmb-input h4 {
+.video-central-metaboxes-input h4 {
 	margin: 0;
 }
-.rwmb-textarea {
+.video-central-metaboxes-textarea {
 	resize: vertical;
 }
 
 /* Clone */
-.rwmb-clone {
+.video-central-metaboxes-clone {
 	min-height: 24px;
 	margin-bottom: 5px;
 	position: relative;
 }
-.rwmb-clone > input[type="radio"],
-.rwmb-clone > input[type="checkbox"] {
+.video-central-metaboxes-clone > input[type="radio"],
+.video-central-metaboxes-clone > input[type="checkbox"] {
 	margin: 6px 0 0 4px;
 }
-.rwmb-button {
+.video-central-metaboxes-button {
 	float: right;
 }
-.rwmb-button.remove-clone {
+.video-central-metaboxes-button.remove-clone {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -73,7 +73,7 @@ select.error {
 /* =Styles for 'side' meta boxes
 -------------------------------------------------------------- */
 
-#side-sortables .rwmb-label,
-#side-sortables .rwmb-input {
+#side-sortables .video-central-metaboxes-label,
+#side-sortables .video-central-metaboxes-input {
 	width: 100%;
 }

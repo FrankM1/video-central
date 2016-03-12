@@ -112,25 +112,14 @@ module.exports = function(grunt) {
                 }
             },
 
-            video_central: {
-
-                files: {
-                    'assets/frontend/js/video-central.min.js': [
-                        'assets/frontend/js/source/video-central.js',
-                    ]
-                }
-            },
-
             videojs: {
 
                 files: {
-                    'assets/frontend/js/video-js.js': 'assets/frontend/js/vendor/video.dev.js',
-                    'assets/frontend/js/playlist.js': 'assets/frontend/js/source/playlist.js',
-                    'assets/frontend/js/video-js.plugins.min.js': [
-                        'assets/frontend/js/vendor/videojs.persistvolume.js',
-                        'assets/frontend/js/vendor/videojs.progressiveTips.js',
-                        'assets/frontend/js/vendor/vjs.vimeo.js',
-                        'assets/frontend/js/vendor/vjs.youtube.js',
+                    'assets/frontend/js/video-js.js': [
+                        'bower_components/video.js/dist/video.js',
+                        'bower_components/videojs-vimeo/vjs.vimeo.js',
+                        'bower_components/videojs-youtube/dist/Youtube.js',
+                        'assets/frontend/js/source/video-central.js'
                     ]
                 }
 
@@ -234,10 +223,27 @@ module.exports = function(grunt) {
             }
         },
 
+        devUpdate: {
+          main: {
+              options: {
+                  updateType: 'prompt', //just report outdated packages
+                  reportUpdated: false, //don't report up-to-date packages
+                  semver: false, // update regardless of package.json
+                  packages: {
+                      devDependencies: true, //only check for devDependencies
+                      dependencies: false
+                  },
+                  packageJson: null, //use matchdep default findup to locate package.json
+                  reportOnlyPkgs: [] //use updateType action on all packages
+              }
+          }
+      }
+
     });
 
     // register task
     grunt.registerTask('build', ['sass', 'sprites', 'autoprefixer', 'jshint', 'uglify', 'watch']);
     grunt.registerTask('build-lang', ['checktextdomain', 'makepot']);
+    grunt.registerTask('update-packages', ['devUpdate']);
 
 };

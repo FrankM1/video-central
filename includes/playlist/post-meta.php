@@ -64,7 +64,7 @@ class Radium_Video_Playlist_Metaboxes
             'pages' => array(video_central_get_playlist_post_type()),
             'context' => 'normal',
             'priority' => 'high',
-            'fields' => apply_filters('video_central_metaboxes', $args),
+            'fields' => apply_filters('video_central_metaboxes_playlist', $args),
         );
 
         // Make sure there's no errors when the plugin is deactivated or during upgrade

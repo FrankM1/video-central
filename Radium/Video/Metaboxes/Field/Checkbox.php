@@ -14,7 +14,7 @@ if (!class_exists('Radium_Video_Metaboxes_Field_Checkbox')) {
         public static function html($meta, $field)
         {
             return sprintf(
-                '<input type="checkbox" class="rwmb-checkbox" name="%s" id="%s" value="1" %s />',
+                '<input type="checkbox" class="video-central-metaboxes-checkbox" name="%s" id="%s" value="1" %s />',
                 $field['field_name'],
                 $field['id'],
                 checked(!empty($meta), 1, false)

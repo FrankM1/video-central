@@ -15,7 +15,7 @@ if ( !class_exists( 'Radium_Video_Metaboxes_Field_Text' ) )
         static function html( $meta, $field )
         {
             return sprintf(
-                '<input type="text" class="rwmb-text" name="%s" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
+                '<input type="text" class="video-central-metaboxes-text" name="%s" id="%s" value="%s" placeholder="%s" size="%s" %s>%s',
                 $field['field_name'],
                 $field['id'],
                 $meta,

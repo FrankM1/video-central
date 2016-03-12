@@ -11,9 +11,9 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
          */
         static function admin_enqueue_scripts()
         {
-            wp_enqueue_style( 'rwmb-file', video_central()->admin->css_url  . 'metaboxes/file.css', array(), video_central()->version  );
-            wp_enqueue_script( 'rwmb-file', video_central()->admin->js_url  . 'metaboxes/file.js', array( 'jquery' ), video_central()->version, true );
-            wp_localize_script( 'rwmb-file', 'rwmbFile', array(
+            wp_enqueue_style( 'video-central-admin-file', video_central()->admin->css_url  . 'metaboxes/file.css', array(), video_central()->version  );
+            wp_enqueue_script( 'video-central-admin-file', video_central()->admin->js_url  . 'metaboxes/file.js', array( 'jquery' ), video_central()->version, true );
+            wp_localize_script( 'video-central-admin-file', 'VideoCentralMetaboxesFile', array(
                 'maxFileUploadsSingle' => __( 'You may only upload maximum %d file', 'video_central' ),
                 'maxFileUploadsPlural' => __( 'You may only upload maximum %d files', 'video_central' ),
             ) );
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
             add_action( 'post_edit_form_tag', array( __CLASS__, 'post_edit_form_tag' ) );
 
             // Delete file via Ajax
-            add_action( 'wp_ajax_rwmb_delete_file', array( __CLASS__, 'wp_ajax_delete_file' ) );
+            add_action( 'wp_ajax_video_central_metaboxes_delete_file', array( __CLASS__, 'wp_ajax_delete_file' ) );
         }
 
         /**
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
             $attachment_id = isset( $_POST['attachment_id'] ) ? intval( $_POST['attachment_id'] ) : 0;
             $force_delete  = isset( $_POST['force_delete'] ) ? intval( $_POST['force_delete'] ) : 0;
 
-            check_ajax_referer( "rwmb-delete-file_{$field_id}" );
+            check_ajax_referer( "video-central-metaboxes-delete-file_{$field_id}" );
 
             delete_post_meta( $post_id, $field_id, $attachment_id );
             $ok = $force_delete ? wp_delete_attachment( $attachment_id ) : true;
@@ -78,8 +78,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
          */
         static function html( $meta, $field )
         {
-            $i18n_title = apply_filters( 'rwmb_file_upload_string', _x( 'Upload Files', 'file upload', 'video_central' ), $field );
-            $i18n_more  = apply_filters( 'rwmb_file_add_string', _x( '+ Add new file', 'file upload', 'video_central' ), $field );
+            $i18n_title = apply_filters( 'video_central_metaboxes_file_upload_string', _x( 'Upload Files', 'file upload', 'video_central' ), $field );
+            $i18n_more  = apply_filters( 'video_central_metaboxes_file_add_string', _x( '+ Add new file', 'file upload', 'video_central' ), $field );
 
             // Uploaded files
             $html = self::get_uploaded_files( $meta, $field );
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
                 '<div class="%s">
                     <h4>%s</h4>
                     <div class="file-input"><input type="file" name="%s[]" /></div>
-                    <a class="rwmb-add-file" href="#"><strong>%s</strong></a>
+                    <a class="video-central-metaboxes-add-file" href="#"><strong>%s</strong></a>
                 </div>',
                 implode( ' ', $new_file_classes ),
                 $i18n_title,
@@ -105,8 +105,8 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
 
         static function get_uploaded_files( $files, $field )
         {
-            $delete_nonce = wp_create_nonce( "rwmb-delete-file_{$field['id']}" );
-            $classes = array('rwmb-file', 'rwmb-uploaded');
+            $delete_nonce = wp_create_nonce( "video-central-metaboxes-delete-file_{$field['id']}" );
+            $classes = array('video-central-admin-file', 'video-central-metaboxes-uploaded');
             if ( count( $files ) <= 0  )
                 $classes[] = 'hidden';
             $ol = '<ul class="%s" data-field_id="%s" data-delete_nonce="%s" data-force_delete="%s" data-max_file_uploads="%s" data-mime_type="%s">';
@@ -131,16 +131,16 @@ if ( ! class_exists( 'Radium_Video_Metaboxes_Field_File' ) ) {
 
         static function file_html( $attachment_id )
         {
-            $i18n_delete = apply_filters( 'rwmb_file_delete_string', _x( 'Delete', 'file upload', 'video_central' ) );
-            $i18n_edit   = apply_filters( 'rwmb_file_edit_string', _x( 'Edit', 'file upload', 'video_central' ) );
+            $i18n_delete = apply_filters( 'video_central_metaboxes_file_delete_string', _x( 'Delete', 'file upload', 'video_central' ) );
+            $i18n_edit   = apply_filters( 'video_central_metaboxes_file_edit_string', _x( 'Edit', 'file upload', 'video_central' ) );
             $li = '
             <li>
-                <div class="rwmb-icon">%s</div>
-                <div class="rwmb-info">
+                <div class="video-central-metaboxes-icon">%s</div>
+                <div class="video-central-metaboxes-info">
                     <a href="%s" target="_blank">%s</a>
                     <p>%s</p>
                     <a title="%s" href="%s" target="_blank">%s</a> |
-                    <a title="%s" class="rwmb-delete-file" href="#" data-attachment_id="%s">%s</a>
+                    <a title="%s" class="video-central-metaboxes-delete-file" href="#" data-attachment_id="%s">%s</a>
                 </div>
             </li>';
 
