@@ -12,8 +12,8 @@
   width: 24%; }
 
 .video-central-metaboxes-label.required > span {
-  color: #c00;
-  font-weight: bold; }
+  font-weight: bold;
+  color: #c00; }
 
 /* 75% if field has label, 100% if no label */
 .video-central-metaboxes-input {
@@ -30,9 +30,9 @@
 
 /* Clone */
 .video-central-metaboxes-clone {
-  min-height: 24px;
+  position: relative;
   margin-bottom: 5px;
-  position: relative; }
+  min-height: 24px; }
 
 .video-central-metaboxes-clone > input[type="radio"],
 .video-central-metaboxes-clone > input[type="checkbox"] {
@@ -52,19 +52,27 @@
 
 /* jQuery validation */
 label.error {
-  padding-left: 3px;
-  color: red; }
+  color: red;
+  padding-left: 3px; }
 
 input.error,
 textarea.error,
 select.error {
-  border: #c00 solid 1px !important;
-  background: #ffebe8 !important; }
+  background: #ffebe8 !important;
+  border: #c00 solid 1px !important; }
 
 /* =Styles for 'side' meta boxes
 -------------------------------------------------------------- */
 #side-sortables .video-central-metaboxes-label,
 #side-sortables .video-central-metaboxes-input {
   width: 100%; }
+
+.video-central-metaboxes-field {
+  border-bottom: 1px solid #EEEEEE;
+  padding-bottom: 10px; }
+
+.video-central-metaboxes-label label {
+  color: #000;
+  font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */

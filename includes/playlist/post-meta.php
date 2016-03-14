@@ -69,7 +69,7 @@ class Radium_Video_Playlist_Metaboxes
 
         // Make sure there's no errors when the plugin is deactivated or during upgrade
         foreach ($meta_boxes as $meta_box) {
-            new Radium_Video_Metaboxes_Init($meta_box);
+            new Video_Central_Metaboxes_Init($meta_box);
         }
     }
 }

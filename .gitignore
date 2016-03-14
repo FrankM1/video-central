@@ -3,8 +3,11 @@ composer.phar
 .DS_Store
 Thumbs.db
 *.log
-/node_modules
-deploy.sh
+.sass-cache/
+node_modules/
+bower_components/
+.DS_STORE
+npm-debug.log
 
 .*
 !.gitignore

@@ -1906,13 +1906,18 @@ function video_central_video_duration($video_id = 0)
      */
     function video_central_get_video_duration($video_id = 0)
     {
+
         $video_id = video_central_get_video_id($video_id);
 
-        $video_data = get_post_meta($video_id, '_video_central_video_data', true);
+        $duration_data  = get_post_meta( $video_id, '_video_central_video_duration', true );
 
-        $duration = isset($video_data['duration']) ? video_central_sec_to_time($video_data['duration']) : null;
+        if( empty($duration_data)) {
+            $duration_data = '0:00';
+        }
 
-        return apply_filters(__FUNCTION__, $duration);
+        $time = (preg_match('/^\d{2}:\d{2}$/', $duration_data)) ? $duration_data : video_central_sec_to_time($duration_data);
+
+        return apply_filters(__FUNCTION__, $time);
     }
 
 /** Related Videos **********************************************************/

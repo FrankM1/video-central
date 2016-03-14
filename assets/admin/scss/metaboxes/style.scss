@@ -1,79 +1,89 @@
 /* =Styles for 'normal' meta boxes
 -------------------------------------------------------------- */
-
 .video-central-metaboxes-field {
-	margin: 10px 0;
+  margin: 10px 0;
 }
+
 .video-central-metaboxes-label,
 .video-central-metaboxes-input {
-	display: inline-block;
-	vertical-align: top;
-}
-.video-central-metaboxes-label {
-	width: 24%;
-}
-.video-central-metaboxes-label.required > span {
-	color: #c00;
-	font-weight: bold;
+  display: inline-block;
+  vertical-align: top;
 }
 
+.video-central-metaboxes-label {
+  width: 24%;
+}
+
+.video-central-metaboxes-label.required > span {
+  font-weight: bold;
+  color: #c00;
+}
 /* 75% if field has label, 100% if no label */
 .video-central-metaboxes-input {
-	width: 100%;
-}
-.video-central-metaboxes-label ~ .video-central-metaboxes-input {
-	width: 75%;
-}
-.video-central-metaboxes-input h4 {
-	margin: 0;
-}
-.video-central-metaboxes-textarea {
-	resize: vertical;
+  width: 100%;
 }
 
+.video-central-metaboxes-label ~ .video-central-metaboxes-input {
+  width: 75%;
+}
+
+.video-central-metaboxes-input h4 {
+  margin: 0;
+}
+
+.video-central-metaboxes-textarea {
+  resize: vertical;
+}
 /* Clone */
 .video-central-metaboxes-clone {
-	min-height: 24px;
-	margin-bottom: 5px;
-	position: relative;
+  position: relative;
+  margin-bottom: 5px;
+  min-height: 24px;
 }
+
 .video-central-metaboxes-clone > input[type="radio"],
 .video-central-metaboxes-clone > input[type="checkbox"] {
-	margin: 6px 0 0 4px;
-}
-.video-central-metaboxes-button {
-	float: right;
-}
-.video-central-metaboxes-button.remove-clone {
-	position: absolute;
-	top: 0;
-	right: 0;
+  margin: 6px 0 0 4px;
 }
 
+.video-central-metaboxes-button {
+  float: right;
+}
+
+.video-central-metaboxes-button.remove-clone {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 /* Fix empty block below admin footer (issue #24) */
 #ui-datepicker-div {
-	display: none;
+  display: none;
 }
-
 /* jQuery validation */
 label.error {
-	padding-left: 3px;
-	color: red;
+  color: red;
+  padding-left: 3px;
 }
+
 input.error,
 textarea.error,
 select.error {
-	border: #c00 solid 1px !important;
-	background: #ffebe8 !important;
+  background: #ffebe8 !important;
+  border: #c00 solid 1px !important;
 }
-
-
-
-
 /* =Styles for 'side' meta boxes
 -------------------------------------------------------------- */
-
 #side-sortables .video-central-metaboxes-label,
 #side-sortables .video-central-metaboxes-input {
-	width: 100%;
+  width: 100%;
+}
+
+.video-central-metaboxes-field {
+  border-bottom: 1px solid #EEEEEE;
+  padding-bottom: 10px;
+}
+
+.video-central-metaboxes-label label {
+  color: #000;
+  font-weight: bold;
 }

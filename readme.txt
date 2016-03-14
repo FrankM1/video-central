@@ -71,7 +71,9 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 = 1.2.2 =
 * New - Create playlist
-* New - Made Links in description clickabe by default
+* New - Made Links in description clickable by default
+* New - Duration meta field in video
+* New - Integration with Visual Composer layout  Builder
 
 = 1.2.0 =
 

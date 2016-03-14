@@ -1,120 +1,211 @@
-jQuery( document ).ready( function( $ )
+/* global jQuery, video_central_metaboxes_cloneable_editors */
+
+jQuery( function ( $ )
 {
-    toggle_remove_buttons();
+	'use strict';
 
-    function add_cloned_fields( $input )
-    {
-        var $clone_last = $input.find( '.video-central-metaboxes-clone:last' ),
-            $clone = $clone_last.clone(),
-            $input, name;
+	// Object holds all methods related to fields' index when clone
+	var cloneIndex = {
+		/**
+		 * Set index for fields in a .video-central-metaboxes-clone
+		 * @param $clone .video-central-metaboxes-clone element
+		 * @param index Index value
+		 */
+		set: function ( $clone, index )
+		{
+			$clone.find( ':input[class|="rwmb"]' ).each( function ()
+			{
+				var $field = $( this );
 
-        $clone.insertAfter( $clone_last );
-        $input = $clone.find( ':input[class|="video-central-metaboxes"]' );
+				// Name attribute
+				var name = $field.attr( 'name' );
+				if ( name )
+				{
+					$field.attr( 'name', cloneIndex.replace( index, name, '[', ']', false ) );
+				}
 
-        // Reset value
-        $input.val( '' );
+				// ID attribute
+				var id = this.id;
+				if ( id )
+				{
+					$field.attr( 'id', cloneIndex.replace( index, id, '_' ) );
+				}
+			} );
 
-        // Get the field name, and increment
-        name = $input.attr( 'name' ).replace( /\[(\d+)\]/, function( match, p1 )
-        {
-            return '[' + ( parseInt( p1 ) + 1 ) + ']';
-        } );
+			// Address button's value attribute
+			var $address = $clone.find( '.video-central-metaboxes-map-goto-address-button' );
+			if ( $address.length )
+			{
+				var value = $address.attr( 'value' );
+				$address.attr( 'value', cloneIndex.replace( index, value, '_' ) );
+			}
+		},
 
-        // Update the "name" attribute
-        $input.attr( 'name', name );
+		/**
+		 * Replace an attribute of a field with updated index
+		 * @param index New index value
+		 * @param value Attribute value
+		 * @param before String before returned value
+		 * @param after String after returned value
+		 * @param alternative Check if attribute does not contain any integer, will reset the attribute?
+		 * @return string
+		 */
+		replace: function ( index, value, before, after, alternative )
+		{
+			before = before || '';
+			after = after || '';
+			alternative = alternative || true;
 
-        // Toggle remove buttons
-        toggle_remove_buttons( $input );
+			var regex = new RegExp( cloneIndex.escapeRegex( before ) + '(\\d+)' + cloneIndex.escapeRegex( after ) ),
+				newValue = before + index + after;
 
-        //Trigger custom clone event
-        $input.trigger( 'clone' );
-    }
+			return regex.test( value ) ? value.replace( regex, newValue ) : (alternative ? value + newValue : value );
+		},
 
-    // Add more clones
-    $( '.add-clone' ).on( 'click', function( e )
-    {
-        e.stopPropagation();
-        var $input = $( this ).parents( '.video-central-metaboxes-input' ),
-            $clone_group = $( this ).parents( '.video-central-metaboxes-field' ).attr( "clone-group" );
+		/**
+		 * Helper function to escape string in regular expression
+		 * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+		 * @param string
+		 * @return string
+		 */
+		escapeRegex: function ( string )
+		{
+			return string.replace( /[.*+?^${}()|[\]\\]/g, "\\$&" );
+		},
 
-        // If the field is part of a clone group, get all fields in that
-        // group and itterate over them
-        if ( $clone_group )
-        {
-            // Get the parent metabox and then find the matching
-            // clone-group elements inside
-            var $metabox = $( this ).parents( '.inside' );
-            var $clone_group_list = $metabox.find( 'div[clone-group="' + $clone_group + '"]' );
+		/**
+		 * Helper function to create next index for clones
+		 * @param $container .video-central-metaboxes-input container
+		 * @return integer
+		 */
+		nextIndex: function ( $container )
+		{
+			var nextIndex = $container.data( 'next-index' );
+			$container.data( 'next-index', nextIndex + 1 );
+			return nextIndex;
+		}
+	};
 
-            $.each( $clone_group_list.find( '.video-central-metaboxes-input' ),
-                function( key, value )
-                {
-                    add_cloned_fields( $( value ) );
-                } );
-        }
-        else
-            add_cloned_fields( $input );
+	/**
+	 * Clone fields
+	 * @param $container A div container which has all fields
+	 * @return void
+	 */
+	function clone( $container )
+	{
+		var $last = $container.children( '.video-central-metaboxes-clone:last' ),
+			$clone = $last.clone(),
+			$input = $clone.find( ':input[class|="rwmb"]' ),
+			nextIndex = cloneIndex.nextIndex( $container );
 
-        toggle_remove_buttons( $input );
+		// Reset value for fields
+		$input.each( function ()
+		{
+			var $field = $( this );
+			if ( $field.is( ':radio' ) || $field.is( ':checkbox' ) )
+			{
+				// Reset 'checked' attribute
+				$field.prop( 'checked', false );
+			}
+			else if ( $field.is( 'select' ) )
+			{
+				// Reset select to first
+				$field.prop( 'selectedIndex', 0 )
+			}
+			else
+			{
+				// Reset value
+				$field.val( '' );
+			}
+		} );
 
-        return false;
-    } );
+		// Insert Clone
+		$clone.insertAfter( $last );
+		// Set fields index. Must run before trigger clone event.
+		cloneIndex.set( $clone, nextIndex );
 
-    // Remove clones
-    $( '.video-central-metaboxes-input' ).on( 'click', '.remove-clone', function()
-    {
-        var $this = $( this ),
-            $input = $this.parents( '.video-central-metaboxes-input' ),
-            $clone_group = $( this ).parents( '.video-central-metaboxes-field' ).attr( 'clone-group' );
+		// Trigger custom clone event
+		$input.trigger( 'clone', nextIndex );
+	}
 
-        // Remove clone only if there're 2 or more of them
-        if ( $input.find( '.video-central-metaboxes-clone' ).length <= 1 )
-            return false;
+	/**
+	 * Hide remove buttons when there's only 1 of them
+	 *
+	 * @param $container .video-central-metaboxes-input container
+	 *
+	 * @return void
+	 */
+	function toggleRemoveButtons( $container )
+	{
+		var $button = $container.find( '.remove-clone' );
+		$button.toggle( $button.length > 1 );
+	}
 
-        if ( $clone_group )
-        {
-            // Get the parent metabox and then find the matching
-            // clone-group elements inside
-            var $metabox = $( this ).parents( '.inside' );
-            var $clone_group_list = $metabox.find( 'div[clone-group="' + $clone_group + '"]' );
-            var $index = $this.parent().index();
+	/**
+	 * Toggle add button
+	 * Used with [data-max-clone] attribute. When max clone is reached, the add button is hid and vice versa
+	 *
+	 * @param $container .video-central-metaboxes-input container
+	 *
+	 * @return void
+	 */
+	function toggleAddButton( $container )
+	{
+		var $button = $container.find( '.add-clone' ),
+			maxClone = parseInt( $container.data( 'max-clone' ) ),
+			numClone = $container.find( '.video-central-metaboxes-clone' ).length;
 
-            $.each( $clone_group_list.find( '.video-central-metaboxes-input' ),
-                function( key, value )
-                {
-                    $( value ).children( '.video-central-metaboxes-clone' ).eq( $index ).remove();
+		$button.toggle( isNaN( maxClone ) || ( maxClone && numClone < maxClone ) );
+	}
 
-                    // Toggle remove buttons
-                    toggle_remove_buttons( $( value ) );
-                } );
-        }
-        else
-        {
-            $this.parent().remove();
+	$( '#wpbody-content' )
+	// Add clones
+		.on( 'click', '.add-clone', function ( e )
+		{
+			e.preventDefault();
 
-            // Toggle remove buttons
-            toggle_remove_buttons( $input );
-        }
+			var $container = $( this ).closest( '.video-central-metaboxes-input' );
+			clone( $container );
 
-        return false;
-    } );
+			toggleRemoveButtons( $container );
+			toggleAddButton( $container );
+		} )
+		// Remove clones
+		.on( 'click', '.remove-clone', function ( e )
+		{
+			e.preventDefault();
 
-    /**
-     * Hide remove buttons when there's only 1 of them
-     *
-     * @param $el jQuery element. If not supplied, the function will applies for all fields
-     *
-     * @return void
-     */
-    function toggle_remove_buttons( $el )
-    {
-        var $button;
-        if ( !$el )
-            $el = $( '.video-central-metaboxes-field' );
-        $el.each( function()
-        {
-            $button = $( this ).find( '.remove-clone' );
-            $button.length < 2 ? $button.hide() : $button.show();
-        } );
-    }
+			var $this = $( this ),
+				$container = $this.closest( '.video-central-metaboxes-input' );
+
+			// Remove clone only if there are 2 or more of them
+			if ( $container.find( '.video-central-metaboxes-clone' ).length < 2 )
+			{
+				return;
+			}
+
+			$this.parent().trigger( 'remove' ).remove();
+			toggleRemoveButtons( $container );
+			toggleAddButton( $container )
+		} );
+
+	$( '.video-central-metaboxes-input' ).each( function ()
+	{
+		var $container = $( this );
+		toggleRemoveButtons( $container );
+		toggleAddButton( $container );
+
+		$container
+			.data( 'next-index', $container.children( '.video-central-metaboxes-clone' ).length )
+			.sortable( {
+				handle     : '.video-central-metaboxes-clone-icon',
+				placeholder: ' video-central-metaboxes-clone video-central-metaboxes-clone-placeholder',
+				items      : '.video-central-metaboxes-clone',
+				start      : function ( event, ui )
+				{
+					// Make the placeholder has the same height as dragged item
+					ui.placeholder.height( ui.item.height() );
+				}
+			} );
+	} );
 } );

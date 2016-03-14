@@ -2,10 +2,10 @@
 .video-central-metaboxes-file li {
   width: 250px;
   margin: 0 10px 10px 0;
-  -moz-transition: width 0.25s, opacity 0.25s, -moz-opacity 0.25s;
-  -webkit-transition: width 0.25s, opacity 0.25s, -webkit-opacity 0.25s;
-  -o-transition: width 0.25s, opacity 0.25s, -o-opacity 0.25s;
-  transition: width 0.25s, opacity 0.25s; }
+  -moz-transition: width .25s, opacity .25s, -moz-opacity .25s;
+  -webkit-transition: width .25s, opacity .25s, -webkit-opacity .25s;
+  -o-transition: width .25s, opacity .25s, -o-opacity .25s;
+  transition: width .25s, opacity .25s; }
 
 .video-central-metaboxes-file .video-central-metaboxes-icon {
   width: 60px;
@@ -29,10 +29,13 @@
   font-weight: bold;
   text-decoration: none; }
 
-.video-central-metaboxes-file li, .video-central-metaboxes-file .video-central-metaboxes-icon, .video-central-metaboxes-file .video-central-metaboxes-info {
+.video-central-metaboxes-file li,
+.video-central-metaboxes-file .video-central-metaboxes-icon,
+.video-central-metaboxes-file .video-central-metaboxes-info {
   display: inline-block; }
 
-.video-central-metaboxes-file .video-central-metaboxes-icon, .video-central-metaboxes-file .video-central-metaboxes-info {
+.video-central-metaboxes-file .video-central-metaboxes-icon,
+.video-central-metaboxes-file .video-central-metaboxes-info {
   margin: 0 0 2px 2px; }
 
 .video-central-metaboxes-file li.removed {
@@ -44,7 +47,7 @@
   -o-opacity: 0; }
 
 .video-central-metaboxes-file li.removed:after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;

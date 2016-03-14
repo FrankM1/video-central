@@ -71,6 +71,14 @@ class Video_Central_Map_Shortcode
             'std' => '3',
         );
 
+        $params[] = array(
+            'type' => 'textfield',
+            'heading' => __('Classes', 'radium'),
+            'param_name' => 'classes',
+            'admin_label' => true,
+            'std' => '',
+        );
+
         $map_parameters = array(
             'name' => __('Video', 'radium'),
             'base' => 'video',
@@ -95,7 +103,15 @@ class Video_Central_Map_Shortcode
             'allowed_container_element' => 'vc_row',
             'category' => __('Video Central Elements', 'radium'),
             'description' => __('Display Video Central Index', 'radium'),
-            'params' => array(),
+            'params' => array(
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
+            ),
         );
 
         vc_map($map_parameters);
@@ -119,6 +135,13 @@ class Video_Central_Map_Shortcode
                     'value' => radium_builder_get_video_selection_data(),
                     'std' => '',
                 ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
             ),
         );
 
@@ -139,6 +162,13 @@ class Video_Central_Map_Shortcode
                     'type' => 'textfield',
                     'heading' => __('Maximum number of categories to show', 'radium'),
                     'param_name' => 'show_count',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
                     'admin_label' => true,
                     'std' => '',
                 ),
@@ -166,6 +196,13 @@ class Video_Central_Map_Shortcode
                     'value' => video_central_vc_get_category_selection_data(),
                     'std' => '',
                 ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
             ),
         );
 
@@ -186,6 +223,13 @@ class Video_Central_Map_Shortcode
                     'type' => 'textfield',
                     'heading' => __('Maximum number of tags to show', 'radium'),
                     'param_name' => 'show_count',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
                     'admin_label' => true,
                     'std' => '',
                 ),
@@ -213,6 +257,13 @@ class Video_Central_Map_Shortcode
                     'value' => video_central_vc_get_tag_selection_data(),
                     'std' => '',
                 ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
             ),
         );
 
@@ -236,6 +287,13 @@ class Video_Central_Map_Shortcode
                     'admin_label' => true,
                     'std' => '',
                 ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
             ),
         );
 
@@ -251,7 +309,15 @@ class Video_Central_Map_Shortcode
             'allowed_container_element' => 'vc_row',
             'category' => __('Video Central Elements', 'radium'),
             'description' => __('Display the video search form', 'radium'),
-            'params' => array(),
+            'params' => array(
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
+            ),
         );
 
         vc_map($map_parameters);
@@ -273,6 +339,13 @@ class Video_Central_Map_Shortcode
                     'param_name' => 'id',
                     'admin_label' => true,
                     'value' => radium_builder_get_registered_video_views_selection_data(),
+                    'std' => '',
+                ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
+                    'admin_label' => true,
                     'std' => '',
                 ),
             ),
@@ -297,6 +370,13 @@ class Video_Central_Map_Shortcode
                     'type' => 'textfield',
                     'heading' => __('Title', 'radium'),
                     'param_name' => 'title',
+                    'admin_label' => true,
+                    'std' => '',
+                ),
+                array(
+                    'type' => 'textfield',
+                    'heading' => __('Classes', 'radium'),
+                    'param_name' => 'classes',
                     'admin_label' => true,
                     'std' => '',
                 ),
