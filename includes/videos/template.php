@@ -1696,6 +1696,39 @@ function video_central_single_video_description($args = '')
         // Return filtered result
         return apply_filters(__FUNCTION__, $retstr, $r);
     }
+
+    /**
+     * Get featured image.
+     *
+     * @param int $video_id video id
+     *
+     * @return array
+     */
+    function video_central_get_featured_image_id($video_id = 0)
+    {
+        $video_id = video_central_get_video_id($video_id);
+
+        $thumb_id = false;
+
+        //Check if post has a featured image set else get the first image from the video and use it. If both statements are false display fallback image.
+        if ( get_post_meta($video_id, '_video_poster', true) ) {
+
+            $thumb_id = get_post_meta($video_id, '_video_poster', true);
+
+        } elseif ( has_post_thumbnail( $video_id ) ) {
+
+            //get featured image
+            $thumb_id = get_post_thumbnail_id($video_id);
+
+        } elseif ( get_post_meta($video_id, '_video_thumbnail', true) ) {
+
+            $thumb_id = get_post_meta($video_id, '_video_thumbnail', true);
+
+        }
+
+        return apply_filters(__FUNCTION__, $thumb_id, $video_id);
+    }
+
 /**
  * Get featured image.
  *
@@ -1707,19 +1740,7 @@ function video_central_get_featured_image_src($video_id = 0)
 {
     $video_id = video_central_get_video_id($video_id);
 
-    $image = false;
-
-    //Check if post has a featured image set else get the first image from the video and use it. If both statements are false display fallback image.
-    if ($thumb = get_post_meta($video_id, '_video_poster', true)) {
-        $image = wp_get_attachment_image_src($thumb, 'full'); //get full URL to image (use "large" or "medium" if the image is too big)
-    } elseif (has_post_thumbnail($video_id)) {
-
-        //get featured image
-        $thumb = get_post_thumbnail_id($video_id);
-        $image = wp_get_attachment_image_src($thumb, 'full'); //get full URL to image (use "large" or "medium" if the image is too big)
-    } elseif ($thumb = get_post_meta($video_id, '_video_thumbnail', true)) {
-        $image = wp_get_attachment_image_src($thumb, 'full');
-    }
+    $image = wp_get_attachment_image_src(video_central_get_featured_image_id($video_id), 'full');
 
     return apply_filters(__FUNCTION__, $image, $video_id);
 }
@@ -1909,13 +1930,17 @@ function video_central_video_duration($video_id = 0)
 
         $video_id = video_central_get_video_id($video_id);
 
-        $duration_data  = get_post_meta( $video_id, '_video_central_video_duration', true );
+        $duration_data = get_post_meta( $video_id, '_video_central_video_duration', true );
 
-        if( empty($duration_data)) {
-            $duration_data = '0:00';
+        $duration_data = trim($duration_data);
+
+        if( empty($duration_data) ) {
+            $duration_data = '000';
         }
 
-        $time = (preg_match('/^\d{2}:\d{2}$/', $duration_data)) ? $duration_data : video_central_sec_to_time($duration_data);
+        $array = explode(':', $duration_data);
+
+        $time = (count($array) !== 1) ? $duration_data : video_central_sec_to_time($duration_data);
 
         return apply_filters(__FUNCTION__, $time);
     }

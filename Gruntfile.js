@@ -25,16 +25,17 @@ module.exports = function(grunt) {
                 files: {
                     'assets/admin/css/style.css': 'assets/admin/scss/style.scss',
 
-                    'assets/admin/css/metaboxes/file.css': 'assets/admin/scss/metaboxes/file.scss',
+                    /* 'assets/admin/css/metaboxes/file.css': 'assets/admin/scss/metaboxes/file.scss',
                     'assets/admin/css/metaboxes/image-select.css': 'assets/admin/scss/metaboxes/image-select.scss',
                     'assets/admin/css/metaboxes/image.css': 'assets/admin/scss/metaboxes/image.scss',
                     'assets/admin/css/metaboxes/plupload-image.css': 'assets/admin/scss/metaboxes/plupload-image.scss',
                     'assets/admin/css/metaboxes/select-advanced.css': 'assets/admin/scss/metaboxes/select-advanced.scss',
                     'assets/admin/css/metaboxes/select.css': 'assets/admin/scss/metaboxes/select.scss',
-                    'assets/admin/css/metaboxes/style.css': 'assets/admin/scss/metaboxes/style.scss',
                     'assets/admin/css/metaboxes/wysiwyg.css': 'assets/admin/scss/metaboxes/wysiwyg.scss',
                     'assets/admin/css/playlist.css': 'assets/admin/scss/playlist.scss',
-                    'assets/admin/css/playlist-modal.css': 'assets/admin/scss/playlist-modal.scss',
+                    'assets/admin/css/playlist-modal.css': 'assets/admin/scss/playlist-modal.scss', */
+
+                    'assets/admin/css/metaboxes/style.css': 'assets/admin/scss/metaboxes/style.scss',
 
                     'assets/frontend/css/video-js.css': 'assets/frontend/scss/video-js.scss',
 
