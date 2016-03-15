@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,0CAA2C;EAC1C,MAAM,EAAE,IAAI;EACZ,SAAS,EAAE,KAAK",
+"mappings": "AAAA,0CAA2C;EACzC,MAAM,EAAE,IAAI;EACZ,SAAS,EAAE,KAAK",
 "sources": ["../../scss/metaboxes/select.scss"],
 "names": [],
 "file": "select.css"

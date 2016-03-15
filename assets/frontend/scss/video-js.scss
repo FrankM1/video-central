@@ -6,11 +6,17 @@
   font-size: 3em;
   background-color: rgba(43, 51, 63, 0.7);
   background-color: #2B333F;
+  margin-top: -1.25em;
+  margin-left: -1.25em;
   border: 2px solid #fff;
   border-radius: 50%;
   line-height: 2.5em;
-  height: 2.5em;
   width: 2.5em;
+  height: 2.5em;
   -webkit-border-radius: 50%;
-  -moz-border-radius:  50%;
+  -moz-border-radius: 50%;
+}
+
+.video-js .vjs-tech {
+  cursor: pointer;
 }

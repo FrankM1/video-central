@@ -1,0 +1,7 @@
+.video-central-metaboxes-color-wrapper .wp-picker-container {
+	position: relative;
+}
+.video-central-metaboxes-color-wrapper .wp-picker-holder {
+	position: absolute;
+	z-index: 9;
+}

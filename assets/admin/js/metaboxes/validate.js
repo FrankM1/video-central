@@ -1,22 +1,35 @@
-jQuery( document ).ready( function( $ )
+jQuery( function ( $ )
 {
-	var $form = $( '#post' );
+	'use strict';
 
-	// Required field styling
-	$.each( VideoCentralMetaboxes.validationOptions.rules, function( k, v )
+	var $form = $( '#post' ),
+		rules = {
+			invalidHandler: function ()
+			{
+				// Re-enable the submit ( publish/update ) button and hide the ajax indicator
+				$( '#publish' ).removeClass( 'button-primary-disabled' );
+				$( '#ajax-loading' ).attr( 'style', '' );
+				$form.siblings( '#message' ).remove();
+				$form.before( '<div id="message" class="error"><p>' + rwmbValidate.summaryMessage + '</p></div>' );
+			}
+		};
+
+	// Gather all validation rules
+	$( '.video-central-metaboxes-validation-rules' ).each( function ()
 	{
-		if ( v['required'] )
-			$( '#' + k ).parent().siblings( '.video-central-metaboxes-label' ).addClass( 'required' ).append( '<span>*</span>' );
+		var subRules = $( this ).data( 'rules' );
+		jQuery.extend( true, rules, subRules );
+
+		// Required field styling
+		$.each( subRules, function ( k, v )
+		{
+			if ( v['required'] )
+			{
+				$( '#' + k ).parent().siblings( '.video-central-metaboxes-label' ).addClass( 'required' ).append( '<span>*</span>' );
+			}
+		} );
 	} );
 
-	VideoCentralMetaboxes.validationOptions.invalidHandler = function( form, validator )
-	{
-		// Re-enable the submit ( publish/update ) button and hide the ajax indicator
-		$( '#publish' ).removeClass( 'button-primary-disabled' );
-		$( '#ajax-loading' ).attr( 'style', '' );
-		$form.siblings( '#message' ).remove();
-		$form.before( '<div id="message" class="error"><p>' + VideoCentralMetaboxes.summaryMessage + '</p></div>' );
-	};
-
-	$form.validate( VideoCentralMetaboxes.validationOptions );
+	// Execute
+	$form.validate( rules );
 } );

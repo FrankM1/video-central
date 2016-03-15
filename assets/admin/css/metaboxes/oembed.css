@@ -1,0 +1,11 @@
+.video-central-metaboxes-oembed-wrapper .spinner {
+	float: none;
+	vertical-align: top;
+	display: inline-block;
+}
+.video-central-metaboxes-oembed-wrapper .embed-code {
+	margin-top: 1em;
+}
+.video-central-metaboxes-oembed-wrapper .embed-code iframe {
+	max-width: 100%;
+}

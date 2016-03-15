@@ -1,0 +1,125 @@
+.video-central-metaboxes-media-list {
+	margin: 0 0 5px;
+	overflow: hidden;
+}
+.video-central-metaboxes-media-item {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.video-central-metaboxes-media-preview {
+	width: 60px;
+	float: left;
+	position: relative;
+}
+.video-central-metaboxes-media-preview:before {
+	content: '';
+	display: block;
+	padding-top: 100%;
+}
+.video-central-metaboxes-media-content {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+.video-central-metaboxes-media-content .centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transform: translate(50%, 50%);
+	-ms-transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
+}
+.video-central-metaboxes-media-content img {
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	max-height: 100%;
+	max-width: 100%;
+	border-radius: 3px;
+}
+.video-central-metaboxes-media-info {
+	margin-left: 65px;
+}
+.video-central-metaboxes-media-info a {
+	text-decoration: none;
+}
+.video-central-metaboxes-media-info p,
+.video-central-metaboxes-media-info h4 {
+	margin: 0 0 2px;
+}
+.video-central-metaboxes-edit-media,
+.video-central-metaboxes-remove-media {
+	font-size: 11px;
+	color: inherit;
+}
+.video-central-metaboxes-edit-media .dashicons,
+.video-central-metaboxes-remove-media .dashicons {
+	font-size: 12px;
+	width: 12px;
+	height: 12px;
+	vertical-align: middle;
+}
+
+/* Add more button */
+.video-central-metaboxes-media-view .video-central-metaboxes-add-media {
+	padding-left: 5px;
+	margin-right: 5px;
+}
+
+/* Status */
+.video-central-metaboxes-media-status {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 26px;
+	height: 28px;
+}
+
+/* Image */
+.video-central-metaboxes-image-item {
+	position: relative;
+	float: left;
+	padding: 0;
+	margin: 0 5px 5px 0;
+	box-sizing: border-box;
+	width: 150px;
+}
+.video-central-metaboxes-image-item .video-central-metaboxes-media-preview {
+	width: 150px;
+}
+.video-central-metaboxes-image-item .dashicons {
+	font-size: 20px;
+	width: 20px;
+	height: 20px;
+}
+.video-central-metaboxes-media-bar {
+	position: absolute;
+	z-index: 10;
+	display: none;
+	right: 5px;
+	top: 5px;
+	color: #fff;
+}
+.video-central-metaboxes-media-bar a {
+	text-decoration: none;
+	color: inherit;
+}
+.video-central-metaboxes-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, .6);
+	display: none;
+}
+.video-central-metaboxes-image-item:hover .video-central-metaboxes-media-bar,
+.video-central-metaboxes-image-item:hover .video-central-metaboxes-overlay {
+	display: block;
+	cursor: move;
+}

@@ -367,38 +367,42 @@ class Video_Central
 
             // Quick admin check and load if needed
             require $this->includes_dir.'admin/admin.php';
-        require $this->includes_dir.'admin/actions.php';
-        require $this->includes_dir.'admin/fields.php';
+            require $this->includes_dir.'admin/actions.php';
+            require $this->includes_dir.'admin/fields.php';
 
-            //Check that 'class-wp-list-table.php' is available
+            // Check that 'class-wp-list-table.php' is available
             if (!class_exists('WP_List_Table')) :
                 require_once ABSPATH.'wp-admin/includes/class-wp-list-table.php';
-        endif;
+            endif;
 
-        //Modules (Modules can run as 'independent' plugins to enhance or add features)
-        include_once $this->includes_dir.'modules/import/options.php';
+            //metaboxes
+            include_once $this->includes_dir.'modules/metaboxes/loader.php';
+            include_once $this->includes_dir.'modules/metaboxes/config.php';
 
-        include_once $this->includes_dir.'modules/import/video/class.settings.php';
-        include_once $this->includes_dir.'modules/import/video/class.thumbnails-providers.php';
-        include_once $this->includes_dir.'modules/import/video/class.wizard.php';
-        include_once $this->includes_dir.'modules/import/video/class.importer.php';
+            // Modules (Modules can run as 'independent' plugins to enhance or add features)
+            include_once $this->includes_dir.'modules/import/options.php';
 
-        //import youtube videos
-        include_once $this->includes_dir.'modules/import/youtube/functions.php';
-        include_once $this->includes_dir.'modules/import/youtube/class.api-query.php';
-        include_once $this->includes_dir.'modules/import/youtube/class.importer.php';
-        include_once $this->includes_dir.'modules/import/youtube/class.auto.importer.php';
-        include_once $this->includes_dir.'modules/import/youtube/class.thumbnails.php';
-        include_once $this->includes_dir.'modules/import/youtube/class.wizard.php';
-        include_once $this->includes_dir.'modules/import/youtube/class.list-table.php';
+            include_once $this->includes_dir.'modules/import/video/class.settings.php';
+            include_once $this->includes_dir.'modules/import/video/class.thumbnails-providers.php';
+            include_once $this->includes_dir.'modules/import/video/class.wizard.php';
+            include_once $this->includes_dir.'modules/import/video/class.importer.php';
 
-        //import youtube videos
-        //include_once $this->includes_dir.'modules/import/vimeo/functions.php';
-        //include_once $this->includes_dir.'modules/import/vimeo/class.importer.php';
-        //include_once $this->includes_dir.'modules/import/vimeo/class.importer-data.php';
-        include_once $this->includes_dir.'modules/import/vimeo/class.thumbnails.php';
-        //include_once $this->includes_dir.'modules/import/vimeo/class.wizard.php';
-        //include_once $this->includes_dir.'modules/import/vimeo/class.list-table.php';
+            //import youtube videos
+            include_once $this->includes_dir.'modules/import/youtube/functions.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.api-query.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.importer.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.auto.importer.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.thumbnails.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.wizard.php';
+            include_once $this->includes_dir.'modules/import/youtube/class.list-table.php';
+
+            //import youtube videos
+            //include_once $this->includes_dir.'modules/import/vimeo/functions.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.importer.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.importer-data.php';
+            include_once $this->includes_dir.'modules/import/vimeo/class.thumbnails.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.wizard.php';
+            //include_once $this->includes_dir.'modules/import/vimeo/class.list-table.php';
 
         else :
 
@@ -486,7 +490,7 @@ class Video_Central
         // Only run certain processes in the admin.
         if (is_admin()) :
 
-            $this->metaboxes = new Radium_Video_Metaboxes();
+            $this->metaboxes = new Video_Central_Metaboxes_Loader();
             //$this->playlist_metaboxes   = new Radium_Video_Playlist_Metaboxes;
             //$this->playlist_admin = new Video_Central_Playlist_Admin();
 

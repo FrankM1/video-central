@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,kDAAmD;EAClD,UAAU,EAAE,IAAI",
+"mappings": "AAAA,kDAAmD;EACjD,UAAU,EAAE,IAAI",
 "sources": ["../../scss/metaboxes/wysiwyg.scss"],
 "names": [],
 "file": "wysiwyg.css"
