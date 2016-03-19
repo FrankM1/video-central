@@ -14,7 +14,7 @@ Video Central is the ultimate video manager for WordPress.
 
 Video Central allows you to import and present videos on your website from various sources such as Youtube, Vimeo or upload and host your own videos.
 
-This plugin borrows from the code structure and philosophy found in popular plugins such as bbPress and BuddyPress meaning it is very customizable, extendable and integrates nicely with any WordPress installation. The plugin gives you the ability to create a layout or theme just the way you like it.
+This plugin uses the code structure and philosophy found in popular plugins such as bbPress and BuddyPress making it very customizable, extendable and allowing the plugin to integrate well with any WordPress installation. The plugin gives you the ability to create a layout or theme easily.
 
 = Features =
 
