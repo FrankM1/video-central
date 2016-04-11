@@ -10,7 +10,7 @@
     <form method="get" action="" id="video_central_load_feed_form">
 
         <?php wp_nonce_field('video-central-import', 'video_central_search_nonce');?>
-        <input type="hidden" name="post_type" value="<?php echo $this->post_type;?>" />
+        <input type="hidden" name="post_type" value="<?php echo esc_attr( $this->post_type );?>" />
         <input type="hidden" name="page" value="video_central_import" />
         <input type="hidden" name="video_central_source" value="vimeo" />
 

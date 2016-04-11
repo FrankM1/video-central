@@ -53,7 +53,7 @@ class Video_Central_Thumbnails_Providers
     public function text_setting_callback($args)
     {
         $value = (isset($this->options[$args['slug']]) ? $this->options[$args['slug']] : '');
-        $html = '<input type="text" id="'.$args['slug'].'" name="video_thumbnails[providers]['.$this->service_slug.']['.$args['slug'].']" value="'.$value.'"/>';
+        $html = '<input type="text" id="'. esc_attr( $args['slug'] ) .'" name="video_thumbnails[providers]['. esc_attr( $this->service_slug ).']['. esc_attr( $args['slug'] ).']" value="'. esc_attr( $value ).'"/>';
         $html .= '<label for="'.$args['slug'].'"> '.$args['description'].'</label>';
         echo $html;
     }

@@ -510,7 +510,7 @@ function video_central_get_video($video, $output = OBJECT, $filter = 'raw')
  */
 function video_central_video_permalink($video_id = 0)
 {
-    echo esc_url(video_central_get_video_permalink($video_id));
+    echo esc_url( video_central_get_video_permalink( $video_id ) );
 }
     /**
      * Return the link to the video.

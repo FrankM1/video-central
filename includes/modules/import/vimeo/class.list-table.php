@@ -187,8 +187,8 @@ class Video_Central_Vimeo_Importer_ListTable extends WP_List_Table
         // get dropdown output
         $categ_select = wp_dropdown_categories($args);
         ?>
-        <select name="action<?php echo $suffix;
-        ?>" id="action_<?php echo $which;
+        <select name="action<?php echo esc_attr( $suffix );
+        ?>" id="action_<?php echo esc_attr( $which );
         ?>">
             <option value="-1"><?php _e('Bulk actions', 'video_central');
         ?></option>
@@ -197,7 +197,7 @@ class Video_Central_Vimeo_Importer_ListTable extends WP_List_Table
         </select>
 
         <?php if ($categ_select): ?>
-        <label for="video_central_categories<?php echo $suffix;
+        <label for="video_central_categories<?php echo esc_attr( $suffix );
         ?>"><?php _e('Import into category', 'video_central');
         ?> :</label>
         <?php echo $categ_select;
@@ -205,7 +205,7 @@ class Video_Central_Vimeo_Importer_ListTable extends WP_List_Table
         <?php endif;
         ?>
 
-        <?php submit_button(__('Apply', 'video_central'), 'action', false, false, array('id' => "doaction$suffix"));
+        <?php submit_button( __('Apply', 'video_central'), 'action', false, false, array( 'id' => 'doaction'. esc_attr( $suffix ) ) );
         ?>
         <span class="video-central-ajax-response"></span>
         <?php

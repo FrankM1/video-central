@@ -449,7 +449,7 @@ function video_central_video_views($video_id = 0)
         return;
     }
 
-    echo $count;
+    echo esc_html( $count );
 }
 
     /**

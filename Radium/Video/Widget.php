@@ -163,18 +163,18 @@ class Radium_Video_Widget extends WP_Widget
         <p><!-- Widget Title: Text Input -->
             <label for="<?php echo $this->get_field_id('title');
         ?>"><?php _e('Title:', 'video_central') ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id('title');
-        ?>" name="<?php echo $this->get_field_name('title');
-        ?>" value="<?php echo $instance['title'];
+            <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id('title') );
+        ?>" name="<?php echo esc_attr( $this->get_field_name('title') );
+        ?>" value="<?php echo esc_attr( $instance['title'] );
         ?>" />
         </p>
 
         <p><!-- Number Input: Text Input -->
             <label for="<?php echo $this->get_field_id('number');
         ?>"><?php _e('Number of Posts to Display:', 'video_central') ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id('number');
-        ?>" name="<?php echo $this->get_field_name('number');
-        ?>" value="<?php echo $instance['number'];
+            <input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id('number') );
+        ?>" name="<?php echo esc_attr( $this->get_field_name('number') );
+        ?>" value="<?php echo esc_attr( $instance['number'] );
         ?>" />
         </p>
 
@@ -183,7 +183,7 @@ class Radium_Video_Widget extends WP_Widget
         ?>"><?php _e('Description:', 'video_central') ?></label>
             <textarea class="widefat" rows="6" cols="15" id="<?php echo $this->get_field_id('desc');
         ?>" name="<?php echo $this->get_field_name('desc');
-        ?>"><?php echo $instance['desc'];
+        ?>"><?php echo esc_html( $instance['desc'] );
         ?></textarea>
         </p>
 
