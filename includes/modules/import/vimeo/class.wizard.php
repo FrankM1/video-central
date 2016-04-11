@@ -34,8 +34,7 @@ class Video_Central_Vimeo_Importer_Video_Wizard extends Video_Central_Importer_W
     {
         ?>
         <div class="video-central-import-source-tab">
-            <a href="#" class="video-central-tab-select select-vimeo"><img src="<?php echo video_central()->admin->images_url;
-        ?>vimeo.png" title="vimeo" /></a>
+            <a href="#" class="video-central-tab-select select-vimeo"><img src="<?php echo esc_url( video_central()->admin->images_url .'vimeo.png' ); ?>" title="vimeo" /></a>
         </div>
     <?php
     }

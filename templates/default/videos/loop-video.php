@@ -17,7 +17,7 @@ $image_size = video_central_thumbnail_dimensions();
 
     <a class="video-central-thumb" href="<?php video_central_video_permalink(); ?>">
 
-        <img src="<?php video_central_featured_image_url(); ?>" alt="" height="<?php echo $image_size['height']; ?>" width="<?php echo $image_size['width']; ?>"/>
+        <img src="<?php video_central_featured_image_url(); ?>" alt="" height="<?php echo esc_attr( $image_size['height'] ); ?>" width="<?php echo esc_attr( $image_size['width'] ); ?>"/>
 
         <span class="video-icon-wrapper"><span class="icon icon-play"></span></span>
 

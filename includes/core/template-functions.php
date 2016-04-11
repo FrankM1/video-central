@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Video Central Template Functions.
  *
@@ -513,22 +512,13 @@ function video_central_parse_query($posts_query)
         // Setup the default user variable
         $the_user = false;
 
-        // If using pretty permalinks, use the email or slug
-        if (get_option('permalink_structure')) {
+        // If using pretty permalinks, always use slug
+        if ( get_option( 'permalink_structure' ) ) {
+            $the_user = get_user_by( 'slug', $video_central_user );
 
-            // Email was passed
-            if (is_email($video_central_user)) {
-                $the_user = get_user_by('email', $video_central_user);
-
-            // Try nicename
-            } else {
-                $the_user = get_user_by('slug', $video_central_user);
-            }
-        }
-
-        // No user found by slug/email, so try the ID if it's numeric
-        if (empty($the_user) && is_numeric($video_central_user)) {
-            $the_user = get_user_by('id', $video_central_user);
+        // If not using pretty permalinks, always use numeric ID
+        } elseif ( is_numeric( $video_central_user ) ) {
+            $the_user = get_user_by( 'id', $video_central_user );
         }
 
         // 404 and bail if user does not have a profile
@@ -609,10 +599,10 @@ function video_central_parse_query($posts_query)
         video_central()->displayed_user = $the_user;
 
     // View Page
-    } elseif (!empty($video_central_view)) {
+    } elseif ( ! empty( $video_central_view ) ) {
 
         // Check if the view exists by checking if there are query args are set
-        $view_args = video_central_get_view_query_args($video_central_view);
+        $view_args = video_central_get_view_query_args( $video_central_view );
 
         // Bail if view args is false (view isn't registered)
         if (false === $view_args) {

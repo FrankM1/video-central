@@ -115,10 +115,10 @@ class Radium_Video_Template
         }
 
         // Just to be safe, we check if the file exist first
-        if (file_exists($file)) {
+        if ( file_exists( $file ) ) {
             return $file;
         } else {
-            echo $file;
+            echo esc_html( $file );
         }
 
         return $template;

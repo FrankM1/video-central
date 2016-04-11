@@ -948,33 +948,48 @@ function video_central_title($title = '', $sep = '&raquo;', $seplocation = '')
  *
  * @since 1.0.0
  *
- * @param string $url Pass a URL to redirect to
+ * @param array args Pass a URL to redirect to
  *
  * @uses add_query_arg() To add a arg to the url
  * @uses site_url() Toget the site url
  * @uses apply_filters() Calls 'video_central_wp_login_action' with the url and args
  */
-function video_central_wp_login_action($args = '')
-{
+
+function video_central_wp_login_action( $args = '' ) {
+    echo esc_url( video_central_get_wp_login_action( $args ) );
+}
+
+    /**
+     * Return the login form action url
+     *
+     * @since 1.2.3
+     *
+     * @param array $args Pass a URL to redirect to
+     * @uses add_query_arg() To add a arg to the url
+     * @uses site_url() Toget the site url
+     * @uses apply_filters() Calls 'video_central_wp_login_action' with the url and args
+     */
+function video_central_get_wp_login_action( $args = '' ) {
 
     // Parse arguments against default values
-    $r = video_central_parse_args($args, array(
-        'action' => '',
+    $r = video_central_parse_args( $args, array(
+        'action'  => '',
         'context' => '',
-    ), 'login_action');
+        'url'     => 'wp-login.php'
+    ), 'login_action' );
 
     // Add action as query arg
-    if (!empty($r['action'])) {
-        $login_url = add_query_arg(array('action' => $r['action']), 'wp-login.php');
+    if ( !empty( $r['action'] ) ) {
+        $login_url = add_query_arg( array( 'action' => $r['action'] ), $r['url'] );
 
     // No query arg
     } else {
-        $login_url = 'wp-login.php';
+        $login_url = $r['url'];
     }
 
-    $login_url = site_url($login_url, $r['context']);
+    $login_url = site_url( $login_url, $r['context'] );
 
-    echo apply_filters(__FUNCTION__, $login_url, $r);
+    return apply_filters( __FUNCTION__, $login_url, $r, $args );
 }
 
 /**
@@ -1005,7 +1020,7 @@ function video_central_redirect_to_field($redirect_to = '')
 
     // Remove loggedout query arg if it's there
     $redirect_to = (string) esc_attr(remove_query_arg('loggedout', $redirect_to));
-    $redirect_field = '<input type="hidden" id="video_central_redirect_to" name="redirect_to" value="'.$redirect_to.'" />';
+    $redirect_field = '<input type="hidden" id="video_central_redirect_to" name="redirect_to" value="'. esc_url( $redirect_to ).'" />';
 
     echo apply_filters(__FUNCTION__, $redirect_field, $redirect_to);
 }

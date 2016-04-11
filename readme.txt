@@ -6,7 +6,7 @@ License URI: http://www.gnu.org/licenses/gpl.html
 Tags: Video, Media, Shortcode, Youtube, Vimeo, Comments, Widget
 Requires at least: 3.3
 Tested up to: 4.4.2
-Stable tag: 1.1.3
+Stable tag: 1.2.2
 
 Video Central is the ultimate video manager for WordPress.
 
@@ -14,7 +14,7 @@ Video Central is the ultimate video manager for WordPress.
 
 Video Central allows you to import and present videos on your website from various sources such as Youtube, Vimeo or upload and host your own videos.
 
-This plugin borrows from the code structure and philosophy found in popular plugins such as bbPress and BuddyPress meaning it is very customizable, extendable and integrates nicely with any WordPress installation. The plugin gives you the ability to create a layout or theme just the way you like it.
+This plugin uses the code structure and philosophy found in popular plugins such as bbPress and BuddyPress making it very customizable, extendable and allowing the plugin to integrate well with any WordPress installation. The plugin gives you the ability to create a layout or theme easily.
 
 = Features =
 
@@ -73,7 +73,9 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 * New - Create playlist
 * New - Made Links in description clickable by default
 * New - Duration meta field in video
-* New - Integration with Visual Composer layout  Builder
+* New - Integration with Visual Composer layout Builder
+* Rebuilt video meta options
+* Upgraded video player to video js 5
 
 = 1.2.0 =
 

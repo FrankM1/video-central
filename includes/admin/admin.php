@@ -152,11 +152,9 @@ class Video_Central_Admin
 
         /* Ajax **************************************************************/
 
+        // No _nopriv_ equivalent - users must be logged in
         add_action('wp_ajax_video_central_suggest_video',        array($this, 'suggest_video'));
-        add_action('wp_ajax_nopriv_video_central_suggest_video', array($this, 'suggest_video'));
-
         add_action('wp_ajax_video_central_suggest_user',         array($this, 'suggest_user'));
-        add_action('wp_ajax_nopriv_video_central_suggest_user',  array($this, 'suggest_user'));
 
         /* Filters ***********************************************************/
 
@@ -410,12 +408,12 @@ class Video_Central_Admin
 
         // Settings page link
         if (current_user_can('video_central_settings_page')) {
-            $new_links['settings'] = '<a href="'.add_query_arg(array('page' => 'video_central'), admin_url('options-general.php')).'">'.esc_html__('Settings', 'video_central').'</a>';
+            $new_links['settings'] = '<a href="'. esc_url( add_query_arg( array( 'page' => 'video_central' ), admin_url( 'options-general.php' ) ) ).'">'.esc_html__( 'Settings', 'video_central' ).'</a>';
         }
 
         // About page link
         if (current_user_can('video_central_about_page')) {
-            $new_links['about'] = '<a href="'.add_query_arg(array('page' => 'video-central-about'), admin_url('index.php')).'">'.esc_html__('About',    'video_central').'</a>';
+            $new_links['about'] = '<a href="'. esc_url( add_query_arg( array( 'page' => 'video-central-about' ), admin_url( 'index.php' ) ) ).'">'.esc_html__( 'About',    'video_central' ).'</a>';
         }
 
         // Add a few links to the existing links array
@@ -622,12 +620,26 @@ class Video_Central_Admin
      *
      * @since 1.0.0
      */
-    public function suggest_user()
-    {
+    public function suggest_user() {
+
+        global $wpdb;
+
+        // Bail early if no request
+        if ( empty( $_REQUEST['q'] ) ) {
+            wp_die( '0' );
+        }
+
+        // Bail if user cannot moderate - only moderators can change authorship
+        if ( ! current_user_can( 'moderate' ) ) {
+            wp_die( '0' );
+        }
+
+        // Check the ajax nonce
+        check_ajax_referer( 'video_central_suggest_user_nonce' );
 
         // Try to get some users
         $users_query = new WP_User_Query(array(
-            'search' => '*'.like_escape($_REQUEST['q']).'*',
+            'search'         => '*' . $wpdb->esc_like( $_REQUEST['q'] ) . '*',
             'fields' => array('ID', 'user_nicename'),
             'search_columns' => array('ID', 'user_nicename', 'user_email'),
             'orderby' => 'ID',
@@ -784,7 +796,7 @@ class Video_Central_Admin
         foreach ($this->plugin_settings_tabs as $tab_key => $tab_caption) {
             $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
 
-            echo '<a class="nav-tab '.$active.'" href="?page=video_central&tab='.$tab_key.'">'.$tab_caption.'</a>';
+            echo '<a class="nav-tab '.$active.'" href="?page=video_central&tab='.esc_attr($tab_key).'">'.$tab_caption.'</a>';
         }
 
         echo '</h2>';

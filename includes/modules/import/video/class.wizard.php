@@ -56,8 +56,7 @@ class Video_Central_Importer_Wizard
         }
 
         ?>
-        <div class="wizard-wrap" data-step="<?php echo $data_step_current;
-        ?>">
+        <div class="wizard-wrap" data-step="<?php echo esc_attr( $data_step_current ); ?>">
 
             <div class="wizard-container">
 
@@ -75,7 +74,7 @@ class Video_Central_Importer_Wizard
     echo 'current';
 }
         ?>" id="step1" data-step="1">
-                        <?php _e('Select Source', 'video_central');
+                        <?php esc_html_e('Select Source', 'video_central');
         ?>
                     </div>
 
@@ -86,7 +85,7 @@ class Video_Central_Importer_Wizard
     echo 'current';
 }
         ?>" id="step2" data-step="2">
-                        <?php _e('Set Parameters', 'video_central');
+                        <?php esc_html_e('Set Parameters', 'video_central');
         ?>
                     </div>
 
@@ -97,7 +96,7 @@ class Video_Central_Importer_Wizard
     echo 'current';
 }
         ?>" id="step3" data-step="3">
-                        <?php _e('Select Videos & Import', 'video_central');
+                        <?php esc_html_e('Select Videos & Import', 'video_central');
         ?>
                     </div>
 
@@ -105,7 +104,7 @@ class Video_Central_Importer_Wizard
     echo 'current';
 }
         ?>" id="step4" data-step="4">
-                        <?php _e('Done', 'video_central');
+                        <?php esc_html_e('Done', 'video_central');
         ?>
                     </div>
                 </div>
@@ -126,7 +125,7 @@ class Video_Central_Importer_Wizard
                             </div>
 
                             <br />
-                            <a onclick="window.Video_Central_Import.Wizard_Step_Process(1, 2)" class="button"><?php _e('Start', 'video_central');
+                            <a onclick="window.Video_Central_Import.Wizard_Step_Process(1, 2)" class="button"><?php esc_html_e('Start', 'video_central');
         ?></a>
                         </div>
                     </div>
@@ -134,10 +133,10 @@ class Video_Central_Importer_Wizard
                 <div class="block" id="block2">
                     <div class="wrap video-central-import-parameters">
                         <div class="video-central-import-parameters-description">
-                            <h2><?php _e('Set Parameters', 'video_central');
+                            <h2><?php esc_html_e('Set Parameters', 'video_central');
         ?></h2>
                             <p class="description">
-                                <?php _e('Enter the search criteria and submit.', 'video_central');
+                                <?php esc_html_e('Enter the search criteria and submit.', 'video_central');
         ?>
                             </p>
                         </div>
@@ -170,15 +169,15 @@ class Video_Central_Importer_Wizard
 
                 <div class="block" id="block4">
                     <div class="wrap video-central-import-done">
-                        <h2><?php _e('Done', 'video_central');
+                        <h2><?php esc_html_e('Done', 'video_central');
         ?></h2>
                         <div id="video-central-import-done"><?php do_action('video_central_import_complete');
         ?></div>
                         <br />
-                        <a onclick="window.Video_Central_Import.Wizard_Step_Process(4, 1, 'restart')" class="button"><?php _e('Start Over', 'video_central');
+                        <a onclick="window.Video_Central_Import.Wizard_Step_Process(4, 1, 'restart')" class="button"><?php esc_html_e('Start Over', 'video_central');
         ?></a>
                         <a href="<?php echo admin_url('edit.php?post_type='.video_central_get_video_post_type());
-        ?>" class="button"><?php _e('Go to Videos List', 'video_central');
+        ?>" class="button"><?php esc_html_e('Go to Videos List', 'video_central');
         ?></a>
 
                     </div>

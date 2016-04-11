@@ -23,7 +23,7 @@ function video_central_show_oauth_link($text = '', $echo = true)
         if (!empty($options['token']['value'])) {
             $nonce = wp_create_nonce('video-central-revoke-oauth-token');
             $url = menu_page_url('video_central_settings', false).'&unset_token=true&video_central_nonce='.$nonce.'#video-central-settings-auth-options';
-            printf('<a href="%s" class="button">%s</a>', $url, __('Revoke access', 'video_central'));
+            printf('<a href="%s" class="button">%s</a>', esc_url( $url ), __('Revoke access', 'video_central'));
 
             return;
         }
@@ -41,7 +41,7 @@ function video_central_show_oauth_link($text = '', $echo = true)
 
     $url = $endpoint.'?'.http_build_query($parameters);
 
-    $anchor = sprintf('<a href="%s">%s</a>', $url, $text);
+    $anchor = sprintf('<a href="%s">%s</a>', esc_url( $url ), esc_html( $text ) );
     if ($echo) {
         echo $anchor;
     }
