@@ -73,10 +73,11 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 = 1.2.3 =
 * Fixed self hosted video upload bug.
-* Fixed Readmore button 
+* Fixed Readmore button
 * Wordpress 4.7 compatibility
 * Removed get_currentuserinfo()
 * Metaboxes update
+* Security fixes
 
 = 1.2.2 =
 * New - Create playlist

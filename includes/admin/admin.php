@@ -215,6 +215,15 @@ class Video_Central_Admin
                 'video-central-about',
                 array($this, 'about_screen')
             );
+
+            // credits
+            add_dashboard_page(
+                __('Video Central Credits',  'video_central'),
+                __('Video Central Credits',  'video_central'),
+                $this->minimum_capability,
+                'video-central-credits',
+                array($this, 'credits_screen')
+            );
         }
 
         // Bail if plugin is not network activated
@@ -661,52 +670,81 @@ class Video_Central_Admin
      *
      * @since 1.0.0
      */
-    public function about_screen()
-    {
-        list($display_version) = explode('-', video_central_get_version());
-        ?>
+    public function about_screen() {
+
+        list($display_version) = explode('-', video_central_get_version() ); ?>
 
         <div class="wrap about-wrap">
-            <h1><?php printf(esc_html__('Welcome to Video Central %s', 'video_central'), $display_version);
-        ?></h1>
-            <div class="about-text"><?php printf(esc_html__('Thank you for updating.', 'video_central'), $display_version);
-        ?></div>
+            <h1><?php printf(esc_html__('Welcome to Video Central %s', 'video_central'), $display_version); ?></h1>
+            <div class="about-text"><?php printf(esc_html__('Thank you for updating.', 'video_central'), $display_version); ?></div>
 
             <h2 class="nav-tab-wrapper">
-                <a class="nav-tab nav-tab-active" href="<?php echo esc_url(admin_url(add_query_arg(array('page' => 'video-central-about'), 'index.php')));
-        ?>">
-                    <?php esc_html_e('What&#8217;s New', 'video_central');
-        ?>
-                </a><a class="nav-tab" href="<?php echo esc_url(admin_url(add_query_arg(array('page' => 'video-central-credits'), 'index.php')));
-        ?>">
-                    <?php esc_html_e('Credits', 'video_central');
-        ?>
+                <a class="nav-tab nav-tab-active" href="<?php echo esc_url(admin_url(add_query_arg(array('page' => 'video-central-about'), 'index.php'))); ?>">
+                    <?php esc_html_e('What&#8217;s New', 'video_central'); ?>
+                </a>
+                <a class="nav-tab" href="<?php echo esc_url(admin_url(add_query_arg(array('page' => 'video-central-credits'), 'index.php'))); ?>">
+                    <?php esc_html_e('Credits', 'video_central'); ?>
                 </a>
             </h2>
 
-            <!-- <div class="changelog">
-                <h3><?php esc_html_e('Converters', 'video_central');
-        ?></h3>
-
-                <div class="feature-section col three-col">
-                    <div>
-                        <h4><?php esc_html_e('Theme Compatibility', 'video_central');
-        ?></h4>
-                        <p><?php esc_html_e('Better handling of styles and scripts in the template stack.', 'video_central');
-        ?></p>
-                    </div>
-                 </div>
-            </div> -->
-
-            <div class="return-to-dashboard">
-                <a href="<?php echo esc_url(admin_url(add_query_arg(array('page' => 'video_central'), 'options-general.php')));
-        ?>"><?php esc_html_e('Go to video Settings', 'video_central');
-        ?></a>
+            <div class="changelog">
+                <p><?php esc_html_e( 'Video central has been growing and improving with time to become the best video managerment plugin for WordPress. Below is a list of the latest changes in version ', 'video_central'); echo video_central_get_version(); ?>.</p>
+                <h4><?php esc_html_e( 'Changelog', 'video_central' ); ?></h4>
+                <div class="changelog-section">
+                    <ul>
+                        <li><?php esc_html_e( 'Fixed self hosted video upload bug', 'video_central' ); ?></li>
+                        <li><?php esc_html_e( 'Fixed Readmore button', 'video_central' ); ?></li>
+                        <li><?php esc_html_e( 'Wordpress 4.7 compatibility', 'video_central' ); ?></li>
+                        <li><?php esc_html_e( 'Removed get_currentuserinfo()', 'video_central' ); ?></li>
+                        <li><?php esc_html_e( 'Metaboxes update', 'video_central' ); ?></li>
+                        <li><?php esc_html_e( 'Security fixes', 'video_central' ); ?></li>
+                    </ul>
             </div>
-
         </div>
 
-        <?php
+            <div class="return-to-dashboard">
+                <a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'video_central' ), 'options-general.php' ) ) ); ?>"><?php esc_html_e( 'Go to video Settings', 'video_central' ); ?></a>
+            </div>
+
+        </div><?php
+
+    }
+
+    /**
+     * Output the about screen.
+     *
+     * @since 1.0.0
+     */
+    public function credits_screen() {
+
+        list($display_version) = explode('-', video_central_get_version() ); ?>
+
+        <div class="wrap about-wrap">
+            <h1><?php printf(esc_html__('Welcome to Video Central %s', 'video_central'), $display_version); ?></h1>
+            <div class="about-text"><?php printf(esc_html__('Thank you for updating.', 'video_central'), $display_version); ?></div>
+
+            <h2 class="nav-tab-wrapper">
+                <a class="nav-tab" href="<?php echo esc_url(admin_url(add_query_arg(array('page' => 'video-central-about'), 'index.php'))); ?>">
+                    <?php esc_html_e('What&#8217;s New', 'video_central'); ?>
+                </a>
+                <a class="nav-tab nav-tab-active" href="<?php echo esc_url(admin_url(add_query_arg(array('page' => 'video-central-credits'), 'index.php'))); ?>">
+                    <?php esc_html_e('Credits', 'video_central'); ?>
+                </a>
+            </h2>
+
+            <div class="credits">
+                <p><?php esc_html_e( 'Video central was created and is maintained by Franklin Gitonga.', 'video_central'); ?></br></br>
+                <?php esc_html_e( 'Twitter: ', 'video_central'); ?><a href="https://twitter.com/FrankGM1">@FrankGM1</a></br>
+                <?php esc_html_e( 'Website: ', 'video_central'); ?><a href="http://radiumthemes.com">RadiumThemes</a></br>
+                <?php esc_html_e( 'Plugin Demo: ', 'video_central'); ?><a href="http://demo.videocentral.co">Video Central Demo</a></p>
+
+            </div>
+
+            <div class="return-to-dashboard">
+                <a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'video_central' ), 'options-general.php' ) ) ); ?>"><?php esc_html_e( 'Go to video Settings', 'video_central' ); ?></a>
+            </div>
+
+        </div><?php
 
     }
 
