@@ -1,279 +1,389 @@
 window.rwmb = window.rwmb || {};
 
-jQuery( function ( $ )
-{
+jQuery( function ( $ ) {
 	'use strict';
 
 	var views = rwmb.views = rwmb.views || {},
-		MediaField, MediaList, MediaItem, ImageField, ImageList, ImageItem, MediaButton, MediaStatus, UploadButton;
+		models = rwmb.models = rwmb.models || {},
+		Controller, MediaField, MediaList, MediaItem, MediaButton, MediaStatus;
 
-	MediaList = views.MediaList = Backbone.View.extend( {
-		tagName       	: 'ul',
-		className     	: 'video-central-metaboxes-media-list',
-		createItemView: function ( options )
-		{
-			return new MediaItem( options );
+	/***
+	 * Controller Model
+	 * Manages data of media field and media models.  Most of the media views will use this to manage the media
+	 */
+	Controller = models.Controller = Backbone.Model.extend( {
+		//Default options
+		defaults: {
+			maxFiles: 0,
+			ids: [],
+			mimeType: '',
+			forceDelete: false,
+			showStatus: true,
+			length: 0
 		},
 
-		addItemView: function ( item )
-		{
-			this.itemViews[item.cid] = this.createItemView( {
-				model     : item,
-				collection: this.collection,
-				props     : this.props
-			} );
-			this.$el.append( this.itemViews[item.cid].el );
-		},
-
-		render: function ()
-		{
-			this.$el.empty();
-			this.collection.each( this.addItemView );
-		},
-
-		initialize: function ( options )
-		{
+		//Initialize Controller model
+		initialize: function ( options ) {
 			var that = this;
-			this.itemViews = {};
-			this.props = options.props;
+			// All numbers, no 0 ids
+			this.set( 'ids', _.without( _.map( this.get( 'ids' ), Number ), 0, - 1 ) );
 
-			this.listenTo( this.collection, 'add', this.addItemView );
+			// Create items collection
+			this.set( 'items', new wp.media.model.Attachments() );
 
-			this.listenTo( this.collection, 'remove', function ( item, collection )
-			{
-				if ( this.itemViews[item.cid] )
-				{
-					this.itemViews[item.cid].remove();
-					delete this.itemViews[item.cid];
+			this.listenTo( this.get( 'items' ), 'add remove reset', function () {
+				var items = this.get( 'items' ),
+					length = items.length,
+					max = this.get( 'maxFiles' );
+
+				this.set( 'length', length );
+				this.set( 'full', max > 0 && length >= max );
+			} );
+
+			// Listen for destroy event on controller, delete all models when triggered
+			this.on( 'destroy', function ( e ) {
+				if ( this.get( 'forceDelete' ) ) {
+					this.get( 'items' ).each( function ( item ) {
+						item.destroy();
+					} );
 				}
 			} );
+		},
 
-			//Sort media using sortable
-			this.$el.sortable( { delay: 150 } );
 
-			this.render();
+		// Method to load media
+		load: function () {
+			var that = this;
+			// Load initial media
+			if ( ! _.isEmpty( this.get( 'ids' ) ) ) {
+				this.get( 'items' ).props.set( {
+					query: true,
+					include: this.get( 'ids' ),
+					orderby: 'post__in',
+					order: 'ASC',
+					type: this.get( 'mimeType' ),
+					perPage: this.get( 'maxFiles' ) || - 1
+				} );
+				// Get more then trigger ready
+				this.get( 'items' ).more();
+			}
+		},
+
+		// Method to remove media items
+		removeItem: function ( item ) {
+			this.get( 'items' ).remove( item );
+			if ( this.get( 'forceDelete' ) ) {
+				item.destroy();
+			}
+		},
+
+		// Method to add items
+		addItems: function ( items ) {
+			if ( this.get( 'maxFiles' ) ) {
+				var left = this.get( 'maxFiles' ) - this.get( 'items' ).length;
+				if ( left <= 0 ) {
+					return this;
+				}
+
+				items = _.difference( items, this.get( 'items' ).models );
+				items = _.first( items, left );
+			}
+			this.get( 'items' ).add( items );
 		}
 	} );
 
-	ImageList = views.ImageList = MediaList.extend( {
-		createItemView: function ( options )
-		{
-			return new ImageItem( options );
-		}
-	} );
-
+	/***
+	 * MediaField
+	 * Sets up media field view and subviews
+	 */
 	MediaField = views.MediaField = Backbone.View.extend( {
-		initialize: function ( options )
-		{
+		initialize: function ( options ) {
 			var that = this;
 			this.$input = $( options.input );
-			this.values = this.$input.val().split( ',' );
-			this.props = new Backbone.Model( this.$el.data() );
-			this.props.set( 'fieldName', this.$input.attr( 'name' ) );
+			this.controller = new Controller( _.extend(
+				{
+					fieldName: this.$input.attr( 'name' ),
+					ids: this.$input.val().split( ',' )
+				},
+				this.$el.data()
+			) );
 
-			//Create collection
-			this.collection = new wp.media.model.Attachments();
+			// Create views
+			this.createList();
+			this.createAddButton();
+			this.createStatus();
+
+			// Render
+			this.render();
+
+			// Load media
+			this.controller.load();
+
+			// Listen for destroy event on input
+			this.$input.on( 'remove', function () {
+				this.controller.destroy();
+			} );
+
+			this.controller.on( 'change:length', function ( e ) {
+				that.$input.trigger( 'change' );
+			} );
+		},
+
+		// Creates media list
+		createList: function () {
+			this.list = new MediaList( {controller: this.controller} );
+		},
+
+		// Creates button that adds media
+		createAddButton: function () {
+			this.addButton = new MediaButton( {controller: this.controller} );
+		},
+
+		// Creates status
+		createStatus: function () {
+			this.status = new MediaStatus( {controller: this.controller} );
+		},
+
+		// Render field and adds sub fields
+		render: function () {
+			// Empty then add parts
+			this.$el.empty().append(
+				this.list.el,
+				this.addButton.el,
+				this.status.el
+			);
+		}
+	} );
+
+	/***
+	 * Media List
+	 * lists media
+	 */
+	MediaList = views.MediaList = Backbone.View.extend( {
+		tagName: 'ul',
+		className: 'video-central-metaboxes-media-list',
+
+		//Add item view
+		addItemView: function ( item ) {
+			var view = this._views[item.cid] = new this.itemView( {
+				model: item,
+				controller: this.controller
+			} );
+
+			this.$el.append( view.el );
+		},
+
+		//Remove item view
+		removeItemView: function ( item ) {
+			if ( this._views[item.cid] ) {
+				this._views[item.cid].remove();
+				delete this._views[item.cid];
+			}
+		},
+
+		initialize: function ( options ) {
+			this._views = {};
+			this.controller = options.controller;
+			this.itemView = options.itemView || MediaItem;
+
+			this.setEvents();
+
+			// Sort media using sortable
+			this.initSortable();
+		},
+
+		setEvents: function () {
+			this.listenTo( this.controller.get( 'items' ), 'add', this.addItemView );
+			this.listenTo( this.controller.get( 'items' ), 'remove', this.removeItemView );
+		},
+
+		initSortable: function () {
+			var collection = this.controller.get( 'items' );
+			this.$el.sortable( {
+				// Change the position of the attachment as soon as the
+				// mouse pointer overlaps a thumbnail.
+				tolerance: 'pointer',
+
+				// Record the initial `index` of the dragged model.
+				start: function ( event, ui ) {
+					ui.item.data( 'sortableIndexStart', ui.item.index() );
+				},
+
+				// Update the model's index in the collection.
+				// Do so silently, as the view is already accurate.
+				update: function ( event, ui ) {
+					var model = collection.at( ui.item.data( 'sortableIndexStart' ) );
+
+					// Silently shift the model to its new index.
+					collection.remove( model, {
+						silent: true
+					} );
+					collection.add( model, {
+						silent: true,
+						at: ui.item.index()
+					} );
+
+					// Fire the `reset` event to ensure other collections sync.
+					collection.trigger( 'reset', collection );
+				}
+			} );
+		}
+	} );
+
+	/***
+	 * MediaStatus
+	 * Tracks status of media field if maxStatus is greater than 0
+	 */
+	MediaStatus = views.MediaStatus = Backbone.View.extend( {
+		tagName: 'span',
+		className: 'video-central-metaboxes-media-status',
+		template: wp.template( 'video-central-metaboxes-media-status' ),
+
+		//Initialize
+		initialize: function ( options ) {
+			this.controller = options.controller;
+
+			//Auto hide if showStatus is false
+			if ( ! this.controller.get( 'showStatus' ) ) {
+				this.$el.hide();
+			}
+
+			//Rerender if changes happen in controller
+			this.listenTo( this.controller, 'change:length', this.render );
 
 			//Render
 			this.render();
-
-			//Limit max files
-			this.listenTo( this.collection, 'add', function ( item, collection )
-			{
-				var maxFiles = this.props.get( 'maxFiles' );
-				if ( maxFiles > 0 && this.collection.length > maxFiles )
-				{
-					this.collection.pop();
-				}
-			} );
-
-			//Load initial media
-			if ( !_.isEmpty( this.values ) )
-			{
-				this.collection.props.set( {
-					query  : true,
-					include: this.values,
-					orderby: 'post__in',
-					order  : 'ASC',
-					type   : this.props.get( 'mimeType' ),
-					perPage: this.props.get( 'maxFiles' ) || -1
-				} );
-				this.collection.more();
-			}
-
-			//Listen for destroy event on input
-			this.$input
-				.on( 'remove', function(){
-					if ( that.props.gat( 'forceDelete' ) )
-					{
-						_.each( _.clone( that.collection.models ), function ( model )
-						{
-							model.destroy();
-						} );
-					}
-				} )
 		},
 
-		render: function ()
-		{
-			//Empty then add parts
-			this.$el.empty();
-			this.$el.append( new MediaList( { collection: this.collection, props: this.props } ).el );
-			this.$el.append( new MediaButton( { collection: this.collection, props: this.props } ).el );
-			this.$el.append( new MediaStatus( { collection: this.collection, props: this.props } ).el );
+		render: function () {
+			var attrs = _.clone( this.controller.attributes );
+			this.$el.html( this.template( attrs ) );
 		}
 	} );
 
-	ImageField = views.ImageField = MediaField.extend( {
-		render: function ()
-		{
-			this.$el.empty();
-			this.$el.append( new ImageList( { collection: this.collection, props: this.props } ).el );
-			this.$el.append( new MediaButton( { collection: this.collection, props: this.props } ).el );
-			this.$el.append( new MediaStatus( { collection: this.collection, props: this.props } ).el );
-		}
-	} );
-
-	MediaStatus = views.MediaStatus = Backbone.View.extend( {
-		tagName   : 'span',
-		className : 'video-central-metaboxes-media-status',
-		template  : wp.template( 'video-central-metaboxes-media-status' ),
-		initialize: function ( options )
-		{
-			this.props = options.props;
-			this.listenTo( this.collection, 'add remove reset', this.render );
-			this.render();
-		},
-
-		render: function ()
-		{
-			var data = {
-				items   : this.collection.length,
-				maxFiles: this.props.get( 'maxFiles' )
-			};
-			this.$el.html( this.template( data ) );
-		}
-	} );
-
+	/***
+	 * Media Button
+	 * Selects and adds ,edia to controller
+	 */
 	MediaButton = views.MediaButton = Backbone.View.extend( {
 		className: 'video-central-metaboxes-add-media button',
-		tagName  : 'a',
-		template : wp.template( 'video-central-metaboxes-add-media' ),
-		events   : {
-			click: function ()
-			{
-				var models = this.collection.models;
-
+		tagName: 'a',
+		events: {
+			click: function () {
 				// Destroy the previous collection frame.
-				if ( this._frame )
-				{
-					this.stopListening( this._frame );
+				if ( this._frame ) {
+					//this.stopListening( this._frame );
 					this._frame.dispose();
 				}
 
 				this._frame = wp.media( {
 					className: 'media-frame video-central-metaboxes-media-frame',
-					multiple : true,
-					title    : 'Select Media',
-					editing  : true,
-					library  : {
-						type: this.props.get( 'mimeType' )
+					multiple: true,
+					title: i18nVcmMedia.select,
+					editing: true,
+					library: {
+						type: this.controller.get( 'mimeType' )
 					}
 				} );
 
-				this.listenTo( this._frame, 'select', function ()
-				{
+				this._frame.on( 'select', function () {
 					var selection = this._frame.state().get( 'selection' );
-					this.collection.add( selection.models );
-				} );
+					this.controller.addItems( selection.models );
+				}, this );
 
 				this._frame.open();
 			}
 		},
-		render   : function ()
-		{
-			this.$el.html( this.template( {} ) );
+		render: function () {
+			this.$el.text( i18nVcmMedia.add );
 			return this;
 		},
 
-		initialize: function ( options )
-		{
-			this.props = options.props;
-			this.listenTo( this.collection, 'add remove reset', function ()
-			{
-				var maxFiles = this.props.get( 'maxFiles' );
-				if ( maxFiles > 0 && this.collection.length >= maxFiles )
-				{
-					this.$el.hide();
-				}
-				else
-				{
-					this.$el.show();
-				}
+		initialize: function ( options ) {
+			this.controller = options.controller;
+
+			// Auto hide if you reach the max number of media
+			this.listenTo( this.controller, 'change:full', function () {
+				this.$el.toggle( ! this.controller.get( 'full' ) );
 			} );
 
 			this.render();
 		}
 	} );
 
+	/***
+	 * MediaItem
+	 * View for individual media items
+	 */
 	MediaItem = views.MediaItem = Backbone.View.extend( {
-		tagName   : 'li',
-		className : 'video-central-metaboxes-media-item',
-		template  : wp.template( 'video-central-metaboxes-media-item' ),
-		initialize: function ( options )
-		{
-			this.props = options.props;
+		tagName: 'li',
+		className: 'video-central-metaboxes-media-item',
+		template: wp.template( 'video-central-metaboxes-media-item' ),
+		initialize: function ( options ) {
+			this.controller = options.controller;
 			this.render();
-			this.listenTo( this.model, 'destroy', function ( model )
-			{
-				this.collection.remove( this.model );
+			this.listenTo( this.model, 'change', function () {
+				this.render();
 			} );
+
+			this.$el.data( 'id', this.model.cid );
 		},
 
+
 		events: {
-			'click .video-central-metaboxes-remove-media': function ( e )
-			{
-				this.collection.remove( this.model );
-				if ( this.props.get( 'forceDelete' ) )
-				{
-					this.model.destroy();
+			// Event when remove button clicked
+			'click .video-central-metaboxes-remove-media': function ( e ) {
+				this.controller.removeItem( this.model );
+				return false;
+			},
+
+			'click .video-central-metaboxes-edit-media': function ( e ) {
+				// Destroy the previous collection frame.
+				if ( this._frame ) {
+					//this.stopListening( this._frame );
+					this._frame.dispose();
 				}
+
+				// Trigger the media frame to open the correct item
+				this._frame = wp.media( {
+					frame: 'edit-attachments',
+					controller: {
+						// Needed to trick Edit modal to think there is a gridRouter
+						gridRouter: {
+							navigate: function ( destination ) {
+							},
+							baseUrl: function ( url ) {
+							}
+						}
+					},
+					library: this.controller.get( 'items' ),
+					model: this.model
+				} );
+
+				this._frame.open();
 
 				return false;
 			}
 		},
 
-		render: function ()
-		{
+		render: function () {
 			var attrs = _.clone( this.model.attributes );
-			attrs.fieldName = this.props.get( 'fieldName' );
+			attrs.fieldName = this.controller.get( 'fieldName' );
 			this.$el.html( this.template( attrs ) );
 			return this;
 		}
-	} );
-
-	ImageItem = views.ImageItem = MediaItem.extend( {
-		className: 'video-central-metaboxes-image-item',
-		template : wp.template( 'video-central-metaboxes-image-item' )
 	} );
 
 	/**
 	 * Initialize media fields
 	 * @return void
 	 */
-	function initMediaField()
-	{
-		new MediaField( { input: this, el: $( this ).siblings( 'div.video-central-metaboxes-media-view' ) } );
+	function initMediaField() {
+		new MediaField( {input: this, el: $( this ).siblings( 'div.video-central-metaboxes-media-view' )} );
 	}
 
-	function initImageField()
-	{
-		new ImageField( { input: this, el: $( this ).siblings( 'div.video-central-metaboxes-media-view' ) } );
-	}
 
 	$( ':input.video-central-metaboxes-file_advanced' ).each( initMediaField );
-	$( ':input.video-central-metaboxes-image_advanced' ).each( initImageField );
 	$( '.video-central-metaboxes-input' )
-		.on( 'clone', ':input.video-central-metaboxes-file_advanced', initMediaField )
-		.on( 'clone', ':input.video-central-metaboxes-image_advanced', initImageField )
+		.on( 'clone', ':input.video-central-metaboxes-file_advanced', initMediaField );
 } );

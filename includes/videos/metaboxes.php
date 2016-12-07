@@ -1,5 +1,5 @@
 <?php
-add_filter( 'video_central_metaboxes', 'video_central_register_meta_boxes' );
+add_filter( 'video_central_metaboxes', 'video_central_video_register_meta_boxes' );
 /**
  * Register meta boxes
  *
@@ -9,7 +9,7 @@ add_filter( 'video_central_metaboxes', 'video_central_register_meta_boxes' );
  *
  * @return array
  */
-function video_central_register_meta_boxes( $meta_boxes ) {
+function video_central_video_register_meta_boxes( $meta_boxes ) {
 
     global $post;
 

@@ -307,39 +307,45 @@ function video_central_get_template_stack()
 {
     global $wp_filter, $merged_filters, $wp_current_filter;
 
-    // Setup some default variables
-    $tag = 'video_central_template_stack';
-    $args = $stack = array();
+	// Setup some default variables
+	$tag  = 'video_central_template_stack';
+	$args = $stack = array();
 
-    // Add 'video_central_template_stack' to the current filter array
-    $wp_current_filter[] = $tag;
+	// Add 'video_central_template_stack' to the current filter array.
+	$wp_current_filter[] = $tag;
 
-    // Sort
-    if (!isset($merged_filters[ $tag ])) {
-        ksort($wp_filter[$tag]);
-        $merged_filters[ $tag ] = true;
-    }
+	// Sort.
+	if ( class_exists( 'WP_Hook' ) ) {
+		$filter = $wp_filter[ $tag ]->callbacks;
+	} else {
+		$filter = &$wp_filter[ $tag ];
 
-    // Ensure we're always at the beginning of the filter array
-    reset($wp_filter[ $tag ]);
+		if ( ! isset( $merged_filters[ $tag ] ) ) {
+			ksort( $filter );
+			$merged_filters[ $tag ] = true;
+		}
+	}
 
-    // Loop through 'video_central_template_stack' filters, and call callback functions
-    do {
-        foreach ((array) current($wp_filter[$tag]) as $the_) {
-            if (!is_null($the_['function'])) {
-                $args[1] = $stack;
-                $stack[] = call_user_func_array($the_['function'], array_slice($args, 1, (int) $the_['accepted_args']));
-            }
-        }
-    } while (next($wp_filter[$tag]) !== false);
+	// Ensure we're always at the beginning of the filter array.
+	reset( $filter );
 
-    // Remove 'video_central_template_stack' from the current filter array
-    array_pop($wp_current_filter);
+	// Loop through 'video_central_template_stack' filters, and call callback functions.
+	do {
+		foreach( (array) current( $filter ) as $the_ ) {
+			if ( ! is_null( $the_['function'] ) ) {
+				$args[1] = $stack;
+				$stack[] = call_user_func_array( $the_['function'], array_slice( $args, 1, (int) $the_['accepted_args'] ) );
+			}
+		}
+	} while ( next( $filter ) !== false );
 
-    // Remove empties and duplicates
-    $stack = array_unique(array_filter($stack));
+	// Remove 'video_central_template_stack' from the current filter array.
+	array_pop( $wp_current_filter );
 
-    return (array) apply_filters(__FUNCTION__, $stack);
+	// Remove empties and duplicates.
+	$stack = array_unique( array_filter( $stack ) );
+
+	return (array) apply_filters( __FUNCTION__, $stack ) ;
 }
 
 /**

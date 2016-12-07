@@ -35,6 +35,10 @@ For more info, check me out on twitter and follow <a href="http://twitter.com/fr
 2. Activate the Video Central plugin through the 'Plugins' menu in WordPress
 3. Configure the plugin by going to the `Video` menu that appears in your admin menu
 
+## New in Version 1.2.3
+
+* Fixed self hosted video upload bug.
+* Wordpress 4.7 compatibility
 
 ## New in Version 1.2.2
 

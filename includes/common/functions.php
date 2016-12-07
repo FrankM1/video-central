@@ -278,8 +278,6 @@ function video_central_get_current_user_role()
 {
     global $current_user;
 
-    get_currentuserinfo();
-
     $user_roles = $current_user->roles;
 
     $user_role = array_shift($user_roles);

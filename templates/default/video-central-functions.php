@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Functions of Video Central's Default theme.
  *
@@ -33,8 +32,8 @@ class Video_Central_Default_Theme extends Video_Central_Theme_Compat
      *
      * @since 1.0.0
      *
-     * @uses BBP_Default::setup_globals()
-     * @uses BBP_Default::setup_actions()
+     * @uses Video_Central_Default::setup_globals()
+     * @uses Video_Central_Default::setup_actions()
      */
     public function __construct($properties = array())
     {

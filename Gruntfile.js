@@ -99,7 +99,6 @@ module.exports = function(grunt) {
                         'templates/default/js/vendor/bootstrap.tabs.js',
                         'templates/default/js/vendor/fitvid.js',
                         'templates/default/js/vendor/readmore.min.js',
-
                     ]
                 }
             },
