@@ -34,7 +34,7 @@ class Video_Central_Video_Posttype
         add_action('after_setup_theme', array(&$this, 'setup'), 99);
 
         // PORTFOLIO THUMBNAILS
-           add_filter('manage_edit-video_columns', array(&$this, 'add_thumbnail_column'), 10, 1);
+        add_filter('manage_edit-video_columns', array(&$this, 'add_thumbnail_column'), 10, 1);
 
         // add columns to posts table
         add_filter('manage_edit-'.$this->post_type.'_columns', array($this, 'extra_columns'));

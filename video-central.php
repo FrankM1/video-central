@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
 Author: Franklin M Gitonga
-Version: 1.2.2
+Version: 1.2.3
 Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
@@ -46,7 +45,7 @@ class Video_Central
      *
      * @var string
      */
-    public $version = '1.2.2';
+    public $version = '1.2.3';
 
     /** Magic *****************************************************************/
 
@@ -300,7 +299,7 @@ class Video_Central
         require $this->includes_dir.'core/template-loader.php';
         require $this->includes_dir.'core/theme-compat.php';
 
-/** Components ********************************************************/
+        /** Components ********************************************************/
 
         // Common
         require $this->includes_dir.'common/functions.php';
@@ -315,6 +314,7 @@ class Video_Central
         require $this->includes_dir.'videos/capabilities.php';
         require $this->includes_dir.'videos/functions.php';
         require $this->includes_dir.'videos/template.php';
+        require $this->includes_dir.'videos/metaboxes.php';
 
         // Player
         require $this->includes_dir.'player/functions.php';
@@ -330,13 +330,13 @@ class Video_Central
         require $this->includes_dir.'users/template.php';
         //require( $this->includes_dir . 'users/options.php'        );
 
-        /* playlist
+        // playlist
         require $this->includes_dir.'playlist/class.posttype.php';
         require $this->includes_dir.'playlist/class.admin.php';
         require $this->includes_dir.'playlist/functions.php';
         require $this->includes_dir.'playlist/template.php';
-        require $this->includes_dir.'playlist/post-meta.php';
-        require $this->includes_dir.'playlist/ajax.php'; */
+        require $this->includes_dir.'playlist/metaboxes.php';
+        require $this->includes_dir.'playlist/ajax.php';
 
         //likes
         require $this->includes_dir.'modules/likes/functions.php';
@@ -377,7 +377,6 @@ class Video_Central
 
             //metaboxes
             include_once $this->includes_dir.'modules/metaboxes/loader.php';
-            include_once $this->includes_dir.'modules/metaboxes/config.php';
 
             // Modules (Modules can run as 'independent' plugins to enhance or add features)
             include_once $this->includes_dir.'modules/import/options.php';
@@ -425,7 +424,7 @@ class Video_Central
         add_action('deactivate_'.$this->basename, 'video_central_deactivation');
 
          // If Video Central is being deactivated, do not add any actions
-        if (video_central_is_deactivation($this->basename)) {
+        if ( video_central_is_deactivation( $this->basename ) ) {
             return;
         }
 
@@ -484,17 +483,16 @@ class Video_Central
         /* Load the plugin */
         new Video_Central_Video_Posttype();
         new Radium_MediaElements_Shortcode();
-        //new Video_Central_Playlist_Posttype();
+        new Video_Central_Playlist_Posttype();
         new Video_Central_Map_Shortcode();
 
         // Only run certain processes in the admin.
-        if (is_admin()) :
+        if ( is_admin() ) :
 
             $this->metaboxes = new Video_Central_Metaboxes_Loader();
-            //$this->playlist_metaboxes   = new Radium_Video_Playlist_Metaboxes;
-            //$this->playlist_admin = new Video_Central_Playlist_Admin();
+            $this->playlist_admin = new Video_Central_Playlist_Admin();
 
-        $this->import_thumbnails = new Video_Central_Import_Thumbnails();
+            $this->import_thumbnails = new Video_Central_Import_Thumbnails();
             //$this->auto_import_youtube  = new Video_Central_Youtube_Auto_Importer;
 
             new Video_Central_Likes_Ajax();
@@ -511,7 +509,7 @@ class Video_Central
     {
 
         //video js (http://videojs.com)
-        wp_enqueue_script('video-central-player', $this->core_assets_url . 'frontend/js/video-js.js', array('jquery'), $this->version, true); //dev version is required for some plugins to work
+        wp_enqueue_script('video-central-player', $this->core_assets_url . 'frontend/js/video-js.js', array('jquery'), $this->version, true);
 
         //custom css files
         wp_enqueue_style('video-central-player-style', $this->core_assets_url.'frontend/css/video-js.css', array(), $this->version);

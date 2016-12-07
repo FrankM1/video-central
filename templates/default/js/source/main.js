@@ -2,6 +2,9 @@ var VideoCentral = {
 
     init: function(){
 
+        var content = jQuery('.video-central-single-content');
+        var toggle = content.data('toggle');
+
         VideoCentral.loopViewSwitcher();
         VideoCentral.lessMore();
 
@@ -13,10 +16,14 @@ var VideoCentral = {
         // FitVid Magic - Target all videos
         jQuery('.video-central-player').fitVids({ customSelector: "iframe[src*='livestream']" });
 
-        jQuery('.video-central-single-content').readmore({
-            speed: 75,
-            lessLink: '<a href="#">Read less</a>'
-        });
+        if ( toggle ) {
+            jQuery('.video-central-single-content').readmore({
+                speed: 75,
+                collapsedHeight: 200, // in pixels
+                lessLink: '<a href="#">Read less</a>',
+                moreLink: '<a href="#">Read more</a>'
+            }).append('<a href="#">Read more</a>');
+        }
 
     },
 
@@ -102,7 +109,7 @@ var VideoCentral = {
 
             stage.jcarouselAutoscroll({
                 'interval': interval,
-                'autostart': true 
+                'autostart': true
             });
 
         }

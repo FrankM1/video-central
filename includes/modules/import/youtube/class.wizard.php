@@ -60,7 +60,7 @@ class Video_Central_Youtube_Importer_Video_Wizard extends Video_Central_Importer
     {
         $list_table = video_central()->admin->video_central_list_table;
 
-        if ($list_table) {
+        if ( ! empty( $list_table ) ) {
             $list_table->prepare_items();
             ?>
         <div class="import-progress">

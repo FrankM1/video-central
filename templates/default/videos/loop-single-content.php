@@ -27,7 +27,9 @@
 
     ?>
 
-    <div class="video-central-single-content entry-content" data-toggle="<?php echo video_central_content_toggle(); ?>"><?php video_central_content(); ?></div>
+    <div class="video-central-single-content entry-content" data-toggle="<?php echo video_central_content_toggle(); ?>">
+        <div class="video-central-content-inner"><?php video_central_content(); ?></div>
+    </div>
 
     <div id="video-central-action-panels" class="video-central-entry-meta">
 

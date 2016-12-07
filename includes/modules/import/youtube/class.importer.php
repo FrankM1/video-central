@@ -60,9 +60,9 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
         }
 
         // set post type and taxonomy
-        if ($theme_import) {
+        if ( $theme_import ) {
             $this->post_type = $theme_import['post_type']; // set post type
-            $taxonomy = (!$theme_import['taxonomy'] && 'post' == $theme_import['post_type']) ?
+            $taxonomy = ( ! $theme_import['taxonomy'] && 'post' == $theme_import['post_type'] ) ?
                         'category' : // if taxonomy is false and is post type post, set it to category
                         $theme_import['taxonomy'];
             $post_format = isset($theme_import['post_format']) && $theme_import['post_format'] ?

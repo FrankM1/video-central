@@ -41,7 +41,7 @@ function video_central_player($video_id = 0)
         $poster = video_central_get_featured_image_url($video_id, array('height' => '800', 'width' => '600'));
 
         if ($upload_source == 'youtube') {
-            $url = 'https://www.youtube.com/embed/'.$upload_video_id;
+            $url = 'https://www.youtube.com/embed/'.$upload_video_id . '?version=3&enablejsapi=1';
 
             $dataSetup['forceSSL'] = 'true';
             $dataSetup['techOrder'] = array('youtube');
@@ -82,6 +82,7 @@ _end_;
             $file_webm = wp_get_attachment_url($file_id_webm);
             $file_ogg = wp_get_attachment_url($file_id_ogg);
             $file_flv = wp_get_attachment_url($file_id_flv);
+
 
             $dataSetup['fluid']     = 'true';
             $dataSetup['controls']  = 'true';
@@ -125,7 +126,7 @@ _end_;
                     $output .= $source;
 
                 $output .= '</video>';
-                
+
             } else {
 
                 $output = '<div class="alert error">'. __('Failed to retrieve video file', 'video_central') .'</div>';

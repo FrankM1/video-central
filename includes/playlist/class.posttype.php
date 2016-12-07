@@ -7,8 +7,7 @@
  *
  * @author  Franklin M Gitonga
  */
-class Video_Central_Playlist_Posttype
-{
+class Video_Central_Playlist_Posttype {
     /**
      * Holds a copy of the object for easy reference.
      *
@@ -31,7 +30,6 @@ class Video_Central_Playlist_Posttype
 
         $this->playlist_init();
 
-        add_action('admin_init', array($this, 'register_meta_boxes'));
     }
 
     public function playlist_init()
@@ -60,37 +58,6 @@ class Video_Central_Playlist_Posttype
                 'menu_icon' => '',
             ))
         );
-    }
-
-    public function register_meta_boxes()
-    {
-
-        //select videos
-
-         $arg = array(
-
-            array(
-                'name' => __('Video Description', 'video_central'),
-                'desc' => __('', 'video_central'),
-                'id' => '_video_central_playlist_ids',
-                'type' => 'Text',
-            ),
-
-        );
-
-        $meta_boxes[] = array(
-            'id' => 'video-profile-settings',
-            'title' => __('Playlist Settings', 'video_central'),
-            'pages' => array(video_central_get_playlist_post_type()),
-            'context' => 'normal',
-            'priority' => 'high',
-            'fields' => apply_filters('video_central_metaboxes_playlist', $arg),
-        );
-
-        // Make sure there's no errors when the plugin is deactivated or during upgrade
-        foreach ($meta_boxes as $meta_box) {
-            new Video_Central_Metaboxes_Init($meta_box);
-        }
     }
 
     /**

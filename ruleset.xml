@@ -9,7 +9,6 @@
     <description>
         Custom code checks for Radium WordPress themes.
     </description>
-    <rule ref="rulesets/unusedcode.xml" />
     <rule ref="rulesets/codesize.xml">
             <exclude name="NPathComplexity" />
             <exclude name="ExcessiveClassLength" />
