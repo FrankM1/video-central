@@ -75,7 +75,7 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 * Fixed self hosted video upload bug.
 * Fixed Readmore button
 * Wordpress 4.7 compatibility
-* Removed get_currentuserinfo()
+* Removed deplicated get_currentuserinfo()
 * Metaboxes update
 * Security fixes
 
