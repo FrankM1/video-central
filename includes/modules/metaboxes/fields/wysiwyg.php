@@ -3,10 +3,11 @@
 /**
  * WYSIWYG (editor) field class.
  */
-class Video_Central_Metaboxes_Wysiwyg_Field extends Video_Central_Metaboxes_Field
-{
+class Video_Central_Metaboxes_Wysiwyg_Field extends Video_Central_Metaboxes_Field {
+
 	/**
 	 * Array of cloneable editors.
+	 *
 	 * @var array
 	 */
 	static $cloneable_editors = array();
@@ -14,8 +15,7 @@ class Video_Central_Metaboxes_Wysiwyg_Field extends Video_Central_Metaboxes_Fiel
 	/**
 	 * Enqueue scripts and styles.
 	 */
-	static function admin_enqueue_scripts()
-	{
+	static function admin_enqueue_scripts() {
 		wp_enqueue_style( 'video-central-metaboxes-wysiwyg', Video_Central_Metaboxes_CSS_URL . 'wysiwyg.css', array(), Video_Central_Metaboxes_VER );
 		wp_enqueue_script( 'video-central-metaboxes-wysiwyg', Video_Central_Metaboxes_JS_URL . 'wysiwyg.js', array( 'jquery' ), Video_Central_Metaboxes_VER, true );
 	}
@@ -29,22 +29,8 @@ class Video_Central_Metaboxes_Wysiwyg_Field extends Video_Central_Metaboxes_Fiel
 	 * @param array $field
 	 * @return string
 	 */
-	static function value( $new, $old, $post_id, $field )
-	{
-		if ( $field['raw'] )
-		{
-			$meta = $new;
-		}
-		elseif ( $field['clone'] )
-		{
-			$meta = array_map( 'wpautop', $new );
-		}
-		else
-		{
-			$meta = wpautop( $new );
-		}
-
-		return $meta;
+	static function value( $new, $old, $post_id, $field ) {
+		return  $field['raw'] ? $new : wpautop( $new );
 	}
 
 	/**
@@ -54,8 +40,7 @@ class Video_Central_Metaboxes_Wysiwyg_Field extends Video_Central_Metaboxes_Fiel
 	 * @param array $field
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
+	static function html( $meta, $field ) {
 		// Using output buffering because wp_editor() echos directly
 		ob_start();
 
@@ -74,8 +59,7 @@ class Video_Central_Metaboxes_Wysiwyg_Field extends Video_Central_Metaboxes_Fiel
 	 * @param mixed $meta
 	 * @return mixed
 	 */
-	static function esc_meta( $meta )
-	{
+	static function esc_meta( $meta ) {
 		return $meta;
 	}
 
@@ -85,8 +69,7 @@ class Video_Central_Metaboxes_Wysiwyg_Field extends Video_Central_Metaboxes_Fiel
 	 * @param array $field
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	static function normalize( $field ) {
 		$field = parent::normalize( $field );
 		$field = wp_parse_args( $field, array(
 			'raw'     => false,

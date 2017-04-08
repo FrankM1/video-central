@@ -1,17 +1,18 @@
 <?php
+
 /**
  * File field class which uses HTML <input type="file"> to upload file.
  */
-class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
-{
+class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field {
+
 	/**
 	 * Enqueue scripts and styles
 	 */
-	static function admin_enqueue_scripts()
-	{
+	public static function admin_enqueue_scripts() {
 		wp_enqueue_style( 'video-central-metaboxes-file', Video_Central_Metaboxes_CSS_URL . 'file.css', array(), Video_Central_Metaboxes_VER );
 		wp_enqueue_script( 'video-central-metaboxes-file', Video_Central_Metaboxes_JS_URL . 'file.js', array( 'jquery' ), Video_Central_Metaboxes_VER, true );
-		wp_localize_script( 'video-central-metaboxes-file', 'rwmbFile', array(
+
+		self::localize_script( 'video-central-metaboxes-file', 'rwmbFile', array(
 			'maxFileUploadsSingle' => __( 'You may only upload maximum %d file', 'meta-box' ),
 			'maxFileUploadsPlural' => __( 'You may only upload maximum %d files', 'meta-box' ),
 		) );
@@ -20,23 +21,23 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 	/**
 	 * Add custom actions
 	 */
-	static function add_actions()
-	{
-		// Add data encoding type for file uploading
+	public static function add_actions() {
 		add_action( 'post_edit_form_tag', array( __CLASS__, 'post_edit_form_tag' ) );
-
-		// Delete file via Ajax
 		add_action( 'wp_ajax_video_central_metaboxes_delete_file', array( __CLASS__, 'wp_ajax_delete_file' ) );
-
-		// Allow reordering files
 		add_action( 'wp_ajax_video_central_metaboxes_reorder_files', array( __CLASS__, 'wp_ajax_reorder_files' ) );
+	}
+
+	/**
+	 * Add data encoding type for file uploading
+	 */
+	public static function post_edit_form_tag() {
+		echo ' enctype="multipart/form-data"';
 	}
 
 	/**
 	 * Ajax callback for reordering images
 	 */
-	static function wp_ajax_reorder_files()
-	{
+	public static function wp_ajax_reorder_files() {
 		$post_id  = (int) filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
 		$field_id = (string) filter_input( INPUT_POST, 'field_id' );
 		$order    = (string) filter_input( INPUT_POST, 'order' );
@@ -44,30 +45,19 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 		check_ajax_referer( "video-central-metaboxes-reorder-files_{$field_id}" );
 		parse_str( $order, $items );
 		delete_post_meta( $post_id, $field_id );
-		foreach ( $items['item'] as $item )
-		{
+		foreach ( $items['item'] as $item ) {
 			add_post_meta( $post_id, $field_id, $item, false );
 		}
 		wp_send_json_success();
 	}
 
 	/**
-	 * Add data encoding type for file uploading
-	 *
-	 * @return void
-	 */
-	static function post_edit_form_tag()
-	{
-		echo ' enctype="multipart/form-data"';
-	}
-
-	/**
 	 * Ajax callback for deleting files.
 	 * Modified from a function used by "Verve Meta Boxes" plugin
+	 *
 	 * @link http://goo.gl/LzYSq
 	 */
-	static function wp_ajax_delete_file()
-	{
+	public static function wp_ajax_delete_file() {
 		$post_id       = (int) filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
 		$field_id      = (string) filter_input( INPUT_POST, 'field_id' );
 		$attachment_id = (int) filter_input( INPUT_POST, 'attachment_id', FILTER_SANITIZE_NUMBER_INT );
@@ -77,10 +67,10 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 		delete_post_meta( $post_id, $field_id, $attachment_id );
 		$success = $force_delete ? wp_delete_attachment( $attachment_id ) : true;
 
-		if ( $success )
+		if ( $success ) {
 			wp_send_json_success();
-		else
-			wp_send_json_error( __( 'Error: Cannot delete file', 'meta-box' ) );
+		}
+		wp_send_json_error( __( 'Error: Cannot delete file', 'meta-box' ) );
 	}
 
 	/**
@@ -91,16 +81,16 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 	 *
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
+	public static function html( $meta, $field ) {
 		$i18n_title = apply_filters( 'video_central_metaboxes_file_upload_string', _x( 'Upload Files', 'file upload', 'meta-box' ), $field );
 		$i18n_more  = apply_filters( 'video_central_metaboxes_file_add_string', _x( '+ Add new file', 'file upload', 'meta-box' ), $field );
 
 		// Uploaded files
-		$html             = self::get_uploaded_files( $meta, $field );
-		$new_file_classes = array( 'new-files' );
-		if ( ! empty( $field['max_file_uploads'] ) && count( $meta ) >= (int) $field['max_file_uploads'] )
-			$new_file_classes[] = 'hidden';
+		$html    = self::get_uploaded_files( $meta, $field );
+		$classes = 'new-files';
+		if ( ! empty( $field['max_file_uploads'] ) && count( $meta ) >= (int) $field['max_file_uploads'] ) {
+			$classes .= ' hidden';
+		}
 
 		// Show form upload
 		$html .= sprintf(
@@ -109,7 +99,7 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 				<div class="file-input"><input type="file" name="%s[]" /></div>
 				<a class="video-central-metaboxes-add-file" href="#"><strong>%s</strong></a>
 			</div>',
-			implode( ' ', $new_file_classes ),
+			$classes,
 			$i18n_title,
 			$field['id'],
 			$i18n_more
@@ -118,65 +108,67 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 		return $html;
 	}
 
-	static function get_uploaded_files( $files, $field )
-	{
+	/**
+	 * Get HTML for uploaded files.
+	 *
+	 * @param array $files List of uploaded files
+	 * @param array $field Field parameters
+	 * @return string
+	 */
+	protected static function get_uploaded_files( $files, $field ) {
 		$reorder_nonce = wp_create_nonce( "video-central-metaboxes-reorder-files_{$field['id']}" );
 		$delete_nonce  = wp_create_nonce( "video-central-metaboxes-delete-file_{$field['id']}" );
 
-		$classes = array( 'video-central-metaboxes-file', 'video-central-metaboxes-uploaded' );
-		if ( count( $files ) <= 0 )
-			$classes[] = 'hidden';
-		$list = '<ul class="%s" data-field_id="%s" data-delete_nonce="%s" data-reorder_nonce="%s" data-force_delete="%s" data-max_file_uploads="%s" data-mime_type="%s">';
-		$html = sprintf(
-			$list,
-			implode( ' ', $classes ),
+		$classes = 'video-central-metaboxes-uploaded';
+		if ( count( $files ) <= 0 ) {
+			$classes .= ' hidden';
+		}
+
+		foreach ( (array) $files as $k => $file ) {
+			$files[ $k ] = self::call( $field, 'file_html', $file );
+		}
+		return sprintf(
+			'<ul class="%s" data-field_id="%s" data-delete_nonce="%s" data-reorder_nonce="%s" data-force_delete="%s" data-max_file_uploads="%s" data-mime_type="%s">%s</ul>',
+			$classes,
 			$field['id'],
 			$delete_nonce,
 			$reorder_nonce,
 			$field['force_delete'] ? 1 : 0,
 			$field['max_file_uploads'],
-			$field['mime_type']
+			$field['mime_type'],
+			implode( '', $files )
 		);
-
-		foreach ( $files as $attachment_id )
-		{
-			$html .= self::file_html( $attachment_id );
-		}
-
-		$html .= '</ul>';
-
-		return $html;
 	}
 
-	static function file_html( $attachment_id )
-	{
+	/**
+	 * Get HTML for uploaded file.
+	 *
+	 * @param int $file Attachment (file) ID
+	 * @return string
+	 */
+	protected static function file_html( $file ) {
 		$i18n_delete = apply_filters( 'video_central_metaboxes_file_delete_string', _x( 'Delete', 'file upload', 'meta-box' ) );
 		$i18n_edit   = apply_filters( 'video_central_metaboxes_file_edit_string', _x( 'Edit', 'file upload', 'meta-box' ) );
-		$item        = '
-		<li id="item_%s">
-			<div class="video-central-metaboxes-icon">%s</div>
-			<div class="video-central-metaboxes-info">
-				<a href="%s" target="_blank">%s</a>
-				<p>%s</p>
-				<a title="%s" href="%s" target="_blank">%s</a> |
-				<a title="%s" class="video-central-metaboxes-delete-file" href="#" data-attachment_id="%s">%s</a>
-			</div>
-		</li>';
-
-		$mime_type = get_post_mime_type( $attachment_id );
+		$mime_type   = get_post_mime_type( $file );
 
 		return sprintf(
-			$item,
-			$attachment_id,
-			wp_get_attachment_image( $attachment_id, array( 60, 60 ), true ),
-			wp_get_attachment_url( $attachment_id ),
-			get_the_title( $attachment_id ),
+			'<li id="item_%s">
+				<div class="video-central-metaboxes-icon">%s</div>
+				<div class="video-central-metaboxes-info">
+					<a href="%s" target="_blank">%s</a>
+					<p>%s</p>
+					<a href="%s" target="_blank">%s</a> |
+					<a class="video-central-metaboxes-delete-file" href="#" data-attachment_id="%s">%s</a>
+				</div>
+			</li>',
+			$file,
+			wp_get_attachment_image( $file, array( 60, 60 ), true ),
+			wp_get_attachment_url( $file ),
+			get_the_title( $file ),
 			$mime_type,
+			get_edit_post_link( $file ),
 			$i18n_edit,
-			get_edit_post_link( $attachment_id ),
-			$i18n_edit,
-			$i18n_delete,
-			$attachment_id,
+			$file,
 			$i18n_delete
 		);
 	}
@@ -191,63 +183,58 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 	 *
 	 * @return array|mixed
 	 */
-	static function value( $new, $old, $post_id, $field )
-	{
-		$name = $field['id'];
-		if ( empty( $_FILES[$name] ) )
+	public static function value( $new, $old, $post_id, $field ) {
+		if ( empty( $_FILES[ $field['id'] ] ) ) {
 			return $new;
-
-		$new   = array();
-		$files = self::fix_file_array( $_FILES[$name] );
-
-		foreach ( $files as $file_item )
-		{
-			$file = wp_handle_upload( $file_item, array( 'test_form' => false ) );
-
-			if ( ! isset( $file['file'] ) )
-				continue;
-
-			$file_name = $file['file'];
-
-			$attachment = array(
-				'post_mime_type' => $file['type'],
-				'guid'           => $file['url'],
-				'post_parent'    => $post_id,
-				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $file_name ) ),
-				'post_content'   => '',
-			);
-			$id         = wp_insert_attachment( $attachment, $file_name, $post_id );
-
-			if ( ! is_wp_error( $id ) )
-			{
-				wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $file_name ) );
-
-				// Save file ID in meta field
-				$new[] = $id;
-			}
 		}
 
-		return array_unique( array_merge( $old, $new ) );
+		$new   = array();
+		$files = self::transform( $_FILES[ $field['id'] ] );
+		foreach ( $files as $file ) {
+			$new[] = self::upload( $file, $post_id );
+		}
+
+		return array_filter( array_unique( array_merge( (array) $old, $new ) ) );
 	}
 
 	/**
-	 * Fixes the odd indexing of multiple file uploads from the format:
-	 *     $_FILES['field']['key']['index']
-	 * To the more standard and appropriate:
-	 *     $_FILES['field']['index']['key']
+	 * Handle upload file.
+	 *
+	 * @param array $file
+	 * @param int   $post Post parent ID
+	 * @return int Attachment ID on success, false on failure.
+	 */
+	protected static function upload( $file, $post ) {
+		$file = wp_handle_upload( $file, array( 'test_form' => false ) );
+		if ( ! isset( $file['file'] ) ) {
+			return false;
+		}
+
+		$attachment = wp_insert_attachment( array(
+			'post_mime_type' => $file['type'],
+			'guid'           => $file['url'],
+			'post_parent'    => $post,
+			'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $file['file'] ) ),
+			'post_content'   => '',
+		), $file['file'], $post );
+		if ( is_wp_error( $attachment ) || ! $attachment ) {
+			return false;
+		}
+		wp_update_attachment_metadata( $attachment, wp_generate_attachment_metadata( $attachment, $file['file'] ) );
+		return $attachment;
+	}
+
+	/**
+	 * Transform $_FILES from $_FILES['field']['key']['index'] to $_FILES['field']['index']['key']
 	 *
 	 * @param array $files
-	 *
 	 * @return array
 	 */
-	static function fix_file_array( $files )
-	{
+	protected static function transform( $files ) {
 		$output = array();
-		foreach ( $files as $key => $list )
-		{
-			foreach ( $list as $index => $value )
-			{
-				$output[$index][$key] = $value;
+		foreach ( $files as $key => $list ) {
+			foreach ( $list as $index => $value ) {
+				$output[ $index ][ $key ] = $value;
 			}
 		}
 
@@ -258,11 +245,9 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 	 * Normalize parameters for field
 	 *
 	 * @param array $field
-	 *
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	public static function normalize( $field ) {
 		$field             = parent::normalize( $field );
 		$field             = wp_parse_args( $field, array(
 			'std'              => array(),
@@ -276,9 +261,7 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 	}
 
 	/**
-	 * Get the field value
-	 * The difference between this function and 'meta' function is 'meta' function always returns the escaped value
-	 * of the field saved in the database, while this function returns more meaningful value of the field
+	 * Get the field value. Return meaningful info of the files.
 	 *
 	 * @param  array    $field   Field parameters
 	 * @param  array    $args    Not used for this field
@@ -286,82 +269,95 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field
 	 *
 	 * @return mixed Full info of uploaded files
 	 */
-	static function get_value( $field, $args = array(), $post_id = null )
-	{
-		if ( ! $post_id )
-			$post_id = get_the_ID();
-
-		/**
-		 * Get raw meta value in the database, no escape
-		 * Very similar to self::meta() function
-		 */
-		$file_ids = get_post_meta( $post_id, $field['id'], false );
-
-		// For each file, get full file info
-		$value = array();
-		foreach ( (array) $file_ids as $file_id )
-		{
-			if ( $file_info = call_user_func( array( Video_Central_Metabox::get_class_name( $field ), 'file_info' ), $file_id, $args ) )
-			{
-				$value[$file_id] = $file_info;
+	public static function get_value( $field, $args = array(), $post_id = null ) {
+		$value = parent::get_value( $field, $args, $post_id );
+		if ( ! $field['clone'] ) {
+			$value = self::call( 'files_info', $field, $value, $args );
+		} else {
+			$return = array();
+			foreach ( $value as $subvalue ) {
+				$return[] = self::call( 'files_info', $field, $subvalue, $args );
 			}
+			$value = $return;
 		}
-
+		if ( isset( $args['limit'] ) ) {
+			$value = array_slice( $value, 0, intval( $args['limit'] ) );
+		}
 		return $value;
 	}
 
 	/**
-	 * Output the field value
-	 * Display unordered list of files
+	 * Get uploaded files information
 	 *
-	 * @param  array    $field   Field parameters
-	 * @param  array    $args    Additional arguments. Not used for these fields.
-	 * @param  int|null $post_id Post ID. null for current post. Optional.
-	 *
-	 * @return mixed Field value
+	 * @param array $field Field parameter
+	 * @param array $files Files IDs
+	 * @param array $args  Additional arguments (for image size)
+	 * @return array
 	 */
-	static function the_value( $field, $args = array(), $post_id = null )
-	{
-		$value = self::get_value( $field, $args, $post_id );
-		if ( ! $value )
-			return '';
-
-		$output = '<ul>';
-		foreach ( $value as $file_id => $file_info )
-		{
-			$output .= sprintf(
-				'<li><a href="%s" target="_blank">%s</a></li>',
-				wp_get_attachment_url( $file_id ),
-				get_the_title( $file_id )
-			);
+	public static function files_info( $field, $files, $args ) {
+		$return = array();
+		foreach ( (array) $files as $file ) {
+			if ( $info = self::call( $field, 'file_info', $file, $args ) ) {
+				$return[ $file ] = $info;
+			}
 		}
-		$output .= '</ul>';
-
-		return $output;
+		return $return;
 	}
 
 	/**
 	 * Get uploaded file information
 	 *
-	 * @param int   $file_id Attachment file ID (post ID). Required.
-	 * @param array $args    Array of arguments (for size).
+	 * @param int   $file Attachment file ID (post ID). Required.
+	 * @param array $args Array of arguments (for size).
 	 *
 	 * @return array|bool False if file not found. Array of (id, name, path, url) on success
 	 */
-	static function file_info( $file_id, $args = array() )
-	{
-		$path = get_attached_file( $file_id );
-		if ( ! $path )
-		{
+	public static function file_info( $file, $args = array() ) {
+		if ( ! $path = get_attached_file( $file ) ) {
 			return false;
 		}
 
-		return array(
-			'ID'    => $file_id,
+		return wp_parse_args( array(
+			'ID'    => $file,
 			'name'  => basename( $path ),
 			'path'  => $path,
-			'url'   => wp_get_attachment_url( $file_id ),
-			'title' => get_the_title( $file_id ),
-		);
+			'url'   => wp_get_attachment_url( $file ),
+			'title' => get_the_title( $file ),
+		), wp_get_attachment_metadata( $file ) );
+	}
+
+	/**
+	 * Format value for the helper functions.
+	 *
+	 * @param array        $field Field parameter
+	 * @param string|array $value The field meta value
+	 * @return string
+	 */
+	public static function format_value( $field, $value ) {
+		if ( ! $field['clone'] ) {
+			return self::call( 'format_single_value', $field, $value );
+		}
+		$output = '<ul>';
+		foreach ( $value as $subvalue ) {
+			$output .= '<li>' . self::call( 'format_single_value', $field, $subvalue ) . '</li>';
+		}
+		$output .= '</ul>';
+		return $output;
+	}
+
+	/**
+	 * Format a single value for the helper functions.
+	 *
+	 * @param array $field Field parameter
+	 * @param array $value The value
+	 * @return string
+	 */
+	public static function format_single_value( $field, $value ) {
+		$output = '<ul>';
+		foreach ( $value as $file ) {
+			$output .= sprintf( '<li><a href="%s" target="_blank">%s</a></li>', $file['url'], $file['title'] );
+		}
+		$output .= '</ul>';
+		return $output;
 	}
 }

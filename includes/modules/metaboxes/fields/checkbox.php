@@ -1,14 +1,14 @@
 <?php
+
 /**
  * Checkbox field class.
  */
-class Video_Central_Metaboxes_Checkbox_Field extends Video_Central_Metaboxes_Input_Field
-{
+class Video_Central_Metaboxes_Checkbox_Field extends Video_Central_Metaboxes_Input_Field {
+
 	/**
 	 * Enqueue scripts and styles.
 	 */
-	static function admin_enqueue_scripts()
-	{
+	public static function admin_enqueue_scripts() {
 		wp_enqueue_style( 'video-central-metaboxes-checkbox', Video_Central_Metaboxes_CSS_URL . 'checkbox.css', array(), Video_Central_Metaboxes_VER );
 	}
 
@@ -19,69 +19,37 @@ class Video_Central_Metaboxes_Checkbox_Field extends Video_Central_Metaboxes_Inp
 	 * @param array $field
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
+	public static function html( $meta, $field ) {
 		$attributes = self::get_attributes( $field, 1 );
-		return sprintf(
+		$output     = sprintf(
 			'<input %s %s>',
 			self::render_attributes( $attributes ),
 			checked( ! empty( $meta ), 1, false )
 		);
+		if ( $field['desc'] ) {
+			$output = "<label id='{$field['id']}_description' class='description'>$output {$field['desc']}</label>";
+		}
+		return $output;
 	}
 
 	/**
-	 * Get the attributes for a field.
+	 * Do not show field description.
 	 *
 	 * @param array $field
-	 * @param mixed $value
-	 * @return array
+	 * @return string
 	 */
-	static function get_attributes( $field, $value = null )
-	{
-		$attributes = parent::get_attributes( $field, $value );
-		$attributes['type'] = 'checkbox';
-		$attributes['list'] = false;
-
-		return $attributes;
+	public static function element_description( $field ) {
+		return '';
 	}
 
 	/**
-	 * Set the value of checkbox to 1 or 0 instead of 'checked' and empty string
-	 * This prevents using default value once the checkbox has been unchecked
+	 * Format a single value for the helper functions.
 	 *
-	 * @link https://github.com/rilwis/meta-box/issues/6
-	 *
-	 * @param mixed $new
-	 * @param mixed $old
-	 * @param int   $post_id
-	 * @param array $field
-	 *
-	 * @return int
+	 * @param array  $field Field parameter
+	 * @param string $value The value
+	 * @return string
 	 */
-	static function value( $new, $old, $post_id, $field )
-	{
-		return empty( $new ) ? 0 : 1;
-	}
-
-	/**
-	 * Output the field value
-	 * Display 'Yes' or 'No' instead of '1' and '0'
-	 *
-	 * Note: we don't echo the field value directly. We return the output HTML of field, which will be used in
-	 * video_central_metaboxes_the_field function later.
-	 *
-	 * @use self::get_value()
-	 * @see video_central_metaboxes_the_value()
-	 *
-	 * @param  array    $field   Field parameters
-	 * @param  array    $args    Additional arguments. Rarely used. See specific fields for details
-	 * @param  int|null $post_id Post ID. null for current post. Optional.
-	 *
-	 * @return string HTML output of the field
-	 */
-	static function the_value( $field, $args = array(), $post_id = null )
-	{
-		$value = self::get_value( $field, $args, $post_id );
+	public static function format_single_value( $field, $value ) {
 		return $value ? __( 'Yes', 'meta-box' ) : __( 'No', 'meta-box' );
 	}
 }

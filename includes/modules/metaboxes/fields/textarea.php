@@ -2,8 +2,8 @@
 /**
  * Textarea field class.
  */
-class Video_Central_Metaboxes_Textarea_Field extends Video_Central_Metaboxes_Field
-{
+class Video_Central_Metaboxes_Textarea_Field extends Video_Central_Metaboxes_Field {
+
 	/**
 	 * Get field HTML
 	 *
@@ -12,8 +12,7 @@ class Video_Central_Metaboxes_Textarea_Field extends Video_Central_Metaboxes_Fie
 	 *
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
+	static function html( $meta, $field ) {
 		$attributes = self::get_attributes( $field, $meta );
 		return sprintf(
 			'<textarea %s>%s</textarea>',
@@ -28,8 +27,7 @@ class Video_Central_Metaboxes_Textarea_Field extends Video_Central_Metaboxes_Fie
 	 * @param mixed $meta
 	 * @return mixed
 	 */
-	static function esc_meta( $meta )
-	{
+	static function esc_meta( $meta ) {
 		return is_array( $meta ) ? array_map( 'esc_textarea', $meta ) : esc_textarea( $meta );
 	}
 
@@ -39,8 +37,7 @@ class Video_Central_Metaboxes_Textarea_Field extends Video_Central_Metaboxes_Fie
 	 * @param array $field
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	static function normalize( $field ) {
 		$field = parent::normalize( $field );
 		$field = wp_parse_args( $field, array(
 			'cols'      => 60,
@@ -61,8 +58,7 @@ class Video_Central_Metaboxes_Textarea_Field extends Video_Central_Metaboxes_Fie
 	 *
 	 * @return array
 	 */
-	static function get_attributes( $field, $value = null )
-	{
+	static function get_attributes( $field, $value = null ) {
 		$attributes = parent::get_attributes( $field, $value );
 		$attributes = wp_parse_args( $attributes, array(
 			'cols'        => $field['cols'],

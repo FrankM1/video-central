@@ -1,28 +1,39 @@
-jQuery( function ( $ )
-{
+jQuery( function ( $ ) {
 	'use strict';
 
 	/**
 	 * Update datetime picker element
 	 * Used for static & dynamic added elements (when clone)
 	 */
-	function update()
-	{
+	function update() {
 		var $this = $( this ),
-			options = $this.data( 'options' );
+			options = $this.data( 'options' ),
+			$inline = $this.siblings( '.video-central-metaboxes-datetime-inline' ),
+			current = $this.val();
 
 		$this.siblings( '.ui-datepicker-append' ).remove();  // Remove appended text
-		$this.removeClass( 'hasDatepicker' ).timepicker( options );
+
+		if ( $inline.length ) {
+			options.altField = '#' + $this.attr( 'id' );
+			$inline
+				.removeClass( 'hasDatepicker' )
+				.empty()
+				.prop( 'id', '' )
+				.timepicker( options )
+				.timepicker( "setTime", current );
+		}
+		else {
+			$this.removeClass( 'hasDatepicker' ).timepicker( options );
+		}
 	}
 
 	// Set language if available
-	if ( $.timepicker.regional.hasOwnProperty( Video_Central_Metaboxes_Timepicker.locale ) )
-	{
-		$.timepicker.setDefaults( $.timepicker.regional[Video_Central_Metaboxes_Timepicker.locale] );
+	$.timepicker.setDefaults( $.timepicker.regional[""] );
+	if ( $.timepicker.regional.hasOwnProperty( RWMB_Time.locale ) ) {
+		$.timepicker.setDefaults( $.timepicker.regional[RWMB_Time.locale] );
 	}
-	else if ( $.timepicker.regional.hasOwnProperty( Video_Central_Metaboxes_Timepicker.localeShort ) )
-	{
-		$.timepicker.setDefaults( $.timepicker.regional[Video_Central_Metaboxes_Timepicker.localeShort] );
+	else if ( $.timepicker.regional.hasOwnProperty( RWMB_Time.localeShort ) ) {
+		$.timepicker.setDefaults( $.timepicker.regional[RWMB_Time.localeShort] );
 	}
 
 	$( '.video-central-metaboxes-time' ).each( update );

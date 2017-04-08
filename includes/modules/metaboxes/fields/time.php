@@ -2,57 +2,17 @@
 /**
  * Time field class.
  */
-class Video_Central_Metaboxes_Time_Field extends Video_Central_Metaboxes_Text_Field
-{
+class Video_Central_Metaboxes_Time_Field extends Video_Central_Metaboxes_Datetime_Field {
+
 	/**
 	 * Enqueue scripts and styles
-	 */
-	static function admin_enqueue_scripts()
-	{
-		$url = Video_Central_Metaboxes_CSS_URL . 'jqueryui';
-		wp_register_style( 'jquery-ui-core', "{$url}/jquery.ui.core.css", array(), '1.8.17' );
-		wp_register_style( 'jquery-ui-theme', "{$url}/jquery.ui.theme.css", array(), '1.8.17' );
-		wp_register_style( 'jquery-ui-datepicker', "{$url}/jquery.ui.datepicker.css", array( 'jquery-ui-core', 'jquery-ui-theme' ), '1.8.17' );
-		wp_register_style( 'wp-datepicker', Video_Central_Metaboxes_CSS_URL . 'datepicker.css', array( 'jquery-ui-core', 'jquery-ui-theme' ), '1.8.17' );
-		wp_register_style( 'jquery-ui-slider', "{$url}/jquery.ui.slider.css", array( 'jquery-ui-core', 'jquery-ui-theme' ), '1.8.17' );
-		wp_enqueue_style( 'jquery-ui-timepicker', "{$url}/jquery-ui-timepicker-addon.min.css", array( 'jquery-ui-datepicker', 'jquery-ui-slider', 'wp-datepicker' ), '1.5.0' );
-
-		$url = Video_Central_Metaboxes_JS_URL . 'jqueryui';
-		wp_register_script( 'jquery-ui-timepicker', "{$url}/jquery-ui-timepicker-addon.min.js", array( 'jquery-ui-datepicker', 'jquery-ui-slider' ), '1.5.0', true );
-
-		/**
-		 * Localization
-		 * Use 1 minified JS file which contains all languages for simpilicity (in version < 4.4.2 we use separated JS files).
-		 * The language is set in Javascript
-		 *
-		 * Note: we use full locale (de-DE) and fallback to short locale (de)
-		 */
-		$locale       = str_replace( '_', '-', get_locale() );
-		$locale_short = substr( $locale, 0, 2 );
-		wp_register_script( 'jquery-ui-timepicker-i18n', "{$url}/jquery-ui-timepicker-addon-i18n.min.js", array( 'jquery-ui-timepicker' ), '1.5.0', true );
-
-		wp_enqueue_script( 'video-central-metaboxes-time', Video_Central_Metaboxes_JS_URL . 'time.js', array( 'jquery-ui-timepicker-i18n' ), Video_Central_Metaboxes_VER, true );
-		wp_localize_script( 'video-central-metaboxes-time', 'Video_Central_Metaboxes_Timepicker', array(
-			'locale'      => $locale,
-			'localeShort' => $locale_short,
-		) );
-	}
-
-	/**
-	 * Get field HTML
 	 *
-	 * @param mixed $meta
-	 * @param array $field
-	 * @return string
+	 * @return void
 	 */
-	static function html( $meta, $field )
-	{
-		$output = parent::html( $meta, $field );
-		if ( $field['inline'] )
-		{
-			$output .= '<div class="video-central-metaboxes-time-inline"></div>';
-		}
-		return $output;
+	public static function admin_enqueue_scripts() {
+		parent::admin_register_scripts();
+		wp_enqueue_style( 'jquery-ui-timepicker' );
+		wp_enqueue_script( 'video-central-metaboxes-time' );
 	}
 
 	/**
@@ -61,37 +21,9 @@ class Video_Central_Metaboxes_Time_Field extends Video_Central_Metaboxes_Text_Fi
 	 * @param array $field
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
-		$field = wp_parse_args( $field, array(
-			'js_options' => array(),
-			'inline'	 => false,
-		) );
-
-		// Deprecate 'format', but keep it for backward compatible
-		// Use 'js_options' instead
-		$field['js_options'] = wp_parse_args( $field['js_options'], array(
-			'showButtonPanel' => true,
-			'timeFormat'      => empty( $field['format'] ) ? 'HH:mm' : $field['format'],
-		) );
-
+	public static function normalize( $field ) {
 		$field = parent::normalize( $field );
+		$field['js_options']['timeFormat'] = empty( $field['format'] ) ? $field['js_options']['timeFormat'] : $field['format'];
 		return $field;
-	}
-
-	/**
-	 * Get the attributes for a field
-	 *
-	 * @param array $field
-	 * @param mixed $value
-	 * @return array
-	 */
-	static function get_attributes( $field, $value = null )
-	{
-		$attributes = parent::get_attributes( $field, $value );
-		$attributes = wp_parse_args( $attributes, array(
-			'data-options' => wp_json_encode( $field['js_options'] ),
-		) );
-		return $attributes;
 	}
 }

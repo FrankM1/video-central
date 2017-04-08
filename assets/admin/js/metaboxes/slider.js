@@ -1,32 +1,28 @@
-jQuery( function( $ )
-{
+jQuery( function ( $ ) {
 	'use strict';
 
-	function video_central_metaboxes_update_slider()
-	{
+	function video_central_metaboxes_update_slider() {
 		var $input = $( this ),
 			$slider = $input.siblings( '.video-central-metaboxes-slider' ),
 			$valueLabel = $slider.siblings( '.video-central-metaboxes-slider-value-label' ).find( 'span' ),
 			value = $input.val(),
 			options = $slider.data( 'options' );
 
+
 		$slider.html( '' );
 
-		if ( !value )
-		{
+		if ( ! value ) {
 			value = 0;
 			$input.val( 0 );
 			$valueLabel.text( '0' );
 		}
-		else
-		{
+		else {
 			$valueLabel.text( value );
 		}
 
 		// Assign field value and callback function when slide
 		options.value = value;
-		options.slide = function( event, ui )
-		{
+		options.slide = function ( event, ui ) {
 			$input.val( ui.value );
 			$valueLabel.text( ui.value );
 		};

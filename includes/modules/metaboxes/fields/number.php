@@ -2,8 +2,8 @@
 /**
  * Number field class.
  */
-class Video_Central_Metaboxes_Number_Field extends Video_Central_Metaboxes_Input_Field
-{
+class Video_Central_Metaboxes_Number_Field extends Video_Central_Metaboxes_Input_Field {
+
 	/**
 	 * Normalize parameters for field
 	 *
@@ -11,8 +11,7 @@ class Video_Central_Metaboxes_Number_Field extends Video_Central_Metaboxes_Input
 	 *
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	static function normalize( $field ) {
 		$field = parent::normalize( $field );
 
 		$field = wp_parse_args( $field, array(
@@ -32,16 +31,13 @@ class Video_Central_Metaboxes_Number_Field extends Video_Central_Metaboxes_Input
 	 *
 	 * @return array
 	 */
-	static function get_attributes( $field, $value = null )
-	{
+	static function get_attributes( $field, $value = null ) {
 		$attributes = parent::get_attributes( $field, $value );
 		$attributes = wp_parse_args( $attributes, array(
 			'step' => $field['step'],
 			'max'  => $field['max'],
 			'min'  => $field['min'],
 		) );
-		$attributes['type'] = 'number';
-
 		return $attributes;
 	}
 }

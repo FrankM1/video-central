@@ -3,98 +3,95 @@
  * Load plugin's files with check for installing it as a standalone plugin or
  * a module of a theme / plugin. If standalone plugin is already installed, it
  * will take higher priority.
+ *
  * @package Meta Box
  */
 
 /**
  * Plugin loader class.
+ *
  * @package Meta Box
  */
-class Video_Central_Metaboxes_Loader
-{
-    /**
-     * Class constructor.
-     */
-    public function __construct()
-    {
-        $this->constants();
-        spl_autoload_register( array( $this, 'autoload' ) );
-        $this->init();
-    }
+class Video_Central_Metaboxes_Loader {
 
-    /**
-     * Define plugin constants.
-     */
-    public function constants()
-    {
-        video_central()->version;
+	/**
+	 * Define plugin constants.
+	 */
+	protected function constants() {
+		// Script version, used to add version for scripts and styles
+		define( 'Video_Central_Metaboxes_VER', '4.9.8' );
 
-        // Script version, used to add version for scripts and styles
-        define( 'Video_Central_Metaboxes_VER', video_central()->version );
+		// Plugin URLs, for fast enqueuing scripts and styles
+		define( 'Video_Central_Metaboxes_URL', video_central()->core_assets_url . 'admin/' );
+		define( 'Video_Central_Metaboxes_JS_URL', trailingslashit( Video_Central_Metaboxes_URL . 'js/metaboxes' ) );
+		define( 'Video_Central_Metaboxes_CSS_URL', trailingslashit( Video_Central_Metaboxes_URL . 'css/metaboxes' ) );
 
-        // Plugin URLs, for fast enqueuing scripts and styles
-        define( 'Video_Central_Metaboxes_URL', video_central()->plugin_url );
-        define( 'Video_Central_Metaboxes_JS_URL', trailingslashit( Video_Central_Metaboxes_URL . 'assets/admin/js/metaboxes' ) );
-        define( 'Video_Central_Metaboxes_CSS_URL', trailingslashit( Video_Central_Metaboxes_URL . 'assets/admin/css/metaboxes' ) );
+        $path       = video_central()->includes_dir.'modules/';
 
-        // Plugin paths, for including files
-        define( 'Video_Central_Metaboxes_DIR', video_central()->plugin_dir );
-        define( 'Video_Central_Metaboxes_INC_DIR', trailingslashit( video_central()->plugin_dir . 'includes/modules/metaboxes' ) );
-        define( 'Video_Central_Metaboxes_FIELDS_DIR', trailingslashit( Video_Central_Metaboxes_INC_DIR . 'fields' ) );
-    }
+		// Plugin paths, for including files
+		define( 'Video_Central_Metaboxes_DIR', $path );
+		define( 'Video_Central_Metaboxes_INC_DIR', trailingslashit( Video_Central_Metaboxes_DIR . 'metaboxes' ) );
+	}
 
-    /**
-     * Autoload fields' classes.
-     * @param string $class Class name
-     */
-    public function autoload( $class )
-    {
-        // Only load plugin's classes
-        if ( 'Video_Central_Metabox' != $class && 0 !== strpos( $class, 'Video_Central_Metaboxes_' ) )
-        {
-            return;
-        }
+	/**
+	 * Get plugin base path and URL.
+	 * The method is static and can be used in extensions.
+	 *
+	 * @link http://www.deluxeblogtips.com/2013/07/get-url-of-php-file-in-wordpress.html
+	 * @param string $path Base folder path
+	 * @return array Path and URL.
+	 */
+	public static function get_path( $path = '' ) {
 
-        // Get file name
-        $file = 'meta-box';
-        if ( 'Video_Central_Metabox' != $class )
-        {
-            // Remove prefix 'Video_Central_Metaboxes_'
-            $file = substr( $class, 24 );
+		// Plugin base path
+		$path       = video_central()->includes_dir.'modules/';
+		$themes_dir = wp_normalize_path( untrailingslashit( dirname( realpath( get_stylesheet_directory() ) ) ) );
 
-            // Optional '_Field'
-            $file = preg_replace( '/_Field$/', '', $file );
-        }
+		// Default URL
+		$url = plugins_url( '', $path . '/' . basename( $path ) . '.php' );
 
-        $file = strtolower( str_replace( '_', '-', $file ) ) . '.php';
+		// Included into themes
+		if (
+			0 !== strpos( $path, wp_normalize_path( WP_PLUGIN_DIR ) )
+			&& 0 !== strpos( $path, wp_normalize_path( WPMU_PLUGIN_DIR ) )
+			&& 0 === strpos( $path, $themes_dir )
+		) {
+			$themes_url = untrailingslashit( dirname( get_stylesheet_directory_uri() ) );
+			$url        = str_replace( $themes_dir, $themes_url, $path );
+		}
 
-        $dirs = array( Video_Central_Metaboxes_INC_DIR, Video_Central_Metaboxes_FIELDS_DIR, trailingslashit( Video_Central_Metaboxes_INC_DIR . 'walkers' ) );
+		$path = trailingslashit( $path );
+		$url  = trailingslashit( $url );
 
-        foreach ( $dirs as $dir )
-        {
-            if ( file_exists( $dir . $file ) )
-            {
-                require $dir . $file;
-                return;
-            }
-        }
-    }
+		return array( $path, $url );
+	}
 
-    /**
-     * Initialize plugin.
-     */
-    public function init()
-    {
-        // Plugin core
-        new Video_Central_Metaboxes_Core;
+	/**
+	 * Bootstrap the plugin.
+	 */
+	public function init() {
+		$this->constants();
 
-        if ( is_admin() )
-        {
-            // Validation module
-            new Video_Central_Metaboxes_Validation;
-        }
+		// Register autoload for classes
+		require_once Video_Central_Metaboxes_INC_DIR . 'autoloader.php';
+		$autoloader = new Video_Central_Metaboxes_Autoloader;
+		$autoloader->add( Video_Central_Metaboxes_INC_DIR, 'Video_Central_Metaboxes_' );
+		$autoloader->add( Video_Central_Metaboxes_INC_DIR . 'fields', 'Video_Central_Metaboxes_', '_Field' );
+		$autoloader->add( Video_Central_Metaboxes_INC_DIR . 'walkers', 'Video_Central_Metaboxes_Walker_' );
+		$autoloader->register();
 
-        // Public functions
-        require Video_Central_Metaboxes_INC_DIR . 'functions.php';
-    }
+		// Plugin core
+		new Video_Central_Metaboxes_Core;
+
+		if ( is_admin() ) {
+			// Validation module
+			new Video_Central_Metaboxes_Validation;
+
+			$sanitize = new Video_Central_Metaboxes_Sanitizer;
+			$sanitize->init();
+		}
+
+		// Public functions
+		require_once Video_Central_Metaboxes_INC_DIR . 'functions.php';
+	}
 }

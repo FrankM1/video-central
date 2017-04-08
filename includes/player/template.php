@@ -83,7 +83,6 @@ _end_;
             $file_ogg = wp_get_attachment_url($file_id_ogg);
             $file_flv = wp_get_attachment_url($file_id_flv);
 
-
             $dataSetup['fluid']     = 'true';
             $dataSetup['controls']  = 'true';
             $dataSetup['preload']   = 'auto';

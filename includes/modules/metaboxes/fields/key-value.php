@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Key-value field class.
  */
-abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Metaboxes_Text_Field
-{
+abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Metaboxes_Text_Field {
+
 	/**
 	 * Get field HTML
 	 *
@@ -11,18 +12,17 @@ abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Met
 	 * @param array $field
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
+	static function html( $meta, $field ) {
 		// Key
 		$key                       = isset( $meta[0] ) ? $meta[0] : '';
 		$attributes                = self::get_attributes( $field, $key );
-		$attributes['placeholder'] = esc_attr__( 'Key', 'meta-box' );
+		$attributes['placeholder'] = $field['placeholder']['key'];
 		$html                      = sprintf( '<input %s>', self::render_attributes( $attributes ) );
 
 		// Value
 		$val                       = isset( $meta[1] ) ? $meta[1] : '';
 		$attributes                = self::get_attributes( $field, $val );
-		$attributes['placeholder'] = esc_attr__( 'Value', 'meta-box' );
+		$attributes['placeholder'] = $field['placeholder']['value'];
 		$html .= sprintf( '<input %s>', self::render_attributes( $attributes ) );
 
 		return $html;
@@ -35,12 +35,12 @@ abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Met
 	 * @param array $field
 	 * @return string
 	 */
-	static function begin_html( $meta, $field )
-	{
+	static function begin_html( $meta, $field ) {
 		$desc = $field['desc'] ? "<p id='{$field['id']}_description' class='description'>{$field['desc']}</p>" : '';
 
-		if ( empty( $field['name'] ) )
+		if ( empty( $field['name'] ) ) {
 			return '<div class="video-central-metaboxes-input">' . $desc;
+		}
 
 		return sprintf(
 			'<div class="video-central-metaboxes-label">
@@ -55,18 +55,13 @@ abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Met
 	}
 
 	/**
-	 * Show end HTML markup for fields
-	 * Do not show field description. Field description is shown before list of fields
+	 * Do not show field description.
 	 *
-	 * @param mixed $meta
 	 * @param array $field
 	 * @return string
 	 */
-	static function end_html( $meta, $field )
-	{
-		$button = $field['clone'] ? self::add_clone_button( $field ) : '';
-		$html   = "$button</div>";
-		return $html;
+	public static function element_description( $field ) {
+		return '';
 	}
 
 	/**
@@ -75,11 +70,9 @@ abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Met
 	 * @param mixed $meta
 	 * @return mixed
 	 */
-	static function esc_meta( $meta )
-	{
-		foreach ( (array) $meta as $k => $pairs )
-		{
-			$meta[$k] = array_map( 'esc_attr', (array) $pairs );
+	static function esc_meta( $meta ) {
+		foreach ( (array) $meta as $k => $pairs ) {
+			$meta[ $k ] = array_map( 'esc_attr', (array) $pairs );
 		}
 		return $meta;
 	}
@@ -94,12 +87,11 @@ abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Met
 	 *
 	 * @return string
 	 */
-	static function value( $new, $old, $post_id, $field )
-	{
-		foreach ( $new as &$arr )
-		{
-			if ( empty( $arr[0] ) && empty( $arr[1] ) )
+	static function value( $new, $old, $post_id, $field ) {
+		foreach ( $new as &$arr ) {
+			if ( empty( $arr[0] ) && empty( $arr[1] ) ) {
 				$arr = false;
+			}
 		}
 		$new = array_filter( $new );
 		return $new;
@@ -111,36 +103,28 @@ abstract class Video_Central_Metaboxes_Key_Value_Field extends Video_Central_Met
 	 * @param array $field
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
-		$field             = parent::normalize( $field );
-		$field['clone']    = true;
-		$field['multiple'] = true;
+	static function normalize( $field ) {
+		$field                       = parent::normalize( $field );
+		$field['clone']              = true;
+		$field['multiple']           = true;
+		$field['attributes']['type'] = 'text';
+		$field['placeholder']        = wp_parse_args( (array) $field['placeholder'], array(
+			'key'   => 'Key',
+			'value' => 'Value',
+		) );
 		return $field;
 	}
 
 	/**
-	 * Output the field value
-	 * Display unordered list of key - value pairs
+	 * Format value for the helper functions.
 	 *
-	 * @use self::get_value()
-	 * @see video_central_metaboxes_the_value()
-	 *
-	 * @param  array    $field   Field parameters
-	 * @param  array    $args    Additional arguments. Rarely used. See specific fields for details
-	 * @param  int|null $post_id Post ID. null for current post. Optional.
-	 *
-	 * @return string HTML output of the field
+	 * @param array        $field Field parameter
+	 * @param string|array $value The field meta value
+	 * @return string
 	 */
-	static function the_value( $field, $args = array(), $post_id = null )
-	{
-		$value = self::get_value( $field, $args, $post_id );
-		if ( ! is_array( $value ) )
-			return '';
-
+	public static function format_value( $field, $value ) {
 		$output = '<ul>';
-		foreach ( $value as $subvalue )
-		{
+		foreach ( $value as $subvalue ) {
 			$output .= sprintf( '<li><label>%s</label>: %s</li>', $subvalue[0], $subvalue[1] );
 		}
 		$output .= '</ul>';

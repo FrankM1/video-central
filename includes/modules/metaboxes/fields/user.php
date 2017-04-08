@@ -2,8 +2,8 @@
 /**
  * User field class.
  */
-class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_Choice_Field
-{
+class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_Choice_Field {
+
 	/**
 	 * Normalize parameters for field
 	 *
@@ -11,15 +11,11 @@ class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_
 	 *
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	public static function normalize( $field ) {
 		/**
 		 * Set default field args
 		 */
-		$field = wp_parse_args( $field, array(
-			'field_type' => 'select',
-			'query_args' => array(),
-		) );
+		$field = parent::normalize( $field );
 
 		/**
 		 * Prevent select tree for user since it's not hierarchical
@@ -45,7 +41,6 @@ class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_
 			'role'    => '',
 			'fields'  => 'all',
 		) );
-		$field               = parent::normalize( $field );
 
 		return $field;
 	}
@@ -57,10 +52,9 @@ class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_
 	 *
 	 * @return array
 	 */
-	static function get_options( $field )
-	{
-		$options = get_users( $field['query_args'] );
-		return $options;
+	public static function get_options( $field ) {
+		$query = new WP_User_Query( $field['query_args'] );
+		return $query->get_results();
 	}
 
 	/**
@@ -68,8 +62,7 @@ class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_
 	 *
 	 * @return array
 	 */
-	static function get_db_fields()
-	{
+	public static function get_db_fields() {
 		return array(
 			'parent' => 'parent',
 			'id'     => 'ID',
@@ -78,17 +71,15 @@ class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_
 	}
 
 	/**
-	 * Get option label to display in the frontend
+	 * Get option label
 	 *
-	 * @param int   $value Option value
-	 * @param int   $index Array index
-	 * @param array $field Field parameter
+	 * @param string $value Option value
+	 * @param array  $field Field parameter
 	 *
 	 * @return string
 	 */
-	static function get_option_label( &$value, $index, $field )
-	{
+	public static function get_option_label( $field, $value ) {
 		$user  = get_userdata( $value );
-		$value = '<a href="' . get_author_posts_url( $value ) . '">' . $user->display_name . '</a>';
+		return '<a href="' . get_author_posts_url( $value ) . '">' . $user->display_name . '</a>';
 	}
 }

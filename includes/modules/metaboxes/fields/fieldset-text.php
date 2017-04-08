@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Fieldset text class.
  */
-class Video_Central_Metaboxes_Fieldset_Text_Field extends Video_Central_Metaboxes_Text_Field
-{
+class Video_Central_Metaboxes_Fieldset_Text_Field extends Video_Central_Metaboxes_Text_Field {
+
 	/**
 	 * Get field HTML
 	 *
@@ -12,21 +13,29 @@ class Video_Central_Metaboxes_Fieldset_Text_Field extends Video_Central_Metaboxe
 	 *
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
+	static function html( $meta, $field ) {
 		$html = array();
 		$tpl  = '<label>%s %s</label>';
 
-		foreach ( $field['options'] as $key => $label )
-		{
-			$value  = isset( $meta[$key] ) ? $meta[$key] : '';
+		foreach ( $field['options'] as $key => $label ) {
+			$value                       = isset( $meta[ $key ] ) ? $meta[ $key ] : '';
 			$field['attributes']['name'] = $field['field_name'] . "[{$key}]";
-			$html[] = sprintf( $tpl, $label, parent::html( $value, $field ) );
+			$html[]                      = sprintf( $tpl, $label, parent::html( $value, $field ) );
 		}
 
 		$out = '<fieldset><legend>' . $field['desc'] . '</legend>' . implode( ' ', $html ) . '</fieldset>';
 
 		return $out;
+	}
+
+	/**
+	 * Do not show field description.
+	 *
+	 * @param array $field
+	 * @return string
+	 */
+	public static function element_description( $field ) {
+		return '';
 	}
 
 	/**
@@ -36,49 +45,52 @@ class Video_Central_Metaboxes_Fieldset_Text_Field extends Video_Central_Metaboxe
 	 *
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
-		$field = parent::normalize( $field );
-		$field['multiple'] = false;
-		$field['attributes']['id'] = false;
+	static function normalize( $field ) {
+		$field                       = parent::normalize( $field );
+		$field['multiple']           = false;
+		$field['attributes']['id']   = false;
+		$field['attributes']['type'] = 'text';
 		return $field;
 	}
 
 	/**
-	 * Output the field value
-	 * Display options in format Label: value in unordered list
+	 * Format value for the helper functions.
 	 *
-	 * @param  array    $field   Field parameters
-	 * @param  array    $args    Additional arguments. Not used for these fields.
-	 * @param  int|null $post_id Post ID. null for current post. Optional.
-	 *
-	 * @return mixed Field value
+	 * @param array        $field Field parameter
+	 * @param string|array $value The field meta value
+	 * @return string
 	 */
-	static function the_value( $field, $args = array(), $post_id = null )
-	{
-		$value = self::get_value( $field, $args, $post_id );
-		if ( ! $value )
-			return '';
-
-		$output = '<table>';
-		$output .= '<thead><tr>';
-		foreach ( $field['options'] as $label )
-		{
+	public static function format_value( $field, $value ) {
+		$output = '<table><thead><tr>';
+		foreach ( $field['options'] as $label ) {
 			$output .= "<th>$label</th>";
 		}
-		$output .= '</tr></thead><tbody>';
+		$output .= '<tr>';
 
-		foreach ( $value as $subvalue )
-		{
-			$output .= '<tr>';
-			foreach ( $subvalue as $value )
-			{
-				$output .= "<td>$value</td>";
+		if ( ! $field['clone'] ) {
+			$output .= self::format_single_value( $field, $value );
+		} else {
+			foreach ( $value as $subvalue ) {
+				$output .= self::format_single_value( $field, $subvalue );
 			}
-			$output .= '</tr>';
 		}
 		$output .= '</tbody></table>';
+		return $output;
+	}
 
+	/**
+	 * Format a single value for the helper functions.
+	 *
+	 * @param array $field Field parameter
+	 * @param array $value The value
+	 * @return string
+	 */
+	public static function format_single_value( $field, $value ) {
+		$output = '<tr>';
+		foreach ( $value as $subvalue ) {
+			$output .= "<td>$subvalue</td>";
+		}
+		$output .= '</tr>';
 		return $output;
 	}
 }

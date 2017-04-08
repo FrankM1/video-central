@@ -1,39 +1,21 @@
 <?php
+
 /**
  * Abstract field to select an object: post, user, taxonomy, etc.
  */
-abstract class Video_Central_Metaboxes_Object_Choice_Field extends Video_Central_Metaboxes_Field
-{
+abstract class Video_Central_Metaboxes_Object_Choice_Field extends Video_Central_Metaboxes_Choice_Field {
+
 	/**
 	 * Get field HTML
 	 *
+	 * @param mixed $options
+	 * @param mixed $db_fields
 	 * @param mixed $meta
 	 * @param array $field
-	 *
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
-		$field_class = Video_Central_Metabox::get_class_name( $field );
-		$meta        = (array) $meta;
-		$options     = call_user_func( array( $field_class, 'get_options' ), $field );
-		$output      = '';
-		switch ( $field['field_type'] )
-		{
-			case 'checkbox_list':
-			case 'radio_list':
-				$output .= call_user_func( array( $field_class, 'render_list' ), $options, $meta, $field );
-				break;
-			case 'select_tree':
-				$output .= call_user_func( array( $field_class, 'render_select_tree' ), $options, $meta, $field );
-				break;
-			case 'select_advanced':
-			case 'select':
-			default:
-				$output .= call_user_func( array( $field_class, 'render_select' ), $options, $meta, $field );
-				break;
-		}
-		return $output;
+	public static function walk( $field, $options, $db_fields, $meta ) {
+		return call_user_func( array( self::get_type_class( $field ), 'walk' ), $field, $options, $db_fields, $meta );
 	}
 
 	/**
@@ -43,47 +25,25 @@ abstract class Video_Central_Metaboxes_Object_Choice_Field extends Video_Central
 	 *
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	public static function normalize( $field ) {
 		$field = parent::normalize( $field );
 		$field = wp_parse_args( $field, array(
 			'flatten'    => true,
 			'query_args' => array(),
-			'field_type' => 'select',
+			'field_type' => 'select_advanced',
 		) );
 
-		if ( 'checkbox_tree' === $field['field_type'] )
-		{
+		if ( 'checkbox_tree' === $field['field_type'] ) {
 			$field['field_type'] = 'checkbox_list';
 			$field['flatten']    = false;
 		}
-
-		switch ( $field['field_type'] )
-		{
-			case 'checkbox_list':
-			case 'radio_list':
-				$field = wp_parse_args( $field, array(
-					'collapse' => true
-				) );
-				$field['flatten']  = 'radio_list' === $field['field_type'] ? true : $field['flatten'];
-				$field['multiple'] = 'radio_list' === $field['field_type'] ? false : true;
-				$field             = Video_Central_Metaboxes_Input_Field::normalize( $field );
-				break;
-			case 'select_advanced':
-				$field            = Video_Central_Metaboxes_Select_Advanced_Field::normalize( $field );
-				$field['flatten'] = true;
-				break;
-			case 'select_tree':
-				$field             = Video_Central_Metaboxes_Select_Field::normalize( $field );
-				$field['multiple'] = true;
-				break;
-			case 'select':
-			default:
-				$field = Video_Central_Metaboxes_Select_Field::normalize( $field );
-				break;
+		if ( 'radio_list' == $field['field_type'] ) {
+			$field['multiple'] = false;
 		}
-
-		return $field;
+		if ( 'checkbox_list' == $field['field_type'] ) {
+			$field['multiple'] = true;
+		}
+		return call_user_func( array( self::get_type_class( $field ), 'normalize' ), $field );
 	}
 
 	/**
@@ -94,37 +54,11 @@ abstract class Video_Central_Metaboxes_Object_Choice_Field extends Video_Central
 	 *
 	 * @return array
 	 */
-	static function get_attributes( $field, $value = null )
-	{
-		switch ( $field['field_type'] )
-		{
-			case 'checkbox_list':
-			case 'radio_list':
-				$attributes           = Video_Central_Metaboxes_Input_Field::get_attributes( $field, $value );
-				$attributes['class'] .= " video-central-metaboxes-choice";
-				$attributes['id']     = false;
-				$attributes['type']   = 'radio_list' === $field['field_type'] ? 'radio' : 'checkbox';
-				$attributes['name'] .= ! $field['clone'] && $field['multiple'] ? '[]' : '';
-				break;
-			case 'select_advanced':
-				$attributes           = Video_Central_Metaboxes_Select_Advanced_Field::get_attributes( $field, $value );
-				$attributes['class'] .= " video-central-metaboxes-select_advanced";
-				break;
-			case 'select_tree':
-				$attributes             = Video_Central_Metaboxes_Select_Field::get_attributes( $field, $value );
-				$attributes['multiple'] = false;
-				$attributes['id']       = false;
-				$attributes['class'] .= " video-central-metaboxes-select";
-				break;
-			case 'select':
-			default:
-				$attributes           = Video_Central_Metaboxes_Select_Field::get_attributes( $field, $value );
-				$attributes['class'] .= " video-central-metaboxes-select";
-				break;
+	public static function get_attributes( $field, $value = null ) {
+		$attributes = call_user_func( array( self::get_type_class( $field ), 'get_attributes' ), $field, $value );
+		if ( 'select_advanced' == $field['field_type'] ) {
+			$attributes['class'] .= ' video-central-metaboxes-select_advanced';
 		}
-
-
-
 		return $attributes;
 	}
 
@@ -133,8 +67,7 @@ abstract class Video_Central_Metaboxes_Object_Choice_Field extends Video_Central
 	 *
 	 * @return array
 	 */
-	static function get_db_fields()
-	{
+	public static function get_db_fields() {
 		return array(
 			'parent' => '',
 			'id'     => '',
@@ -142,98 +75,27 @@ abstract class Video_Central_Metaboxes_Object_Choice_Field extends Video_Central
 		);
 	}
 
+
 	/**
 	 * Enqueue scripts and styles
-	 *
-	 * @return void
 	 */
-	static function admin_enqueue_scripts()
-	{
-		wp_enqueue_style( 'video-central-metaboxes-object-choice', Video_Central_Metaboxes_CSS_URL . 'object-choice.css', array(), Video_Central_Metaboxes_VER );
-		wp_enqueue_script( 'video-central-metaboxes-object-choice', Video_Central_Metaboxes_JS_URL . 'object-choice.js', array(), Video_Central_Metaboxes_VER, true );
+	public static function admin_enqueue_scripts() {
+		Video_Central_Metaboxes_Input_List_Field::admin_enqueue_scripts();
 		Video_Central_Metaboxes_Select_Field::admin_enqueue_scripts();
+		Video_Central_Metaboxes_Select_Tree_Field::admin_enqueue_scripts();
 		Video_Central_Metaboxes_Select_Advanced_Field::admin_enqueue_scripts();
 	}
 
 	/**
-	 * Render checkbox_list or radio_list using walker
+	 * Get correct rendering class for the field.
 	 *
-	 * @param $options
-	 * @param $meta
-	 * @param $field
-	 *
-	 * @return array
+	 * @param array $field Field parameter
+	 * @return string
 	 */
-	static function render_list( $options, $meta, $field )
-	{
-		$field_class = Video_Central_Metabox::get_class_name( $field );
-		$db_fields   = call_user_func( array( $field_class, 'get_db_fields' ), $field );
-		$walker      = new Video_Central_Metaboxes_Choice_List_Walker( $db_fields, $field, $meta );
-
-		$output = sprintf( '<ul class="video-central-metaboxes-choice-list %s">', $field['collapse'] ? 'collapse' : '' );
-
-		$output .= $walker->walk( $options, $field['flatten'] ? - 1 : 0 );
-		$output .= '</ul>';
-		return $output;
-	}
-
-	/**
-	 * Render select or select_advanced using walker
-	 *
-	 * @param $options
-	 * @param $meta
-	 * @param $field
-	 *
-	 * @return array
-	 */
-	static function render_select( $options, $meta, $field )
-	{
-		$field_class = Video_Central_Metabox::get_class_name( $field );
-		$attributes  = call_user_func( array( $field_class, 'get_attributes' ), $field, $meta );
-		$db_fields   = call_user_func( array( $field_class, 'get_db_fields' ), $field );
-		$walker      = new Video_Central_Metaboxes_Select_Walker( $db_fields, $field, $meta );
-
-		$output = sprintf(
-			'<select %s>',
-			self::render_attributes( $attributes )
-		);
-		if ( false === $field['multiple'] )
-		{
-			$output .= isset( $field['placeholder'] ) ? "<option value=''>{$field['placeholder']}</option>" : '<option></option>';
+	protected static function get_type_class( $field ) {
+		if ( in_array( $field['field_type'], array( 'checkbox_list', 'radio_list' ) ) ) {
+			return 'Video_Central_Metaboxes_Input_List_Field';
 		}
-		$output .= $walker->walk( $options, $field['flatten'] ? - 1 : 0 );
-		$output .= '</select>';
-		return $output;
-	}
-
-	/**
-	 * Render select_tree
-	 *
-	 * @param $options
-	 * @param $meta
-	 * @param $field
-	 *
-	 * @return array
-	 */
-	static function render_select_tree( $options, $meta, $field )
-	{
-		$field_class = Video_Central_Metabox::get_class_name( $field );
-		$db_fields   = call_user_func( array( $field_class, 'get_db_fields' ), $field );
-		$walker      = new Video_Central_Metaboxes_Select_Tree_Walker( $db_fields, $field, $meta );
-		$output      = $walker->walk( $options );
-
-		return $output;
-	}
-
-	/**
-	 * Get options for walker
-	 *
-	 * @param array $field
-	 *
-	 * @return array
-	 */
-	static function get_options( $field )
-	{
-		return array();
+		return self::get_class_name( array( 'type' => $field['field_type'] ) );
 	}
 }
