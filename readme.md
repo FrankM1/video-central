@@ -28,6 +28,8 @@ For more info, check me out on twitter and follow <a href="http://twitter.com/fr
 
 ### Officially Supported Themes
 <a href="http://themes.radiumthemes.com/wp/newscore">Newscore</a>
+<a href="http://themes.radiumthemes.com/wp/newsfront">Newsfront</a>
+<a href="http://themes.radiumthemes.com/?theme=Juniper">Juniper</a>
 
 ## Installation
 
