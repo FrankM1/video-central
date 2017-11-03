@@ -42,21 +42,21 @@ function video_central_videos_post_type()
 function video_central_get_video_post_type_labels()
 {
     return apply_filters(__FUNCTION__, array(
-        'name' => __('Videos',                   'video_central'),
-        'menu_name' => __('Videos',                   'video_central'),
-        'singular_name' => __('Video',                    'video_central'),
-        'all_items' => __('All Videos',               'video_central'),
-        'add_new' => __('New Video',                'video_central'),
-        'add_new_item' => __('Create New Video',         'video_central'),
-        'edit' => __('Edit',                     'video_central'),
-        'edit_item' => __('Edit Video',               'video_central'),
-        'new_item' => __('New Video',                'video_central'),
-        'view' => __('View Video',               'video_central'),
-        'view_item' => __('View Video',               'video_central'),
-        'search_items' => __('Search Videos',            'video_central'),
-        'not_found' => __('No videos found',          'video_central'),
+        'name'               => __('Videos',                   'video_central'),
+        'menu_name'          => __('Videos',                   'video_central'),
+        'singular_name'      => __('Video',                    'video_central'),
+        'all_items'          => __('All Videos',               'video_central'),
+        'add_new'            => __('New Video',                'video_central'),
+        'add_new_item'       => __('Create New Video',         'video_central'),
+        'edit'               => __('Edit',                     'video_central'),
+        'edit_item'          => __('Edit Video',               'video_central'),
+        'new_item'           => __('New Video',                'video_central'),
+        'view'               => __('View Video',               'video_central'),
+        'view_item'          => __('View Video',               'video_central'),
+        'search_items'       => __('Search Videos',            'video_central'),
+        'not_found'          => __('No videos found',          'video_central'),
         'not_found_in_trash' => __('No videos found in Trash', 'video_central'),
-        'parent_item_colon' => __('Parent Video:',            'video_central'),
+        'parent_item_colon'  => __('Parent Video:',            'video_central'),
     ));
 }
 
@@ -70,21 +70,21 @@ function video_central_get_video_post_type_labels()
 function video_central_get_video_category_tax_labels()
 {
     return apply_filters(__FUNCTION__, array(
-            'name' => __('Video Categories', 'video_central'),
-            'singular_name' => __('Video Category', 'video_central'),
-            'search_items' => __('Search Video Categories', 'video_central'),
-            'popular_items' => __('Popular Video Categories', 'video_central'),
-            'all_items' => __('All Video Categories', 'video_central'),
-            'parent_item' => __('Parent Video Category', 'video_central'),
-            'parent_item_colon' => __('Parent Video Category:', 'video_central'),
-            'edit_item' => __('Edit Video Category', 'video_central'),
-            'update_item' => __('Update Video Category', 'video_central'),
-            'add_new_item' => __('Add New Video Category', 'video_central'),
-            'new_item_name' => __('New Video Category Name', 'video_central'),
+            'name'                       => __('Video Categories', 'video_central'),
+            'singular_name'              => __('Video Category', 'video_central'),
+            'search_items'               => __('Search Video Categories', 'video_central'),
+            'popular_items'              => __('Popular Video Categories', 'video_central'),
+            'all_items'                  => __('All Video Categories', 'video_central'),
+            'parent_item'                => __('Parent Video Category', 'video_central'),
+            'parent_item_colon'          => __('Parent Video Category:', 'video_central'),
+            'edit_item'                  => __('Edit Video Category', 'video_central'),
+            'update_item'                => __('Update Video Category', 'video_central'),
+            'add_new_item'               => __('Add New Video Category', 'video_central'),
+            'new_item_name'              => __('New Video Category Name', 'video_central'),
             'separate_items_with_commas' => __('Separate video categories with commas', 'video_central'),
-            'add_or_remove_items' => __('Add or remove video categories', 'video_central'),
-            'choose_from_most_used' => __('Choose from the most used video categories', 'video_central'),
-            'menu_name' => __('Video Categories', 'video_central'),
+            'add_or_remove_items'        => __('Add or remove video categories', 'video_central'),
+            'choose_from_most_used'      => __('Choose from the most used video categories', 'video_central'),
+            'menu_name'                  => __('Video Categories', 'video_central'),
    ));
 }
 
@@ -98,21 +98,21 @@ function video_central_get_video_category_tax_labels()
 function video_central_get_video_tag_tax_labels()
 {
     return apply_filters(__FUNCTION__, array(
-        'name' => __('Video Tags', 'video_central'),
-        'singular_name' => __('Video Tag', 'video_central'),
-        'search_items' => __('Search Video Tags', 'video_central'),
-        'popular_items' => __('Popular Video Tags', 'video_central'),
-        'all_items' => __('All Video Tags', 'video_central'),
-        'parent_item' => __('Parent Video Tag', 'video_central'),
-        'parent_item_colon' => __('Parent Video Tag:', 'video_central'),
-        'edit_item' => __('Edit Video Tag', 'video_central'),
-        'update_item' => __('Update Video Tag', 'video_central'),
-        'add_new_item' => __('Add New Video Tag', 'video_central'),
-        'new_item_name' => __('New Video Tag Name', 'video_central'),
+        'name'                       => __('Video Tags', 'video_central'),
+        'singular_name'              => __('Video Tag', 'video_central'),
+        'search_items'               => __('Search Video Tags', 'video_central'),
+        'popular_items'              => __('Popular Video Tags', 'video_central'),
+        'all_items'                  => __('All Video Tags', 'video_central'),
+        'parent_item'                => __('Parent Video Tag', 'video_central'),
+        'parent_item_colon'          => __('Parent Video Tag:', 'video_central'),
+        'edit_item'                  => __('Edit Video Tag', 'video_central'),
+        'update_item'                => __('Update Video Tag', 'video_central'),
+        'add_new_item'               => __('Add New Video Tag', 'video_central'),
+        'new_item_name'              => __('New Video Tag Name', 'video_central'),
         'separate_items_with_commas' => __('Separate video tags with commas', 'video_central'),
-        'add_or_remove_items' => __('Add or remove video tags', 'video_central'),
-        'choose_from_most_used' => __('Choose from the most used video tags', 'video_central'),
-        'menu_name' => __('Video Tags', 'video_central'),
+        'add_or_remove_items'        => __('Add or remove video tags', 'video_central'),
+        'choose_from_most_used'      => __('Choose from the most used video tags', 'video_central'),
+        'menu_name'                  => __('Video Tags', 'video_central'),
     ));
 }
 
@@ -978,6 +978,42 @@ function video_central_videos_type($video_id = 0)
         return apply_filters(__FUNCTION__, $retval, $video_id);
     }
 
+/**
+ * Output the source of the video.
+ *
+ * @since 1.0.0
+ *
+ * @param int $video_id Optional.  id
+ *
+ * @uses video_central_get_video_source() To get the video source
+ */
+function video_central_video_source($video_id = 0)
+{
+    echo video_central_get_video_source($video_id);
+}
+    /**
+     * Return the type of video (vimeo/youtube/etc...).
+     *
+     * @since 1.0.0
+     *
+     * @param int $video_id Optional.  id
+     *
+     * @uses get_post_meta() To get the video category meta
+     *
+     * @return string Where the video is from
+     */
+    function video_central_get_video_source($video_id = 0)
+    {
+        $video_id = video_central_get_video_id($video_id);
+        $retval = get_post_meta($video_id, '_video_central_source', true);
+        if ( $retval !== 'self' ) {
+            $retval = 'embed';
+        }
+
+        return apply_filters(__FUNCTION__, $retval, $video_id);
+    }
+
+    
 /** Video Tags ****************************************************************/
 
 /**

@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         watch: {
             sass: {
                 files: ['templates/default/scss/**/*.{scss,sass}', 'assets/admin/scss/**/*.{scss,sass}', 'assets/frontend/scss/**/*.{scss,sass}'],
-                tasks: ['sass', 'autoprefixer', 'jshint', 'uglify']
+                tasks: ['sass', 'postcss', 'jshint', 'uglify']
             },
             js: {
                 files: '<%= jshint.all %>',
