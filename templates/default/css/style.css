@@ -39,24 +39,23 @@ div.like-opening div.like-circle {
   -webkit-transition-property: -webkit-transform, background-color;
   -webkit-transition-property: -webkit-transform, background-color;
   -webkit-transition-property: -webkit-transform, background-color;
+  -webkit-transition: background-color, -webkit-transform;
+  transition: background-color, -webkit-transform;
+  -o-transition: transform, background-color;
   transition: transform, background-color;
+  transition: transform, background-color, -webkit-transform;
   -webkit-transition-duration: 1s;
-  -moz-transition-duration: 1s;
   -o-transition-duration: 1s;
-  -ms-transition-duration: 1s;
   transition-duration: 1s;
   -webkit-transition-timing-function: ease-out;
-  -moz-transition-timing-function: ease-out;
   -o-transition-timing-function: ease-out;
-  -ms-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
   -webkit-transform: scale(0.3);
-  -moz-transform: scale(0.3);
-  -o-transform: scale(0.3);
   -ms-transform: scale(0.3);
   transform: scale(0.3);
   transition-style: preserve-3d;
-  backface-visibility: visible; }
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible; }
 
 .like.like-complete a.like-object div.like-opening div.like-circle:before {
   content: "\f004"; }
@@ -100,39 +99,25 @@ div.like-opening div.like-circle {
 
 .like.like-active a.like-object div.like-opening div.like-circle {
   -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
   background: rgba(0, 0, 0, 0.7); }
 
 .like.like-complete a.like-object div.like-opening div.like-circle {
   -webkit-transition-property: none;
-  -moz-transition-property: none;
   -o-transition-property: none;
-  -ms-transition-property: none;
   transition-property: none;
   -webkit-animation: bounce 1s;
-  -moz-animation: bounce 1s;
-  -ms-animation: bounce 1s;
-  -o-animation: bounce 1s;
   animation: bounce 1s;
   -webkit-animation-iteration-count: 1;
-  -moz-animation-iteration-count: 1;
-  -ms-animation-iteration-count: 1;
-  -o-animation-iteration-count: 1;
   animation-iteration-count: 1;
   -webkit-transform: scale(0.85);
-  -moz-transform: scale(0.85);
-  -o-transform: scale(0.85);
   -ms-transform: scale(0.85);
   transform: scale(0.85); }
 
 @keyframes "bounce" {
   0% {
     -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
     -ms-transform: scale(1.1);
     transform: scale(1.1);
     background-color: #ff5a00;
@@ -141,8 +126,6 @@ div.like-opening div.like-circle {
     opacity: 1; }
   50% {
     -webkit-transform: scale(1.6);
-    -moz-transform: scale(1.6);
-    -o-transform: scale(1.6);
     -ms-transform: scale(1.6);
     transform: scale(1.6);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
@@ -151,8 +134,6 @@ div.like-opening div.like-circle {
     background-color: #ff5a00; }
   60% {
     -webkit-transform: scale(0.6);
-    -moz-transform: scale(0.6);
-    -o-transform: scale(0.6);
     -ms-transform: scale(0.6);
     transform: scale(0.6);
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -160,39 +141,11 @@ div.like-opening div.like-circle {
     opacity: 1; }
   80% {
     -webkit-transform: scale(0.95);
-    -moz-transform: scale(0.95);
-    -o-transform: scale(0.95);
     -ms-transform: scale(0.95);
     transform: scale(0.95); }
   100% {
     -webkit-transform: scale(0.85);
-    -moz-transform: scale(0.85);
-    -o-transform: scale(0.85);
     -ms-transform: scale(0.85);
-    transform: scale(0.85); } }
-@-moz-keyframes bounce {
-  0% {
-    -moz-transform: scale(1.1);
-    transform: scale(1.1);
-    background-color: #ff5a00;
-    filter: alpha(opacity=100);
-    opacity: 1; }
-  50% {
-    -moz-transform: scale(1.6);
-    transform: scale(1.6);
-    filter: alpha(opacity=70);
-    opacity: .7;
-    background-color: #ff5a00; }
-  60% {
-    -moz-transform: scale(0.6);
-    transform: scale(0.6);
-    filter: alpha(opacity=100);
-    opacity: 1; }
-  80% {
-    -moz-transform: scale(0.95);
-    transform: scale(0.95); }
-  100% {
-    -moz-transform: scale(0.85);
     transform: scale(0.85); } }
 @-webkit-keyframes "bounce" {
   0% {
@@ -217,57 +170,6 @@ div.like-opening div.like-circle {
     transform: scale(0.95); }
   100% {
     -webkit-transform: scale(0.85);
-    transform: scale(0.85); } }
-@-ms-keyframes "bounce" {
-  0% {
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
-    background-color: #ff5a00;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1; }
-  50% {
-    -ms-transform: scale(1.6);
-    transform: scale(1.6);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
-    opacity: .7;
-    background-color: #ff5a00; }
-  60% {
-    -ms-transform: scale(0.6);
-    transform: scale(0.6);
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-    opacity: 1; }
-  80% {
-    -ms-transform: scale(0.95);
-    transform: scale(0.95); }
-  100% {
-    -ms-transform: scale(0.85);
-    transform: scale(0.85); } }
-@-o-keyframes "bounce" {
-  0% {
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
-    background-color: #ff5a00;
-    filter: alpha(opacity=100);
-    opacity: 1; }
-  50% {
-    -o-transform: scale(1.6);
-    transform: scale(1.6);
-    filter: alpha(opacity=70);
-    opacity: .7;
-    background-color: #ff5a00; }
-  60% {
-    -o-transform: scale(0.6);
-    transform: scale(0.6);
-    filter: alpha(opacity=100);
-    opacity: 1; }
-  80% {
-    -o-transform: scale(0.95);
-    transform: scale(0.95); }
-  100% {
-    -o-transform: scale(0.85);
     transform: scale(0.85); } }
 .widget_display_featured .thumbnail-large li,
 .widget_display_recent .thumbnail-large li,
@@ -348,7 +250,8 @@ div.like-opening div.like-circle {
       z-index: 2;
       width: 20px;
       height: 20px;
-      box-shadow: 0px 0px 0px 2px white;
+      -webkit-box-shadow: 0px 0px 0px 2px white;
+              box-shadow: 0px 0px 0px 2px white;
       line-height: 20px;
       border-radius: 50%;
       padding-left: 2px;
@@ -482,6 +385,8 @@ div.like-opening div.like-circle {
       line-height: 1;
       overflow: hidden; }
       .video-central ul.video-central-list > li .video-central-thumb img {
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
         transition: all .3s ease-in-out;
         border: 1px solid rgba(0, 0, 0, 0.02); }
     .video-central ul.video-central-list > li:hover .video-central-thumb img {
@@ -510,7 +415,8 @@ div.like-opening div.like-circle {
       z-index: 2;
       width: 20px;
       height: 20px;
-      box-shadow: 0px 0px 0px 2px white;
+      -webkit-box-shadow: 0px 0px 0px 2px white;
+              box-shadow: 0px 0px 0px 2px white;
       line-height: 20px;
       border-radius: 50%;
       margin: 3px;
@@ -718,8 +624,6 @@ div.like-opening div.like-circle {
     height: 100%;
     background-repeat: no-repeat;
     -webkit-transition: .25s;
-    -moz-transition: .25s;
-    -ms-transition: .25s;
     -o-transition: .25s;
     transition: .25s; }
   .video-home-slider-grid .video-wall-wrap .video-wall-wrap-inner {
@@ -831,6 +735,8 @@ div.like-opening div.like-circle {
       height: 57px;
       float: left;
       border: 2px solid #000;
+      -webkit-transition: all .3s ease-in-out;
+      -o-transition: all .3s ease-in-out;
       transition: all .3s ease-in-out; }
       .video-home-slider-grid .video-wall-wrap .carousel-nav .thumb .poster-link img {
         width: 124px;
@@ -968,6 +874,8 @@ div.like-opening div.like-circle {
   margin: 15px 0;
   overflow: hidden;
   max-height: 200px;
+  -webkit-transition: max-height 0.8s;
+  -o-transition: max-height 0.8s;
   transition: max-height 0.8s; }
   .video-central-single-content.toggled {
     max-height: none; }
@@ -990,11 +898,14 @@ video:hover {
 
 .video-central-player .video-js {
   width: 100%;
+  -webkit-transition: height 0.8s;
+  -o-transition: height 0.8s;
   transition: height 0.8s; }
 .video-central-player.loading {
   min-height: 400px;
   position: relative;
-  box-shadow: inset 0 0 6px 0 #eee;
+  -webkit-box-shadow: inset 0 0 6px 0 #eee;
+          box-shadow: inset 0 0 6px 0 #eee;
   background-color: #fafafa; }
   .video-central-player.loading video,
   .video-central-player.loading > div {
@@ -1016,8 +927,6 @@ video:hover {
     border-radius: 50%;
     /* animation */
     -webkit-animation: spin 1.5s infinite linear;
-    -moz-animation: spin 1.5s infinite linear;
-    -o-animation: spin 1.5s infinite linear;
     animation: spin 1.5s infinite linear; }
 
 /** Tabs **/
@@ -1051,6 +960,8 @@ video:hover {
       content: '';
       position: absolute;
       z-index: 1;
+      -webkit-transition: .3s all ease-in-out;
+      -o-transition: .3s all ease-in-out;
       transition: .3s all ease-in-out;
       transition: .3s all ease-in-out;
       height: 0;

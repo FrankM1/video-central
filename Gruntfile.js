@@ -59,20 +59,45 @@ module.exports = function(grunt) {
 
         },
 
-        // autoprefixer
-        autoprefixer: {
-            options: {
-                browsers: ['last 2 versions', 'ie 9', 'ios 6', 'android 4'],
-                map: true
-            },
-            files: {
-                expand: true,
-                flatten: true,
-                cwd: 'templates/default/css/',
-                src: 'templates/default/css/{,*/}*.css',
-                dest: 'templates/default/css/'
-            },
-        },
+        postcss: {
+			dev: {
+				options: {
+					map: true,
+
+					processors: [
+						require( 'autoprefixer' )( {
+							browsers: 'last 5 versions'
+						} )
+					]
+				},
+				files: [ {
+					src: [
+						'templates/default/css/*.css',
+						'!templates/default/css/*.min.css'
+					]
+				} ]
+			},
+			minify: {
+				options: {
+					processors: [
+						require( 'autoprefixer' )( {
+							browsers: 'last 5 versions'
+						} ),
+						require( 'cssnano' )( {
+							reduceIdents: false
+						} )
+					]
+				},
+				files: [ {
+					expand: true,
+					src: [
+						'templates/default/css/*.css',
+						'!templates/default/css/*.min.css'
+					],
+					ext: '.min.css'
+				} ]
+			}
+		},
 
         // javascript linting with jshint
         jshint: {
@@ -97,7 +122,6 @@ module.exports = function(grunt) {
                         'templates/default/js/vendor/jquery.cookie.js',
                         'templates/default/js/vendor/jquery.jcarousel.js',
                         'templates/default/js/vendor/bootstrap.tabs.js',
-                        'templates/default/js/vendor/fitvid.js',
                         'templates/default/js/vendor/readmore.min.js',
                     ]
                 }
@@ -242,7 +266,7 @@ module.exports = function(grunt) {
     });
 
     // register task
-    grunt.registerTask('build', ['sass', 'sprites', 'autoprefixer', 'jshint', 'uglify', 'watch']);
+    grunt.registerTask('build', ['sass', 'sprites', 'postcss', 'jshint', 'uglify', 'watch']);
     grunt.registerTask('build-lang', ['checktextdomain', 'makepot']);
     grunt.registerTask('update-packages', ['devUpdate']);
 

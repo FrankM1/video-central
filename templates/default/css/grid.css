@@ -2,7 +2,6 @@
 .video-central *:before,
 .video-central *:after {
   -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 .video-central img {
@@ -1389,6 +1388,5 @@
 
   .large-block-grid-12 > li:nth-of-type(12n+1) {
     clear: both; } }
-/*# sourceMappingURL=grid.css.map */
 
 /*# sourceMappingURL=grid.css.map */

@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": ";;;;AAMI,yCAAmB;EACf,GAAG,EAAE,CAAC;AAGV,2CAAqB;EACjB,GAAG,EAAE,IAAI;AAGb,wDAAkC;EAC9B,GAAG,EAAE,CAAC",
-"sources": ["../scss/playlist-modal.scss"],
-"names": [],
-"file": "playlist-modal.css"
-}

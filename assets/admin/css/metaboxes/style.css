@@ -1,114 +1,78 @@
 /* =Styles for 'normal' meta boxes
 -------------------------------------------------------------- */
-
-/* Clearfix for field */
-.video-central-metaboxes-field:before,
-.video-central-metaboxes-field:after {
-	content: " ";
-	display: table;
-}
-.video-central-metaboxes-field:after {
-	clear: both;
-}
 .video-central-metaboxes-field {
-	*zoom: 1;
+  margin: 10px 0; }
 
-	margin: 0 0 10px;
-}
 .video-central-metaboxes-label,
 .video-central-metaboxes-input {
-	vertical-align: top;
-	float: left;
-}
+  display: inline-block;
+  vertical-align: top; }
+
 .video-central-metaboxes-label {
-	width: 25%;
-}
+  width: 24%; }
+
 .video-central-metaboxes-label.required > span {
-	color: #c00;
-	font-weight: bold;
-	margin-left: 3px;
-}
+  font-weight: bold;
+  color: #c00; }
 
 /* 75% if field has label, 100% if no label */
 .video-central-metaboxes-input {
-	width: 100%;
-}
+  width: 100%; }
+
 .video-central-metaboxes-label ~ .video-central-metaboxes-input {
-	width: 75%;
-}
+  width: 75%; }
+
 .video-central-metaboxes-input h4 {
-	margin: 0;
-}
+  margin: 0; }
+
 .video-central-metaboxes-textarea {
-	resize: vertical;
-}
+  resize: vertical; }
 
 /* Clone */
 .video-central-metaboxes-clone {
-	min-height: 24px;
-	margin-bottom: 10px;
-	position: relative;
-	clear: both;
-	background: #fff;
-}
-.video-central-metaboxes-clone > input[type='radio'],
-.video-central-metaboxes-clone > input[type='checkbox'] {
-	margin: 6px 0 0 4px;
-}
+  position: relative;
+  margin-bottom: 5px;
+  min-height: 24px; }
+
+.video-central-metaboxes-clone > input[type="radio"],
+.video-central-metaboxes-clone > input[type="checkbox"] {
+  margin: 6px 0 0 4px; }
+
+.video-central-metaboxes-button {
+  float: right; }
+
 .video-central-metaboxes-button.remove-clone {
-	text-decoration: none;
-	color: #fff;
-	background: #c00;
-	border-radius: 50%;
-	display: inline-block;
-	position: absolute;
-	top: 0;
-	right: 0;
-}
-.remove-clone:focus {
-	outline: 0;
-	box-shadow: none;
-}
-.video-central-metaboxes-button.add-clone {
-	margin-top: 5px;
-}
-.video-central-metaboxes-clone-icon {
-	cursor: move;
-	background: url(../img/drag_icon.gif) no-repeat;
-	height: 23px;
-	width: 15px;
-	vertical-align: top;
-	display: inline-block;
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-.video-central-metaboxes-clone-placeholder {
-	background: #fcf8e3;
-	border: 1px solid #faebcc;
-	display: block;
-}
-.video-central-metaboxes-sort-clone {
-	padding-left: 15px;
-}
+  position: absolute;
+  top: 0;
+  right: 0; }
+
+/* Fix empty block below admin footer (issue #24) */
+#ui-datepicker-div {
+  display: none; }
 
 /* jQuery validation */
 label.error {
-	padding-left: 3px;
-	color: red;
-}
+  color: red;
+  padding-left: 3px; }
+
 input.error,
 textarea.error,
 select.error {
-	border-color: #c00 !important;
-	background: #ffebe8 !important;
-}
-
+  background: #ffebe8 !important;
+  border: #c00 solid 1px !important; }
 
 /* =Styles for 'side' meta boxes
 -------------------------------------------------------------- */
-
 #side-sortables .video-central-metaboxes-label,
 #side-sortables .video-central-metaboxes-input {
-	width: 100%;
-}
+  width: 100%; }
+
+.video-central-metaboxes-field {
+  border-bottom: 1px solid #EEEEEE;
+  padding-bottom: 10px; }
+
+.video-central-metaboxes-label label {
+  color: #000;
+  font-weight: bold; }
+
+/*# sourceMappingURL=style.css.map */

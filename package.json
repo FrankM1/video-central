@@ -1,6 +1,6 @@
 {
   "name": "video-central",
-  "version": "1.0.0",
+  "version": "1.2.4",
   "title": "Video Central",
   "description": "A powerful video plugin for WordPress",
   "author": "Franklin Gitonga <frank@radiumthemes.com>",
@@ -8,8 +8,10 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-autoprefixer": "^3.0.4",
+    "grunt": "^1.0.1",
+    "grunt-postcss": "~0.9.0",
+    "autoprefixer": "~7.1.6",
+    "cssnano": "~3.10.0",
     "grunt-checktextdomain": "^1.0.0",
     "grunt-contrib-compass": "^1.1.0",
     "grunt-contrib-cssmin": "^0.14.0",
