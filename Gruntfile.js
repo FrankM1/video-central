@@ -24,24 +24,11 @@ module.exports = function(grunt) {
 
                 files: {
                     'assets/admin/css/style.css': 'assets/admin/scss/style.scss',
-
-                    /* 'assets/admin/css/metaboxes/file.css': 'assets/admin/scss/metaboxes/file.scss',
-                    'assets/admin/css/metaboxes/image-select.css': 'assets/admin/scss/metaboxes/image-select.scss',
-                    'assets/admin/css/metaboxes/image.css': 'assets/admin/scss/metaboxes/image.scss',
-                    'assets/admin/css/metaboxes/plupload-image.css': 'assets/admin/scss/metaboxes/plupload-image.scss',
-                    'assets/admin/css/metaboxes/select-advanced.css': 'assets/admin/scss/metaboxes/select-advanced.scss',
-                    'assets/admin/css/metaboxes/select.css': 'assets/admin/scss/metaboxes/select.scss',
-                    'assets/admin/css/metaboxes/wysiwyg.css': 'assets/admin/scss/metaboxes/wysiwyg.scss',
-                    'assets/admin/css/playlist.css': 'assets/admin/scss/playlist.scss',
-                    'assets/admin/css/playlist-modal.css': 'assets/admin/scss/playlist-modal.scss', */
-
                     'assets/admin/css/metaboxes/style.css': 'assets/admin/scss/metaboxes/style.scss',
-
                     'assets/frontend/css/video-js.css': 'assets/frontend/scss/video-js.scss',
-
                     'templates/default/css/style.css': 'templates/default/scss/style.scss',
                     'templates/default/css/grid.css': 'templates/default/scss/grid.scss',
-                    'templates/default/css/font-awesome.css': 'templates/default/scss/font-awesome.scss',
+                    'templates/default/css/font-awesome.css': 'templates/default/scss/font-awesome.scss'
                 }
             }
         },
@@ -109,7 +96,7 @@ module.exports = function(grunt) {
                 'Gruntfile.js',
                 'templates/default/js/source/*.js',
                 'assets/admin/js/source/*.js',
-                'assets/frontend/js/source/*.js',
+                'assets/frontend/js/source/*.js'
             ]
         },
 
@@ -122,7 +109,7 @@ module.exports = function(grunt) {
                         'templates/default/js/vendor/jquery.cookie.js',
                         'templates/default/js/vendor/jquery.jcarousel.js',
                         'templates/default/js/vendor/bootstrap.tabs.js',
-                        'templates/default/js/vendor/readmore.min.js',
+                        'templates/default/js/vendor/readmore.min.js'
                     ]
                 }
             },
@@ -220,7 +207,7 @@ module.exports = function(grunt) {
 
         addtextdomain: {
             options: {
-                textdomain: 'video_central', // Project text domain.
+                textdomain: 'video_central' // Project text domain.
             },
 
             target: {
