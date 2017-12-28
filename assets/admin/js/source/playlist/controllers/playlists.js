@@ -11,7 +11,7 @@ Playlists = wp.media.controller.State.extend({
 		content: 'video-central-playlist-playlist-browser',
 		menu: 'default',
 		menuItem: {
-			text: l10n.insertFromCue || 'Insert from Cue',
+			text: l10n.insertFromCue || 'Insert from Video Central',
 			priority: 130
 		},
 		selection: null,

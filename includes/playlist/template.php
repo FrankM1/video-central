@@ -80,9 +80,9 @@ function video_central_playlist( $post, $args = array())
             return;
         }
 
-        $tracks = get_video_central_playlist_videos( $post );
+        $videos = get_video_central_playlist_videos( $post );
 
-        if ( empty( $tracks ) ) {
+        if ( empty( $videos ) ) {
             return;
         }
 
@@ -129,11 +129,11 @@ function video_central_playlist( $post, $args = array())
             echo '<div class="video-central-playlist-playlist-container">';
         }
 
-        do_action( 'video_central_before_playlist', $post, $tracks, $args );
+        do_action( 'video_central_before_playlist', $post, $videos, $args );
 
         include( $template );
 
-        do_action( 'video_central_after_playlist', $post, $tracks, $args );
+        do_action( 'video_central_after_playlist', $post, $videos, $args );
 
         if ( $args['container'] ) {
             echo '</div>';

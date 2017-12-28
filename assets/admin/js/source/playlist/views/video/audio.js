@@ -1,17 +1,17 @@
-var TrackAudio,
+var VideoAudio,
 	$ = require( 'jquery' ),
 	_ = require( 'underscore' ),
 	settings = require( 'video_central' ).settings(),
 	workflows = require( '../../workflows' ),
 	wp = require( 'wp' );
 
-TrackAudio = wp.Backbone.View.extend({
+VideoAudio = wp.Backbone.View.extend({
 	tagName: 'span',
-	className: 'video-central-playlist-track-audio',
-	template: wp.template( 'video-central-playlist-playlist-track-audio' ),
+	className: 'video-central-playlist-video-audio',
+	template: wp.template( 'video-central-playlist-playlist-video-audio' ),
 
 	events: {
-		'click .video-central-playlist-track-audio-selector': 'select'
+		'click .video-central-playlist-video-audio-selector': 'select'
 	},
 
 	initialize: function( options ) {
@@ -23,12 +23,12 @@ TrackAudio = wp.Backbone.View.extend({
 
 	render: function() {
 		var $mediaEl, playerSettings,
-			track = this.model.toJSON(),
+			video = this.model.toJSON(),
 			playerId = this.$el.find( '.mejs-audio' ).attr( 'id' );
 
 		// Remove the MediaElement player object if the
 		// audio file URL is empty.
-		if ( '' === track.audioUrl && playerId ) {
+		if ( '' === video.audioUrl && playerId ) {
 			mejs.players[ playerId ].remove();
 		}
 
@@ -42,13 +42,13 @@ TrackAudio = wp.Backbone.View.extend({
 	},
 
 	refresh: function( e ) {
-		var track = this.model.toJSON(),
+		var video = this.model.toJSON(),
 			playerId = this.$el.find( '.mejs-audio' ).attr( 'id' ),
 			player = playerId ? mejs.players[ playerId ] : null;
 
-		if ( player && '' !== track.audioUrl ) {
+		if ( player && '' !== video.audioUrl ) {
 			player.pause();
-			player.setSrc( track.audioUrl );
+			player.setSrc( video.audioUrl );
 		} else {
 			this.render();
 		}
@@ -68,4 +68,4 @@ TrackAudio = wp.Backbone.View.extend({
 	}
 });
 
-module.exports = TrackAudio;
+module.exports = VideoAudio;

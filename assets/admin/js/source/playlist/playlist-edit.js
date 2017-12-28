@@ -7,27 +7,27 @@ video_central.settings( videoCentralPlaylistConfig );
 wp.media.view.settings.post.id = video_central.data.postId;
 wp.media.view.settings.defaultProps = {};
 
-video_central.model.Track = require( './models/track' );
-video_central.model.Tracks = require( './collections/tracks' );
+video_central.model.Video = require( './models/video' );
+video_central.model.Videos = require( './collections/videos' );
 
 video_central.view.MediaFrame = require( './views/media-frame' );
 video_central.view.PostForm = require( './views/post-form' );
-video_central.view.AddTracksButton = require( './views/button/add-tracks' );
-video_central.view.TrackList = require( './views/track-list' );
-video_central.view.Track = require( './views/track' );
-video_central.view.TrackArtwork = require( './views/track/artwork' );
-video_central.view.TrackAudio = require( './views/track/audio' );
+video_central.view.AddVideosButton = require( './views/button/add-videos' );
+video_central.view.VideoList = require( './views/video-list' );
+video_central.view.Video = require( './views/video' );
+video_central.view.VideoArtwork = require( './views/video/artwork' );
+video_central.view.VideoAudio = require( './views/video/audio' );
 
 video_central.workflows = require( './workflows' );
 
 ( function( $ ) {
-    var tracks;
+    var videos;
 
-	tracks = video_central.tracks = new video_central.model.Tracks( video_central.data.tracks );
-	delete video_central.data.tracks;
+	videos = video_central.videos = new video_central.model.Videos( video_central.data.videos );
+	delete video_central.data.videos;
 
 	var postForm = new video_central.view.PostForm({
-		collection: tracks,
+		collection: videos,
 		l10n: video_central.l10n
     });
     

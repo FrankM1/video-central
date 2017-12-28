@@ -1,7 +1,7 @@
 var PostForm,
 	$ = require( 'jquery' ),
-	AddTracksButton = require( './button/add-tracks' ),
-	TrackList = require( './track-list' ),
+	AddVideosButton = require( './button/add-videos' ),
+	VideoList = require( './video-list' ),
 	wp = require( 'wp' );
 
 PostForm = wp.Backbone.View.extend({
@@ -22,12 +22,12 @@ PostForm = wp.Backbone.View.extend({
 
 	render: function() {
 		this.views.add( '#video-central-playlist-playlist-editor .video-central-playlist-panel-body', [
-			new AddTracksButton({
+			new AddVideosButton({
 				collection: this.collection,
 				l10n: this.l10n
 			}),
 
-			new TrackList({
+			new VideoList({
 				collection: this.collection
 			})
 		]);

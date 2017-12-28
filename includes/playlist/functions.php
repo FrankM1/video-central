@@ -93,35 +93,35 @@ function video_central_get_playlist_post_type_supports()
 }
 
 /**
- * Retrieve a playlist's tracks.
+ * Retrieve a playlist's videos.
  *
  * @since 1.0.0
  *
  * @param int|WP_Post $post    Playlist ID or post object.
- * @param string      $context Optional. Context to retrieve the tracks for. Defaults to display.
+ * @param string      $context Optional. Context to retrieve the videos for. Defaults to display.
  * @return array
  */
 function get_video_central_playlist_videos( $post = 0, $context = 'display' ) {
 	$playlist = get_post( $post );
-	$tracks = array_filter( (array) $playlist->tracks );
+	$videos = array_filter( (array) $playlist->videos );
 
 	// Add the audio file extension as a key pointing to the audio url.
 	// Helpful for use with the jPlayer Playlist plugin.
-	foreach ( $tracks as $key => $track ) {
-		$parts = wp_parse_url( $track['audioUrl'] );
+	foreach ( $videos as $key => $video ) {
+		$parts = wp_parse_url( $video['audioUrl'] );
 		if ( ! empty( $parts['path'] ) ) {
 			$ext = pathinfo( $parts['path'], PATHINFO_EXTENSION );
 			if ( ! empty( $ext ) ) {
-				$tracks[ $key ][ $ext ] = $track['audioUrl'];
+				$videos[ $key ][ $ext ] = $video['audioUrl'];
 			}
 		}
 	}
 
-	return apply_filters( 'video_central_playlist_videos', $tracks, $playlist, $context );
+	return apply_filters( 'video_central_playlist_videos', $videos, $playlist, $context );
 }
 
 /**
- * Retrieve a default track.
+ * Retrieve a default video.
  *
  * Useful for whitelisting allowed keys.
  *
@@ -129,7 +129,7 @@ function get_video_central_playlist_videos( $post = 0, $context = 'display' ) {
  *
  * @return array
  */
-function get_video_central_default_track() {
+function get_video_central_default_video() {
 	$args = array(
 		'artist'     => '',
 		'artworkId'  => '',
@@ -142,38 +142,38 @@ function get_video_central_default_track() {
 		'title'      => '',
 	);
 
-	return apply_filters( 'video_central_default_track_properties', $args );
+	return apply_filters( 'video_central_default_video_properties', $args );
 }
 
 /**
- * Sanitize a track based on the context.
+ * Sanitize a video based on the context.
  *
  * @since 1.0.0
  *
- * @param array  $track   Track data.
+ * @param array  $video   Track data.
  * @param string $context Optional. Context to sanitize data for. Defaults to display.
  * @return array
  */
-function sanitize_video_central_track( $track, $context = 'display' ) {
+function sanitize_video_central_video( $video, $context = 'display' ) {
 	if ( 'save' === $context ) {
-		$valid_props = get_video_central_default_track();
+		$valid_props = get_video_central_default_video();
 
 		// Remove properties that aren't in the whitelist.
-		$track = array_intersect_key( $track, $valid_props );
+		$video = array_intersect_key( $video, $valid_props );
 
 		// Sanitize valid properties.
-		$track['artist']     = sanitize_text_field( $track['artist'] );
-		$track['artworkId']  = absint( $track['artworkId'] );
-		$track['artworkUrl'] = esc_url_raw( $track['artworkUrl'] );
-		$track['videoId']    = absint( $track['videoId'] );
-		$track['audioUrl']   = esc_url_raw( $track['audioUrl'] );
-		$track['length']     = sanitize_text_field( $track['length'] );
-		$track['format']     = sanitize_text_field( $track['format'] );
-		$track['title']      = sanitize_text_field( $track['title'] );
-		$track['order']      = absint( $track['order'] );
+		$video['artist']     = sanitize_text_field( $video['artist'] );
+		$video['artworkId']  = absint( $video['artworkId'] );
+		$video['artworkUrl'] = esc_url_raw( $video['artworkUrl'] );
+		$video['videoId']    = absint( $video['videoId'] );
+		$video['audioUrl']   = esc_url_raw( $video['audioUrl'] );
+		$video['length']     = sanitize_text_field( $video['length'] );
+		$video['format']     = sanitize_text_field( $video['format'] );
+		$video['title']      = sanitize_text_field( $video['title'] );
+		$video['order']      = absint( $video['order'] );
 	}
 
-	return apply_filters( 'video_central_sanitize_track', $track, $context );
+	return apply_filters( 'video_central_sanitize_video', $video, $context );
 }
 
 /**
@@ -253,7 +253,7 @@ function get_video_central_playlist_player_id( $player_id ) {
 }
 
 /**
- * Retrieve playlist tracks for a registered player.
+ * Retrieve playlist videos for a registered player.
  *
  * @since 1.1.0
  *
@@ -261,7 +261,7 @@ function get_video_central_playlist_player_id( $player_id ) {
  * @param array  $args {
  *     An array of arguments. Optional.
  *
- *     @type string $context Context to retrieve the tracks for. Defaults to display.
+ *     @type string $context Context to retrieve the videos for. Defaults to display.
  * }
  * @return array
  */

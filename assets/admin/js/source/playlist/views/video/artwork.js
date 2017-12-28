@@ -1,12 +1,12 @@
-var TrackArtwork,
+var VideoArtwork,
 	_ = require( 'underscore' ),
 	workflows = require( '../../workflows' ),
 	wp = require( 'wp' );
 
-TrackArtwork = wp.Backbone.View.extend({
+VideoArtwork = wp.Backbone.View.extend({
 	tagName: 'span',
-	className: 'video-central-playlist-track-artwork',
-	template: wp.template( 'video-central-playlist-playlist-track-artwork' ),
+	className: 'video-central-playlist-video-artwork',
+	template: wp.template( 'video-central-playlist-playlist-video-artwork' ),
 
 	events: {
 		'click': 'select'
@@ -28,4 +28,4 @@ TrackArtwork = wp.Backbone.View.extend({
 	}
 });
 
-module.exports = TrackArtwork;
+module.exports = VideoArtwork;

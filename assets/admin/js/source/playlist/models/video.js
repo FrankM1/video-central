@@ -1,7 +1,7 @@
-var Track,
+var Video,
 	Backbone = require( 'backbone' );
 
-Track = Backbone.Model.extend({
+Video = Backbone.Model.extend({
 	defaults: {
 		artist: '',
 		artworkId: '',
@@ -15,4 +15,4 @@ Track = Backbone.Model.extend({
 	}
 });
 
-module.exports = Track;
+module.exports = Video;

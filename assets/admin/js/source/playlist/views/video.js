@@ -1,18 +1,18 @@
-var Track,
+var Video,
 	$ = require( 'jquery' ),
-	TrackArtwork = require( './track/artwork' ),
-	TrackAudio = require( './track/audio' ),
+	VideoArtwork = require( './video/artwork' ),
+	VideoAudio = require( './video/audio' ),
 	wp = require( 'wp' );
 
-Track = wp.Backbone.View.extend({
+Video = wp.Backbone.View.extend({
 	tagName: 'li',
-	className: 'video-central-playlist-track',
-	template: wp.template( 'video-central-playlist-playlist-track' ),
+	className: 'video-central-playlist-video',
+	template: wp.template( 'video-central-playlist-playlist-video' ),
 
 	events: {
 		'change [data-setting]': 'updateAttribute',
 		'click .js-toggle': 'toggleOpenStatus',
-		'dblclick .video-central-playlist-track-title': 'toggleOpenStatus',
+		'dblclick .video-central-playlist-video-title': 'toggleOpenStatus',
 		'click .js-close': 'minimize',
 		'click .js-remove': 'destroy'
 	},
@@ -26,12 +26,12 @@ Track = wp.Backbone.View.extend({
 	render: function() {
 		this.$el.html( this.template( this.model.toJSON() ) ).data( 'cid', this.model.cid );
 
-		this.views.add( '.video-central-playlist-track-column-artwork', new TrackArtwork({
+		this.views.add( '.video-central-playlist-video-column-artwork', new VideoArtwork({
 			model: this.model,
 			parent: this
 		}));
 
-		this.views.add( '.video-central-playlist-track-audio-group', new TrackAudio({
+		this.views.add( '.video-central-playlist-video-audio-group', new VideoAudio({
 			model: this.model,
 			parent: this
 		}));
@@ -75,23 +75,23 @@ Track = wp.Backbone.View.extend({
 	 * Update a setting field when a model's attribute is changed.
 	 */
 	updateFields: function() {
-		var track = this.model.toJSON(),
+		var video = this.model.toJSON(),
 			$settings = this.$el.find( '[data-setting]' ),
 			attribute, value;
 
 		// A change event shouldn't be triggered here, so it won't cause
 		// the model attribute to be updated and get stuck in an
 		// infinite loop.
-		for ( attribute in track ) {
+		for ( attribute in video ) {
 			// Decode HTML entities.
-			value = $( '<div/>' ).html( track[ attribute ] ).text();
+			value = $( '<div/>' ).html( video[ attribute ] ).text();
 			$settings.filter( '[data-setting="' + attribute + '"]' ).val( value );
 		}
 	},
 
 	updateTitle: function() {
 		var title = this.model.get( 'title' );
-		this.$el.find( '.video-central-playlist-track-title .text' ).text( title ? title : 'Title' );
+		this.$el.find( '.video-central-playlist-video-title .text' ).text( title ? title : 'Title' );
 	},
 
 	/**
@@ -109,4 +109,4 @@ Track = wp.Backbone.View.extend({
 	}
 });
 
-module.exports = Track;
+module.exports = Video;

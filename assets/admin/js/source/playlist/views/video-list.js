@@ -1,15 +1,15 @@
-var TrackList,
+var VideoList,
 	$ = require( 'jquery' ),
 	_ = require( 'underscore' ),
-	Track = require( './track' ),
+	Video = require( './video' ),
 	wp = require( 'wp' );
 
-TrackList = wp.Backbone.View.extend({
-	className: 'video-central-playlist-tracklist',
+VideoList = wp.Backbone.View.extend({
+	className: 'video-central-playlist-videolist',
 	tagName: 'ol',
 
 	initialize: function() {
-		this.listenTo( this.collection, 'add', this.addTrack );
+		this.listenTo( this.collection, 'add', this.addVideo );
 		this.listenTo( this.collection, 'add remove', this.updateOrder );
 		this.listenTo( this.collection, 'reset', this.render );
 	},
@@ -17,7 +17,7 @@ TrackList = wp.Backbone.View.extend({
 	render: function() {
 		this.$el.empty();
 
-		this.collection.each( this.addTrack, this );
+		this.collection.each( this.addVideo, this );
 		this.updateOrder();
 
 		this.$el.sortable( {
@@ -37,17 +37,17 @@ TrackList = wp.Backbone.View.extend({
 		return this;
 	},
 
-	addTrack: function( track ) {
-		var trackView = new Track({ model: track });
-		this.$el.append( trackView.render().el );
+	addVideo: function( video ) {
+		var videoView = new Video({ model: video });
+		this.$el.append( videoView.render().el );
 	},
 
 	updateOrder: function() {
-		_.each( this.$el.find( '.video-central-playlist-track' ), function( item, i ) {
+		_.each( this.$el.find( '.video-central-playlist-video' ), function( item, i ) {
 			var cid = $( item ).data( 'cid' );
 			this.collection.get( cid ).set( 'order', i );
 		}, this );
 	}
 });
 
-module.exports = TrackList;
+module.exports = VideoList;

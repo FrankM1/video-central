@@ -15,8 +15,8 @@ class Video_Central_Playlist_Ajax {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_video_central_get_playlists',        array( $this, 'get_playlists' ) );
-		add_action( 'wp_ajax_video_central_get_playlist_tracks',  array( $this, 'get_playlist_tracks' ) );
-		add_action( 'wp_ajax_video_central_save_playlist_tracks', array( $this, 'save_playlist_tracks' ) );
+		add_action( 'wp_ajax_video_central_get_playlist_videos',  array( $this, 'get_playlist_videos' ) );
+		add_action( 'wp_ajax_video_central_save_playlist_videos', array( $this, 'save_playlist_videos' ) );
 		add_action( 'wp_ajax_video_central_parse_shortcode',      array( $this, 'parse_shortcode' ) );
 	}
 
@@ -56,48 +56,48 @@ class Video_Central_Playlist_Ajax {
 	}
 
 	/**
-	 * AJAX callback to retrieve a playlist's tracks.
+	 * AJAX callback to retrieve a playlist's videos.
 	 *
 	 * @since 2.0.0
 	 */
-	public function get_playlist_tracks() {
+	public function get_playlist_videos() {
 		$post_id = absint( $_POST['post_id'] );
-		wp_send_json_success( get_video_central_playlist_tracks( $post_id, 'edit' ) );
+		wp_send_json_success( get_video_central_playlist_videos( $post_id, 'edit' ) );
 	}
 
 	/**
-	 * AJAX callback to save a playlist's tracks.
+	 * AJAX callback to save a playlist's videos.
 	 *
-	 * Tracks are currently saved to post meta.
+	 * Videos are currently saved to post meta.
 	 *
 	 * @since 2.0.0
 	 */
-	public function save_playlist_tracks() {
+	public function save_playlist_videos() {
 		$post_id = absint( $_POST['post_id'] );
 
-		check_ajax_referer( 'save-tracks_' . $post_id, 'nonce' );
+		check_ajax_referer( 'save-videos_' . $post_id, 'nonce' );
 
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			wp_send_json_error();
 		}
 
-		// Sanitize the list of tracks.
-		$tracks = empty( $_POST['tracks'] ) ? array() : stripslashes_deep( $_POST['tracks'] );
-		foreach ( (array) $tracks as $key => $track ) {
-			if ( empty( $track ) ) {
-				unset( $tracks[ $key ] );
+		// Sanitize the list of videos.
+		$videos = empty( $_POST['videos'] ) ? array() : stripslashes_deep( $_POST['videos'] );
+		foreach ( (array) $videos as $key => $video ) {
+			if ( empty( $video ) ) {
+				unset( $videos[ $key ] );
 				continue;
 			}
 
-			$tracks[ $key ] = sanitize_video_central_track( $track, 'save' );
+			$videos[ $key ] = sanitize_video_central_video( $video, 'save' );
 		}
 
-		// Save the list of tracks to post meta.
-		update_post_meta( $post_id, 'tracks', $tracks );
+		// Save the list of videos to post meta.
+		update_post_meta( $post_id, 'videos', $videos );
 
 		// Response data.
 		$data = array(
-			'nonce' => wp_create_nonce( 'save-tracks_' . $post_id ),
+			'nonce' => wp_create_nonce( 'save-videos_' . $post_id ),
 		);
 
 		// Send the response.
@@ -143,7 +143,7 @@ class Video_Central_Playlist_Ajax {
 		}
 
 		$head .= '<link rel="stylesheet" href="' . $this->plugin->get_url( 'assets/css/video-central-playlist.min.css' ) . '">'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
-		$head .= '<style type="text/css">.video-central-playlist-tracks { max-height: none;}</style>';
+		$head .= '<style type="text/css">.video-central-playlist-videos { max-height: none;}</style>';
 		// @codingStandardsIgnoreEnd
 
 		if ( ! empty( $wp_scripts ) ) {

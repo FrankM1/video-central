@@ -40,11 +40,11 @@ Workflows = {
 	},
 
 	/**
-	 * Workflow for adding tracks to the playlist.
+	 * Workflow for adding videos to the playlist.
 	 *
 	 * @param {Object} frame
 	 */
-	_addTracks: function( frame ) {
+	_addVideos: function( frame ) {
 		// Return the existing frame for this workflow.
 		if ( frame ) {
 			return frame;
@@ -52,12 +52,12 @@ Workflows = {
 
 		// Initialize the audio frame.
 		frame = new MediaFrame({
-			title: l10n.workflows.addTracks.frameTitle,
+			title: l10n.workflows.addVideos.frameTitle,
 			library: {
 				type: 'audio'
 			},
 			button: {
-				text: l10n.workflows.addTracks.frameButtonText
+				text: l10n.workflows.addVideos.frameButtonText
 			},
 			multiple: 'add'
 		});
@@ -66,7 +66,7 @@ Workflows = {
 		frame.uploader.options.uploader.plupload = {
 			filters: {
 				mime_types: [{
-					title: l10n.workflows.addTracks.fileTypes,
+					title: l10n.workflows.addVideos.fileTypes,
 					extensions: 'm4a,mp3,ogg,wma'
 				}]
 			}
@@ -75,36 +75,34 @@ Workflows = {
 		// Prevent the Embed controller scanner from changing the state.
 		frame.state( 'embed' ).props.off( 'change:url', frame.state( 'embed' ).debouncedScan );
 
-		// Insert each selected attachment as a new track model.
+		// Insert each selected attachment as a new video model.
 		frame.state( 'insert' ).on( 'insert', function( selection ) {
 			_.each( selection.models, function( attachment ) {
-                console.log(attachment.toJSON());
-                video_central.tracks.push( attachment.toJSON().video_central );
-                console.log( video_central.tracks );
-			});
-		});
-
+                video_central.videos.push( attachment.toJSON() );
+            });
+        });
+        
 		// Insert the embed data as a new model.
 		frame.state( 'embed' ).on( 'select', function() {
 
 			var embed = this.props.toJSON(),
-				track = {
+                video = {
 					videoId: '',
 					audioUrl: embed.url
 				};
 
 			if ( ( 'title' in embed ) && '' !== embed.title ) {
-				track.title = embed.title;
+				video.title = embed.title;
 			}
 
-			video_central.tracks.push( track );
+			video_central.videos.push( video );
 		});
 
 		return frame;
 	},
 
 	/**
-	 * Workflow for selecting track artwork image.
+	 * Workflow for selecting video artwork image.
 	 *
 	 * @param {Object} frame
 	 */
@@ -154,11 +152,11 @@ Workflows = {
 
 		// Set the model's artwork ID and url properties.
 		frame.state( 'library' ).on( 'select', function() {
-			var attachment = this.get( 'selection' ).first().toJSON();
+            var attachment = this.get( 'selection' ).first().toJSON();
 
 			workflow.model.set({
 				artworkId: attachment.id,
-				artworkUrl: attachment.sizes.video_central.url
+				artworkUrl: attachment.url
 			});
 		});
 
@@ -166,7 +164,7 @@ Workflows = {
 	},
 
 	/**
-	 * Workflow for selecting track audio.
+	 * Workflow for selecting video audio.
 	 *
 	 * @param {Object} frame
 	 */

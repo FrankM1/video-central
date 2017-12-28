@@ -78,7 +78,13 @@ class Video_Central_Playlist_EditPlaylist {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
         $base = Video_Central::get_url();
 
-		wp_enqueue_media();
+        wp_enqueue_media();
+
+        wp_enqueue_style(
+			'video-central-playlist-admin',
+			$base . '/assets/admin/css/playlist.css',
+			array( 'dashicons' )
+		);
 
         wp_register_script( 'video-central-playlist', $base . '/assets/admin/js/video-central.js',
             array(
@@ -86,7 +92,6 @@ class Video_Central_Playlist_EditPlaylist {
 				'jquery-ui-sortable',
 				'media-upload',
 				'media-views',
-				'mediaelement',
 				'wp-util',
             ),
             '1.2.2',
@@ -103,10 +108,10 @@ class Video_Central_Playlist_EditPlaylist {
 
 		wp_localize_script( 'video-central-playlist-playlist-edit', 'videoCentralPlaylistConfig', array(
 			'postId'     => $post->ID,
-			'saveNonce'  => wp_create_nonce( 'save-tracks_' . $post->ID ),
-			'tracks'     => get_video_central_playlist_videos( $post->ID, 'edit' ),
+			'saveNonce'  => wp_create_nonce( 'save-videos_' . $post->ID ),
+			'videos'     => get_video_central_playlist_videos( $post->ID, 'edit' ),
 			'l10n'       => array(
-				'addTracks'  => esc_html__( 'Add Tracks', 'video-central' ),
+				'addVideos'  => esc_html__( 'Add Videos', 'video-central' ),
 				'addFromUrl' => esc_html__( 'Add from URL', 'video-central' ),
 				'workflows'  => array(
 					'selectArtwork' => array(
@@ -115,14 +120,14 @@ class Video_Central_Playlist_EditPlaylist {
 						'frameButtonText' => esc_html__( 'Update Image', 'video-central' ),
 					),
 					'selectAudio'   => array(
-						'fileTypes'       => esc_html__( 'Audio Files', 'video-central' ),
-						'frameTitle'      => esc_html__( 'Choose an Audio File', 'video-central' ),
-						'frameButtonText' => esc_html__( 'Update Audio', 'video-central' ),
+						'fileTypes'       => esc_html__( 'Video Files', 'video-central' ),
+						'frameTitle'      => esc_html__( 'Choose an Video File', 'video-central' ),
+						'frameButtonText' => esc_html__( 'Update Video', 'video-central' ),
 					),
-					'addTracks'     => array(
-						'fileTypes'       => esc_html__( 'Audio Files', 'video-central' ),
-						'frameTitle'      => esc_html__( 'Choose Tracks', 'video-central' ),
-						'frameButtonText' => esc_html__( 'Add Tracks', 'video-central' ),
+					'addVideos'     => array(
+						'fileTypes'       => esc_html__( 'Video Files', 'video-central' ),
+						'frameTitle'      => esc_html__( 'Choose Videos', 'video-central' ),
+						'frameButtonText' => esc_html__( 'Add Videos', 'video-central' ),
 					),
 				),
 			),
@@ -165,11 +170,11 @@ class Video_Central_Playlist_EditPlaylist {
 		?>
 		<div id="video-central-playlist-playlist-editor" class="video-central-playlist-panel hide-if-no-js">
 			<div class="video-central-playlist-panel-header">
-				<h2 class="video-central-playlist-panel-title"><?php esc_html_e( 'Tracks', 'video-central' ); ?></h2>
+				<h2 class="video-central-playlist-panel-title"><?php esc_html_e( 'Videos', 'video-central' ); ?></h2>
 			</div>
 			<div class="video-central-playlist-panel-body">
 				<p>
-					<?php esc_html_e( 'Add tracks to the playlist, then drag and drop to reorder them. Click the arrow on the right of each item to reveal more configuration options.', 'video-central' ); ?>
+					<?php esc_html_e( 'Add videos to the playlist, then drag and drop to reorder them. Click the arrow on the right of each item to reveal more configuration options.', 'video-central' ); ?>
 				</p>
 			</div>
 		</div>

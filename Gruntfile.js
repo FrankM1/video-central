@@ -34,6 +34,7 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     'assets/admin/css/style.css': 'assets/admin/scss/style.scss',
+                    'assets/admin/css/playlist.css': 'assets/admin/scss/playlist.scss',
                     'assets/admin/css/metaboxes/style.css': 'assets/admin/scss/metaboxes/style.scss',
                     'assets/frontend/css/video-js.css': 'assets/frontend/scss/video-js.scss',
                     'templates/default/css/style.css': 'templates/default/scss/style.scss',
