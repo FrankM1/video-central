@@ -8,9 +8,8 @@ class Video_Central_Likes_Ajax
      *
      * @since 1.0.0
      */
-    public function __construct()
-    {
-        if (!video_central_allow_likes()) {
+    public function __construct() {
+        if ( ! video_central_allow_likes()) {
             return;
         }
 

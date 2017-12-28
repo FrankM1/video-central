@@ -1010,7 +1010,7 @@ function video_central_video_source($video_id = 0)
             $retval = 'embed';
         }
 
-        return apply_filters(__FUNCTION__, $retval, $video_id);
+        return apply_filters( __FUNCTION__, $retval, $video_id);
     }
 
     

@@ -39,6 +39,7 @@ function video_central_player($video_id = 0)
         $embed_code = get_post_meta($video_id, '_video_central_embed_code', true);
 
         $poster = video_central_get_featured_image_url($video_id, array('height' => '800', 'width' => '600'));
+        $origin = site_url();
 
         if ($upload_source === 'youtube') {
             $url = 'https://www.youtube.com/embed/'.$upload_video_id . '?version=3&enablejsapi=1';
@@ -52,7 +53,7 @@ function video_central_player($video_id = 0)
             $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
 
             $output = <<<_end_
-<iframe id="video-central-ytplayer" type="text/html" width="auto" height="auto" src="{$url}" frameborder="0" showinfo="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe id="video-central-ytplayer" type="text/html" width="auto" height="auto" src="{$url}" frameborder="0" showinfo="0" enablejsapi="1" rel="0" origin="{$origin}" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 _end_;
 
             return $output;

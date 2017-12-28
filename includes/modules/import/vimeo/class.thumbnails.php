@@ -128,7 +128,7 @@ class Video_Central_Vimeo_Thumbnails extends Video_Central_Thumbnails_Providers
     {
         return array(
             array(
-                'markup' => '<iframe src="http://player.vimeo.com/video/41504360" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
+                'markup' => '<iframe src="http://player.vimeo.com/video/41504360" width="500" height="281" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>',
                 'expected' => 'http://i.vimeocdn.com/video/287850781_1280.jpg',
                 'expected_hash' => '5388e0d772b827b0837444b636c9676c',
                 'name' => __('iFrame Embed', 'video_central'),
