@@ -1,5 +1,10 @@
-#post-body .video-central-metaboxes-select {
-  height: auto;
-  min-width: 200px; }
-
-/*# sourceMappingURL=select.css.map */
+.video-central-metaboxes-select {
+	min-width: 160px;
+}
+.video-central-metaboxes-select option {
+    padding: .5rem 1rem;
+}
+.video-central-metaboxes-select-all-none {
+	display: block;
+	margin-top: 5px;
+}

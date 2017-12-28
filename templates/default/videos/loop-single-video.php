@@ -13,7 +13,9 @@
 
     <?php do_action( 'video_central_template_before_video_player' ); ?>
 
-    <?php video_central_player(); ?>
+    <div class="video-central-player-video-wrapper video-central-video-source-<?php video_central_video_source(); ?>">
+        <?php video_central_player(); ?>
+    </div>
 
     <?php do_action( 'video_central_template_after_video_player' ); ?>
 

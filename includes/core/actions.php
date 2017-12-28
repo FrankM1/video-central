@@ -25,13 +25,13 @@
  */
 add_action('plugins_loaded',           'video_central_loaded',                 10);
 add_action('init',                     'video_central_init',                   0); // Early for video_central_register
-add_action('parse_query',                'video_central_parse_query',            2); // Early for overrides
+add_action('parse_query',              'video_central_parse_query',            2); // Early for overrides
 add_action('widgets_init',             'video_central_widgets_init',           10);
 add_action('wp_enqueue_scripts',       'video_central_enqueue_scripts',        10);
 add_action('setup_theme',              'video_central_init_classes',           10);
 add_action('setup_theme',              'video_central_setup_theme',            11);
 add_action('after_setup_theme',        'video_central_after_setup_theme',      10);
-//add_action( 'wp_head',                   'video_central__player_js_swf', 10); //player fallback
+//add_action( 'wp_head',                'video_central__player_js_swf', 10); //player fallback
 
 /*
  * video_central_loaded - Attached to 'plugins_loaded' above

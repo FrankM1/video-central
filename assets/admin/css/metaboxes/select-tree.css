@@ -1,0 +1,7 @@
+.video-central-metaboxes-select-tree {
+	display: inline-block;
+}
+
+.video-central-metaboxes-select-tree.hidden {
+	display: none;
+}

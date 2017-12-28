@@ -39,8 +39,9 @@ function video_central_player($video_id = 0)
         $embed_code = get_post_meta($video_id, '_video_central_embed_code', true);
 
         $poster = video_central_get_featured_image_url($video_id, array('height' => '800', 'width' => '600'));
+        $origin = site_url();
 
-        if ($upload_source == 'youtube') {
+        if ($upload_source === 'youtube') {
             $url = 'https://www.youtube.com/embed/'.$upload_video_id . '?version=3&enablejsapi=1';
 
             $dataSetup['forceSSL'] = 'true';
@@ -52,7 +53,7 @@ function video_central_player($video_id = 0)
             $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
 
             $output = <<<_end_
-<iframe id="video-central-ytplayer" type="text/html" width="auto" height="auto" src="{$url}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe id="video-central-ytplayer" type="text/html" width="auto" height="auto" src="{$url}" frameborder="0" showinfo="0" enablejsapi="1" rel="0" origin="{$origin}" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 _end_;
 
             return $output;
@@ -60,7 +61,6 @@ _end_;
             $url = 'http://vimeo.com/'.$upload_video_id;
 
             $output = <<<_end_
-
 <iframe src="//player.vimeo.com/video/{$upload_video_id}" width="auto" height="auto" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 _end_;
 
@@ -82,7 +82,6 @@ _end_;
             $file_webm = wp_get_attachment_url($file_id_webm);
             $file_ogg = wp_get_attachment_url($file_id_ogg);
             $file_flv = wp_get_attachment_url($file_id_flv);
-
 
             $dataSetup['fluid']     = 'true';
             $dataSetup['controls']  = 'true';

@@ -1,22 +1,21 @@
 .video-central-metaboxes-image-select {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-  float: left;
-  margin: 0 10px 10px 0;
-  border: 3px solid #d8d8d8;
-  border-radius: 3px;
-  padding: 1px; }
-
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	float: left;
+	margin: 0 10px 10px 0;
+	border: 3px solid #d8d8d8;
+	border-radius: 3px;
+	padding: 1px;
+}
 .video-central-metaboxes-image-select img {
-  width: 100%;
-  height: 100%; }
-
+	width: 100%;
+	height: 100%;
+}
 .video-central-metaboxes-image-select:hover,
 .video-central-metaboxes-image-select.video-central-metaboxes-active {
-  border-color: #21759b; }
-
+	border-color: #0074a2;
+}
 .video-central-metaboxes-image-select input {
-  display: none; }
-
-/*# sourceMappingURL=image-select.css.map */
+	display: none;
+}

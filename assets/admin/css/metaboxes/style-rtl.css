@@ -1,0 +1,7 @@
+.video-central-metaboxes-label, .video-central-metaboxes-input{
+    float: right;
+}
+label.error{
+    padding-left: auto;
+    padding-right: 3px;
+}

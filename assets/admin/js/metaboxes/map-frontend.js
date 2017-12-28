@@ -1,7 +1,6 @@
 /* global google, jQuery */
 
-jQuery( function ( $ )
-{
+jQuery( function ( $ ) {
 	'use strict';
 
 	/**
@@ -9,8 +8,7 @@ jQuery( function ( $ )
 	 *
 	 * @return void
 	 */
-	function displayMap()
-	{
+	function displayMap() {
 		var $container = $( this ),
 			options = $container.data( 'map_options' );
 
@@ -18,8 +16,7 @@ jQuery( function ( $ )
 			center = new google.maps.LatLng( options.latitude, options.longitude ),
 			map;
 
-		switch ( mapOptions.mapTypeId )
-		{
+		switch ( mapOptions.mapTypeId ) {
 			case 'ROADMAP':
 				mapOptions.mapTypeId = google.maps.MapTypeId.ROADMAP;
 				break;
@@ -34,33 +31,37 @@ jQuery( function ( $ )
 				break;
 		}
 		mapOptions.center = center;
+
+		// Typcast zoom to a number
+		mapOptions.zoom *= 1;
 		map = new google.maps.Map( this, mapOptions );
 
 		// Set marker
-		if ( options.marker )
-		{
+		if ( options.marker ) {
 			var marker = new google.maps.Marker( {
 				position: center,
-				map     : map
+				map: map
 			} );
 
 			// Set marker title
-			if ( options.marker_title )
-			{
+			if ( options.marker_title ) {
 				marker.setTitle( options.marker_title );
+			}
+
+			// Set marker icon
+			if ( options.marker_icon ) {
+				marker.setIcon( options.marker_icon );
 			}
 		}
 
 		// Set info window
-		if ( options.info_window )
-		{
+		if ( options.info_window ) {
 			var infoWindow = new google.maps.InfoWindow( {
-				content : options.info_window,
+				content: options.info_window,
 				minWidth: 200
 			} );
 
-			google.maps.event.addListener( marker, 'click', function ()
-			{
+			google.maps.event.addListener( marker, 'click', function () {
 				infoWindow.open( map, marker );
 			} );
 		}

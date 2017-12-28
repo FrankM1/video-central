@@ -2,16 +2,15 @@
 /**
  * Text field class.
  */
-class Video_Central_Metaboxes_Text_Field extends Video_Central_Metaboxes_Input_Field
-{
+class Video_Central_Metaboxes_Text_Field extends Video_Central_Metaboxes_Input_Field {
+
 	/**
 	 * Normalize parameters for field
 	 *
 	 * @param array $field
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	static function normalize( $field ) {
 		$field = parent::normalize( $field );
 
 		$field = wp_parse_args( $field, array(
@@ -31,8 +30,7 @@ class Video_Central_Metaboxes_Text_Field extends Video_Central_Metaboxes_Input_F
 	 *
 	 * @return array
 	 */
-	static function get_attributes( $field, $value = null )
-	{
+	static function get_attributes( $field, $value = null ) {
 		$attributes = parent::get_attributes( $field, $value );
 		$attributes = wp_parse_args( $attributes, array(
 			'size'        => $field['size'],
@@ -40,8 +38,6 @@ class Video_Central_Metaboxes_Text_Field extends Video_Central_Metaboxes_Input_F
 			'pattern'     => $field['pattern'],
 			'placeholder' => $field['placeholder'],
 		) );
-
-		$attributes['type'] = 'text';
 
 		return $attributes;
 	}

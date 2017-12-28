@@ -16,7 +16,6 @@
     "video.js": "^5.8.0",
     "videojs-youtube": "~2.0.0",
     "videojs-vimeo": "^2.0.0",
-    "jquery.fitvids": "FitVids#~1.1.0",
     "jquery.cookie": "~1.4.1",
     "jcarousel": "~0.3.4"
   },

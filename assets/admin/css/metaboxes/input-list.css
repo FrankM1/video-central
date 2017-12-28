@@ -1,0 +1,20 @@
+.video-central-metaboxes-input-list li{
+	line-height: 22px;
+}
+
+.video-central-metaboxes-input-list.inline li{
+	display:inline-block;
+	margin-right: 0;
+  line-height:1;
+}
+.video-central-metaboxes-input-list.inline li label {
+	margin-right: 10px;
+}
+
+.video-central-metaboxes-input-list.inline {
+    margin:0;
+}
+
+li .video-central-metaboxes-input-list {
+	margin-left: 15px;
+}

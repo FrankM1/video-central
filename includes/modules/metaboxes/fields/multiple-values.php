@@ -8,8 +8,8 @@
  * - If field is cloneable, value is saved as a single entry in the database
  * - Otherwise value is saved as multiple entries
  */
-abstract class Video_Central_Metaboxes_Multiple_Values_Field extends Video_Central_Metaboxes_Field
-{
+abstract class Video_Central_Metaboxes_Multiple_Values_Field extends Video_Central_Metaboxes_Field {
+
 	/**
 	 * Normalize parameters for field
 	 *
@@ -17,57 +17,25 @@ abstract class Video_Central_Metaboxes_Multiple_Values_Field extends Video_Centr
 	 *
 	 * @return array
 	 */
-	static function normalize( $field )
-	{
+	static function normalize( $field ) {
 		$field               = parent::normalize( $field );
 		$field['multiple']   = true;
 		$field['field_name'] = $field['id'];
-		if ( ! $field['clone'] )
+		if ( ! $field['clone'] ) {
 			$field['field_name'] .= '[]';
+		}
 
 		return $field;
 	}
 
 	/**
-	 * Output the field value
-	 * Display option name instead of option value
+	 * Format a single value for the helper functions.
 	 *
-	 * @param  array    $field   Field parameters
-	 * @param  array    $args    Additional arguments. Not used for these fields.
-	 * @param  int|null $post_id Post ID. null for current post. Optional.
-	 *
-	 * @return mixed Field value
+	 * @param array  $field Field parameter
+	 * @param string $value The value
+	 * @return string
 	 */
-	static function the_value( $field, $args = array(), $post_id = null )
-	{
-		$value = self::get_value( $field, $args, $post_id );
-		if ( ! $value )
-			return '';
-
-		$output = '<ul>';
-		if ( $field['clone'] )
-		{
-			foreach ( $value as $subvalue )
-			{
-				$output .= '<li>';
-				$output .= '<ul>';
-				foreach ( $subvalue as $option )
-				{
-					$output .= '<li>' . $field['options'][$option] . '</li>';
-				}
-				$output .= '</ul>';
-				$output .= '</li>';
-			}
-		}
-		else
-		{
-			foreach ( $value as $option )
-			{
-				$output .= '<li>' . $field['options'][$option] . '</li>';
-			}
-		}
-		$output .= '</ul>';
-
-		return $output;
+	static function format_single_value( $field, $value ) {
+		return $field['options'][ $value ];
 	}
 }

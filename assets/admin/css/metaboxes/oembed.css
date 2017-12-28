@@ -3,9 +3,9 @@
 	vertical-align: top;
 	display: inline-block;
 }
-.video-central-metaboxes-oembed-wrapper .embed-code {
+.video-central-metaboxes-embed-media {
 	margin-top: 1em;
 }
-.video-central-metaboxes-oembed-wrapper .embed-code iframe {
+.video-central-metaboxes-embed-media iframe {
 	max-width: 100%;
 }

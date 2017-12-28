@@ -1,6 +1,7 @@
 <?php
 /**
  * Validation module.
+ *
  * @package Meta Box
  */
 
@@ -15,7 +16,7 @@ class Video_Central_Metaboxes_Validation
 	public function __construct()
 	{
 		add_action( 'video_central_metaboxes_after', array( $this, 'rules' ) );
-		add_action( 'video_central_metaboxes_enqueue_scripts', array( $this, 'scripts' ) );
+		add_action( 'video_central_metaboxes_enqueue_scripts', array( $this, 'enqueue' ) );
 	}
 
 	/**
@@ -23,7 +24,7 @@ class Video_Central_Metaboxes_Validation
 	 * The rules are outputted in [data-rules] attribute of an hidden <script> and will be converted into JSON by JS.
 	 * @param Video_Central_Metabox $object Meta Box object
 	 */
-	public function rules( Video_Central_Metabox $object )
+	public function rules( $object )
 	{
 		if ( ! empty( $object->meta_box['validation'] ) )
 		{
@@ -34,12 +35,14 @@ class Video_Central_Metaboxes_Validation
 	/**
 	 * Enqueue scripts for validation.
 	 */
-	public function scripts()
-	{
-		wp_enqueue_script( 'jquery-validate', Video_Central_Metaboxes_JS_URL . 'jquery.validate.min.js', array( 'jquery' ), Video_Central_Metaboxes_VER, true );
+	public function enqueue( $object ) {
+		if ( empty( $object->meta_box['validation'] ) ) {
+			return;
+		}
+		wp_enqueue_script( 'jquery-validation', Video_Central_Metaboxes_JS_URL . 'jquery.validate.min.js', array( 'jquery' ), Video_Central_Metaboxes_VER, true );
 		wp_enqueue_script( 'video-central-metaboxes-validate', Video_Central_Metaboxes_JS_URL . 'validate.js', array( 'jquery-validate' ), Video_Central_Metaboxes_VER, true );
 		wp_localize_script( 'video-central-metaboxes-validate', 'rwmbValidate', array(
-			'summaryMessage' => __( 'Please correct the errors highlighted below and try again.', 'meta-box' ),
+			'summaryMessage' => esc_html__( 'Please correct the errors highlighted below and try again.', 'meta-box' ),
 		) );
 	}
 }

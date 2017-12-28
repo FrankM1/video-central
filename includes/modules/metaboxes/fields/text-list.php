@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Text list field class.
  */
-class Video_Central_Metaboxes_Text_List_Field extends Video_Central_Metaboxes_Multiple_Values_Field
-{
+class Video_Central_Metaboxes_Text_List_Field extends Video_Central_Metaboxes_Multiple_Values_Field {
+
 	/**
 	 * Get field HTML
 	 *
@@ -12,18 +13,16 @@ class Video_Central_Metaboxes_Text_List_Field extends Video_Central_Metaboxes_Mu
 	 *
 	 * @return string
 	 */
-	static function html( $meta, $field )
-	{
+	static function html( $meta, $field ) {
 		$html  = array();
 		$input = '<label><input type="text" class="video-central-metaboxes-text-list" name="%s" value="%s" placeholder="%s"> %s</label>';
 
 		$count = 0;
-		foreach ( $field['options'] as $placeholder => $label )
-		{
+		foreach ( $field['options'] as $placeholder => $label ) {
 			$html[] = sprintf(
 				$input,
 				$field['field_name'],
-				isset( $meta[$count] ) ? esc_attr( $meta[$count] ) : '',
+				isset( $meta[ $count ] ) ? esc_attr( $meta[ $count ] ) : '',
 				$placeholder,
 				$label
 			);
@@ -34,58 +33,43 @@ class Video_Central_Metaboxes_Text_List_Field extends Video_Central_Metaboxes_Mu
 	}
 
 	/**
-	 * Output the field value
-	 * Display option name instead of option value
+	 * Format value for the helper functions.
 	 *
-	 * @param  array    $field   Field parameters
-	 * @param  array    $args    Additional arguments. Not used for these fields.
-	 * @param  int|null $post_id Post ID. null for current post. Optional.
-	 *
-	 * @return mixed Field value
+	 * @param array        $field Field parameter
+	 * @param string|array $value The field meta value
+	 * @return string
 	 */
-	static function the_value( $field, $args = array(), $post_id = null )
-	{
-		$value = self::get_value( $field, $args, $post_id );
-		if ( ! $value )
-			return '';
+	public static function format_value( $field, $value ) {
+		$output = '<table><thead><tr>';
+		foreach ( $field['options'] as $label ) {
+			$output .= "<th>$label</th>";
+		}
+		$output .= '<tr>';
 
-		$output = '<ul>';
-		if ( $field['clone'] )
-		{
-			foreach ( $value as $subvalue )
-			{
-				$output .= '<li>';
-				$output .= '<ul>';
-
-				$i = 0;
-				foreach ( $field['options'] as $placeholder => $label )
-				{
-					$output .= sprintf(
-						'<li><label>%s</label>: %s</li>',
-						$label,
-						isset( $subvalue[$i] ) ? $subvalue[$i] : ''
-					);
-					$i ++;
-				}
-				$output .= '</ul>';
-				$output .= '</li>';
+		if ( ! $field['clone'] ) {
+			$output .= self::format_single_value( $field, $value );
+		} else {
+			foreach ( $value as $subvalue ) {
+				$output .= self::format_single_value( $field, $subvalue );
 			}
 		}
-		else
-		{
-			$i = 0;
-			foreach ( $field['options'] as $placeholder => $label )
-			{
-				$output .= sprintf(
-					'<li><label>%s</label>: %s</li>',
-					$label,
-					isset( $value[$i] ) ? $value[$i] : ''
-				);
-				$i ++;
-			}
-		}
-		$output .= '</ul>';
+		$output .= '</tbody></table>';
+		return $output;
+	}
 
+	/**
+	 * Format a single value for the helper functions.
+	 *
+	 * @param array $field Field parameter
+	 * @param array $value The value
+	 * @return string
+	 */
+	public static function format_single_value( $field, $value ) {
+		$output = '<tr>';
+		foreach ( $value as $subvalue ) {
+			$output .= "<td>$subvalue</td>";
+		}
+		$output .= '</tr>';
 		return $output;
 	}
 }
