@@ -1,5 +1,5 @@
 <?php
-add_filter( 'video_central_metaboxes', 'video_central_playlist_register_meta_boxes' );
+//add_filter( 'video_central_metaboxes', 'video_central_playlist_register_meta_boxes' );
 /**
  * Register meta boxes
  *

@@ -91,3 +91,185 @@ function video_central_get_playlist_post_type_supports()
         'revisions',
     ));
 }
+
+/**
+ * Retrieve a playlist's tracks.
+ *
+ * @since 1.0.0
+ *
+ * @param int|WP_Post $post    Playlist ID or post object.
+ * @param string      $context Optional. Context to retrieve the tracks for. Defaults to display.
+ * @return array
+ */
+function get_video_central_playlist_videos( $post = 0, $context = 'display' ) {
+	$playlist = get_post( $post );
+	$tracks = array_filter( (array) $playlist->tracks );
+
+	// Add the audio file extension as a key pointing to the audio url.
+	// Helpful for use with the jPlayer Playlist plugin.
+	foreach ( $tracks as $key => $track ) {
+		$parts = wp_parse_url( $track['audioUrl'] );
+		if ( ! empty( $parts['path'] ) ) {
+			$ext = pathinfo( $parts['path'], PATHINFO_EXTENSION );
+			if ( ! empty( $ext ) ) {
+				$tracks[ $key ][ $ext ] = $track['audioUrl'];
+			}
+		}
+	}
+
+	return apply_filters( 'video_central_playlist_videos', $tracks, $playlist, $context );
+}
+
+/**
+ * Retrieve a default track.
+ *
+ * Useful for whitelisting allowed keys.
+ *
+ * @since 1.0.0
+ *
+ * @return array
+ */
+function get_video_central_default_track() {
+	$args = array(
+		'artist'     => '',
+		'artworkId'  => '',
+		'artworkUrl' => '',
+		'videoId'    => '',
+		'audioUrl'   => '',
+		'length'     => '',
+		'format'     => '',
+		'order'      => '',
+		'title'      => '',
+	);
+
+	return apply_filters( 'video_central_default_track_properties', $args );
+}
+
+/**
+ * Sanitize a track based on the context.
+ *
+ * @since 1.0.0
+ *
+ * @param array  $track   Track data.
+ * @param string $context Optional. Context to sanitize data for. Defaults to display.
+ * @return array
+ */
+function sanitize_video_central_track( $track, $context = 'display' ) {
+	if ( 'save' === $context ) {
+		$valid_props = get_video_central_default_track();
+
+		// Remove properties that aren't in the whitelist.
+		$track = array_intersect_key( $track, $valid_props );
+
+		// Sanitize valid properties.
+		$track['artist']     = sanitize_text_field( $track['artist'] );
+		$track['artworkId']  = absint( $track['artworkId'] );
+		$track['artworkUrl'] = esc_url_raw( $track['artworkUrl'] );
+		$track['videoId']    = absint( $track['videoId'] );
+		$track['audioUrl']   = esc_url_raw( $track['audioUrl'] );
+		$track['length']     = sanitize_text_field( $track['length'] );
+		$track['format']     = sanitize_text_field( $track['format'] );
+		$track['title']      = sanitize_text_field( $track['title'] );
+		$track['order']      = absint( $track['order'] );
+	}
+
+	return apply_filters( 'video_central_sanitize_track', $track, $context );
+}
+
+/**
+ * Display a theme-registered player.
+ *
+ * @since 1.1.0
+ *
+ * @param string $player_id Player ID.
+ * @param array  $args      Playlist arguments.
+ */
+function video_central_playlist_player( $player_id, $args = array() ) {
+	$playlist_id = get_video_central_playlist_player_id( $player_id );
+
+	$args = array(
+		'enqueue'  => false,
+		'player'   => $player_id,
+		'template' => array(
+			"player-{$player_id}.php",
+			'player.php',
+		),
+	);
+
+	video_central_playlist( $playlist_id, $args );
+}
+
+/**
+ * Retrieve a list of players registered by the current them.
+ *
+ * Includes the player id, name and associated playlist if one has been saved.
+ *
+ * @since 1.1.0
+ *
+ * @return array
+ */
+function get_video_central_playlist_players() {
+	$players = array();
+	$assigned = get_theme_mod( 'video_central_playlist_players', array() );
+
+	/**
+	 * List of registered players.
+	 *
+	 * Format: array( 'player_id' => 'Player Name' )
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param array $players List of players.
+	 */
+	$registered = apply_filters( 'video_central_playlist_players', array() );
+
+	if ( ! empty( $registered ) ) {
+		asort( $registered );
+		foreach ( $registered as $id => $name ) {
+			$playlist_id = isset( $assigned[ $id ] ) ? $assigned[ $id ] : 0;
+
+			$players[ $id ] = array(
+				'id'          => $id,
+				'name'        => $name,
+				'playlist_id' => $playlist_id,
+			);
+		}
+	}
+
+	return $players;
+}
+
+/**
+ * Retreive the ID of a playlist connected to a player.
+ *
+ * @since 1.1.0
+ *
+ * @param string $player_id Player ID.
+ * @return int
+ */
+function get_video_central_playlist_player_id( $player_id ) {
+	$players = get_theme_mod( 'video_central_playlist_players', array() );
+	return isset( $players[ $player_id ] ) ? $players[ $player_id ] : 0;
+}
+
+/**
+ * Retrieve playlist tracks for a registered player.
+ *
+ * @since 1.1.0
+ *
+ * @param string $player_id Player ID.
+ * @param array  $args {
+ *     An array of arguments. Optional.
+ *
+ *     @type string $context Context to retrieve the tracks for. Defaults to display.
+ * }
+ * @return array
+ */
+function get_video_central_playlist_player_videos( $player_id, $args = array() ) {
+	$args = wp_parse_args( $args, array(
+		'context' => 'display',
+	) );
+
+	$playlist_id = get_video_central_playlist_player_id( $player_id );
+	return get_video_central_playlist_videos( $playlist_id, $args['context'] );
+}

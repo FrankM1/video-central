@@ -44,7 +44,7 @@ function video_central_playlist_id($playlist_id = 0)
             $video_central_playlist_id = $playlist_id ? $playlist_id : $video_central->playlist_instance;
         }
 
-        return (int) apply_filters(__FUNCTION__, (int) $video_central_playlist_id, $playlist_id);
+        return (int) apply_filters( __FUNCTION__, (int) $video_central_playlist_id, $playlist_id );
     }
 
 /**
@@ -54,66 +54,89 @@ function video_central_playlist_id($playlist_id = 0)
  *
  * @uses video_central_get_playlist() To get the playlist player
  */
-function video_central_playlist($args = array())
+function video_central_playlist( $post, $args = array())
 {
-    echo video_central_get_playlist($args);
+    echo video_central_get_playlist( $post, $args );
 }
+
     /**
-     * Return the unique id of the custom post type for playlists.
+     * Display a playlist.
      *
-     * @since 1.2.0
+     * @since 1.0.0
+     * @todo Add an arg to specify a template path that doesn't exist in the /video-central directory.
+     *
+     * @param mixed $post A post ID, WP_Post object or post slug.
+     * @param array $args Playlist arguments.
      */
-    function video_central_get_playlist($args = array())
-    {
-        $args['ids'] = get_post_meta($args['id'], '_video_central_playlist_ids', true);
-
-        if (!empty($args['ids'])) {
-            $videos = explode(',', $args['ids']);
+    function video_central_get_playlist( $post, $args = array() ) {
+        if ( is_string( $post ) && ! is_numeric( $post ) ) {
+            // Get a playlist by its slug.
+            $post = get_page_by_path( $post, OBJECT, video_central_get_playlist_post_type() );
+        } else {
+            $post = get_post( $post );
         }
 
-        if (empty($videos)) {
-            return '';
+        if ( ! $post || video_central_get_playlist_post_type() !== get_post_type( $post ) ) {
+            return;
         }
 
-        $output = '<div id="video-central-playlist-'.video_central_get_playlist_id().'" class="video-central-playlist-'.video_central_get_playlist_id().' default" >';
+        $tracks = get_video_central_playlist_videos( $post );
 
-        $output .= '<div class="video-central-player">';
+        if ( empty( $tracks ) ) {
+            return;
+        }
 
-        $output .= video_central_get_player($videos[0]);
+        $args = wp_parse_args( $args, array(
+            'container'     => true,
+            'enqueue'       => true,
+            'print_data'    => true,
+            'show_playlist' => true,
+            'player'        => '',
+            'theme'         => get_video_central_default_theme(),
+            'template'      => '',
+        ) );
 
-        $output .= '</div>';
+        if ( $args['enqueue'] ) {
+            VideoCentral::enqueue_assets();
+        }
 
-        $output .= '<div class="video-central-playlist-wrap">';
+        $template_names = array(
+            "playlist-{$post->ID}.php",
+            "playlist-{$post->post_name}.php",
+            'playlist.php',
+        );
 
-        $output .= '<div class="video-central-playlist">';
+        // Prepend custom templates.
+        if ( ! empty( $args['template'] ) ) {
+            $add_templates = array_filter( (array) $args['template'] );
+            $template_names = array_merge( $add_templates, $template_names );
+        }
 
-        $count = 0;
+        $template_loader = new VideoCentral_Template_Loader();
+        $template = $template_loader->locate_template( $template_names );
 
-        foreach ($videos as $video_id) :
+        $themes = get_video_central_themes();
+        if ( ! isset( $themes[ $args['theme'] ] ) ) {
+            $args['theme'] = 'default';
+        }
 
-            $count++;
+        $classes   = array( 'video-central-playlist-playlist' );
+        $classes[] = $args['show_playlist'] ? '' : 'is-playlist-hidden';
+        $classes[] = sprintf( 'video-central-playlist-theme-%s', sanitize_html_class( $args['theme'] ) );
+        $classes   = implode( ' ', array_filter( $classes ) );
 
-            $playlist_class = $count == 1 ? 'active' : '';
+        if ( $args['container'] ) {
+            echo '<div class="video-central-playlist-playlist-container">';
+        }
 
-            $output .= '<div class="video-central-playlist-item '.$playlist_class.'">';
+        do_action( 'video_central_before_playlist', $post, $tracks, $args );
 
-            $output .= '<a href="'.video_central_get_video_permalink($video_id).'">';
+        include( $template );
 
-            $output .= video_central_get_video_title($video_id);
+        do_action( 'video_central_after_playlist', $post, $tracks, $args );
 
-            $output .= '</a>';
-
-            $output .= '</div>';
-
-        endforeach;
-
-        $output .= '</div>';
-
-        $output .= '<a href="#" class="playlist-visibility collapse"></a>';
-
-        $output .= '</div>';
-
-        $output .= '</div>';
-
-        return $output;
+        if ( $args['container'] ) {
+            echo '</div>';
+        }
     }
+    
