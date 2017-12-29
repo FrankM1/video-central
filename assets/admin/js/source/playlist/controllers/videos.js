@@ -29,8 +29,8 @@ Videos = wp.media.controller.State.extend({
 		}) );
 
 		this.set( 'collection', collection );
-		this.set( 'selection', selection );
-
+        this.set( 'selection', selection );
+        
 		this.listenTo( selection, 'remove', this.updateSelection );
 	}
 });

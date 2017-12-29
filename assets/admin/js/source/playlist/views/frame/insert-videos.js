@@ -3,16 +3,17 @@ var InsertVideosFrame,
     VideosController = require( '../../controllers/videos' ),
 	VideosToolbar = require( '../toolbar/videos' ),
     wp = require( 'wp' ),
-    PostFrame = wp.media.view.MediaFrame;
+    MediaFrame = wp.media.view.MediaFrame;
 
-InsertVideosFrame = PostFrame.extend({
+InsertVideosFrame = MediaFrame.extend({
 
     initialize: function() {
 		_.extend( this.options, {
-			uploader: false
-		});
+            uploader: false,
+            multiple: true
+        });
 
-		PostFrame.prototype.initialize.apply( this, arguments );
+		MediaFrame.prototype.initialize.apply( this, arguments );
 
 		this.createStates();
 		this.bindHandlers();

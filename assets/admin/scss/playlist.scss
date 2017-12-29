@@ -431,7 +431,7 @@
 	position: relative;
     width: 10%;
 
-	&.is-selected {
+	&.selected {
 		box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 7px #0073aa;
 	}
 }
@@ -546,7 +546,7 @@
 		}
 	}
 
-	.is-selected & {
+	.selected & {
 		display: block;
 	}
 }
