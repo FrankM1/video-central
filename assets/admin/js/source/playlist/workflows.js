@@ -2,7 +2,7 @@ var Workflows,
 	_ = require( 'underscore' ),
 	video_central = require( 'video_central' ),
 	l10n = require( 'video_central' ).l10n,
-    MediaFrame = require( './views/frame/insert-videos' ),
+    AddVideosFrame = require( './views/frame/insert-videos' ),
 	wp = require( 'wp' ),
 	Attachment = wp.media.model.Attachment;
 
@@ -51,18 +51,8 @@ Workflows = {
 		}
 
 		// Initialize the audio frame.
-        frame = new MediaFrame();
+        frame = new AddVideosFrame();
         
-        console.log( frame.state( 'video-central-playlist-videos' ) );
-
-		// Insert each selected attachment as a new video model.
-		frame.state( 'video-central-playlist-videos' ).on( 'insert', function( selection ) {
-            console.log(selection);
-			_.each( selection.models, function( attachment ) {
-                video_central.videos.push( attachment.toJSON() );
-            });
-        });
-
 		return frame;
 	},
 
