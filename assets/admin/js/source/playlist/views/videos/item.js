@@ -1,10 +1,10 @@
-var Playlist,
+var Videos,
 	wp = require( 'wp' );
 
-Playlist = wp.Backbone.View.extend({
+Videos = wp.Backbone.View.extend({
 	tagName: 'li',
-	className: 'video-central-playlist-browser-list-item',
-	template: wp.template( 'video-central-playlist-browser-list-item' ),
+	className: 'video-central-videos-browser-list-item',
+	template: wp.template( 'video-central-videos-browser-list-item' ),
 
 	events: {
 		'click': 'resetSelection'
@@ -40,4 +40,4 @@ Playlist = wp.Backbone.View.extend({
 	}
 });
 
-module.exports = Playlist;
+module.exports = Videos;

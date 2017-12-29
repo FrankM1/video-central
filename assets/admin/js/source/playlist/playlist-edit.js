@@ -10,7 +10,6 @@ wp.media.view.settings.defaultProps = {};
 video_central.model.Video = require( './models/video' );
 video_central.model.Videos = require( './collections/videos' );
 
-video_central.view.MediaFrame = require( './views/media-frame' );
 video_central.view.PostForm = require( './views/post-form' );
 video_central.view.AddVideosButton = require( './views/button/add-videos' );
 video_central.view.VideoList = require( './views/video-list' );

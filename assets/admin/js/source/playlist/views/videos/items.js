@@ -1,9 +1,9 @@
-var PlaylistItems,
-	PlaylistItem = require( '../playlist/item' ),
+var VideosItems,
+	VideosItem = require( '../videos/item' ),
 	wp = require( 'wp' );
 
-PlaylistItems = wp.Backbone.View.extend({
-	className: 'video-central-playlist-browser-list',
+VideosItems = wp.Backbone.View.extend({
+	className: 'video-central-videos-browser-list',
 	tagName: 'ul',
 
 	initialize: function( options ) {
@@ -20,7 +20,7 @@ PlaylistItems = wp.Backbone.View.extend({
 	},
 
 	addItem: function( model ) {
-		var view = new PlaylistItem({
+		var view = new VideosItem({
 			controller: this.controller,
 			model: model
 		}).render();
@@ -29,4 +29,4 @@ PlaylistItems = wp.Backbone.View.extend({
 	}
 });
 
-module.exports = PlaylistItems;
+module.exports = VideosItems;

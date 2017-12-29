@@ -273,3 +273,41 @@ function get_video_central_playlist_player_videos( $player_id, $args = array() )
 	$playlist_id = get_video_central_playlist_player_id( $player_id );
 	return get_video_central_playlist_videos( $playlist_id, $args['context'] );
 }
+
+
+/**
+ * Prepare an audio attachment for JavaScript.
+ *
+ * Filters the core method and inserts data using 'video_central' as the top level key.
+ *
+ * @since 1.0.0
+ *
+ * @param WP_Post $attachment Attachment object.
+ * @return array
+ */
+function prepare_video_central_playlist_video_for_js( $attachment ) {
+    if ( ! $attachment = get_post( $attachment ) )
+		return;
+
+	if ( video_central_get_video_post_type() !== $attachment->post_type )
+		return;
+
+    $data = array();
+
+    // Fall back to the attachment title if the audio meta doesn't have one.
+    $data['title']    = video_central_get_video_title( $attachment->ID );
+    $data['videoId']  = $attachment->ID;
+
+    if ( has_post_thumbnail( $attachment->ID ) ) {
+        $thumbnail_id = get_post_thumbnail_id( $attachment->ID );
+        $size         = apply_filters( 'video_central_artwork_size', array( 300, 300 ) );
+        $image        = image_downsize( $thumbnail_id, $size );
+
+        $data['artworkId']  = $thumbnail_id;
+        $data['artworkUrl'] = $image[0];
+    }
+
+    $data['id'] = $attachment->ID;
+
+    return apply_filters( 'prepare_video_central_playlist_video_for_js', $data, $attachment );
+}

@@ -1,10 +1,10 @@
-var PlaylistSidebar,
+var VideosSidebar,
 	$ = require( 'jquery' ),
 	wp = require( 'wp' );
 
-PlaylistSidebar = wp.Backbone.View.extend({
-	className: 'video-central-playlist-browser-sidebar media-sidebar',
-	template: wp.template( 'video-central-playlist-browser-sidebar' ),
+VideosSidebar = wp.Backbone.View.extend({
+	className: 'video-central-videos-browser-sidebar media-sidebar',
+	template: wp.template( 'video-central-videos-browser-sidebar' ),
 
 	events: {
 		'change [data-setting]': 'updateAttribute'
@@ -31,4 +31,4 @@ PlaylistSidebar = wp.Backbone.View.extend({
 	}
 });
 
-module.exports = PlaylistSidebar;
+module.exports = VideosSidebar;

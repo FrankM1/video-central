@@ -231,7 +231,8 @@ class Video_Central_Playlist_EditPlaylist {
 	 * @since 1.0.0
 	 */
 	public function print_templates() {
-		include( Video_Central::get_dir() . 'includes/playlist/views/templates-playlist.php' );
+        include( Video_Central::get_dir() . 'includes/playlist/views/templates-playlist.php' );
+        include( Video_Central::get_dir() . 'includes/playlist/views/templates-videos.php' );
 	}
 
 	/**

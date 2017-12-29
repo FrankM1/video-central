@@ -14,10 +14,46 @@ class Video_Central_Playlist_Ajax {
 	 * @since 2.0.0
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_video_central_get_playlists',        array( $this, 'get_playlists' ) );
+        add_action( 'wp_ajax_video_central_get_playlists',        array( $this, 'get_playlists' ) );
+        add_action( 'wp_ajax_video_central_get_videos_for_frame', array( $this, 'get_videos_for_frame' ) );
 		add_action( 'wp_ajax_video_central_get_playlist_videos',  array( $this, 'get_playlist_videos' ) );
 		add_action( 'wp_ajax_video_central_save_playlist_videos', array( $this, 'save_playlist_videos' ) );
-		add_action( 'wp_ajax_video_central_parse_shortcode',      array( $this, 'parse_shortcode' ) );
+        add_action( 'wp_ajax_video_central_parse_shortcode',      array( $this, 'parse_shortcode' ) );
+    }
+
+    /**
+	 * AJAX callback to retrieve videos.
+	 *
+	 * @since 1.3.0
+	 */
+	public function get_videos_for_frame() {
+		$data = array();
+		$page = isset( $_POST['paged'] ) ? absint( $_POST['paged'] ) : 1;
+		$posts_per_page = isset( $_POST['posts_per_page'] ) ? absint( $_POST['posts_per_page'] ) : 40;
+
+		$videos = new WP_Query( array(
+			'post_type'      => video_central_get_video_post_type(),
+			'post_status'    => 'publish',
+			'posts_per_page' => $posts_per_page,
+			'paged'          => $page,
+		) );
+
+		if ( $videos->have_posts() ) {
+			foreach ( $videos->posts as $video ) {
+				$image = video_central_get_featured_image_url( $video->ID, array( 'width' => 120, 'height' => 120 ) );
+
+				$data[ $video->ID ] = array(
+					'id'        => $video->ID,
+					'title'     => $video->post_title,
+					'thumbnail' => $image,
+				);
+			}
+		}
+
+		$send['maxNumPages'] = $videos->max_num_pages;
+		$send['videos'] = array_values( $data );
+
+		wp_send_json_success( $send );
 	}
 
 	/**

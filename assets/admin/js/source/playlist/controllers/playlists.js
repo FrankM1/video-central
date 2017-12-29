@@ -5,17 +5,17 @@ var Playlists,
 
 Playlists = wp.media.controller.State.extend({
 	defaults: {
-		id: 'video-central-playlist-playlists',
+		id: 'video-central-playlists',
 		title: l10n.insertPlaylist || 'Insert Playlist',
 		collection: null,
-		content: 'video-central-playlist-playlist-browser',
+		content: 'video-central-playlist-browser',
 		menu: 'default',
 		menuItem: {
 			text: l10n.insertFromCue || 'Insert from Video Central',
 			priority: 130
 		},
 		selection: null,
-		toolbar: 'video-central-playlist-insert-playlist'
+		toolbar: 'video-central-insert-playlist'
 	},
 
 	initialize: function( options ) {

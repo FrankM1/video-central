@@ -1,10 +1,10 @@
-var PlaylistNoItems,
+var VideosNoItems,
 	wp = require( 'wp' );
 
-PlaylistNoItems = wp.Backbone.View.extend({
-	className: 'video-central-playlist-browser-empty',
+VideosNoItems = wp.Backbone.View.extend({
+	className: 'video-central-videos-browser-empty',
 	tagName: 'div',
-	template: wp.template( 'video-central-playlist-browser-empty' ),
+	template: wp.template( 'video-central-videos-browser-empty' ),
 
 	initialize: function( options ) {
 		this.collection = this.collection;
@@ -22,4 +22,4 @@ PlaylistNoItems = wp.Backbone.View.extend({
 	}
 });
 
-module.exports = PlaylistNoItems;
+module.exports = VideosNoItems;
