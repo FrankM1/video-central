@@ -1,10 +1,19 @@
-'use strict';
 module.exports = function(grunt) {
+    'use strict';
 
-    // load all grunt tasks matching the `grunt-*` pattern
-    require('load-grunt-tasks')(grunt);
+    require('jit-grunt')(grunt, {
+        usebanner: 'grunt-banner',
+        replace: 'grunt-text-replace'
+    });
+
+    // require it at the top and pass in the grunt instance
+	require('time-grunt')(grunt);
+
+    var remapify = require( 'remapify' ),
+        pkgInfo = grunt.file.readJSON( 'package.json' );
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON( 'package.json' ),
 
         // watch for changes and trigger sass, jshint, uglify and livereload
         watch: {
@@ -12,18 +21,20 @@ module.exports = function(grunt) {
                 files: ['templates/default/scss/**/*.{scss,sass}', 'assets/admin/scss/**/*.{scss,sass}', 'assets/frontend/scss/**/*.{scss,sass}'],
                 tasks: ['sass', 'postcss', 'jshint', 'uglify']
             },
-            js: {
-                files: '<%= jshint.all %>',
-                tasks: ['jshint', 'uglify']
+            scripts: {
+                files: [
+                    'assets/admin/js/source/**/*.js'
+                ],
+                tasks: [ 'scripts' ]
             }
         },
 
         // sass
         sass: {
             dist: {
-
                 files: {
                     'assets/admin/css/style.css': 'assets/admin/scss/style.scss',
+                    'assets/admin/css/playlist.css': 'assets/admin/scss/playlist.scss',
                     'assets/admin/css/metaboxes/style.css': 'assets/admin/scss/metaboxes/style.scss',
                     'assets/frontend/css/video-js.css': 'assets/frontend/scss/video-js.scss',
                     'templates/default/css/style.css': 'templates/default/scss/style.scss',
@@ -84,7 +95,37 @@ module.exports = function(grunt) {
 					ext: '.min.css'
 				} ]
 			}
-		},
+        },
+        
+        browserify: {
+            options: {
+                browserifyOptions: {
+                    debug: true
+                },
+                preBundleCB: function( bundle ) {
+                    bundle.plugin( remapify, [
+                        {
+							cwd: 'assets/admin/js/source/playlist',
+							src: '**/*.js',
+							expose: 'video-central-playlist'
+						}
+                    ] );
+                }
+            },
+
+            dist: {
+                files: {
+                    'assets/admin/js/video-central.js': [
+                        'assets/admin/js/source/playlist/editor.js'
+                    ],
+                    'assets/admin/js/playlist-edit.js': [
+                        'assets/admin/js/source/playlist/playlist-edit.js'
+                    ]
+                },
+                options: pkgInfo.browserify
+            }
+
+        },
 
         // javascript linting with jshint
         jshint: {
@@ -139,16 +180,24 @@ module.exports = function(grunt) {
             admin_js: {
 
                 files: {
-                    'assets/admin/js/import.min.js':    'assets/admin/js/source/import.js',
-                    'assets/admin/js/sort.min.js':      'assets/admin/js/source/sort.js',
-                    'assets/admin/js/meta.min.js':      'assets/admin/js/source/meta.js',
-                    'assets/admin/js/debug-bar.min.js': 'assets/admin/js/source/debug-bar.js',
-                    'assets/admin/js/mce-playlist-view.js': 'assets/admin/js/source/mce-playlist-view.js',
-                    'assets/admin/js/modal-playlist-view.js': 'assets/admin/js/source/modal-playlist-view.js',
-                    'assets/admin/js/playlist.js': 'assets/admin/js/source/playlist.js'
+                    'assets/admin/js/import.min.js'         : 'assets/admin/js/source/import.js',
+                    'assets/admin/js/meta.min.js'           : 'assets/admin/js/source/meta.js',
+                    'assets/admin/js/debug-bar.min.js'      : 'assets/admin/js/source/debug-bar.js',
+                    'assets/admin/js/mce-playlist-view.js'  : 'assets/admin/js/source/playlist/mce-playlist-view.js',
+                    'assets/admin/js/modal-playlist-view.js': 'assets/admin/js/source/playlist/modal-playlist-view.js',
                 }
             }
 
+        },
+
+        // Extract sourcemap to separate file
+        exorcise: {
+            bundle: {
+                options: {},
+                files: {
+                    'templates/default/js/main.js.map': [ 'templates/default/js/main.js' ]
+                }
+            }
         },
 
         // image optimization
@@ -180,7 +229,7 @@ module.exports = function(grunt) {
 
         checktextdomain: {
             options: {
-                correct_domain: false,
+                correct_domain: true,
                 text_domain: 'video_central',
                 keywords: [
                     '__:1,2d',
@@ -199,22 +248,18 @@ module.exports = function(grunt) {
                     '_nx_noop:1,2,3c,4d'
                 ]
             },
-            files: {
-                src: '**/*.php',
+            files: [ {
+                src: [
+                    '**/*.php',
+                    '!node_modules/**',
+                    '!build/**',
+                    '!tests/**',
+                    '!.github/**',
+                    '!vendor/**',
+                    '!*~'
+                ],
                 expand: true
-            }
-        },
-
-        addtextdomain: {
-            options: {
-                textdomain: 'video_central' // Project text domain.
-            },
-
-            target: {
-                files: {
-                    src: ['*.php', '**/*.php', '!node_modules/**']
-                }
-            }
+            } ]
         },
 
         makepot: {
@@ -252,9 +297,32 @@ module.exports = function(grunt) {
 
     });
 
+    grunt.registerTask( 'i18n', [
+        'checktextdomain',
+        'makepot' 
+    ] );
+
+    grunt.registerTask( 'scripts', [
+        'jshint',
+        'browserify',
+        //'exorcise',
+        'uglify'
+    ] );
+
+    grunt.registerTask( 'styles', [
+        'sass',
+        'postcss'
+        //'sprites'
+    ] );
+
     // register task
-    grunt.registerTask('build', ['sass', 'sprites', 'postcss', 'jshint', 'uglify', 'watch']);
-    grunt.registerTask('build-lang', ['checktextdomain', 'makepot']);
-    grunt.registerTask('update-packages', ['devUpdate']);
+    grunt.registerTask( 'default', [ 
+        //'i18n',
+        'styles',
+        'scripts',
+        'watch'
+    ] );
+
+    grunt.registerTask( 'update-packages', ['devUpdate']);
 
 };

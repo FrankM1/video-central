@@ -989,17 +989,13 @@ function video_central_admin_setting_callback_youtube_api_client_secret()
  *
  * @since 1.0.0
  *
- * @uses screen_icon() To display the screen icon
  * @uses settings_fields() To output the hidden fields for the form
  * @uses do_settings_sections() To output the settings sections
  */
 function video_central_admin_settings()
 {
     ?>
-
     <div class="wrap">
-
-        <?php screen_icon();
     ?>
 
         <h2><?php esc_html_e('Video Central Settings', 'video_central') ?></h2>

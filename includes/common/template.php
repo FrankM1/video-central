@@ -4,7 +4,7 @@
  * Common Template Tags.
  *
  * Common template tags are ones that are used by more than one component, like
- * videos, replies, users, video tags, etc...
+ * videos, users, video tags, etc...
  */
 
 /** URLs **********************************************************************/

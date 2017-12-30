@@ -43,14 +43,14 @@ jQuery(document).ready(function() {
     
     function radiumHideEmbed() {
         
-    		jQuery( _video_central_webm ).hide();
-    		jQuery( _video_central_mp4 ).hide();
-    		jQuery( _video_central_ogg ).hide();
-			jQuery( _video_central_flv ).hide();
-         	jQuery( _video_thumbnail ).hide();
-        	jQuery( _video_central_video_id ).hide();
-        	
-    		jQuery( _video_central_embed_code ).show();
+        jQuery( _video_central_webm ).hide();
+        jQuery( _video_central_mp4 ).hide();
+        jQuery( _video_central_ogg ).hide();
+        jQuery( _video_central_flv ).hide();
+        jQuery( _video_thumbnail ).hide();
+        jQuery( _video_central_video_id ).hide();
+        
+        jQuery( _video_central_embed_code ).show();
         	
    }
         

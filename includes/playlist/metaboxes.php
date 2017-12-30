@@ -1,5 +1,5 @@
 <?php
-add_filter( 'video_central_metaboxes', 'video_central_playlist_register_meta_boxes' );
+//add_filter( 'video_central_metaboxes', 'video_central_playlist_register_meta_boxes' );
 /**
  * Register meta boxes
  *
@@ -24,7 +24,7 @@ function video_central_playlist_register_meta_boxes( $meta_boxes ) {
         $meta_boxes[] = array(
             'id' => 'video-profile-settings',
             'title' => __('Playlist Settings', 'video_central'),
-            'pages' => array(video_central_get_playlist_post_type()),
+            'pages' => array(video_central_get_playlists_post_type()),
             'context' => 'normal',
             'priority' => 'high',
             'fields' => apply_filters('video_central_metaboxes_playlist', $arg),
@@ -52,7 +52,7 @@ function video_central_playlist_register_meta_boxes( $meta_boxes ) {
         $meta_boxes[] = array(
             'id' => 'video-playlist-settings',
             'title' => __('Select Videos', 'video_central'),
-            'pages' => array(video_central_get_playlist_post_type()),
+            'pages' => array(video_central_get_playlists_post_type()),
             'context' => 'normal',
             'priority' => 'high',
             'fields' => apply_filters('video_central_metaboxes_playlist', $args),

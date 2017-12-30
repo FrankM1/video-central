@@ -3,20 +3,20 @@
  *
  * @version 1.0.0
  */
-;(function($) {
+(function ($) {
 
     window.video_central_importMessages = {
         loading: 'Importing, please wait...',
         wait: 'Not done yet, still importing. You\'ll have to wait a bit longer.',
         importing: 'Importing',
-        done: 'Import Complete',
+        done: 'Import Complete'
     };
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         window.Video_Central_Import = {
 
-            init: function() {
+            init: function () {
 
                 window.Video_Central_Import.Events();
 
@@ -28,7 +28,7 @@
 
                 var current_position = $('.wizard-wrap').attr('data-step');
 
-                if (current_position == 3) {
+                if ( current_position === 3 ) {
 
                     window.Video_Central_Import.Wizard_Step_Process(current_position - 1, 3);
 
@@ -43,10 +43,10 @@
 
             },
 
-            Events: function() {
+            Events: function () {
 
                 // search criteria form functionality
-                $('#video_central_feed').change(function() {
+                $('#video_central_feed').change(function () {
 
                     var val = $(this).val(),
                         ordVal = $('#video_central_order').val();
@@ -62,13 +62,13 @@
                             var hide = ['position', 'commentCount', 'duration', 'reversedPosition', 'title'],
                                 show = ['relevance', 'rating'];
 
-                            $.each(hide, function(i, el) {
+                            $.each(hide, function (i, el) {
                                 $('#video_central_order option[value=' + el + ']').attr({
                                     'disabled': 'disabled'
                                 }).css('display', 'none');
                             });
 
-                            $.each(show, function(i, el) {
+                            $.each(show, function (i, el) {
                                 $('#video_central_order option[value=' + el + ']').removeAttr('disabled').css('display', '');
                             });
 
@@ -89,13 +89,13 @@
                             var show2 = ['position', 'commentCount', 'duration', 'reversedPosition', 'title'],
                                 hide2 = ['relevance', 'rating'];
 
-                            $.each(hide2, function(i, el) {
+                            $.each(hide2, function (i, el) {
                                 $('#video_central_order option[value=' + el + ']').attr({
                                     'disabled': 'disabled'
                                 }).css('display', 'none');
                             });
 
-                            $.each(show2, function(i, el) {
+                            $.each(show2, function (i, el) {
                                 $('#video_central_order option[value=' + el + ']').removeAttr('disabled').css('display', '');
                             });
 
@@ -113,9 +113,9 @@
 
             },
 
-            Wizard: function() {
+            Wizard: function () {
 
-                $("body").on("click", ".progress_bar .step.complete", function() {
+                $("body").on("click", ".progress_bar .step.complete", function () {
 
                     var from = $(this).parent().find('.current').data('step');
 
@@ -133,7 +133,7 @@
 
             },
 
-            Wizard_Move_to_Step: function(step, end, dir, step_speed) {
+            Wizard_Move_to_Step: function (step, end, dir, step_speed) {
 
                 var width = ((parseInt(step + 1) - 1) * 25);
 
@@ -143,7 +143,7 @@
 
                     $(".progress_bar").find('.current_steps').animate({
                         'width': width + '%'
-                    }, step_speed, function() {
+                    }, step_speed, function () {
 
                         $("#step" + (step + 1)).removeClass('complete').addClass('current');
 
@@ -159,7 +159,7 @@
 
                     $(".progress_bar").find('.current_steps').animate({
                         'width': width + '%'
-                    }, step_speed, function() {
+                    }, step_speed, function () {
 
                         $("#step" + (step - 1)).removeClass('complete').addClass('current');
 
@@ -176,7 +176,7 @@
                     //bug fix for starting over
                     $(".progress_bar").find('.current_steps').animate({
                         'width': '0%'
-                    }, step_speed, function() {
+                    }, step_speed, function () {
 
                         $("#step" + (step - 1)).removeClass('complete').addClass('current');
 
@@ -190,13 +190,13 @@
 
             },
 
-            Wizard_Step_Process: function(from, to, dir) {
+            Wizard_Step_Process: function (from, to, dir) {
 
                 $("html, body").animate({
                     scrollTop: 0
                 }, "slow");
 
-                if (typeof(dir) === 'undefined') {
+                if (typeof (dir) === 'undefined') {
                     dir = 'asc';
                 }
 
@@ -219,7 +219,7 @@
 
                 $('#block' + from).animate({
                     left: old_move + '100%'
-                }, speed, function() {
+                }, speed, function () {
                     $(this).css({
                         left: '100%',
                         'z-index': '2'
@@ -231,7 +231,7 @@
                     left: new_start + '100%'
                 }).animate({
                     left: '0%'
-                }, speed, function() {
+                }, speed, function () {
                     $(this).css({
                         'z-index': '2'
                     });
@@ -254,7 +254,7 @@
 
                     $(".progress_bar").find('.current_steps').animate({
                         'width': width + '%'
-                    }, speed, function() {
+                    }, speed, function () {
                         $("#step" + to).removeClass('complete').addClass('current');
                     });
 
@@ -282,9 +282,9 @@
 
             },
 
-            Params_Ajax: function() {
+            Params_Ajax: function () {
 
-                $('#video_central_load_feed_form').submit(function(e) {
+                $('#video_central_load_feed_form').submit(function (e) {
 
                     var query = $('#video_central_query').val();
 
@@ -296,7 +296,7 @@
 
                 });
 
-                $('#video_central_query').keyup(function() {
+                $('#video_central_query').keyup(function () {
 
                     var query = $(this).val();
 
@@ -312,7 +312,7 @@
                 // form submit on search results
                 var submitted = false;
 
-                $('.ajax-submit-params').on('click', function(e) {
+                $('.ajax-submit-params').on('click', function (e) {
 
                     var query = $('#video_central_query').val();
 
@@ -330,15 +330,17 @@
 
             },
 
-            Import_Ajax: function() {
+            Import_Ajax: function () {
 
                 // rename table action form action (which conflicts with ajax) to action_top
-                $('.ajax-submit .tablenav.top .actions select[name=action]').attr({'name': 'action_top'});
+                $('.ajax-submit .tablenav.top .actions select[name=action]').attr({
+                    'name': 'action_top'
+                });
 
                 // form submit on search results
                 var submitted = false;
 
-                $('.ajax-submit').submit(function(e) {
+                $('.ajax-submit').submit(function (e) {
 
                     e.preventDefault();
 
@@ -371,14 +373,18 @@
                                 'action': 'video_central_import_progress'
                             },
                             dataType: 'JSON',
-                            beforeSend: function() {}
+                            beforeSend: function () {}
 
-                        }).done(function(response, textStatus, jqXHR) {
+                        }).done(function (response, textStatus, jqXHR) {
 
                             var progress = response;
 
-                            if (typeof progress.current === 'undefined')  { progress.current = 0; }
-                            if (typeof progress.total === 'undefined') { progress.total = 1; }
+                            if (typeof progress.current === 'undefined') {
+                                progress.current = 0;
+                            }
+                            if (typeof progress.total === 'undefined') {
+                                progress.total = 1;
+                            }
 
                             var progressWidth = Math.round((progress.current / progress.total) * 100);
 
@@ -394,7 +400,7 @@
 
                     }
 
-                    var CheckProgressintervalID = setInterval(function() {
+                    var CheckProgressintervalID = setInterval(function () {
                         new CheckProgress();
                     }, 5000);
 
@@ -405,7 +411,7 @@
                         data: dataString,
                         dataType: 'json',
 
-                        success: function(response) {
+                        success: function (response) {
 
                             if (response.success) {
 
@@ -437,4 +443,4 @@
 
     }); //end doc ready
 
-})(jQuery);
+}(jQuery));

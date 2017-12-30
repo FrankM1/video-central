@@ -455,6 +455,38 @@ function video_central_allow_video_categories($default = 1)
 }
 
 /**
+ * Are video tags allowed.
+ *
+ * @since 1.0.0
+ *
+ * @param $default bool Optional. Default value true
+ *
+ * @uses get_option() To get the allow tags
+ *
+ * @return bool Are tags allowed?
+ */
+function video_central_allow_playlist_tags($default = 1)
+{
+    return (bool) apply_filters(__FUNCTION__, (bool) get_option('_video_central_allow_playlist_tags', $default));
+}
+
+/**
+ * Are video tags allowed.
+ *
+ * @since 1.0.0
+ *
+ * @param $default bool Optional. Default value true
+ *
+ * @uses get_option() To get the allow tags
+ *
+ * @return bool Are tags allowed?
+ */
+function video_central_allow_playlist_categories($default = 1)
+{
+    return (bool) apply_filters(__FUNCTION__, (bool) get_option('_video_central_allow_playlist_categories', $default));
+}
+
+/**
  * Are related videos allowed.
  *
  * @since 1.0.0

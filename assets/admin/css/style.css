@@ -15,31 +15,13 @@
     left: 0;
     top: 0;
     height: 5px;
-    -webkit-transition: width 4s ease-in-out;
-    -moz-transition: width 4s ease-in-out;
-    -o-transition: width 4s ease-in-out;
     transition: width 4s ease-in-out;
-        /*background: red url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAP0lEQVQIHWWMAQoAIAgDR/QJ/Ub//04+w7ZICBwcOg5FZi5iBB82AGzixEglJrd4TVK5XUJpskSTEvpdFzX9AB2pGziSQcvAAAAAAElFTkSuQmCC) -50% 0 repeat;
-        background-position: 0px 0px;
-
-        -webkit-animation: videojsloading 2.5s linear infinite;
-        -moz-animation: videojsloading 2.5s linear infinite;
-        -ms-animation: videojsloading 2.5s linear infinite;
-        -o-animation: videojsloading 2.5s linear infinite;
-        animation: videojsloading 2.5s linear infinite;*/
     background: #36b1d9;
-    background: -moz-linear-gradient(left, #36b1d9 0, #56cdb3 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0, #36b1d9), color-stop(100%, #56cdb3));
-    background: -webkit-linear-gradient(left, #36b1d9 0, #56cdb3 100%);
-    background: -o-linear-gradient(left, #36b1d9 0, #56cdb3 100%);
-    background: -ms-linear-gradient(left, #36b1d9 0, #56cdb3 100%);
     background: linear-gradient(to right, #36b1d9 0, #56cdb3 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#36b1d9', endColorstr='#56cdb3', GradientType=1); }
     .import-progress .import-progress-inner.done {
       animation-duration: 1s;
-      -webkit-animation-duration: 1s;
-      animation-play-state: paused;
-      -webkit-animation-play-state: paused; }
+      animation-play-state: paused; }
 
 label.video_central_error {
   color: red;
@@ -133,10 +115,6 @@ h2.video-central-ajax-response {
       color: #ccc;
       position: relative;
       text-shadow: 1px 1px #fff;
-      -webkit-transition: all 0.3s ease-in;
-      -moz-transition: all 0.3s ease-in;
-      -ms-transition: all 0.3s ease-in;
-      -o-transition: all 0.3s ease-in;
       transition: all 0.3s ease-in; }
       .wizard-container .progress_bar div.step:before {
         position: absolute;
@@ -311,8 +289,6 @@ h2.video-central-ajax-response {
     margin-left: -30px;
     padding: 20px;
     background-color: #C60F13;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
     border-radius: 2px;
     color: #FFF;
     line-height: 20px;

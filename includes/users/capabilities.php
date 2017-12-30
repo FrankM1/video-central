@@ -460,7 +460,7 @@ function video_central_make_spam_user($user_id = 0)
         if (!empty($posts)) {
             foreach ($posts as $post_id) {
 
-                // The routines for videos ang replies are different, so use the
+                // The routines for videos are different, so use the
                 // correct one based on the post type
                 switch (get_post_type($post_id)) {
 
@@ -481,7 +481,7 @@ function video_central_make_spam_user($user_id = 0)
 }
 
 /**
- * Mark a users videos and replies as spam when the user is marked as spam.
+ * Mark a users videos as spam when the user is marked as spam.
  *
  * @since 1.0.0
  *
@@ -541,14 +541,14 @@ function video_central_make_ham_user($user_id = 0)
         // Switch to the blog ID
         switch_to_blog($blog_id);
 
-        // Get videos and replies
+        // Get videos
         $posts = $wpdb->get_col($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_author = %d AND post_status = '%s' AND post_type IN ( {$post_types} )", $user_id, video_central_get_spam_status_id()));
 
         // Loop through posts and spam them
         if (!empty($posts)) {
             foreach ($posts as $post_id) {
 
-                // The routines for videos ang replies are different, so use the
+                // The routines for videos are different, so use the
                 // correct one based on the post type
                 switch (get_post_type($post_id)) {
 
