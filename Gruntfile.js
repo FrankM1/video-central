@@ -317,7 +317,7 @@ module.exports = function(grunt) {
 
     // register task
     grunt.registerTask( 'default', [ 
-        //'i18n',
+        'i18n',
         'styles',
         'scripts',
         'watch'
