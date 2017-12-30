@@ -692,12 +692,9 @@ class Video_Central_Admin
                 <h4><?php esc_html_e( 'Changelog', 'video_central' ); ?></h4>
                 <div class="changelog-section">
                     <ul>
-                        <li><?php esc_html_e( 'Fixed self hosted video upload bug', 'video_central' ); ?></li>
-                        <li><?php esc_html_e( 'Fixed Readmore button', 'video_central' ); ?></li>
-                        <li><?php esc_html_e( 'Wordpress 4.7 compatibility', 'video_central' ); ?></li>
+                        <li><?php esc_html_e( 'Added new playlist manager', 'video_central' ); ?></li>
+                        <li><?php esc_html_e( 'Wordpress 4.9 compatibility', 'video_central' ); ?></li>
                         <li><?php esc_html_e( 'Removed get_currentuserinfo()', 'video_central' ); ?></li>
-                        <li><?php esc_html_e( 'Metaboxes update', 'video_central' ); ?></li>
-                        <li><?php esc_html_e( 'Security fixes', 'video_central' ); ?></li>
                     </ul>
             </div>
         </div>
@@ -737,7 +734,6 @@ class Video_Central_Admin
                 <?php esc_html_e( 'Twitter: ', 'video_central'); ?><a href="https://twitter.com/FrankGM1">@FrankGM1</a></br>
                 <?php esc_html_e( 'Website: ', 'video_central'); ?><a href="http://radiumthemes.com">RadiumThemes</a></br>
                 <?php esc_html_e( 'Plugin Demo: ', 'video_central'); ?><a href="http://demo.videocentral.co">Video Central Demo</a></p>
-
             </div>
 
             <div class="return-to-dashboard">
@@ -820,8 +816,6 @@ class Video_Central_Admin
     public function plugin_options_tabs()
     {
         $current_tab = isset($_GET['tab']) ? $_GET['tab'] : $this->general_settings_key;
-
-        screen_icon();
 
         echo '<h2 class="nav-tab-wrapper">';
 

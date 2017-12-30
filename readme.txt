@@ -5,8 +5,8 @@ License: GPLv2+
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: Video, Media, Shortcode, Youtube, Vimeo, Comments, Widget
 Requires at least: 3.3
-Tested up to: 4.7
-Stable tag: 1.2.3
+Tested up to: 4.9
+Stable tag: 1.3.0
 
 Video Central is the ultimate video manager for WordPress.
 
@@ -70,6 +70,11 @@ Github Link <a href="https://github.com/FrankM1/video-central">https://github.co
 Youtube, Vimeo are supported. You can also upload and host your own mp4, webm and m4v files. We will be adding support for more providers soon.
 
 == Changelog ==
+= 1.3.0 =
+* Added new playlist manager
+* Wordpress 4.9 compatibility
+* Removed deplicated get_screen_icon()
+
 
 = 1.2.3 =
 * Fixed self hosted video upload bug.
