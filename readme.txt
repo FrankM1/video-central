@@ -75,7 +75,6 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 * Wordpress 4.9 compatibility
 * Removed deplicated get_screen_icon()
 
-
 = 1.2.3 =
 * Fixed self hosted video upload bug.
 * Fixed Readmore button
