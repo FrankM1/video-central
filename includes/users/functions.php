@@ -202,7 +202,7 @@ function video_central_get_user_video_count_raw($user_id = 0)
 }
 
 /**
- * Return the raw database count of replies by a user.
+ * Return the raw database count of videos by a user.
  *
  * @since 1.0.0
  *
@@ -213,7 +213,7 @@ function video_central_get_user_video_count_raw($user_id = 0)
  * @uses video_central_get_video_post_type()
  * @uses apply_filters()
  *
- * @return int Raw DB count of replies
+ * @return int Raw DB count of videos
  */
 function video_central_get_user_videos_count_raw($user_id = 0)
 {

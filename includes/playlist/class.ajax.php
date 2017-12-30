@@ -98,7 +98,7 @@ class Video_Central_Playlist_Ajax {
 	 */
 	public function get_playlist_videos() {
 		$post_id = absint( $_POST['post_id'] );
-		wp_send_json_success( get_video_central_playlist_videos( $post_id, 'edit' ) );
+		wp_send_json_success( video_central_get_playlist_videos( $post_id, 'edit' ) );
 	}
 
 	/**

@@ -1677,7 +1677,7 @@ function video_central_videos_class($video_id = 0, $classes = array())
 
 /**
  * Output a fancy description of the current video, including total videos,
- * total replies, and last activity.
+ * total videos, and last activity.
  *
  * @since 1.0.0
  *
@@ -1691,7 +1691,7 @@ function video_central_single_video_description($args = '')
 }
     /**
      * Return a fancy description of the current video, including total
-     * videos, total replies, and last activity.
+     * videos, total videos, and last activity.
      *
      * @since 1.0.0
      *
@@ -1884,7 +1884,7 @@ function video_central_featured_image_url($video_id = 0, $image_size = array())
  */
 function video_central_add_comments()
 {
-    if ((comments_open() || '0' != get_comments_number()) && video_central_allow_comments()) {
+    if ( ( comments_open() || '0' != get_comments_number() ) && video_central_allow_comments() ) {
         comments_template('', true);
     }
 }

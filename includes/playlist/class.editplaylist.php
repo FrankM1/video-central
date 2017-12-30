@@ -17,8 +17,8 @@ class Video_Central_Playlist_EditPlaylist {
 	public function __construct() {
 		add_action( 'load-post.php',               array( $this, 'load_screen' ) );
 		add_action( 'load-post-new.php',           array( $this, 'load_screen' ) );
-		add_action( 'add_meta_boxes_' . video_central_get_playlist_post_type(), array( $this, 'register_meta_boxes' ) );
-		add_action( 'save_post_' . video_central_get_playlist_post_type(),      array( $this, 'on_playlist_save' ) );
+		add_action( 'add_meta_boxes_' . video_central_get_playlists_post_type(), array( $this, 'register_meta_boxes' ) );
+		add_action( 'save_post_' . video_central_get_playlists_post_type(),      array( $this, 'on_playlist_save' ) );
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Video_Central_Playlist_EditPlaylist {
 	 * @since 2.0.0
 	 */
 	public function load_screen() {
-		if ( video_central_get_playlist_post_type() !== get_current_screen()->id ) {
+		if ( video_central_get_playlists_post_type() !== get_current_screen()->id ) {
 			return;
 		}
 
@@ -45,14 +45,14 @@ class Video_Central_Playlist_EditPlaylist {
 	 * @param WP_Post $post The record post object being edited.
 	 */
 	public function register_meta_boxes( $post ) {
-		$players = get_video_central_playlist_players();
+		$players = video_central_get_playlist_players();
 
 		if ( ! empty( $players ) ) {
 			add_meta_box(
 				'video-central-playlist-players',
 				esc_html__( 'Players', 'video-central' ),
 				array( $this, 'display_players_meta_box' ),
-				video_central_get_playlist_post_type(),
+				video_central_get_playlists_post_type(),
 				'side',
 				'default'
 			);
@@ -62,7 +62,7 @@ class Video_Central_Playlist_EditPlaylist {
 			'video-central-playlist-playlist-shortcode',
 			esc_html__( 'Shortcode', 'video-central' ),
 			array( $this, 'display_shortcode_meta_box' ),
-			video_central_get_playlist_post_type(),
+			video_central_get_playlists_post_type(),
 			'side',
 			'default'
 		);
@@ -109,7 +109,7 @@ class Video_Central_Playlist_EditPlaylist {
 		wp_localize_script( 'video-central-playlist-playlist-edit', 'videoCentralPlaylistConfig', array(
 			'postId'     => $post->ID,
 			'saveNonce'  => wp_create_nonce( 'save-videos_' . $post->ID ),
-			'videos'     => get_video_central_playlist_videos( $post->ID, 'edit' ),
+			'videos'     => video_central_get_playlist_videos( $post->ID, 'edit' ),
 			'l10n'       => array(
 				'addVideos'  => esc_html__( 'Add Videos', 'video-central' ),
 				'addFromUrl' => esc_html__( 'Add from URL', 'video-central' ),
@@ -194,7 +194,7 @@ class Video_Central_Playlist_EditPlaylist {
 
 		printf( '<p>%s</p>', esc_html__( 'Choose which players should use this playlist:', 'video-central' ) );
 
-		$players = get_video_central_playlist_players();
+		$players = video_central_get_playlist_players();
 		echo '<ul style="margin-bottom: 0">';
 		foreach ( $players as $id => $player ) {
 			printf(

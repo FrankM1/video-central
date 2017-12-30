@@ -7,7 +7,7 @@
  *
  * @since 1.0.0
  *
- * @param int $default Default replies per page (15)
+ * @param int $default Default videos per page (15)
  *
  * @uses get_option() To get the setting
  * @uses apply_filters() To allow the return value to be manipulated
@@ -34,7 +34,7 @@ function video_central_get_videos_per_page($default = 16)
  *
  * @since 1.0.0
  *
- * @param int $default Default replies per page (25)
+ * @param int $default Default videos per page (25)
  *
  * @uses get_option() To get the setting
  * @uses apply_filters() To allow the return value to be manipulated
@@ -61,7 +61,7 @@ function video_central_get_videos_per_rss_page($default = 35)
  *
  * @since 1.0.0
  *
- * @param int $default Default replies per page (15)
+ * @param int $default Default videos per page (15)
  *
  * @uses get_option() To get the setting
  * @uses apply_filters() To allow the return value to be manipulated
@@ -88,7 +88,7 @@ function video_central_get_related_videos_per_page($default = 12)
  *
  * @since 1.2.0
  *
- * @param int $default Default replies per page (15)
+ * @param int $default Default videos per page (15)
  *
  * @uses get_option() To get the setting
  * @uses apply_filters() To allow the return value to be manipulated

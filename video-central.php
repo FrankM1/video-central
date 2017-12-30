@@ -262,8 +262,9 @@ class Video_Central
         $this->current_view_id = 0; // Current view id
         $this->current_video_id = 0; // Current video id
 
-        $this->video_query = new WP_Query(); // Main video query
-        $this->search_query = new WP_Query(); // Main search query
+        $this->video_query      = new WP_Query(); // Main video query
+        $this->playlist_query   = new WP_Query(); // Main playlist query
+        $this->search_query     = new WP_Query(); // Main search query
 
         /* Theme Compat ******************************************************/
 

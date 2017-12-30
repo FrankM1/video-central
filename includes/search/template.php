@@ -38,7 +38,7 @@ function video_central_has_search_results($args = '')
 
     // Default query args
     $default = array(
-        'post_type' => video_central_get_video_post_type(),         // Videos, and replies
+        'post_type' => video_central_get_video_post_type(),         // Videos
         'posts_per_page' => video_central_get_videos_per_page(), // This many
         'paged' => video_central_get_paged(),            // On this page
         'orderby' => 'date',                     // Sorted by date

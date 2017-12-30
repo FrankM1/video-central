@@ -4,6 +4,63 @@
  * Playlist Central Playlist Functions.
  */
 
+
+/** Settings ******************************************************************/
+
+/**
+ * Return the videos per page setting.
+ *
+ * @since 1.0.0
+ *
+ * @param int $default Default playlists per page (15)
+ *
+ * @uses get_option() To get the setting
+ * @uses apply_filters() To allow the return value to be manipulated
+ *
+ * @return int
+ */
+function video_central_get_playlists_per_page($default = 16)
+{
+
+    // Get database option and cast as integer
+    $retval = get_option('_video_central_playlists_per_page', $default);
+
+    // If return val is empty, set it to default
+    if (empty($retval)) {
+        $retval = $default;
+    }
+
+    // Filter and return
+    return (int) apply_filters( __FUNCTION__, $retval, $default );
+}
+
+/**
+ * Return the playlists per RSS page setting.
+ *
+ * @since 1.0.0
+ *
+ * @param int $default Default playlists per page (25)
+ *
+ * @uses get_option() To get the setting
+ * @uses apply_filters() To allow the return value to be manipulated
+ *
+ * @return int
+ */
+function video_central_get_playlists_per_rss_page($default = 35)
+{
+
+    // Get database option and cast as integer
+    $retval = get_option('_video_central_playlists_per_rss_page', $default);
+
+    // If return val is empty, set it to default
+    if (empty($retval)) {
+        $retval = $default;
+    }
+
+    // Filter and return
+    return (int) apply_filters(__FUNCTION__, $retval, $default);
+}
+
 /** Post Type *****************************************************************/
 
 /**
@@ -11,23 +68,23 @@
  *
  * @since 1.2.0
  *
- * @uses video_central_get_playlist_post_type() To get the playlist post type
+ * @uses video_central_get_playlists_post_type() To get the playlist post type
  */
 function video_central_playlist_post_type()
 {
-    echo video_central_get_playlist_post_type();
+    echo video_central_get_playlists_post_type();
 }
     /**
      * Return the unique id of the custom post type for playlists.
      *
      * @since 1.2.0
      *
-     * @uses apply_filters() Calls 'video_central_get_playlist_post_type' with the playlist
+     * @uses apply_filters() Calls 'video_central_get_playlists_post_type' with the playlist
      *                        post type id
      *
      * @return string The unique playlist post type id
      */
-    function video_central_get_playlist_post_type()
+    function video_central_get_playlists_post_type()
     {
         return video_central()->playlist_post_type;
     }
@@ -92,6 +149,8 @@ function video_central_get_playlist_post_type_supports()
     ));
 }
 
+/** Data Functions *********************************************************************/
+
 /**
  * Retrieve a playlist's videos.
  *
@@ -101,22 +160,9 @@ function video_central_get_playlist_post_type_supports()
  * @param string      $context Optional. Context to retrieve the videos for. Defaults to display.
  * @return array
  */
-function get_video_central_playlist_videos( $post = 0, $context = 'display' ) {
+function video_central_get_playlist_videos( $post = 0, $context = 'display' ) {
 	$playlist = get_post( $post );
 	$videos = array_filter( (array) $playlist->videos );
-
-	// Add the audio file extension as a key pointing to the audio url.
-	// Helpful for use with the jPlayer Playlist plugin.
-	foreach ( $videos as $key => $video ) {
-		$parts = wp_parse_url( $video['audioUrl'] );
-		if ( ! empty( $parts['path'] ) ) {
-			$ext = pathinfo( $parts['path'], PATHINFO_EXTENSION );
-			if ( ! empty( $ext ) ) {
-				$videos[ $key ][ $ext ] = $video['audioUrl'];
-			}
-		}
-	}
-
 	return apply_filters( 'video_central_playlist_videos', $videos, $playlist, $context );
 }
 
@@ -135,9 +181,7 @@ function get_video_central_default_video() {
 		'artworkId'  => '',
 		'artworkUrl' => '',
 		'videoId'    => '',
-		'audioUrl'   => '',
 		'length'     => '',
-		'format'     => '',
 		'order'      => '',
 		'title'      => '',
 	);
@@ -166,9 +210,7 @@ function sanitize_video_central_video( $video, $context = 'display' ) {
 		$video['artworkId']  = absint( $video['artworkId'] );
 		$video['artworkUrl'] = esc_url_raw( $video['artworkUrl'] );
 		$video['videoId']    = absint( $video['videoId'] );
-		$video['audioUrl']   = esc_url_raw( $video['audioUrl'] );
 		$video['length']     = sanitize_text_field( $video['length'] );
-		$video['format']     = sanitize_text_field( $video['format'] );
 		$video['title']      = sanitize_text_field( $video['title'] );
 		$video['order']      = absint( $video['order'] );
 	}
@@ -185,7 +227,7 @@ function sanitize_video_central_video( $video, $context = 'display' ) {
  * @param array  $args      Playlist arguments.
  */
 function video_central_playlist_player( $player_id, $args = array() ) {
-	$playlist_id = get_video_central_playlist_player_id( $player_id );
+	$playlist_id = video_central_get_playlist_player_id( $player_id );
 
 	$args = array(
 		'enqueue'  => false,
@@ -200,7 +242,7 @@ function video_central_playlist_player( $player_id, $args = array() ) {
 }
 
 /**
- * Retrieve a list of players registered by the current them.
+ * Retrieve a list of players registered by the current theme.
  *
  * Includes the player id, name and associated playlist if one has been saved.
  *
@@ -208,7 +250,7 @@ function video_central_playlist_player( $player_id, $args = array() ) {
  *
  * @return array
  */
-function get_video_central_playlist_players() {
+function video_central_get_playlist_players() {
 	$players = array();
 	$assigned = get_theme_mod( 'video_central_playlist_players', array() );
 
@@ -247,7 +289,7 @@ function get_video_central_playlist_players() {
  * @param string $player_id Player ID.
  * @return int
  */
-function get_video_central_playlist_player_id( $player_id ) {
+function video_central_get_playlist_player_id( $player_id ) {
 	$players = get_theme_mod( 'video_central_playlist_players', array() );
 	return isset( $players[ $player_id ] ) ? $players[ $player_id ] : 0;
 }
@@ -265,13 +307,13 @@ function get_video_central_playlist_player_id( $player_id ) {
  * }
  * @return array
  */
-function get_video_central_playlist_player_videos( $player_id, $args = array() ) {
+function video_central_get_playlist_player_videos( $player_id, $args = array() ) {
 	$args = wp_parse_args( $args, array(
 		'context' => 'display',
 	) );
 
-	$playlist_id = get_video_central_playlist_player_id( $player_id );
-	return get_video_central_playlist_videos( $playlist_id, $args['context'] );
+	$playlist_id = video_central_get_playlist_player_id( $player_id );
+	return video_central_get_playlist_videos( $playlist_id, $args['context'] );
 }
 
 

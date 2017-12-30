@@ -25,7 +25,7 @@ class Video_Central_Playlist_Posttype {
     public function __construct() {
         self::$instance = $this;
 
-        $this->post_type = video_central_get_playlist_post_type();
+        $this->post_type = video_central_get_playlists_post_type();
 
         $this->playlist_init();
 
@@ -35,7 +35,7 @@ class Video_Central_Playlist_Posttype {
 
         // Register playlist content type
         register_post_type(
-            video_central_get_playlist_post_type(),
+            video_central_get_playlists_post_type(),
             apply_filters('video_central_register_playlist_post_type', array(
                 'labels'      => video_central_get_playlist_post_type_labels(),
                 'rewrite'     => video_central_get_playlist_post_type_rewrite(),

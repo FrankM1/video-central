@@ -1971,7 +1971,7 @@ function video_central_current_user_can_access_create_video_form()
 }
 
 /**
- * Performs a series of checks to ensure the current user can create replies.
+ * Performs a series of checks to ensure the current user can create videos.
  *
  * @since 1.0.0
  *
