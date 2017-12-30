@@ -20,18 +20,18 @@
 		<span class="video-central-videos-media-thumbnail-title">{{ data.title }}</span>
 	</div>
 	<button type="button" class="video-central-videos-media-toggle-button dashicons dashicons-yes" tabindex="0">
-		<span class="screen-reader-text"><?php esc_html_e( 'Deselect', 'cue' ); ?></span>
+		<span class="screen-reader-text"><?php esc_html_e( 'Deselect', 'video-central' ); ?></span>
 	</button>
 </script>
 
 <script type="text/html" id="tmpl-video-central-videos-browser-sidebar">
 	<div class="video-central-videos-browser-settings collection-settings">
-		<h2><?php esc_html_e( 'Playlist Settings', 'cue' ); ?></h2>
+		<h2><?php esc_html_e( 'Playlist Settings', 'video-central' ); ?></h2>
 
 		<div class="setting">
 			<p>
 				<label>
-					<span><?php esc_html_e( 'Theme', 'cue' ); ?></span>
+					<span><?php esc_html_e( 'Theme', 'video-central' ); ?></span>
 					<select data-setting="theme">
 						<option value=""></option>
 					</select>
@@ -43,7 +43,7 @@
 			<p>
 				<label>
 					<input type="checkbox" data-setting="show_videos" checked>
-					<span><?php esc_html_e( 'Show Tracklist', 'cue' ); ?></span>
+					<span><?php esc_html_e( 'Show Tracklist', 'video-central' ); ?></span>
 				</label>
 			</p>
 		</div>
@@ -51,8 +51,8 @@
 </script>
 
 <script type="text/html" id="tmpl-video-central-videos-browser-empty">
-	<h2><?php esc_html_e( 'No items found.', 'cue' ); ?></h2>
+	<h2><?php esc_html_e( 'No items found.', 'video-central' ); ?></h2>
 	<p>
-		<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . video_central_get_video_post_type() ) ); ?>"><?php esc_html_e( 'Create a video.', 'cue' ); ?></a>
+		<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=' . video_central_get_video_post_type() ) ); ?>"><?php esc_html_e( 'Create a video.', 'video-central' ); ?></a>
 	</p>
 </script>
