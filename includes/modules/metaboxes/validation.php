@@ -42,7 +42,7 @@ class Video_Central_Metaboxes_Validation
 		wp_enqueue_script( 'jquery-validation', Video_Central_Metaboxes_JS_URL . 'jquery.validate.min.js', array( 'jquery' ), Video_Central_Metaboxes_VER, true );
 		wp_enqueue_script( 'video-central-metaboxes-validate', Video_Central_Metaboxes_JS_URL . 'validate.js', array( 'jquery-validate' ), Video_Central_Metaboxes_VER, true );
 		wp_localize_script( 'video-central-metaboxes-validate', 'rwmbValidate', array(
-			'summaryMessage' => esc_html__( 'Please correct the errors highlighted below and try again.', 'meta-box' ),
+			'summaryMessage' => esc_html__( 'Please correct the errors highlighted below and try again.', 'video_central' ),
 		) );
 	}
 }

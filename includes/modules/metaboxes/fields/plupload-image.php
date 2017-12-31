@@ -71,9 +71,9 @@ class Video_Central_Metaboxes_Plupload_Image_Field extends Video_Central_Metabox
 			$meta = ( array ) $meta;
 
 		// Filter to change the drag & drop box background string
-		$i18n_drop   = apply_filters( 'video_central_metaboxes_plupload_image_drop_string', _x( 'Drop images here', 'image upload', 'meta-box' ), $field );
-		$i18n_or     = apply_filters( 'video_central_metaboxes_plupload_image_or_string', _x( 'or', 'image upload', 'meta-box' ), $field );
-		$i18n_select = apply_filters( 'video_central_metaboxes_plupload_image_select_string', _x( 'Select Files', 'image upload', 'meta-box' ), $field );
+		$i18n_drop   = apply_filters( 'video_central_metaboxes_plupload_image_drop_string', _x( 'Drop images here', 'image upload', 'video_central' ), $field );
+		$i18n_or     = apply_filters( 'video_central_metaboxes_plupload_image_or_string', _x( 'or', 'image upload', 'video_central' ), $field );
+		$i18n_select = apply_filters( 'video_central_metaboxes_plupload_image_select_string', _x( 'Select Files', 'image upload', 'video_central' ), $field );
 
 		// Uploaded images
 
@@ -146,7 +146,7 @@ class Video_Central_Metaboxes_Plupload_Image_Field extends Video_Central_Metabox
 			'urlstream_upload'    => true,
 			'filters'             => array(
 				array(
-					'title'      => _x( 'Allowed Image Files', 'image upload', 'meta-box' ),
+					'title'      => _x( 'Allowed Image Files', 'image upload', 'video_central' ),
 					'extensions' => 'jpg,jpeg,gif,png',
 				),
 			),

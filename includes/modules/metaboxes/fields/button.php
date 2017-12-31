@@ -24,7 +24,7 @@ class Video_Central_Metaboxes_Button_Field extends Video_Central_Metaboxes_Field
 	 */
 	static function normalize( $field ) {
 		$field        = parent::normalize( $field );
-		$field['std'] = $field['std'] ? $field['std'] : __( 'Click me', 'meta-box' );
+		$field['std'] = $field['std'] ? $field['std'] : __( 'Click me', 'video_central' );
 		return $field;
 	}
 

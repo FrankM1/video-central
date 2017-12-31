@@ -45,10 +45,10 @@ class Video_Central_Metaboxes_Taxonomy_Field extends Video_Central_Metaboxes_Obj
 		 * - If single taxonomy: show 'Select a %taxonomy_name%'
 		 */
 		if ( empty( $field['placeholder'] ) ) {
-			$field['placeholder'] = __( 'Select a term', 'meta-box' );
+			$field['placeholder'] = __( 'Select a term', 'video_central' );
 			if ( is_string( $field['taxonomy'] ) && taxonomy_exists( $field['taxonomy'] ) ) {
 				$taxonomy_object      = get_taxonomy( $field['taxonomy'] );
-				$field['placeholder'] = sprintf( __( 'Select a %s', 'meta-box' ), $taxonomy_object->labels->singular_name );
+				$field['placeholder'] = sprintf( __( 'Select a %s', 'video_central' ), $taxonomy_object->labels->singular_name );
 			}
 		}
 

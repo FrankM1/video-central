@@ -13,8 +13,8 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field {
 		wp_enqueue_script( 'video-central-metaboxes-file', Video_Central_Metaboxes_JS_URL . 'file.js', array( 'jquery' ), Video_Central_Metaboxes_VER, true );
 
 		self::localize_script( 'video-central-metaboxes-file', 'rwmbFile', array(
-			'maxFileUploadsSingle' => __( 'You may only upload maximum %d file', 'meta-box' ),
-			'maxFileUploadsPlural' => __( 'You may only upload maximum %d files', 'meta-box' ),
+			'maxFileUploadsSingle' => __( 'You may only upload maximum %d file', 'video_central' ),
+			'maxFileUploadsPlural' => __( 'You may only upload maximum %d files', 'video_central' ),
 		) );
 	}
 
@@ -70,7 +70,7 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field {
 		if ( $success ) {
 			wp_send_json_success();
 		}
-		wp_send_json_error( __( 'Error: Cannot delete file', 'meta-box' ) );
+		wp_send_json_error( __( 'Error: Cannot delete file', 'video_central' ) );
 	}
 
 	/**
@@ -82,8 +82,8 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field {
 	 * @return string
 	 */
 	public static function html( $meta, $field ) {
-		$i18n_title = apply_filters( 'video_central_metaboxes_file_upload_string', _x( 'Upload Files', 'file upload', 'meta-box' ), $field );
-		$i18n_more  = apply_filters( 'video_central_metaboxes_file_add_string', _x( '+ Add new file', 'file upload', 'meta-box' ), $field );
+		$i18n_title = apply_filters( 'video_central_metaboxes_file_upload_string', _x( 'Upload Files', 'file upload', 'video_central' ), $field );
+		$i18n_more  = apply_filters( 'video_central_metaboxes_file_add_string', _x( '+ Add new file', 'file upload', 'video_central' ), $field );
 
 		// Uploaded files
 		$html    = self::get_uploaded_files( $meta, $field );
@@ -147,8 +147,8 @@ class Video_Central_Metaboxes_File_Field extends Video_Central_Metaboxes_Field {
 	 * @return string
 	 */
 	protected static function file_html( $file ) {
-		$i18n_delete = apply_filters( 'video_central_metaboxes_file_delete_string', _x( 'Delete', 'file upload', 'meta-box' ) );
-		$i18n_edit   = apply_filters( 'video_central_metaboxes_file_edit_string', _x( 'Edit', 'file upload', 'meta-box' ) );
+		$i18n_delete = apply_filters( 'video_central_metaboxes_file_delete_string', _x( 'Delete', 'file upload', 'video_central' ) );
+		$i18n_edit   = apply_filters( 'video_central_metaboxes_file_edit_string', _x( 'Edit', 'file upload', 'video_central' ) );
 		$mime_type   = get_post_mime_type( $file );
 
 		return sprintf(

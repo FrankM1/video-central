@@ -50,7 +50,7 @@ class Video_Central_Playlist_EditPlaylist {
 		if ( ! empty( $players ) ) {
 			add_meta_box(
 				'video-central-playlist-players',
-				esc_html__( 'Players', 'video-central' ),
+				esc_html__( 'Players', 'video_central' ),
 				array( $this, 'display_players_meta_box' ),
 				video_central_get_playlists_post_type(),
 				'side',
@@ -60,7 +60,7 @@ class Video_Central_Playlist_EditPlaylist {
 
 		add_meta_box(
 			'video-central-playlist-playlist-shortcode',
-			esc_html__( 'Shortcode', 'video-central' ),
+			esc_html__( 'Shortcode', 'video_central' ),
 			array( $this, 'display_shortcode_meta_box' ),
 			video_central_get_playlists_post_type(),
 			'side',
@@ -111,23 +111,23 @@ class Video_Central_Playlist_EditPlaylist {
 			'saveNonce'  => wp_create_nonce( 'save-videos_' . $post->ID ),
 			'videos'     => video_central_get_playlist_videos( $post->ID, 'edit' ),
 			'l10n'       => array(
-				'addVideos'  => esc_html__( 'Add Videos', 'video-central' ),
-				'addFromUrl' => esc_html__( 'Add from URL', 'video-central' ),
+				'addVideos'  => esc_html__( 'Add Videos', 'video_central' ),
+				'addFromUrl' => esc_html__( 'Add from URL', 'video_central' ),
 				'workflows'  => array(
 					'selectArtwork' => array(
-						'fileTypes'       => esc_html__( 'Image Files', 'video-central' ),
-						'frameTitle'      => esc_html__( 'Choose an Image', 'video-central' ),
-						'frameButtonText' => esc_html__( 'Update Image', 'video-central' ),
+						'fileTypes'       => esc_html__( 'Image Files', 'video_central' ),
+						'frameTitle'      => esc_html__( 'Choose an Image', 'video_central' ),
+						'frameButtonText' => esc_html__( 'Update Image', 'video_central' ),
 					),
 					'selectAudio'   => array(
-						'fileTypes'       => esc_html__( 'Video Files', 'video-central' ),
-						'frameTitle'      => esc_html__( 'Choose an Video File', 'video-central' ),
-						'frameButtonText' => esc_html__( 'Update Video', 'video-central' ),
+						'fileTypes'       => esc_html__( 'Video Files', 'video_central' ),
+						'frameTitle'      => esc_html__( 'Choose an Video File', 'video_central' ),
+						'frameButtonText' => esc_html__( 'Update Video', 'video_central' ),
 					),
 					'addVideos'     => array(
-						'fileTypes'       => esc_html__( 'Video Files', 'video-central' ),
-						'frameTitle'      => esc_html__( 'Choose Videos', 'video-central' ),
-						'frameButtonText' => esc_html__( 'Add Videos', 'video-central' ),
+						'fileTypes'       => esc_html__( 'Video Files', 'video_central' ),
+						'frameTitle'      => esc_html__( 'Choose Videos', 'video_central' ),
+						'frameButtonText' => esc_html__( 'Add Videos', 'video_central' ),
 					),
 				),
 			),
@@ -143,11 +143,11 @@ class Video_Central_Playlist_EditPlaylist {
 		?>
 		<noscript>
 			<div class="notice notice-error">
-				<h2 class="notice-title"><?php esc_html_e( 'JavaScript Disabled', 'video-central' ); ?></h2>
+				<h2 class="notice-title"><?php esc_html_e( 'JavaScript Disabled', 'video_central' ); ?></h2>
 				<p>
 					<?php
 					$notice = sprintf(
-						__( 'Video Central requires JavaScript in order to function correctly. Please <a href="%s">enable it in your browser</a> to continue.', 'video-central' ),
+						__( 'Video Central requires JavaScript in order to function correctly. Please <a href="%s">enable it in your browser</a> to continue.', 'video_central' ),
 						'http://enable-javascript.com/'
 					);
 
@@ -170,11 +170,11 @@ class Video_Central_Playlist_EditPlaylist {
 		?>
 		<div id="video-central-playlist-playlist-editor" class="video-central-playlist-panel hide-if-no-js">
 			<div class="video-central-playlist-panel-header">
-				<h2 class="video-central-playlist-panel-title"><?php esc_html_e( 'Videos', 'video-central' ); ?></h2>
+				<h2 class="video-central-playlist-panel-title"><?php esc_html_e( 'Videos', 'video_central' ); ?></h2>
 			</div>
 			<div class="video-central-playlist-panel-body">
 				<p>
-					<?php esc_html_e( 'Add videos to the playlist, then drag and drop to reorder them. Click the arrow on the right of each item to reveal more configuration options.', 'video-central' ); ?>
+					<?php esc_html_e( 'Add videos to the playlist, then drag and drop to reorder them. Click the arrow on the right of each item to reveal more configuration options.', 'video_central' ); ?>
 				</p>
 			</div>
 		</div>
@@ -192,7 +192,7 @@ class Video_Central_Playlist_EditPlaylist {
 	public function display_players_meta_box( $post ) {
 		wp_nonce_field( 'save-playlist-players_' . $post->ID, 'video_central_playlist_players_nonce' );
 
-		printf( '<p>%s</p>', esc_html__( 'Choose which players should use this playlist:', 'video-central' ) );
+		printf( '<p>%s</p>', esc_html__( 'Choose which players should use this playlist:', 'video_central' ) );
 
 		$players = video_central_get_playlist_players();
 		echo '<ul style="margin-bottom: 0">';
@@ -217,7 +217,7 @@ class Video_Central_Playlist_EditPlaylist {
 	public function display_shortcode_meta_box( $post ) {
 		?>
 		<p>
-			<?php esc_html_e( 'Copy and paste the following shortcode into a post or page to embed this playlist.', 'video-central' ); ?>
+			<?php esc_html_e( 'Copy and paste the following shortcode into a post or page to embed this playlist.', 'video_central' ); ?>
 		</p>
 		<p>
 			<input type="text" value="<?php echo esc_attr( '[video-central-playlist id="' . $post->ID . '"]' ); ?>" readonly>

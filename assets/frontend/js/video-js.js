@@ -1,1 +1,1 @@
-jQuery(document).ready(function(a){a(".video-central-player").each(function(){a(this).removeClass("loading")})});
+jQuery(document).ready(function(e){e(".video-central-player").each(function(){e(this).removeClass("loading")})});

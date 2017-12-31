@@ -237,7 +237,7 @@ function video_central_youtube_api_get_list($args = array())
 
     $types = array('user', 'playlist', 'channel');
     if (!in_array($playlist_type, $types)) {
-        trigger_error(__('Invalid playlist type. Use as playlist type one of the following: user, playlist or channel.', 'video_central_video'), E_USER_NOTICE);
+        trigger_error(__('Invalid playlist type. Use as playlist type one of the following: user, playlist or channel.', 'video_central'), E_USER_NOTICE);
 
         return;
     }

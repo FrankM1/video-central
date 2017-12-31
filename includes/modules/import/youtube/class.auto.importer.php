@@ -213,7 +213,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
                         $this->error = new WP_Error();
                     $this->error->add(
                             'video_central_double_import',
-                            __('An automatic import process is already running. Once that import is done, automatic import will continue imports as scheduled.', 'video_central_video'),
+                            __('An automatic import process is already running. Once that import is done, automatic import will continue imports as scheduled.', 'video_central'),
                             array('pid' => $update['post_id'])
                         );
 
@@ -254,7 +254,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
             }
             $this->error->add(
                 'video_central_no_playlist_details',
-                __('Some details about your playlist could not be found. Please try to remove and recreate the playlist.', 'video_central_video'),
+                __('Some details about your playlist could not be found. Please try to remove and recreate the playlist.', 'video_central'),
                 array('pid' => $playlist_id)
             );
 
@@ -296,7 +296,7 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
                 }
                 $this->error->add(
                     'video_central_unknown_feed_type',
-                    __('Sorry, we encountered an unknown feed type. Importing has stopped for this playlist.', 'video_central_video'),
+                    __('Sorry, we encountered an unknown feed type. Importing has stopped for this playlist.', 'video_central'),
                     array('pid' => $playlist_id)
                 );
 

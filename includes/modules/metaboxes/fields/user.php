@@ -30,7 +30,7 @@ class Video_Central_Metaboxes_User_Field extends Video_Central_Metaboxes_Object_
 		/**
 		 * Set default placeholder
 		 */
-		$field['placeholder'] = empty( $field['placeholder'] ) ? __( 'Select an user', 'meta-box' ) : $field['placeholder'];
+		$field['placeholder'] = empty( $field['placeholder'] ) ? __( 'Select an user', 'video_central' ) : $field['placeholder'];
 
 		/**
 		 * Set default query args

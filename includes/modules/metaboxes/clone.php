@@ -88,7 +88,7 @@ class Video_Central_Metaboxes_Clone {
 		if ( ! $field['clone'] ) {
 			return '';
 		}
-		$text = Video_Central_Metaboxes_Field::filter( 'add_clone_button_text', __( '+ Add more', 'meta-box' ), $field );
+		$text = Video_Central_Metaboxes_Field::filter( 'add_clone_button_text', __( '+ Add more', 'video_central' ), $field );
 		return '<a href="#" class="video-central-metaboxes-button button-primary add-clone">' . esc_html( $text ) . '</a>';
 	}
 

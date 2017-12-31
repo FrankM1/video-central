@@ -81,7 +81,7 @@ class Video_Central_Metaboxes_Select_Field extends Video_Central_Metaboxes_Choic
 	 */
 	public static function get_select_all_html( $field ) {
 		if ( $field['multiple'] && $field['select_all_none'] ) {
-			return '<div class="video-central-metaboxes-select-all-none">' . __( 'Select', 'meta-box' ) . ': <a data-type="all" href="#">' . __( 'All', 'meta-box' ) . '</a> | <a data-type="none" href="#">' . __( 'None', 'meta-box' ) . '</a></div>';
+			return '<div class="video-central-metaboxes-select-all-none">' . __( 'Select', 'video_central' ) . ': <a data-type="all" href="#">' . __( 'All', 'video_central' ) . '</a> | <a data-type="none" href="#">' . __( 'None', 'video_central' ) . '</a></div>';
 		}
 		return '';
 	}

@@ -185,7 +185,7 @@ class Video_Central_Metaboxes_Video_Select_Field extends Video_Central_Metaboxes
         if ( $multiple === true )
         {
             return '<div class="video-central-metaboxes-select-all-none">
-                    ' . __( 'Select', 'meta-box' ) . ': <a data-type="all" href="#">' . __( 'All', 'meta-box' ) . '</a> | <a data-type="none" href="#">' . __( 'None', 'meta-box' ) . '</a>
+                    ' . __( 'Select', 'video_central' ) . ': <a data-type="all" href="#">' . __( 'All', 'video_central' ) . '</a> | <a data-type="none" href="#">' . __( 'None', 'video_central' ) . '</a>
                 </div>';
         }
         return '';

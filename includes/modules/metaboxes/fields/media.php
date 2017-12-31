@@ -14,18 +14,18 @@ class Video_Central_Metaboxes_Media_Field extends Video_Central_Metaboxes_File_F
 		wp_enqueue_script( 'video-central-metaboxes-media', Video_Central_Metaboxes_JS_URL . 'media.js', array( 'jquery-ui-sortable', 'underscore', 'backbone', 'media-grid' ), Video_Central_Metaboxes_VER, true );
 
 		self::localize_script( 'video-central-metaboxes-media', 'i18nVcmMedia', array(
-			'add'                => apply_filters( 'video_central_metaboxes_media_add_string', _x( '+ Add Media', 'media', 'meta-box' ) ),
-			'single'             => apply_filters( 'video_central_metaboxes_media_single_files_string', _x( ' file', 'media', 'meta-box' ) ),
-			'multiple'           => apply_filters( 'video_central_metaboxes_media_multiple_files_string', _x( ' files', 'media', 'meta-box' ) ),
-			'remove'             => apply_filters( 'video_central_metaboxes_media_remove_string', _x( 'Remove', 'media', 'meta-box' ) ),
-			'edit'               => apply_filters( 'video_central_metaboxes_media_edit_string', _x( 'Edit', 'media', 'meta-box' ) ),
-			'view'               => apply_filters( 'video_central_metaboxes_media_view_string', _x( 'View', 'media', 'meta-box' ) ),
-			'noTitle'            => _x( 'No Title', 'media', 'meta-box' ),
+			'add'                => apply_filters( 'video_central_metaboxes_media_add_string', _x( '+ Add Media', 'media', 'video_central' ) ),
+			'single'             => apply_filters( 'video_central_metaboxes_media_single_files_string', _x( ' file', 'media', 'video_central' ) ),
+			'multiple'           => apply_filters( 'video_central_metaboxes_media_multiple_files_string', _x( ' files', 'media', 'video_central' ) ),
+			'remove'             => apply_filters( 'video_central_metaboxes_media_remove_string', _x( 'Remove', 'media', 'video_central' ) ),
+			'edit'               => apply_filters( 'video_central_metaboxes_media_edit_string', _x( 'Edit', 'media', 'video_central' ) ),
+			'view'               => apply_filters( 'video_central_metaboxes_media_view_string', _x( 'View', 'media', 'video_central' ) ),
+			'noTitle'            => _x( 'No Title', 'media', 'video_central' ),
 			'loadingUrl'         => Video_Central_Metaboxes_URL . 'img/loader.gif',
 			'extensions'         => self::get_mime_extensions(),
-			'select'             => apply_filters( 'video_central_metaboxes_media_select_string', _x( 'Select Files', 'media', 'meta-box' ) ),
-			'or'                 => apply_filters( 'video_central_metaboxes_media_or_string', _x( 'or', 'media', 'meta-box' ) ),
-			'uploadInstructions' => apply_filters( 'video_central_metaboxes_media_upload_instructions_string', _x( 'Drop files here to upload', 'media', 'meta-box' ) ),
+			'select'             => apply_filters( 'video_central_metaboxes_media_select_string', _x( 'Select Files', 'media', 'video_central' ) ),
+			'or'                 => apply_filters( 'video_central_metaboxes_media_or_string', _x( 'or', 'media', 'video_central' ) ),
+			'uploadInstructions' => apply_filters( 'video_central_metaboxes_media_upload_instructions_string', _x( 'Drop files here to upload', 'media', 'video_central' ) ),
 		) );
 	}
 

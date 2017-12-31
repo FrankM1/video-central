@@ -12,7 +12,7 @@ class Video_Central_Metaboxes_Autocomplete_Field extends Video_Central_Metaboxes
 		wp_enqueue_style( 'video-central-metaboxes-autocomplete', Video_Central_Metaboxes_CSS_URL . 'autocomplete.css', array( 'wp-admin' ), Video_Central_Metaboxes_VER );
 		wp_enqueue_script( 'video-central-metaboxes-autocomplete', Video_Central_Metaboxes_JS_URL . 'autocomplete.js', array( 'jquery-ui-autocomplete' ), Video_Central_Metaboxes_VER, true );
 
-		self::localize_script( 'video-central-metaboxes-autocomplete', 'Video_Central_Metaboxes_Autocomplete', array( 'delete' => __( 'Delete', 'meta-box' ) ) );
+		self::localize_script( 'video-central-metaboxes-autocomplete', 'Video_Central_Metaboxes_Autocomplete', array( 'delete' => __( 'Delete', 'video_central' ) ) );
 
 	}
 
@@ -71,7 +71,7 @@ class Video_Central_Metaboxes_Autocomplete_Field extends Video_Central_Metaboxes
 					$html .= sprintf(
 						$tpl,
 						$label,
-						__( 'Delete', 'meta-box' ),
+						__( 'Delete', 'video_central' ),
 						$field['field_name'],
 						$value
 					);
@@ -86,7 +86,7 @@ class Video_Central_Metaboxes_Autocomplete_Field extends Video_Central_Metaboxes
 				$html .= sprintf(
 					$tpl,
 					$label,
-					__( 'Delete', 'meta-box' ),
+					__( 'Delete', 'video_central' ),
 					$field['field_name'],
 					$value
 				);

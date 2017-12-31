@@ -3,7 +3,7 @@
 Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
-Author: Franklin M Gitonga
+Author: Franklin Gitonga
 Version: 1.3.0
 Author URI: http://radiumthemes.com/
 License: GPL v2+

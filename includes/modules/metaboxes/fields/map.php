@@ -54,7 +54,7 @@ class Video_Central_Metaboxes_Map_Field extends Video_Central_Metaboxes_Field {
 			$html .= sprintf(
 				'<button class="button video-central-metaboxes-map-goto-address-button" value="%s">%s</button>',
 				is_array( $address ) ? implode( ',', $address ) : $address,
-				__( 'Find Address', 'meta-box' )
+				__( 'Find Address', 'video_central' )
 			);
 		}
 

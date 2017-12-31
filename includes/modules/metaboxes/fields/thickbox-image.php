@@ -48,7 +48,7 @@ class Video_Central_Metaboxes_Thickbox_Image_Field extends Video_Central_Metabox
 	 * @return string
 	 */
 	public static function html( $meta, $field ) {
-		$i18n_title = apply_filters( 'video_central_metaboxes_thickbox_image_upload_string', _x( 'Upload Images', 'image upload', 'meta-box' ), $field );
+		$i18n_title = apply_filters( 'video_central_metaboxes_thickbox_image_upload_string', _x( 'Upload Images', 'image upload', 'video_central' ), $field );
 
 		// Uploaded images
 		$html = parent::get_uploaded_files( $meta, $field );

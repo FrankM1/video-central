@@ -6,6 +6,8 @@ module.exports = function(grunt) {
         replace: 'grunt-text-replace'
     });
 
+    grunt.loadNpmTasks('grunt-wp-i18n');
+
     // require it at the top and pass in the grunt instance
 	require('time-grunt')(grunt);
 
@@ -227,53 +229,40 @@ module.exports = function(grunt) {
             }
         },
 
-        checktextdomain: {
+        addtextdomain: {
             options: {
-                correct_domain: true,
-                text_domain: 'video_central',
-                keywords: [
-                    '__:1,2d',
-                    '_e:1,2d',
-                    '_x:1,2c,3d',
-                    '_n:1,2,4d',
-                    '_ex:1,2c,3d',
-                    '_nx:1,2,4c,5d',
-                    'esc_attr__:1,2d',
-                    'esc_attr_e:1,2d',
-                    'esc_attr_x:1,2c,3d',
-                    'esc_html__:1,2d',
-                    'esc_html_e:1,2d',
-                    'esc_html_x:1,2c,3d',
-                    '_n_noop:1,2,3d',
-                    '_nx_noop:1,2,3c,4d'
-                ]
+                textdomain: 'video_central',
+                updateDomains: true
             },
-            files: [ {
-                src: [
-                    '**/*.php',
-                    '!node_modules/**',
-                    '!build/**',
-                    '!tests/**',
-                    '!.github/**',
-                    '!vendor/**',
-                    '!*~'
-                ],
-                expand: true
-            } ]
-        },
+            target: {
+                files: {
+                    src: [
+                        '*.php',
+                        '**/*.php',
+						'!node_modules/**',
+						'!build/**',
+						'!tests/**',
+						'!.github/**',
+						'!vendor/**',
+						'!*~'
+                    ]
+                }
+            }
+		},
 
         makepot: {
             target: {
                 options: {
                     domainPath: 'languages',
                     mainFile: 'video-central.php',
-                    potFilename: 'video_central-en_US.po',
+                    potFilename: 'en_US.po',
                     processPot: function(pot) {
                         pot.headers['report-msgid-bugs-to'] = 'frank@radiumthemes.com';
                         pot.headers['language-team'] = 'RadiumThemes <http://radiumthemes.com>';
                         pot.headers['Last-Translator'] = 'Franklin Gitonga <frank@radiumthemes.com>';
                         return pot;
                     },
+                    updateTimestamp: true,
                     type: 'wp-plugin'
                 }
             }
@@ -298,7 +287,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask( 'i18n', [
-        'checktextdomain',
+        'addtextdomain',
         'makepot' 
     ] );
 

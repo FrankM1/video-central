@@ -30,10 +30,10 @@ class Video_Central_Metaboxes_Post_Field extends Video_Central_Metaboxes_Object_
 		 * - If single post type: show 'Select a %post_type_name%'
 		 */
 		if ( empty( $field['placeholder'] ) ) {
-			$field['placeholder'] = __( 'Select a post', 'meta-box' );
+			$field['placeholder'] = __( 'Select a post', 'video_central' );
 			if ( is_string( $field['query_args']['post_type'] ) && post_type_exists( $field['query_args']['post_type'] ) ) {
 				$post_type_object     = get_post_type_object( $field['query_args']['post_type'] );
-				$field['placeholder'] = sprintf( __( 'Select a %s', 'meta-box' ), $post_type_object->labels->singular_name );
+				$field['placeholder'] = sprintf( __( 'Select a %s', 'video_central' ), $post_type_object->labels->singular_name );
 			}
 		}
 

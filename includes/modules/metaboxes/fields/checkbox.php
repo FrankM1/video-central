@@ -50,6 +50,6 @@ class Video_Central_Metaboxes_Checkbox_Field extends Video_Central_Metaboxes_Inp
 	 * @return string
 	 */
 	public static function format_single_value( $field, $value ) {
-		return $value ? __( 'Yes', 'meta-box' ) : __( 'No', 'meta-box' );
+		return $value ? __( 'Yes', 'video_central' ) : __( 'No', 'video_central' );
 	}
 }

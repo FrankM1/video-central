@@ -38,7 +38,7 @@ class Video_Central_Metaboxes_Select_Advanced_Field extends Video_Central_Metabo
 	public static function normalize( $field ) {
 		$field = wp_parse_args( $field, array(
 			'js_options'  => array(),
-			'placeholder' => __( 'Select an item', 'meta-box' ),
+			'placeholder' => __( 'Select an item', 'video_central' ),
 		) );
 
 		$field = parent::normalize( $field );

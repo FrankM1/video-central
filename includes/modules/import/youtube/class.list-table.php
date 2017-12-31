@@ -356,7 +356,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table
         ?>
         <div class="tablenav-pages">
 
-            <span class="displaying-num"><?php printf(_n('1 item', '%s items', $this->total_items), number_format_i18n($this->total_items));
+            <span class="displaying-num"><?php printf(_n('1 item', '%s items', $this->total_items, 'video_central'), number_format_i18n($this->total_items));
         ?></span>
             <span class="pagination-links">
                 <?php

@@ -57,7 +57,7 @@ class Video_Central_Metaboxes_OEmbed_Field extends Video_Central_Metaboxes_Text_
 			$embed = $GLOBALS['wp_embed']->shortcode( $args, $url );
 		}
 
-		return $embed ? $embed : __( 'Embed HTML not available.', 'meta-box' );
+		return $embed ? $embed : __( 'Embed HTML not available.', 'video_central' );
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Video_Central_Metaboxes_OEmbed_Field extends Video_Central_Metaboxes_Text_
 			'<a href="#" class="video-central-metaboxes-embed-show button">%s</a>
 			<span class="spinner"></span>
 			<div class="video-central-metaboxes-embed-media">%s</div>',
-			esc_html__( 'Preview', 'meta-box' ),
+			esc_html__( 'Preview', 'video_central' ),
 			$meta ? self::get_embed( $meta ) : ''
 		);
 	}
