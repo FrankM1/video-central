@@ -517,6 +517,10 @@ class Video_Central
     public function enqueue_scripts()
     {
 
+        if ( ! is_video_central() ) {
+            return;
+        }
+
         //video js (http://videojs.com)
         wp_enqueue_script( 'video-central-player', $this->core_assets_url . 'frontend/js/video-js.js', array( 'jquery' ), $this->version, true);
 

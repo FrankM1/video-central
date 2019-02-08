@@ -434,7 +434,11 @@ function video_central_is_custom_post_type($the_post = false)
  * @return array Body Classes
  */
 function video_central_body_class($wp_classes, $custom_classes = false)
-{
+{   
+    if ( ! is_video_central() ) {
+        return $wp_classes;
+    }
+
     $video_central_classes = array();
 
     /* Archives **************************************************************/
