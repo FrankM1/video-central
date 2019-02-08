@@ -128,6 +128,10 @@ function video_central_locate_template($template_names, $load = false, $require_
 function video_central_enqueue_style($handle = '', $file = '', $dependencies = array(), $version = false, $media = 'all')
 {
 
+    if ( ! is_video_central() ) {
+        return false;
+    }
+
     // No file found yet
     $located = false;
 
@@ -195,6 +199,10 @@ function video_central_enqueue_style($handle = '', $file = '', $dependencies = a
  */
 function video_central_enqueue_script($handle = '', $file = '', $dependencies = array(), $version = false, $in_footer = 'all')
 {
+
+    if ( ! is_video_central() ) {
+        return false;
+    }
 
     // No file found yet
     $located = false;

@@ -448,13 +448,13 @@ class Video_Central_Video_Posttype
      */
     public function admin_order($wp_query)
     {
-        if (is_admin()) {
+        if ( is_admin() ) {
             global $wp_query;
 
             // Get the post type from the query
             $post_type = $wp_query->query['post_type'];
 
-            if ($post_type == $this->post_type) {
+            if ( $post_type && $post_type === $this->post_type) {
 
                 // 'orderby' value can be any column name
                 $wp_query->set('orderby', 'date');
