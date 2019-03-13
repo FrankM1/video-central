@@ -860,7 +860,7 @@ function video_central() {
     return $instance;
 }
 
-/*
+/**
  * Hook Video_Central early onto the 'plugins_loaded' action.
  *
  * This gives all other plugins the chance to load before Video Central, to get their

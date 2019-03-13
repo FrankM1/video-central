@@ -462,7 +462,7 @@ function video_central_theme_compat_reset_post($args = array())
 function video_central_template_include_theme_compat($template = '')
 {
 
-    /*
+    /**
      * Bail if a root template was already found. This prevents unintended
      * recursive filtering of 'the_content'.
      *
@@ -529,7 +529,7 @@ function video_central_template_include_theme_compat($template = '')
         ));
     }
 
-    /*
+    /**
      * Bail if the template already matches a Video Central template. This includes
      * archive-* and single-* WordPress post_type matches (allowing
      * themes to use the expected format) as well as all Video Central specific
@@ -542,7 +542,7 @@ function video_central_template_include_theme_compat($template = '')
     if (video_central_is_template_included()) {
         return $template;
 
-    /*
+    /**
      * If we are relying on Video Central's built in theme compatibility to load
      * the proper content, we need to intercept the_content, replace the
      * output, and display ours instead.
