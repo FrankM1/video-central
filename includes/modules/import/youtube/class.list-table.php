@@ -346,13 +346,6 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table
         $disable_first = empty($this->prev_token) ? ' disabled' : false;
         $disable_last = empty($this->next_token) ? ' disabled' : false;
 
-        $prev_page = sprintf("<a class='%s' title='%s' href='%s'>%s</a>",
-            'prev-page'.$disable_first,
-            esc_attr__('Go to the previous page', 'video_central'),
-            esc_url(add_query_arg('token', $this->prev_token, $current_url)),
-            '&lsaquo;'
-        );
-
         ?>
         <div class="tablenav-pages">
 
@@ -362,7 +355,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table
                 <?php
                     // prev page
                     printf("<a class='%s' title='%s' href='%s'>%s</a>",
-                        'prev-page'.$disable_first,
+                        'prev-page button ' . $disable_first,
                         esc_attr__('Go to the previous page', 'video_central'),
                         esc_url(add_query_arg('token', $this->prev_token, $current_url)),
                         '&lsaquo;'
@@ -370,7 +363,7 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table
 
                     // next page
                     printf("<a class='%s' title='%s' href='%s'>%s</a>",
-                        'prev-page'.$disable_last,
+                        'prev-page button ' . $disable_last,
                         esc_attr__('Go to the next page', 'video_central'),
                         esc_url(add_query_arg('token', $this->next_token, $current_url)),
                         '&rsaquo;'
@@ -380,6 +373,5 @@ class Video_Central_Youtube_Importer_ListTable extends WP_List_Table
         </div>
 
         <?php
-
     }
 }
