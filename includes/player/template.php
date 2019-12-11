@@ -121,7 +121,7 @@ _end_;
 
             if( $source ) {
 
-                $output = "<video class='video-js vjs-default-skin' >";
+                $output = "<video class='video-js vjs-default-skin' data-setup='".$jsonDataSetup."'>";
                     $output .= $source;
 
                 $output .= '</video>';
