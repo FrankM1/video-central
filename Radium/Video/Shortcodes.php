@@ -635,7 +635,7 @@ class Radium_Video_Shortcodes {
         //Output the <video> tag
         $videojs = <<<_end_
 
-        <video class="video-js vjs-default-skin{$class}" width="{$width}" height="{$height}"{$poster_attribute}{$controls_attribute}{$preload_attribute}{$autoplay_attribute}{$loop_attribute}{$muted_attribute} data-setup='{$jsonDataSetup}' preload="auto">
+        <video class="video-js vjs-default-skin{$class}" width="{$width}" height="{$height}"{$poster_attribute}{$controls_attribute}{$preload_attribute}{$autoplay_attribute}{$loop_attribute}{$muted_attribute} data-setup='{$jsonDataSetup}' controls>
             {$mp4_source}
             {$webm_source}
             {$ogg_source}{$track}
