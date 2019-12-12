@@ -256,13 +256,6 @@ function video_central_admin_get_settings_fields()
         'video_central_settings_vimeo_api' => array(
 
             // Api Key setting
-            '_video_central_vimeo_api_key' => array(
-                'title' => __('Vimeo API Key', 'video_central'),
-                'callback' => 'video_central_admin_setting_callback_vimeo_api_key',
-                'sanitize_callback' => 'sanitize_text_field',
-                'args' => array(),
-            ),
-
             '_video_central_vimeo_api_client_id' => array(
                 'title' => __('Vimeo API Client ID', 'video_central'),
                 'callback' => 'video_central_admin_setting_callback_vimeo_api_client_id',
@@ -277,9 +270,9 @@ function video_central_admin_get_settings_fields()
                 'args' => array(),
             ),
 
-            '_video_central_vimeo_api_daily_quota' => array(
-                'title' => __('Vimeo API Daily Quota', 'video_central'),
-                'callback' => 'video_central_admin_setting_callback_vimeo_api_daily_quota',
+            '_video_central_vimeo_api_access_token' => array(
+                'title' => __('Vimeo API Access Token', 'video_central'),
+                'callback' => 'video_central_admin_setting_callback_vimeo_api_access_token',
                 'sanitize_callback' => 'intval',
                 'args' => array(),
             ),
@@ -943,6 +936,59 @@ function video_central_admin_setting_callback_vimeo_api_section()
     To get your API key, visit APIs & auth and under Public API access create a new Server Key.<br />
     For more detailed informations please see this tutorial.', 'video_central');
     ?></p>
+
+<?php
+
+}
+
+/**
+ * Api key setting field.
+ *
+ * @since 1.0.0
+ */
+function video_central_admin_setting_callback_vimeo_api_access_token()
+{
+    ?>
+
+    <input name="_video_central_vimeo_api_access_token" id="_video_central_vimeo_api_access_token" type="checkbox" value="1" <?php checked(video_central_get_vimeo_api_access_token());
+    video_central_maybe_admin_setting_disabled('_video_central_allow_search');
+    ?> />
+    <label for="_video_central_vimeo_api_access_token"><?php esc_html_e('Display daily quota', 'video_central');
+    ?></label>
+
+<?php
+
+}
+
+/**
+ * Api key setting field.
+ *
+ * @since 1.0.0
+ */
+function video_central_admin_setting_callback_vimeo_api_client_id()
+{
+    ?>
+
+    <input name="_video_central_vimeo_api_client_id" id="_video_central_vimeo_api_client_id" type="text" class="regular-text code" value="<?php video_central_form_option('_video_central_vimeo_api_client_id', '', true);
+    ?>"<?php video_central_maybe_admin_setting_disabled('_video_central_vimeo_api_client_id');
+    ?> />
+
+<?php
+
+}
+
+/**
+ * Api key setting field.
+ *
+ * @since 1.0.0
+ */
+function video_central_admin_setting_callback_vimeo_api_client_secret()
+{
+    ?>
+
+    <input name="_video_central_vimeo_api_client_secret" id="_video_central_vimeo_api_client_secret" type="text" class="regular-text code" value="<?php video_central_form_option('_video_central_vimeo_api_client_secret', '', true);
+    ?>"<?php video_central_maybe_admin_setting_disabled('_video_central_vimeo_api_client_secret');
+    ?> />
 
 <?php
 
