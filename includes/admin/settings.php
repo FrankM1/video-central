@@ -273,7 +273,7 @@ function video_central_admin_get_settings_fields()
             '_video_central_vimeo_api_access_token' => array(
                 'title' => __('Vimeo API Access Token', 'video_central'),
                 'callback' => 'video_central_admin_setting_callback_vimeo_api_access_token',
-                'sanitize_callback' => 'intval',
+                'sanitize_callback' => 'sanitize_text_field',
                 'args' => array(),
             ),
 
@@ -950,11 +950,9 @@ function video_central_admin_setting_callback_vimeo_api_access_token()
 {
     ?>
 
-    <input name="_video_central_vimeo_api_access_token" id="_video_central_vimeo_api_access_token" type="checkbox" value="1" <?php checked(video_central_get_vimeo_api_access_token());
-    video_central_maybe_admin_setting_disabled('_video_central_allow_search');
+    <input name="_video_central_vimeo_api_access_token" id="_video_central_vimeo_api_access_token" type="text" class="regular-text code" value="<?php video_central_form_option('_video_central_vimeo_api_access_token', '', true);
+    ?>"<?php video_central_maybe_admin_setting_disabled('_video_central_vimeo_api_access_token');
     ?> />
-    <label for="_video_central_vimeo_api_access_token"><?php esc_html_e('Display daily quota', 'video_central');
-    ?></label>
 
 <?php
 
