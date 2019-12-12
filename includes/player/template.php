@@ -83,8 +83,7 @@ _end_;
             $file_ogg = wp_get_attachment_url($file_id_ogg);
             $file_flv = wp_get_attachment_url($file_id_flv);
 
-            $dataSetup['fluid']     = 'true';
-            $dataSetup['controls']  = 'true';
+            $dataSetup['controls'];
             $dataSetup['preload']   = 'auto';
             $dataSetup['poster']    = $poster;
             $dataSetup['width']     = 'auto';
@@ -117,7 +116,7 @@ _end_;
 
             }
 
-            $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
+            $jsonDataSetup = str_replace('\\/', '/', $dataSetup);
 
             if( $source ) {
 
