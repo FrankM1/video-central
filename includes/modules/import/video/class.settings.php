@@ -71,6 +71,12 @@ class Video_Central_Import_Video_Settings
             'page' => 'permalink',
         );
 
+        $sections['video_central_settings_vimeo_api'] = array(
+            'title' => __('Vimeo Api Settings', 'video_central'),
+            'callback' => 'video_central_admin_setting_callback_vimeo_api_section',
+            'page' => 'permalink',
+        );
+
         return $sections;
     }
 

@@ -928,6 +928,26 @@ function video_central_admin_setting_callback_randomize_related_videos()
 
 }
 
+/** Vimeo Api **************************************************************/
+
+/**
+ * Vimeo api settings section description for the settings page.
+ *
+ * @since 1.0.0
+ */
+function video_central_admin_setting_callback_vimeo_api_section()
+{
+    ?>
+    <p><?php _e('To get your Vimeo API key, visit this address: <a href="https://developer.vimeo.com/" target="_blank">https://developer.vimeo.com/</a>.<br />
+    After signing in, Create a new project and enable Vimeo Data API.
+    To get your API key, visit APIs & auth and under Public API access create a new Server Key.<br />
+    For more detailed informations please see this tutorial.', 'video_central');
+    ?></p>
+
+<?php
+
+}
+
 /** Youtube Api **************************************************************/
 
 /**
