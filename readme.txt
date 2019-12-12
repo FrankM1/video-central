@@ -70,6 +70,10 @@ Github Link <a href="https://github.com/FrankM1/video-central">https://github.co
 Youtube, Vimeo are supported. You can also upload and host your own mp4, webm and m4v files. We will be adding support for more providers soon.
 
 == Changelog ==
+= 1.4.0 =
+* New Vimeo API endpoints
+
+== Changelog ==
 = 1.3.1 =
 * Bugfix: video player controls
 
