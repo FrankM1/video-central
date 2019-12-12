@@ -71,7 +71,7 @@ Youtube, Vimeo are supported. You can also upload and host your own mp4, webm an
 
 == Changelog ==
 = 1.3.1 =
-* Bugfix: show video
+* Bugfix: video player controls
 
 == Changelog ==
 = 1.3.0 =
