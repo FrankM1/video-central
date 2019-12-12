@@ -120,7 +120,7 @@ _end_;
 
             if( $source ) {
 
-                $output = "<video class='video-js vjs-default-skin' controls muted preload='auto'>";
+                $output = "<video class='video-js vjs-default-skin' poster='".$poster."' controls muted preload='auto'>";
                     $output .= $source;
 
                 $output .= '</video>';
