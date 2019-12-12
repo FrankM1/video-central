@@ -83,7 +83,7 @@ _end_;
             $file_ogg = wp_get_attachment_url($file_id_ogg);
             $file_flv = wp_get_attachment_url($file_id_flv);
 
-            $dataSetup['controls'];
+            $dataSetup['controls']  = 'true';
             $dataSetup['preload']   = 'auto';
             $dataSetup['poster']    = $poster;
             $dataSetup['width']     = 'auto';
@@ -120,7 +120,7 @@ _end_;
 
             if( $source ) {
 
-                $output = "<video class='video-js vjs-default-skin' poster='".$poster."' controls muted preload='auto'>";
+                $output = "<video class='video-js vjs-default-skin' poster='".$poster."' ".$dataSetup[0]." muted preload='auto'>";
                     $output .= $source;
 
                 $output .= '</video>';
