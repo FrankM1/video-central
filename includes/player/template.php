@@ -116,11 +116,11 @@ _end_;
 
             }
 
-            $jsonDataSetup = str_replace('\\/', '/', $dataSetup);
+            $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
 
             if( $source ) {
 
-                $output = "<video class='video-js vjs-default-skin' ".$jsonDataSetup.">";
+                $output = "<video class='video-js vjs-default-skin' controls muted preload='auto'>";
                     $output .= $source;
 
                 $output .= '</video>';
