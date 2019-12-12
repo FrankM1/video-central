@@ -60,19 +60,22 @@ jQuery(document).ready(function() {
         if( currentType === 'self' ) {
 
     		radiumHideYoutubeVimeo();
+            jQuery( _video_central_upload ).hide();
 
         } else if ( currentType === 'vimeo') {
 
           	radiumHideSelf();
-            jQuery( _video_central_mp4 ).show();
+            jQuery( _video_central_upload ).show();
 
         } else if (currentType === 'youtube' ) {
 
             radiumHideSelf();
+            jQuery( _video_central_upload ).hide();
 
         } else if ( currentType === 'embed' ) {
 
           	radiumHideEmbed();
+            jQuery( _video_central_upload ).hide();
 
         } else {
            // radiumHideYoutubeVimeo();
