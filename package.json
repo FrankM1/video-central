@@ -24,9 +24,6 @@
       ]
     }
   },
-  "dependencies": {
-    "jquery": "^3.4.1"
-  },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
     "browserify": "^14.4.0",
