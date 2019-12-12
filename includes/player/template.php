@@ -87,6 +87,7 @@ _end_;
             $dataSetup['preload']   = 'auto';
             $dataSetup['poster']    = $poster;
             $dataSetup['width']     = '628';
+            $dataSetup['height']    = 'auto';
 
             if ($file_extension == 'flv') {
                 $video_url = get_post_meta($video_id, '_video_central_video_url', true);
