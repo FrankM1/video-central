@@ -7,6 +7,7 @@ jQuery(document).ready(function() {
         _video_thumbnail = '#video_thumbnail',
         _video_central_video_id = '._video_central_video_id',
         _video_central_webm = '._video_central_webm',
+        _video_central_upload = '._video_central_upload',
         _video_central_mp4 = '._video_central_mp4',
         _video_central_ogg = '._video_central_ogg',
         _video_central_flv = '._video_central_flv',
