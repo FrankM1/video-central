@@ -48,7 +48,7 @@ function video_central_video_register_meta_boxes( $meta_boxes ) {
                 'name'             => __('Upload Video', 'video_central'),
                 'id'               => '_video_central_upload',
                 'class'            => '_video_central_upload',
-                'type'             => 'upload',
+                'type'             => 'file_upload',
                 'max_file_uploads' => 1
             ),
 
