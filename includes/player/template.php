@@ -86,7 +86,7 @@ _end_;
             $dataSetup['controls']  = '';
             $dataSetup['preload']   = 'auto';
             $dataSetup['poster']    = $poster;
-            $dataSetup['width']     = '628';
+            $dataSetup['width']     = '100%';
             $dataSetup['height']    = 'auto';
 
             if ($file_extension == 'flv') {
