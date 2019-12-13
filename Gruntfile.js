@@ -190,9 +190,7 @@ module.exports = function(grunt) {
                 files: {
                     'assets/admin/js/import.min.js'         : 'assets/admin/js/source/import.js',
                     'assets/admin/js/meta.min.js'           : 'assets/admin/js/source/meta.js',
-                    'assets/admin/js/debug-bar.min.js'      : 'assets/admin/js/source/debug-bar.js',
-                    'assets/admin/js/mce-playlist-view.js'  : 'assets/admin/js/source/playlist/mce-playlist-view.js',
-                    'assets/admin/js/modal-playlist-view.js': 'assets/admin/js/source/playlist/modal-playlist-view.js',
+                    'assets/admin/js/debug-bar.min.js'      : 'assets/admin/js/source/debug-bar.js'
                 }
             }
 

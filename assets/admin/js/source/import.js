@@ -28,7 +28,7 @@
 
                 var current_position = $('.wizard-wrap').attr('data-step');
 
-                if (current_position == 3) {
+                if (current_position === 3) {
 
                     window.Video_Central_Import.Wizard_Step_Process(current_position - 1, 3);
 
