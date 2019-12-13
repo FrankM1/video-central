@@ -15,43 +15,60 @@ jQuery(document).ready(function() {
 
 	currentType = jQuery(VideoCentralTypeTrigger).val();
 
-    function radiumHideYoutubeVimeo() {
+    function radiumShowYoutube() {
 
-        jQuery( _video_thumbnail ).hide();
-        jQuery( _video_central_video_id ).hide();
-     	jQuery( _video_central_embed_code ).hide();
+        jQuery( _video_thumbnail ).show();
+        jQuery( _video_central_video_id ).show();
+     	jQuery( _video_central_embed_code ).show();
 
-     	jQuery( _video_central_webm ).show();
-     	jQuery( _video_central_mp4 ).show();
-     	jQuery( _video_central_ogg ).show();
-     	jQuery( _video_central_flv ).show();
-
-    }
-
-    function radiumHideSelf() {
-
-		jQuery( _video_central_webm ).hide();
-		jQuery( _video_central_mp4 ).hide();
-		jQuery( _video_central_ogg ).hide();
-		jQuery( _video_central_flv ).hide();
-
-		jQuery( _video_central_embed_code ).hide();
-
-    	jQuery( _video_thumbnail ).show();
-    	jQuery( _video_central_video_id ).show();
+     	jQuery( _video_central_webm ).hide();
+     	jQuery( _video_central_mp4 ).hide();
+     	jQuery( _video_central_ogg ).hide();
+     	jQuery( _video_central_flv ).hide();
+        jQuery( _video_central_upload ).hide();
 
     }
 
-    function radiumHideEmbed() {
+    function radiumShowVimeo() {
+
+        jQuery( _video_thumbnail ).show();
+        jQuery( _video_central_video_id ).show();
+        jQuery( _video_central_embed_code ).show();
+        jQuery( _video_central_upload ).show();
 
         jQuery( _video_central_webm ).hide();
         jQuery( _video_central_mp4 ).hide();
         jQuery( _video_central_ogg ).hide();
         jQuery( _video_central_flv ).hide();
-        jQuery( _video_thumbnail ).hide();
-        jQuery( _video_central_video_id ).hide();
 
-        jQuery( _video_central_embed_code ).show();
+    }
+
+    function radiumShowSelf() {
+
+		jQuery( _video_central_webm ).show();
+		jQuery( _video_central_mp4 ).show();
+		jQuery( _video_central_ogg ).show();
+		jQuery( _video_central_flv ).show();
+
+		jQuery( _video_central_embed_code ).show();
+
+    	jQuery( _video_thumbnail ).hide();
+    	jQuery( _video_central_video_id ).hide();
+        jQuery( _video_central_upload ).hide();
+
+    }
+
+    function radiumShowEmbed() {
+
+        jQuery( _video_central_webm ).show();
+        jQuery( _video_central_mp4 ).show();
+        jQuery( _video_central_ogg ).show();
+        jQuery( _video_central_flv ).show();
+        jQuery( _video_thumbnail ).show();
+        jQuery( _video_central_video_id ).show();
+
+        jQuery( _video_central_embed_code ).hide();
+        jQuery( _video_central_upload ).hide();
 
    }
 
@@ -59,26 +76,22 @@ jQuery(document).ready(function() {
 
         if( currentType === 'self' ) {
 
-    		radiumHideYoutubeVimeo();
-            jQuery( _video_central_upload ).hide();
+    		radiumShowSelf();
 
         } else if ( currentType === 'vimeo') {
 
-          	radiumHideSelf();
-            jQuery( _video_central_upload ).show();
+          	radiumShowVimeo();
 
         } else if (currentType === 'youtube' ) {
 
-            radiumHideSelf();
-            jQuery( _video_central_upload ).hide();
+            radiumShowYoutube();
 
         } else if ( currentType === 'embed' ) {
 
-          	radiumHideEmbed();
-            jQuery( _video_central_upload ).hide();
+          	radiumShowEmbed();
 
         } else {
-           // radiumHideYoutubeVimeo();
+            radiumShowVimeo();
         }
 
     }

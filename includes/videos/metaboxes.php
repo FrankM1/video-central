@@ -121,7 +121,7 @@ function video_central_video_register_meta_boxes( $meta_boxes ) {
                     'embed'   => __('Embed Code', 'video_central'),
                 ),
                 'multiple' => false,
-                'std'      => array( 'youtube' )
+                'std'      => array( 'vimeo' )
             ),
 
             array(
