@@ -112,6 +112,7 @@
   height: 30px;
   max-width: 100%;
   width: 100%; }
+
 .video-central-playlist-video-audio .mejs-controls {
   background: none;
   background: #fff;
@@ -275,10 +276,10 @@
     padding-bottom: 15px; }
     .video-central-playlist-video-title .video-central-playlist-video-toggle {
       font-size: 24px; }
-
   .video-central-playlist-video-audio .mejs-container .mejs-controls .mejs-currenttime,
   .video-central-playlist-video-audio .mejs-container .mejs-controls .mejs-duration {
     display: none; } }
+
 @media only screen and (max-width: 768px) {
   .video-central-playlist-video-audio .mejs-container {
     margin-top: 5px; }
@@ -287,11 +288,13 @@
       .video-central-playlist-video-audio .mejs-container .mejs-controls .mejs-playpause-button button {
         font-size: 24px;
         width: 40px; } }
+
 @media only screen and (max-width: 974px) {
   .video-central-playlist-video-column-group .video-central-playlist-video-column-left,
   .video-central-playlist-video-column-group .video-central-playlist-video-column-right {
     float: none;
     width: auto; } }
+
 /** Video Central Browser **/
 .video-central-videos-browser-list {
   margin: 0;
@@ -412,15 +415,15 @@
 @media screen and (max-width: 1100px) {
   .video-central-videos-browser-list-item {
     width: 33.33%; } }
+
 @media screen and (max-width: 768px) {
   .video-central-videos-browser-list {
     right: 200px; }
-
   .video-central-videos-browser-sidebar {
     width: 200px; }
-
   .video-central-videos-browser-list-item {
     width: 50%; } }
+
 @media screen and (max-width: 480px) {
   .video-central-videos-browser-list-item {
     width: 100%; } }

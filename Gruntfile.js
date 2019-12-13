@@ -6,6 +6,8 @@ module.exports = function(grunt) {
         replace: 'grunt-text-replace'
     });
 
+    const sass = require('node-sass');
+
     grunt.loadNpmTasks('grunt-wp-i18n');
 
     // require it at the top and pass in the grunt instance
@@ -33,6 +35,10 @@ module.exports = function(grunt) {
 
         // sass
         sass: {
+            options: {
+                implementation: sass,
+                sourceMap: true
+            },
             dist: {
                 files: {
                     'assets/admin/css/style.css': 'assets/admin/scss/style.scss',
@@ -162,7 +168,7 @@ module.exports = function(grunt) {
                     'templates/default/js/main.min.js': [
                         'templates/default/js/source/likes.js',
                         'templates/default/js/source/main.js'
-                    ]
+                    ],
                 }
             },
 
@@ -305,7 +311,8 @@ module.exports = function(grunt) {
     ] );
 
     // register task
-    grunt.registerTask( 'default', [ 
+    grunt.registerTask( 'default', [
+        'sass',
         'i18n',
         'styles',
         'scripts',

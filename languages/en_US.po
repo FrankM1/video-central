@@ -1,20 +1,32 @@
-# Copyright (C) 2014 Franklin M Gitonga
+# Copyright (C) 2019 Franklin Gitonga
 # This file is distributed under the GPL v2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Video Central 1.1.3\n"
+"Project-Id-Version: Video Central 1.4.0\n"
 "Report-Msgid-Bugs-To: frank@radiumthemes.com\n"
-"POT-Creation-Date: 2014-10-05 05:18:27+00:00\n"
+"POT-Creation-Date: 2019-12-13 09:46:36+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: RadiumThemes <http://radiumthemes.com>\n"
-"X-Generator: grunt-wp-i18n 0.4.8\n"
+"X-Generator: grunt-wp-i18n1.0.1\n"
 "Last-Translator: Franklin Gitonga <frank@radiumthemes.com>\n"
 
-#: Radium/MediaElements/Helper.php:188
+#: includes/modules/third-party/visual-composer/integrate.php:67
+msgid "2"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:68
+msgid "3"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:69
+msgid "4"
+msgstr ""
+
+#: Radium/MediaElements/Helper.php:186
 msgid ""
 "<span>Update Required</span>To play the audio you will need to either "
 "update your browser to a recent version or update your <a "
@@ -22,7 +34,7 @@ msgid ""
 "plugin</a>."
 msgstr ""
 
-#: Radium/MediaElements/Helper.php:364
+#: Radium/MediaElements/Helper.php:361
 msgid ""
 "<span>Update Required</span>To play the video you will need to either "
 "update your browser to a recent version or update your <a "
@@ -30,178 +42,37 @@ msgid ""
 "plugin</a>."
 msgstr ""
 
-#: Radium/Video/Metaboxes/Field/File.php:19
-msgid "You may only upload maximum %d file"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/File.php:20
-msgid "You may only upload maximum %d files"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/File.php:70
-msgid "Error: Cannot delete file"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/FileAdvanced.php:23
-msgid "Select Files"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/ImageAdvanced.php:23
-#: Radium/Video/Metaboxes/Field/Thumbnail.php:24
-msgid "Select Images"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field.php:190
-msgid "+"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field.php:207
-msgid "&#8211;"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Init.php:241
-msgid "Please correct the errors highlighted below and try again."
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:49
-msgid "Featured Video"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:57
-msgid "Video Description"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:64
-msgid "Video Url (.mp4)"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:73
-msgid "Video Url (.webm)"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:82
-msgid "Video Url (.ogg)"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:91
-msgid "Custom Thumbnail"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:92
-msgid "This will override the auto generated video thumbnail"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:100 Radium/Video/Posttype.php:360
-#: includes/modules/import/vimeo/class.list-table.php:142
-#: includes/modules/import/youtube/class.list-table.php:142
-msgid "Video ID"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:101
-msgid ""
-"Get video id from the url eg "
-"http://youtube.com/watch?v=<strong>123456</strong>"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:108
-msgid "Video Embed Code"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:109
-msgid "Add an embed code here."
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:116
-msgid "Video Source"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:123
-msgid "Self Hosted"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:124
-msgid "Embed Code"
-msgstr ""
-
-#: Radium/Video/Metaboxes.php:134
-msgid "Profile Settings"
-msgstr ""
-
-#: Radium/Video/Posttype.php:104
-msgid "Radium Videos"
-msgstr ""
-
-#: Radium/Video/Posttype.php:238
-msgid "Video Item"
-msgid_plural "Video Items"
-msgstr[0] ""
-msgstr[1] ""
-
-#: Radium/Video/Posttype.php:249
-msgid "Video Item Pending"
-msgid_plural "Video Items Pending"
-msgstr[0] ""
-msgstr[1] ""
-
-#: Radium/Video/Posttype.php:267
-msgid "Sort Videos"
-msgstr ""
-
-#: Radium/Video/Posttype.php:267
-msgid "Sort"
-msgstr ""
-
-#: Radium/Video/Posttype.php:283
-msgid "Sort Video"
-msgstr ""
-
-#: Radium/Video/Posttype.php:285
-msgid ""
-"Click, drag, re-order & repeat as necessary. The item at the top of the "
-"list will display first."
-msgstr ""
-
-#: Radium/Video/Posttype.php:361
-#: includes/modules/import/vimeo/class.list-table.php:144
-#: includes/modules/import/youtube/class.list-table.php:144
-msgid "Duration"
-msgstr ""
-
-#: Radium/Video/Posttype.php:362 includes/common/template.php:689
-#: includes/modules/import/vimeo/class.list-table.php:146
-#: includes/modules/import/youtube/class.list-table.php:146
-msgid "Views"
-msgstr ""
-
-#: Radium/Video/Posttype.php:378
-msgid "Thumbnail"
-msgstr ""
-
-#: Radium/Video/Shortcodes.php:341 includes/widgets/widget-categories.php:50
+#: Radium/Video/Shortcodes.php:339 includes/widgets/widget-categories.php:53
 msgid "Select Category"
 msgstr ""
 
-#: Radium/Video/Widget.php:24
+#: Radium/Video/Shortcodes.php:954
+msgid "Playlist feature not available"
+msgstr ""
+
+#: Radium/Video/Widget.php:22
 msgid "A widget that displays your recent videos."
 msgstr ""
 
-#: Radium/Video/Widget.php:80 Radium/Video/Widget.php:100
+#: Radium/Video/Widget.php:81 Radium/Video/Widget.php:106
 msgid "Permanent Link to %s"
 msgstr ""
 
-#: Radium/Video/Widget.php:153 includes/widgets/widget-categories.php:109
-#: includes/widgets/widget-featured.php:173
-#: includes/widgets/widget-popular.php:171
-#: includes/widgets/widget-recent.php:171
-#: includes/widgets/widget-search.php:108 includes/widgets/widget-tags.php:71
+#: Radium/Video/Widget.php:165
+#: includes/playlist/views/templates-playlist.php:27
+#: includes/widgets/widget-categories.php:118
+#: includes/widgets/widget-featured.php:199
+#: includes/widgets/widget-popular.php:197
+#: includes/widgets/widget-recent.php:197
+#: includes/widgets/widget-search.php:117 includes/widgets/widget-tags.php:75
 msgid "Title:"
 msgstr ""
 
-#: Radium/Video/Widget.php:158
+#: Radium/Video/Widget.php:174
 msgid "Number of Posts to Display:"
 msgstr ""
 
-#: Radium/Video/Widget.php:163
+#: Radium/Video/Widget.php:183
 msgid "Description:"
 msgstr ""
 
@@ -209,718 +80,830 @@ msgstr ""
 msgid "Video Central"
 msgstr ""
 
-#: includes/admin/admin.php:211 includes/admin/admin.php:212
+#: includes/admin/admin.php:212 includes/admin/admin.php:213
 msgid "Welcome to Video Central"
 msgstr ""
 
-#: includes/admin/admin.php:226 includes/admin/admin.php:227
-#: includes/admin/admin.php:246
+#: includes/admin/admin.php:221 includes/admin/admin.php:222
+msgid "Video Central Credits"
+msgstr ""
+
+#: includes/admin/admin.php:236 includes/admin/admin.php:237
+#: includes/admin/admin.php:259
 msgid "Update Videos"
 msgstr ""
 
-#: includes/admin/admin.php:391
+#: includes/admin/admin.php:421
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/admin.php:396
+#: includes/admin/admin.php:426
 msgid "About"
 msgstr ""
 
-#: includes/admin/admin.php:428
+#: includes/admin/admin.php:458
 msgid "About Video Central"
 msgstr ""
 
-#: includes/admin/admin.php:585 includes/admin/admin.php:609
+#: includes/admin/admin.php:622 includes/admin/admin.php:661
 msgid "%s - %s"
 msgstr ""
 
-#: includes/admin/admin.php:627
+#: includes/admin/admin.php:679 includes/admin/admin.php:721
 msgid "Welcome to Video Central %s"
 msgstr ""
 
-#: includes/admin/admin.php:628
+#: includes/admin/admin.php:680 includes/admin/admin.php:722
 msgid "Thank you for updating."
 msgstr ""
 
-#: includes/admin/admin.php:632
+#: includes/admin/admin.php:684 includes/admin/admin.php:726
 msgid "What&#8217;s New"
 msgstr ""
 
-#: includes/admin/admin.php:634
+#: includes/admin/admin.php:687 includes/admin/admin.php:729
 msgid "Credits"
 msgstr ""
 
-#: includes/admin/admin.php:639
-msgid "Video Subscriptions"
+#: includes/admin/admin.php:692
+msgid ""
+"Video central has been growing and improving with time to become the best "
+"video managerment plugin for WordPress. Below is a list of the latest "
+"changes in version "
 msgstr ""
 
-#: includes/admin/admin.php:647
-msgid "Converters"
+#: includes/admin/admin.php:693
+msgid "Changelog"
 msgstr ""
 
-#: includes/admin/admin.php:651
-msgid "Theme Compatibility"
+#: includes/admin/admin.php:696
+msgid "Added new playlist manager"
 msgstr ""
 
-#: includes/admin/admin.php:652
-msgid "Better handling of styles and scripts in the template stack."
+#: includes/admin/admin.php:697
+msgid "Wordpress 4.9 compatibility"
 msgstr ""
 
-#: includes/admin/admin.php:658
+#: includes/admin/admin.php:698
+msgid "Removed get_currentuserinfo()"
+msgstr ""
+
+#: includes/admin/admin.php:704 includes/admin/admin.php:741
 msgid "Go to video Settings"
 msgstr ""
 
-#: includes/admin/settings.php:26
-msgid "Video Central User Settings"
+#: includes/admin/admin.php:734
+msgid "Video central was created and is maintained by Franklin Gitonga."
+msgstr ""
+
+#: includes/admin/admin.php:735
+msgid "Twitter: "
+msgstr ""
+
+#: includes/admin/admin.php:736
+msgid "Website: "
+msgstr ""
+
+#: includes/admin/admin.php:737
+msgid "Plugin Demo: "
+msgstr ""
+
+#: includes/admin/settings.php:21
+msgid "User Settings"
+msgstr ""
+
+#: includes/admin/settings.php:27
+msgid "General"
 msgstr ""
 
 #: includes/admin/settings.php:32
-msgid "Video Features"
+msgid "Theme Packages"
 msgstr ""
 
-#: includes/admin/settings.php:37
-msgid "Video Theme Packages"
+#: includes/admin/settings.php:38
+msgid "Slugs"
 msgstr ""
 
-#: includes/admin/settings.php:42
-msgid "Videos Per Page"
+#: includes/admin/settings.php:44
+msgid "Single Video Page Settings"
 msgstr ""
 
-#: includes/admin/settings.php:48
-msgid "Videos Root Slug"
-msgstr ""
-
-#: includes/admin/settings.php:53
-msgid "Single Video Slugs"
-msgstr ""
-
-#: includes/admin/settings.php:83
+#: includes/admin/settings.php:75
 msgid "Video categories"
 msgstr ""
 
-#: includes/admin/settings.php:91
+#: includes/admin/settings.php:83
 msgid "Video tags"
 msgstr ""
 
-#: includes/admin/settings.php:99 includes/admin/settings.php:218
-#: includes/search/template.php:195 templates/default/videos/form-search.php:16
+#: includes/admin/settings.php:91 includes/admin/settings.php:190
+#: includes/search/template.php:201 templates/default/videos/form-search.php:16
 msgid "Search"
 msgstr ""
 
-#: includes/admin/settings.php:107
+#: includes/admin/settings.php:99
 msgid "Videos slider should show on root"
 msgstr ""
 
-#: includes/admin/settings.php:115 includes/common/template.php:697
-msgid "Comments"
-msgstr ""
-
-#: includes/admin/settings.php:129
-msgid "Current Package"
-msgstr ""
-
-#: includes/admin/settings.php:142
-#: includes/modules/class.woosidebars.integration.php:129
-#: includes/videos/template.php:49 includes/videos/template.php:50
+#: includes/admin/settings.php:107
+#: includes/modules/third-party/class.woosidebars.integration.php:130
+#: includes/playlist/class.editplaylist.php:173 includes/videos/template.php:45
+#: includes/videos/template.php:46
 msgid "Videos"
 msgstr ""
 
-#: includes/admin/settings.php:156
+#: includes/admin/settings.php:121
+msgid "Current Package"
+msgstr ""
+
+#: includes/admin/settings.php:134
 msgid "Videos Root"
 msgstr ""
 
-#: includes/admin/settings.php:164
+#: includes/admin/settings.php:142
 msgid "Videos Prefix"
 msgstr ""
 
-#: includes/admin/settings.php:172
+#: includes/admin/settings.php:150
 msgid "Videos root should show"
 msgstr ""
 
-#: includes/admin/settings.php:186 includes/videos/template.php:51
+#: includes/admin/settings.php:158
+#: includes/modules/third-party/visual-composer/integrate.php:83
+#: includes/videos/template.php:47
 msgid "Video"
 msgstr ""
 
-#: includes/admin/settings.php:194 includes/videos/template.php:106
+#: includes/admin/settings.php:166
+#: includes/modules/third-party/visual-composer/integrate.php:245
+#: includes/videos/template.php:102
 msgid "Video Tag"
 msgstr ""
 
-#: includes/admin/settings.php:202 includes/videos/template.php:78
+#: includes/admin/settings.php:174
+#: includes/modules/third-party/visual-composer/integrate.php:184
+#: includes/videos/template.php:74
 msgid "Video Category"
 msgstr ""
 
-#: includes/admin/settings.php:210
+#: includes/admin/settings.php:182
 msgid "Video View"
 msgstr ""
 
-#: includes/admin/settings.php:231
-msgid "User Base"
-msgstr ""
-
-#: includes/admin/settings.php:271
-msgid "Setting time limits and other user posting capabilities"
-msgstr ""
-
-#: includes/admin/settings.php:287
-msgid "Video Central features that can be toggled on and off"
-msgstr ""
-
-#: includes/admin/settings.php:303
-msgid "Allow video tags"
-msgstr ""
-
-#: includes/admin/settings.php:319
-msgid "Allow video categories"
-msgstr ""
-
-#: includes/admin/settings.php:335
-msgid "Allow video wide search"
-msgstr ""
-
-#: includes/admin/settings.php:351
+#: includes/admin/settings.php:203
 msgid "Allow video comments"
 msgstr ""
 
-#: includes/admin/settings.php:364
+#: includes/admin/settings.php:210
+msgid "Allow video likes"
+msgstr ""
+
+#: includes/admin/settings.php:217 includes/admin/settings.php:814
+msgid "Allow video meta"
+msgstr ""
+
+#: includes/admin/settings.php:224
+msgid "Allow video social links"
+msgstr ""
+
+#: includes/admin/settings.php:232
+msgid "Display Related Videos"
+msgstr ""
+
+#: includes/admin/settings.php:239
+msgid "Related Videos Count"
+msgstr ""
+
+#: includes/admin/settings.php:246 includes/admin/settings.php:917
+msgid "Randomize related videos"
+msgstr ""
+
+#: includes/admin/settings.php:260
+msgid "Vimeo API Client ID"
+msgstr ""
+
+#: includes/admin/settings.php:267
+msgid "Vimeo API Client Secret"
+msgstr ""
+
+#: includes/admin/settings.php:274
+msgid "Vimeo API Access Token"
+msgstr ""
+
+#: includes/admin/settings.php:289
+msgid "Youtube API Key"
+msgstr ""
+
+#: includes/admin/settings.php:296
+msgid "Youtube API Client ID"
+msgstr ""
+
+#: includes/admin/settings.php:303
+msgid "Youtube API Client Secret"
+msgstr ""
+
+#: includes/admin/settings.php:310
+msgid "Youtube API Daily Quota"
+msgstr ""
+
+#: includes/admin/settings.php:324
+msgid "User Base"
+msgstr ""
+
+#: includes/admin/settings.php:369
+msgid "Setting time limits and other user posting capabilities"
+msgstr ""
+
+#: includes/admin/settings.php:387
+msgid "Video Central features that can be toggled on and off"
+msgstr ""
+
+#: includes/admin/settings.php:408
+msgid "Allow video tags"
+msgstr ""
+
+#: includes/admin/settings.php:429
+msgid "Allow video categories"
+msgstr ""
+
+#: includes/admin/settings.php:450
+msgid "Allow video search"
+msgstr ""
+
+#: includes/admin/settings.php:466
 msgid "How your video content is displayed within your existing theme."
 msgstr ""
 
-#: includes/admin/settings.php:388
+#: includes/admin/settings.php:493
 msgid "%1$s - %2$s"
 msgstr ""
 
-#: includes/admin/settings.php:394
+#: includes/admin/settings.php:500
 msgid "will serve all Video Central templates"
 msgstr ""
 
-#: includes/admin/settings.php:398
+#: includes/admin/settings.php:505
 msgid "No template packages available."
 msgstr ""
 
-#: includes/admin/settings.php:414
-msgid "How many videos to show per page"
-msgstr ""
-
-#: includes/admin/settings.php:430
+#: includes/admin/settings.php:525
 msgid "per page"
 msgstr ""
 
-#: includes/admin/settings.php:448
+#: includes/admin/settings.php:548
 msgid ""
 "Customize your videos root. Create a WordPress Page and use Shortcodes for "
 "more flexibility."
 msgstr ""
 
-#: includes/admin/settings.php:481
+#: includes/admin/settings.php:589
 msgid "Prefix all video content with the Video Root slug (Recommended)"
 msgstr ""
 
-#: includes/admin/settings.php:497
+#: includes/admin/settings.php:610
 msgid "Display featured video slider"
 msgstr ""
 
-#: includes/admin/settings.php:517
+#: includes/admin/settings.php:633
+#: includes/modules/third-party/visual-composer/integrate.php:100
 msgid "Video Index"
 msgstr ""
 
-#: includes/admin/settings.php:520
+#: includes/admin/settings.php:636
 msgid "Latest Videos"
 msgstr ""
 
-#: includes/admin/settings.php:551
-msgid "Custom slugs for single videos, categories, tags, views, and search."
-msgstr ""
-
-#: includes/admin/settings.php:663
-msgid "Video Central Settings"
-msgstr ""
-
-#: includes/admin/settings.php:672
-msgid "Save Changes"
-msgstr ""
-
-#: includes/admin/settings.php:771
-msgid "Posts"
-msgstr ""
-
 #: includes/admin/settings.php:772
-msgid "Pages"
-msgstr ""
-
-#: includes/admin/settings.php:773
-msgid "Menus"
-msgstr ""
-
-#: includes/admin/settings.php:776
-msgid "Tag base"
-msgstr ""
-
-#: includes/admin/settings.php:779
-msgid "Category base"
-msgstr ""
-
-#: includes/admin/settings.php:784
-msgid "Videos base"
-msgstr ""
-
-#: includes/admin/settings.php:787
-msgid "Video slug"
-msgstr ""
-
-#: includes/admin/settings.php:790
-msgid "User base"
+msgid "Settings for the single video page"
 msgstr ""
 
 #: includes/admin/settings.php:793
+msgid "Allow Comments videos"
+msgstr ""
+
+#: includes/admin/settings.php:835
+msgid "Allow likes on video"
+msgstr ""
+
+#: includes/admin/settings.php:856
+msgid "Allow social links"
+msgstr ""
+
+#: includes/admin/settings.php:877
+msgid "Display related videos"
+msgstr ""
+
+#: includes/admin/settings.php:896
+msgid "items"
+msgstr ""
+
+#: includes/admin/settings.php:934
+msgid ""
+"To get your Vimeo API key, visit this address: <a "
+"href=\"https://developer.vimeo.com/\" "
+"target=\"_blank\">https://developer.vimeo.com/</a>.<br />\n"
+"    After signing in, Create a new project and enable Vimeo Data API.\n"
+"    To get your API key, visit APIs & auth and under Public API access "
+"create a new Access Token.<br />\n"
+"    For more detailed informations please see this tutorial."
+msgstr ""
+
+#: includes/admin/settings.php:1005
+msgid ""
+"To get your YouTube API key, visit this address: <a "
+"href=\"https://code.google.com/apis/console\" "
+"target=\"_blank\">https://code.google.com/apis/console</a>.<br />\n"
+"    After signing in, Create a new project and enable YouTube Data API.\n"
+"    To get your API key, visit APIs & auth and under Public API access "
+"create a new Server Key.<br />\n"
+"    For more detailed informations please see this tutorial."
+msgstr ""
+
+#: includes/admin/settings.php:1044
+msgid "Display daily quota"
+msgstr ""
+
+#: includes/admin/settings.php:1101
+msgid "Video Central Settings"
+msgstr ""
+
+#: includes/admin/settings.php:1112
+msgid "Save Changes"
+msgstr ""
+
+#: includes/admin/settings.php:1217
+msgid "Posts"
+msgstr ""
+
+#: includes/admin/settings.php:1218
+msgid "Pages"
+msgstr ""
+
+#: includes/admin/settings.php:1219
+msgid "Menus"
+msgstr ""
+
+#: includes/admin/settings.php:1222
+msgid "Tag base"
+msgstr ""
+
+#: includes/admin/settings.php:1225
+msgid "Category base"
+msgstr ""
+
+#: includes/admin/settings.php:1230
+msgid "Videos base"
+msgstr ""
+
+#: includes/admin/settings.php:1233
+msgid "Video slug"
+msgstr ""
+
+#: includes/admin/settings.php:1236
+msgid "User base"
+msgstr ""
+
+#: includes/admin/settings.php:1239
 msgid "View base"
 msgstr ""
 
-#: includes/admin/settings.php:796
+#: includes/admin/settings.php:1242
 msgid "Video tag slug"
 msgstr ""
 
-#: includes/admin/settings.php:799
+#: includes/admin/settings.php:1245
 msgid "Video category slug"
 msgstr ""
 
-#: includes/admin/settings.php:816
+#: includes/admin/settings.php:1262
 msgid "Possible %1$s conflict: %2$s"
 msgstr ""
 
-#: includes/common/functions.php:121
+#: includes/common/functions.php:120
 msgid "sometime"
 msgstr ""
 
-#: includes/common/functions.php:122
+#: includes/common/functions.php:121
 msgid "right now"
 msgstr ""
 
-#: includes/common/functions.php:123
+#: includes/common/functions.php:122
 msgid "%s ago"
 msgstr ""
 
-#: includes/common/functions.php:127
+#: includes/common/functions.php:126
 msgid "year"
 msgstr ""
 
-#: includes/common/functions.php:127
+#: includes/common/functions.php:126
 msgid "years"
 msgstr ""
 
-#: includes/common/functions.php:128
+#: includes/common/functions.php:127
 msgid "month"
 msgstr ""
 
-#: includes/common/functions.php:128
+#: includes/common/functions.php:127
 msgid "months"
 msgstr ""
 
-#: includes/common/functions.php:129
+#: includes/common/functions.php:128
 msgid "week"
 msgstr ""
 
-#: includes/common/functions.php:129
+#: includes/common/functions.php:128
 msgid "weeks"
 msgstr ""
 
-#: includes/common/functions.php:130
+#: includes/common/functions.php:129
 msgid "day"
 msgstr ""
 
-#: includes/common/functions.php:130
+#: includes/common/functions.php:129
 msgid "days"
 msgstr ""
 
-#: includes/common/functions.php:131
+#: includes/common/functions.php:130
 msgid "hour"
 msgstr ""
 
-#: includes/common/functions.php:131
+#: includes/common/functions.php:130
 msgid "hours"
 msgstr ""
 
-#: includes/common/functions.php:132
+#: includes/common/functions.php:131
 msgid "minute"
 msgstr ""
 
-#: includes/common/functions.php:132
+#: includes/common/functions.php:131
 msgid "minutes"
 msgstr ""
 
-#: includes/common/functions.php:133
+#: includes/common/functions.php:132
 msgid "second"
 msgstr ""
 
-#: includes/common/functions.php:133
+#: includes/common/functions.php:132
 msgid "seconds"
 msgstr ""
 
-#: includes/common/functions.php:408
+#: includes/common/functions.php:416
 msgid ""
 "Conditional query tags do not work before the query is run. Before then, "
 "they always return false."
 msgstr ""
 
-#: includes/common/template.php:681
+#: includes/common/template.php:749
+#: includes/modules/import/youtube/class.list-table.php:202
 msgid "Date"
 msgstr ""
 
-#: includes/common/template.php:682
+#: includes/common/template.php:750
 msgid "Sort by Date"
 msgstr ""
 
-#: includes/common/template.php:685
-#: includes/modules/import/vimeo/class.list-table.php:140
-#: includes/modules/import/youtube/class.list-table.php:140
+#: includes/common/template.php:753
+#: includes/modules/import/vimeo/class.list-table.php:149
+#: includes/modules/import/youtube/class.list-table.php:196
+#: includes/modules/third-party/visual-composer/integrate.php:371
+#: includes/playlist/views/templates-playlist.php:28
 msgid "Title"
 msgstr ""
 
-#: includes/common/template.php:686
+#: includes/common/template.php:754
 msgid "Sort by Title"
 msgstr ""
 
-#: includes/common/template.php:690
+#: includes/common/template.php:757
+#: includes/modules/import/vimeo/class.list-table.php:155
+#: includes/modules/import/youtube/class.list-table.php:201
+#: includes/videos/class.posttype.php:370
+msgid "Views"
+msgstr ""
+
+#: includes/common/template.php:758
 msgid "Sort by Views"
 msgstr ""
 
-#: includes/common/template.php:693
+#: includes/common/template.php:761
 msgid "Likes"
 msgstr ""
 
-#: includes/common/template.php:694
+#: includes/common/template.php:762
 msgid "Sort by Likes"
 msgstr ""
 
-#: includes/common/template.php:698
+#: includes/common/template.php:765
+msgid "Comments"
+msgstr ""
+
+#: includes/common/template.php:766
 msgid "Sort by Comments"
 msgstr ""
 
-#: includes/common/template.php:701
+#: includes/common/template.php:769
 msgid "Random"
 msgstr ""
 
-#: includes/common/template.php:702
+#: includes/common/template.php:770
 msgid "Sort Randomly"
 msgstr ""
 
-#: includes/common/template.php:732
+#: includes/common/template.php:799
 msgid "Grid View with Mini Thumbnail"
 msgstr ""
 
-#: includes/common/template.php:733
+#: includes/common/template.php:800
 msgid "Grid View with Small Thumbnail"
 msgstr ""
 
-#: includes/common/template.php:734
+#: includes/common/template.php:801
 msgid "Grid View with Medium Thumbnail"
 msgstr ""
 
-#: includes/common/template.php:841
+#: includes/common/template.php:899
 msgid "Videos: %s"
 msgstr ""
 
-#: includes/core/capabilities.php:374
+#: includes/core/capabilities.php:381
 msgid "Keymaster"
 msgstr ""
 
-#: includes/core/capabilities.php:380
+#: includes/core/capabilities.php:387
 msgid "Moderator"
 msgstr ""
 
-#: includes/core/capabilities.php:386
+#: includes/core/capabilities.php:393
 msgid "Participant"
 msgstr ""
 
-#: includes/core/capabilities.php:392
+#: includes/core/capabilities.php:399
 msgid "Spectator"
 msgstr ""
 
-#: includes/core/capabilities.php:398
+#: includes/core/capabilities.php:405
 msgid "Blocked"
 msgstr ""
 
-#: includes/modules/class.woosidebars.integration.php:114
-msgid "Video Page"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:115
-msgid "The Video Central \"Videos\" landing page"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:119
-#: includes/videos/template.php:77 includes/videos/template.php:91
-msgid "Video Categories"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:120
-msgid "All video categories"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:124
-#: includes/videos/template.php:105 includes/videos/template.php:119
-msgid "Video Tags"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:125
-msgid "All Video tags"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:130
-#: includes/videos/template.php:52
-msgid "All Videos"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:134
-msgid "Account Pages"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:135
-msgid "The Videos \"Account\" pages"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:140
-msgid "Videos in the \"%s\" category"
-msgstr ""
-
-#: includes/modules/class.woosidebars.integration.php:141
-msgid "Videos tagged \"%s\""
-msgstr ""
-
-#: includes/modules/import/thumbnail.php:349
+#: includes/modules/import/thumbnail.php:330
 msgid "Unsupported MIME type:"
 msgstr ""
 
-#: includes/modules/import/thumbnail.php:364
+#: includes/modules/import/thumbnail.php:343
 msgid "Error uploading image data:"
 msgstr ""
 
-#: includes/modules/import/thumbnail.php:445
+#: includes/modules/import/thumbnail.php:413
 msgid "No video thumbnail for this post."
 msgstr ""
 
-#: includes/modules/import/video/class.settings.php:66
-msgid "Video Central Import Settings"
-msgstr ""
-
-#: includes/modules/import/video/class.settings.php:83
-msgid "Settings for importing videos form youtube and other sources."
-msgstr ""
-
-#: includes/modules/import/video/class.settings.php:100
-msgid "Allow Video Imports"
-msgstr ""
-
-#: includes/modules/import/video/class.settings.php:119
-msgid "Allow video imports"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:40
-msgid "Import videos"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:67
-msgid "Video Import Wizard"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:74
-msgid "Select Source"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:78
-#: includes/modules/import/video/class.wizard.php:109
-msgid "Set Parameters"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:82
-msgid "Select Videos & Import"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:86
-#: includes/modules/import/video/class.wizard.php:139
-msgid "Done"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:102
-msgid "Start"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:111
-msgid "Enter the search criteria and submit."
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:124
-msgid "Select Videos to Import"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:133
-msgid "Go Back"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:142
-msgid "Start Over"
-msgstr ""
-
-#: includes/modules/import/video/class.wizard.php:143
-msgid "Go to Videos List"
-msgstr ""
-
-#: includes/modules/import/vimeo/class.importer.php:77
-#: includes/modules/import/youtube/class.importer.php:80
+#: includes/modules/import/video/class.importer.php:74
+#: includes/modules/import/vimeo/class.importer.php:71
 msgid "Video updated <a href=\"%s\">See video</a>"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:78
-#: includes/modules/import/youtube/class.importer.php:81
+#: includes/modules/import/video/class.importer.php:75
+#: includes/modules/import/vimeo/class.importer.php:72
 msgid "Custom field updated."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:79
-#: includes/modules/import/youtube/class.importer.php:82
+#: includes/modules/import/video/class.importer.php:76
+#: includes/modules/import/vimeo/class.importer.php:73
 msgid "Custom field deleted."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:80
-#: includes/modules/import/youtube/class.importer.php:83
+#: includes/modules/import/video/class.importer.php:77
+#: includes/modules/import/vimeo/class.importer.php:74
 msgid "Video updated."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:82
-#: includes/modules/import/youtube/class.importer.php:85
+#: includes/modules/import/video/class.importer.php:79
+#: includes/modules/import/vimeo/class.importer.php:76
 #. translators: %s: date and time of the revision
 msgid "Video restored to version %s"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:83
-#: includes/modules/import/youtube/class.importer.php:86
+#: includes/modules/import/video/class.importer.php:80
+#: includes/modules/import/vimeo/class.importer.php:77
 msgid "Video published. <a href=\"%s\">See video</a>"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:84
-#: includes/modules/import/youtube/class.importer.php:87
+#: includes/modules/import/video/class.importer.php:81
+#: includes/modules/import/vimeo/class.importer.php:78
 msgid "Video saved."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:85
-#: includes/modules/import/youtube/class.importer.php:88
+#: includes/modules/import/video/class.importer.php:82
+#: includes/modules/import/vimeo/class.importer.php:79
 msgid "Video saved. <a target=\"_blank\" href=\"%s\">See video</a>"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:86
-#: includes/modules/import/youtube/class.importer.php:89
+#: includes/modules/import/video/class.importer.php:83
+#: includes/modules/import/vimeo/class.importer.php:80
 msgid ""
 "Video will be published at: <strong>%1$s</strong>. <a target=\"_blank\" "
 "href=\"%2$s\">See video</a>"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:89
-#: includes/modules/import/youtube/class.importer.php:92
+#: includes/modules/import/video/class.importer.php:86
+#: includes/modules/import/vimeo/class.importer.php:83
 #. translators: Publish box date format, see http:php.net/date
 msgid "Video draft saved. <a target=\"_blank\" href=\"%s\">See video</a>"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:91
-#: includes/modules/import/youtube/class.importer.php:94
+#: includes/modules/import/video/class.importer.php:88
+#: includes/modules/import/vimeo/class.importer.php:85
 msgid "Please select a source"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:341
-#: includes/modules/import/youtube/class.importer.php:344
+#: includes/modules/import/video/class.importer.php:421
+#: includes/modules/import/vimeo/class.importer.php:303
 msgid "Out of %d videos, %d were successfully imported and %d were skipped."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:349
-#: includes/modules/import/youtube/class.importer.php:352
+#: includes/modules/import/video/class.importer.php:427
+#: includes/modules/import/vimeo/class.importer.php:309
 msgid ""
 "No videos selected for importing. Please select some videos by checking the "
 "checkboxes next to video title."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:355
-#: includes/modules/import/youtube/class.importer.php:358
+#: includes/modules/import/video/class.importer.php:430
+#: includes/modules/import/vimeo/class.importer.php:312
 msgid "Please select an action."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.importer.php:361
-#: includes/modules/import/vimeo/class.importer.php:367
-#: includes/modules/import/youtube/class.importer.php:364
-#: includes/modules/import/youtube/class.importer.php:370
+#: includes/modules/import/video/class.importer.php:433
+#: includes/modules/import/video/class.importer.php:436
+#: includes/modules/import/vimeo/class.importer.php:315
+#: includes/modules/import/vimeo/class.importer.php:318
 msgid "Cheatin' uh?"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:35
-#: includes/modules/import/youtube/class.list-table.php:35
+#: includes/modules/import/video/class.settings.php:63
+msgid "Import Settings"
+msgstr ""
+
+#: includes/modules/import/video/class.settings.php:69
+msgid "Youtube Api Settings"
+msgstr ""
+
+#: includes/modules/import/video/class.settings.php:75
+msgid "Vimeo Api Settings"
+msgstr ""
+
+#: includes/modules/import/video/class.settings.php:90
+msgid "Settings for importing videos form youtube and other sources."
+msgstr ""
+
+#: includes/modules/import/video/class.settings.php:109
+msgid "Allow Video Imports"
+msgstr ""
+
+#: includes/modules/import/video/class.settings.php:117
+#: includes/modules/import/video/class.settings.php:156
+msgid "Import Videos as posts"
+msgstr ""
+
+#: includes/modules/import/video/class.settings.php:139
+msgid "Allow video imports"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:38
+msgid "Import videos"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:63
+msgid "Video Import Wizard"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:77
+msgid "Select Source"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:88
+#: includes/modules/import/video/class.wizard.php:136
+msgid "Set Parameters"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:99
+msgid "Select Videos & Import"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:107
+#: includes/modules/import/video/class.wizard.php:172
+msgid "Done"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:128
+msgid "Start"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:139
+msgid "Enter the search criteria and submit."
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:154
+msgid "Select Videos to Import"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:165
+msgid "Go Back"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:177
+msgid "Start Over"
+msgstr ""
+
+#: includes/modules/import/video/class.wizard.php:180
+msgid "Go to Videos List"
+msgstr ""
+
+#: includes/modules/import/vimeo/class.list-table.php:32
+#: includes/modules/import/youtube/class.list-table.php:79
 msgid "Column <em>%s</em> was not found."
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:66
+#: includes/modules/import/vimeo/class.list-table.php:63
 msgid "View on Vimeo"
 msgstr ""
 
 #: includes/modules/import/vimeo/class.list-table.php:97
-#: includes/modules/import/youtube/class.list-table.php:97
+#: includes/modules/import/youtube/class.list-table.php:144
 msgid " (%d votes)"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:141
-#: includes/modules/import/youtube/class.list-table.php:141
+#: includes/modules/import/vimeo/class.list-table.php:150
+#: includes/modules/import/youtube/class.list-table.php:197
 msgid "Category"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:143
-#: includes/modules/import/youtube/class.list-table.php:143
+#: includes/modules/import/vimeo/class.list-table.php:151
+#: includes/modules/import/youtube/class.list-table.php:198
+#: includes/modules/third-party/visual-composer/integrate.php:132
+#: includes/videos/class.posttype.php:368 includes/videos/metaboxes.php:97
+msgid "Video ID"
+msgstr ""
+
+#: includes/modules/import/vimeo/class.list-table.php:152
 msgid "Uploader"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:145
+#: includes/modules/import/vimeo/class.list-table.php:153
+#: includes/modules/import/youtube/class.list-table.php:199
+#: includes/videos/class.posttype.php:369
+msgid "Duration"
+msgstr ""
+
+#: includes/modules/import/vimeo/class.list-table.php:154
 #: includes/modules/import/vimeo/views/import_videos.php:81
-#: includes/modules/import/youtube/class.list-table.php:145
-#: includes/modules/import/youtube/views/import_videos.php:78
+#: includes/modules/import/youtube/class.list-table.php:200
+#: includes/modules/import/youtube/views/import_videos.php:79
 msgid "Rating"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:147
-#: includes/modules/import/youtube/class.list-table.php:147
+#: includes/modules/import/vimeo/class.list-table.php:156
 msgid "Published"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:172
+#: includes/modules/import/vimeo/class.list-table.php:182
 msgid "Create categories from Vimeo"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:174
-#: includes/modules/import/youtube/class.list-table.php:177
+#: includes/modules/import/vimeo/class.list-table.php:184
+#: includes/modules/import/youtube/class.list-table.php:233
 msgid "Select category (optional)"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:181
-#: includes/modules/import/youtube/class.list-table.php:185
+#: includes/modules/import/vimeo/class.list-table.php:193
+#: includes/modules/import/youtube/class.list-table.php:243
 msgid "Bulk actions"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:182
-#: includes/modules/import/youtube/class.list-table.php:186
+#: includes/modules/import/vimeo/class.list-table.php:195
+#: includes/modules/import/youtube/class.list-table.php:245
 msgid "Import"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:186
-#: includes/modules/import/youtube/class.list-table.php:190
+#: includes/modules/import/vimeo/class.list-table.php:201
+#: includes/modules/import/youtube/class.list-table.php:251
 msgid "Import into category"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.list-table.php:190
-#: includes/modules/import/youtube/class.list-table.php:194
+#: includes/modules/import/vimeo/class.list-table.php:208
+#: includes/modules/import/youtube/class.list-table.php:258
 msgid "Apply"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.thumbnails.php:139
+#: includes/modules/import/vimeo/class.thumbnails.php:134
 msgid "iFrame Embed"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.thumbnails.php:145
+#: includes/modules/import/vimeo/class.thumbnails.php:140
 msgid "Flash Embed"
 msgstr ""
 
-#: includes/modules/import/vimeo/class.thumbnails.php:151
+#: includes/modules/import/vimeo/class.thumbnails.php:146
 msgid "Channel URL"
 msgstr ""
 
@@ -963,6 +946,7 @@ msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:30
 #: includes/modules/import/youtube/views/import_videos.php:26
+#: includes/modules/third-party/visual-composer/integrate.php:285
 msgid "Search query"
 msgstr ""
 
@@ -976,7 +960,7 @@ msgid "Select the type of feed you want to load."
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:38
-#: includes/modules/import/youtube/views/import_videos.php:34
+#: includes/modules/import/youtube/views/import_videos.php:35
 msgid "Number of videos to retrieve"
 msgstr ""
 
@@ -987,32 +971,32 @@ msgid ""
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:46
-#: includes/modules/import/youtube/views/import_videos.php:43
+#: includes/modules/import/youtube/views/import_videos.php:44
 msgid "Video duration"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:49
-#: includes/modules/import/youtube/views/import_videos.php:46
+#: includes/modules/import/youtube/views/import_videos.php:47
 msgid "Any"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:50
-#: includes/modules/import/youtube/views/import_videos.php:47
+#: includes/modules/import/youtube/views/import_videos.php:48
 msgid "Short (under 4min.)"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:51
-#: includes/modules/import/youtube/views/import_videos.php:48
+#: includes/modules/import/youtube/views/import_videos.php:49
 msgid "Medium (between 4 and 20min.)"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:52
-#: includes/modules/import/youtube/views/import_videos.php:49
+#: includes/modules/import/youtube/views/import_videos.php:50
 msgid "Long (over 20min.)"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:59
-#: includes/modules/import/youtube/views/import_videos.php:56
+#: includes/modules/import/youtube/views/import_videos.php:57
 msgid "Search by"
 msgstr ""
 
@@ -1021,47 +1005,47 @@ msgid "Enter playlist ID, user ID or search query according to Feed Type selecti
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:68
-#: includes/modules/import/youtube/views/import_videos.php:65
+#: includes/modules/import/youtube/views/import_videos.php:66
 msgid "Order by"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:71
-#: includes/modules/import/youtube/views/import_videos.php:68
+#: includes/modules/import/youtube/views/import_videos.php:69
 msgid "Date of publishing"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:72
-#: includes/modules/import/youtube/views/import_videos.php:69
+#: includes/modules/import/youtube/views/import_videos.php:70
 msgid "Number of views"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:74
-#: includes/modules/import/youtube/views/import_videos.php:71
+#: includes/modules/import/youtube/views/import_videos.php:72
 msgid "Position in playlist"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:75
-#: includes/modules/import/youtube/views/import_videos.php:72
+#: includes/modules/import/youtube/views/import_videos.php:73
 msgid "Number of comments"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:76
-#: includes/modules/import/youtube/views/import_videos.php:73
+#: includes/modules/import/youtube/views/import_videos.php:74
 msgid "Duration (longest to shortest)"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:77
-#: includes/modules/import/youtube/views/import_videos.php:74
+#: includes/modules/import/youtube/views/import_videos.php:75
 msgid "Reversed position in playlist"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:78
-#: includes/modules/import/youtube/views/import_videos.php:75
+#: includes/modules/import/youtube/views/import_videos.php:76
 msgid "Video title"
 msgstr ""
 
 #: includes/modules/import/vimeo/views/import_videos.php:80
-#: includes/modules/import/youtube/views/import_videos.php:77
+#: includes/modules/import/youtube/views/import_videos.php:78
 msgid "Search relevance"
 msgstr ""
 
@@ -1069,12 +1053,134 @@ msgstr ""
 msgid "Load feed"
 msgstr ""
 
-#: includes/modules/import/youtube/class.list-table.php:66
+#: includes/modules/import/youtube/class.api-query.php:115
+msgid ""
+"User uploads playlist ID could not be found in YouTube API channel query "
+"response."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:148
+msgid ""
+"User uploads playlist ID could not be found in YouTube API user query "
+"response."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:563
+msgid "YouTube API returned a %s error code. Error returned is: %s"
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:574
+#: includes/modules/import/youtube/class.api-query.php:578
+msgid "Query to YouTube API returned no results."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:597
+msgid "No query specified."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:606
+msgid ""
+"You must enter your YouTube server key in plugins Settings page under tab "
+"API & License."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:753
+msgid "Action %s could not be found to query YouTube."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:763
+msgid ""
+"Please visit plugin Settings page and setup the OAuth details to grant "
+"permission for the plugin to your YouTube account."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:766
+msgid ""
+"Please enter your OAuth credentials in order to be able to query your "
+"YouTube account."
+msgstr ""
+
+#: includes/modules/import/youtube/class.api-query.php:774
+msgid "Please grant permission for the plugin to access your YouTube account."
+msgstr ""
+
+#: includes/modules/import/youtube/class.auth.php:15
+msgid "Grant plugin access"
+msgstr ""
+
+#: includes/modules/import/youtube/class.auth.php:26
+msgid "Revoke access"
+msgstr ""
+
+#: includes/modules/import/youtube/class.auth.php:118
+msgid ""
+"YouTube API OAuth credentials missing. Please visit plugin Settings page "
+"and enter your credentials."
+msgstr ""
+
+#: includes/modules/import/youtube/class.auth.php:147
+msgid ""
+"While refreshing the access token, YouTube returned error code "
+"<strong>%s</strong>. Please refresh tokens manually by revoking current "
+"access and granting new access."
+msgstr ""
+
+#: includes/modules/import/youtube/class.auth.php:150
+msgid "While refreshing the access token, YouTube returned an unknown error."
+msgstr ""
+
+#: includes/modules/import/youtube/class.auto.importer.php:216
+msgid ""
+"An automatic import process is already running. Once that import is done, "
+"automatic import will continue imports as scheduled."
+msgstr ""
+
+#: includes/modules/import/youtube/class.auto.importer.php:257
+msgid ""
+"Some details about your playlist could not be found. Please try to remove "
+"and recreate the playlist."
+msgstr ""
+
+#: includes/modules/import/youtube/class.auto.importer.php:299
+msgid ""
+"Sorry, we encountered an unknown feed type. Importing has stopped for this "
+"playlist."
+msgstr ""
+
+#: includes/modules/import/youtube/class.list-table.php:110
 msgid "View on YouTube"
 msgstr ""
 
-#: includes/modules/import/youtube/class.list-table.php:175
+#: includes/modules/import/youtube/class.list-table.php:231
 msgid "Create categories from YouTube"
+msgstr ""
+
+#: includes/modules/import/youtube/class.list-table.php:330
+msgid "YouTube feed is empty."
+msgstr ""
+
+#: includes/modules/import/youtube/class.list-table.php:333
+msgid " <strong>API error (code: %s)</strong>: %s"
+msgstr ""
+
+#: includes/modules/import/youtube/class.list-table.php:352
+msgid "1 item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/modules/import/youtube/class.list-table.php:359
+msgid "Go to the previous page"
+msgstr ""
+
+#: includes/modules/import/youtube/class.list-table.php:367
+msgid "Go to the next page"
+msgstr ""
+
+#: includes/modules/import/youtube/functions.php:240
+msgid ""
+"Invalid playlist type. Use as playlist type one of the following: user, "
+"playlist or channel."
 msgstr ""
 
 #: includes/modules/import/youtube/views/import_videos.php:19
@@ -1089,414 +1195,1001 @@ msgstr ""
 msgid "YouTube playlist ID"
 msgstr ""
 
-#: includes/modules/import/youtube/views/import_videos.php:35
+#: includes/modules/import/youtube/views/import_videos.php:27
+msgid "Channel query"
+msgstr ""
+
+#: includes/modules/import/youtube/views/import_videos.php:27
+msgid "Channel uploads feed"
+msgstr ""
+
+#: includes/modules/import/youtube/views/import_videos.php:36
 msgid ""
 "Enter any number of results you want to retrieve. Results will be "
 "paginated. Youtube allows a maximum of 1000 per request."
 msgstr ""
 
-#: includes/modules/import/youtube/views/import_videos.php:57
+#: includes/modules/import/youtube/views/import_videos.php:58
 msgid "Enter playlist ID, user ID or search query to use."
 msgstr ""
 
-#: includes/modules/import/youtube/views/import_videos.php:90
+#: includes/modules/import/youtube/views/import_videos.php:91
 msgid "Load video feed"
 msgstr ""
 
-#: includes/search/template.php:199
+#: includes/modules/metaboxes/clone.php:91
+msgid "+ Add more"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/autocomplete.php:15
+#: includes/modules/metaboxes/fields/autocomplete.php:74
+#: includes/modules/metaboxes/fields/autocomplete.php:89
+msgid "Delete"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/button.php:27
+msgid "Click me"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/checkbox.php:53
+msgid "Yes"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/checkbox.php:53
+msgid "No"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file-input.php:17
+msgid "Select File"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file-input.php:39
+#: includes/modules/metaboxes/fields/select.php:84
+#: includes/modules/metaboxes/fields/video-select.php:188
+msgid "Select"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file-input.php:41
+#: includes/playlist/views/templates-playlist.php:54
+msgid "Remove"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file.php:16
+msgid "You may only upload maximum %d file"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file.php:17
+msgid "You may only upload maximum %d files"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file.php:73
+msgid "Error: Cannot delete file"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/map.php:57
+msgid "Find Address"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/oembed.php:60
+msgid "Embed HTML not available."
+msgstr ""
+
+#: includes/modules/metaboxes/fields/oembed.php:75
+msgid "Preview"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/post.php:33
+msgid "Select a post"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/post.php:36
+#: includes/modules/metaboxes/fields/taxonomy.php:51
+msgid "Select a %s"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/select-advanced.php:41
+msgid "Select an item"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/select.php:84
+#: includes/modules/metaboxes/fields/video-select.php:188
+msgid "All"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/select.php:84
+#: includes/modules/metaboxes/fields/video-select.php:188
+msgid "None"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/taxonomy.php:48
+msgid "Select a term"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/user.php:33
+msgid "Select an user"
+msgstr ""
+
+#: includes/modules/metaboxes/validation.php:45
+msgid "Please correct the errors highlighted below and try again."
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:115
+msgid "Video Page"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:116
+msgid "The Video Central \"Videos\" landing page"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:120
+#: includes/videos/template.php:73 includes/videos/template.php:87
+msgid "Video Categories"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:121
+msgid "All video categories"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:125
+#: includes/videos/template.php:101 includes/videos/template.php:115
+msgid "Video Tags"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:126
+msgid "All Video tags"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:131
+#: includes/videos/template.php:48
+msgid "All Videos"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:135
+msgid "Account Pages"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:136
+msgid "The Videos \"Account\" pages"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:141
+msgid "Videos in the \"%s\" category"
+msgstr ""
+
+#: includes/modules/third-party/class.woosidebars.integration.php:142
+msgid "Videos tagged \"%s\""
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:35
+msgid "Width"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:43
+msgid "Height"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:51
+#: includes/modules/third-party/visual-composer/integrate.php:63
+msgid "Type"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:55
+msgid "Popup"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:56
+msgid "Slider"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:76
+#: includes/modules/third-party/visual-composer/integrate.php:109
+#: includes/modules/third-party/visual-composer/integrate.php:140
+#: includes/modules/third-party/visual-composer/integrate.php:170
+#: includes/modules/third-party/visual-composer/integrate.php:201
+#: includes/modules/third-party/visual-composer/integrate.php:231
+#: includes/modules/third-party/visual-composer/integrate.php:262
+#: includes/modules/third-party/visual-composer/integrate.php:292
+#: includes/modules/third-party/visual-composer/integrate.php:315
+#: includes/modules/third-party/visual-composer/integrate.php:346
+#: includes/modules/third-party/visual-composer/integrate.php:378
+msgid "Classes"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:87
+#: includes/modules/third-party/visual-composer/integrate.php:104
+#: includes/modules/third-party/visual-composer/integrate.php:127
+#: includes/modules/third-party/visual-composer/integrate.php:158
+#: includes/modules/third-party/visual-composer/integrate.php:188
+#: includes/modules/third-party/visual-composer/integrate.php:219
+#: includes/modules/third-party/visual-composer/integrate.php:249
+#: includes/modules/third-party/visual-composer/integrate.php:280
+#: includes/modules/third-party/visual-composer/integrate.php:310
+#: includes/modules/third-party/visual-composer/integrate.php:333
+#: includes/modules/third-party/visual-composer/integrate.php:366
+msgid "Video Central Elements"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:88
+msgid "Display latest videos"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:105
+#: includes/modules/third-party/visual-composer/integrate.php:128
+msgid "Display Video Central Index"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:123
+msgid "Single Video"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:154
+msgid "Video Categories List"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:159
+msgid "Display a list of Video Categories"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:163
+msgid "Maximum number of categories to show"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:189
+msgid "Display a list of videos from a Video Category"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:193
+msgid "Category ID"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:215
+msgid "Video Tags List"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:220
+msgid "Display a list of Video Tags"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:224
+msgid "Maximum number of tags to show"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:250
+msgid "Display a list of videos from a Video Tag"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:254
+msgid "Tag ID"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:276
+msgid "Video Search Results"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:281
+msgid "Display a list of galleries based on a search query"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:306
+msgid "Video Search Form"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:311
+msgid "Display the video search form"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:329
+msgid "Video Central View"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:334
+msgid "Display video list based on registerd views eg recent, popular etc"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:338
+msgid "View ID"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:362
+msgid "Video Slider Grid"
+msgstr ""
+
+#: includes/modules/third-party/visual-composer/integrate.php:367
+msgid "Display Video Central Slider Grid"
+msgstr ""
+
+#: includes/player/template.php:134
+msgid "Failed to retrieve video file"
+msgstr ""
+
+#: includes/playlist/class.ajax.php:168
+#: includes/playlist/views/templates-videos.php:54
+msgid "No items found."
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:53
+msgid "Players"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:63
+msgid "Shortcode"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:114
+#: includes/playlist/class.editplaylist.php:130
+msgid "Add Videos"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:115
+msgid "Add from URL"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:118
+msgid "Image Files"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:119
+msgid "Choose an Image"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:120
+msgid "Update Image"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:123
+#: includes/playlist/class.editplaylist.php:128
+msgid "Video Files"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:124
+msgid "Choose an Video File"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:125
+msgid "Update Video"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:129
+msgid "Choose Videos"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:146
+msgid "JavaScript Disabled"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:150
+msgid ""
+"Video Central requires JavaScript in order to function correctly. Please <a "
+"href=\"%s\">enable it in your browser</a> to continue."
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:177
+msgid ""
+"Add videos to the playlist, then drag and drop to reorder them. Click the "
+"arrow on the right of each item to reveal more configuration options."
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:195
+msgid "Choose which players should use this playlist:"
+msgstr ""
+
+#: includes/playlist/class.editplaylist.php:220
+msgid ""
+"Copy and paste the following shortcode into a post or page to embed this "
+"playlist."
+msgstr ""
+
+#: includes/playlist/class.posttype.php:43
+msgid "Video Central Playlist"
+msgstr ""
+
+#: includes/playlist/functions.php:102 includes/playlist/functions.php:103
+msgid "Playlists"
+msgstr ""
+
+#: includes/playlist/functions.php:104
+msgid "Playlist"
+msgstr ""
+
+#: includes/playlist/functions.php:105
+msgid "All Playlists"
+msgstr ""
+
+#: includes/playlist/functions.php:106 includes/playlist/functions.php:110
+msgid "New Playlist"
+msgstr ""
+
+#: includes/playlist/functions.php:107
+msgid "Create New Playlist"
+msgstr ""
+
+#: includes/playlist/functions.php:108 includes/videos/template.php:51
+msgid "Edit"
+msgstr ""
+
+#: includes/playlist/functions.php:109
+msgid "Edit Playlist"
+msgstr ""
+
+#: includes/playlist/functions.php:111 includes/playlist/functions.php:112
+msgid "View Playlist"
+msgstr ""
+
+#: includes/playlist/functions.php:113
+msgid "Search Playlists"
+msgstr ""
+
+#: includes/playlist/functions.php:114
+msgid "No playlists found"
+msgstr ""
+
+#: includes/playlist/functions.php:115
+msgid "No playlists found in Trash"
+msgstr ""
+
+#: includes/playlist/functions.php:116
+msgid "Parent Playlist:"
+msgstr ""
+
+#: includes/playlist/metaboxes.php:17 includes/videos/metaboxes.php:37
+msgid "Video Description"
+msgstr ""
+
+#: includes/playlist/metaboxes.php:26
+#: includes/playlist/views/templates-videos.php:29
+msgid "Playlist Settings"
+msgstr ""
+
+#: includes/playlist/metaboxes.php:35
+msgid "Post"
+msgstr ""
+
+#: includes/playlist/metaboxes.php:42
+msgid "Select an Item"
+msgstr ""
+
+#: includes/playlist/metaboxes.php:54
+msgid "Select Videos"
+msgstr ""
+
+#: includes/playlist/views/templates-playlist.php:12
+msgid "(no title)"
+msgstr ""
+
+#: includes/playlist/views/templates-playlist.php:33
+msgid "Artist:"
+msgstr ""
+
+#: includes/playlist/views/templates-playlist.php:34
+msgid "Artist"
+msgstr ""
+
+#: includes/playlist/views/templates-playlist.php:44
+msgid "Length:"
+msgstr ""
+
+#: includes/playlist/views/templates-playlist.php:45
+msgid "Length"
+msgstr ""
+
+#: includes/playlist/views/templates-playlist.php:55
+msgid "Close"
+msgstr ""
+
+#: includes/playlist/views/templates-playlist.php:67
+msgid "Select Audio"
+msgstr ""
+
+#: includes/playlist/views/templates-videos.php:23
+msgid "Deselect"
+msgstr ""
+
+#: includes/playlist/views/templates-videos.php:34
+msgid "Theme"
+msgstr ""
+
+#: includes/playlist/views/templates-videos.php:46
+msgid "Show Tracklist"
+msgstr ""
+
+#: includes/playlist/views/templates-videos.php:56
+msgid "Create a video."
+msgstr ""
+
+#: includes/search/template.php:205
 msgid "Search Results for '%s'"
 msgstr ""
 
-#: includes/search/template.php:376 includes/videos/template.php:1979
+#: includes/search/template.php:396 includes/videos/template.php:2247
 msgid "Showing %1$s videos"
 msgid_plural "Showing %1$s videos"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/search/template.php:381 includes/videos/template.php:1987
+#: includes/search/template.php:400 includes/videos/template.php:2253
 msgid "Showing %2$s (of %4$s total)"
 msgid_plural "Showing %2$s - %3$s of %4$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/users/functions.php:457
+#: includes/users/functions.php:507
 msgid ""
 "<strong>ERROR</strong>: No video was found! Which video are you "
 "marking/unmarking as favorite?"
 msgstr ""
 
-#: includes/users/functions.php:461 includes/users/functions.php:935
-#: includes/users/functions.php:1041 includes/users/functions.php:1168
-#: includes/users/functions.php:1174
+#: includes/users/functions.php:511 includes/users/functions.php:1016
+#: includes/users/functions.php:1123 includes/users/functions.php:1252
+#: includes/users/functions.php:1259
 msgid "<strong>ERROR</strong>: Are you sure you wanted to do that?"
 msgstr ""
 
-#: includes/users/functions.php:465 includes/users/functions.php:939
-#: includes/users/functions.php:1045
+#: includes/users/functions.php:515 includes/users/functions.php:1020
+#: includes/users/functions.php:1127
 msgid ""
 "<strong>ERROR</strong>: You don't have the permission to edit favorites of "
 "that user!"
 msgstr ""
 
-#: includes/users/functions.php:508
+#: includes/users/functions.php:560
 msgid ""
 "<strong>ERROR</strong>: There was a problem removing that video from "
 "favorites!"
 msgstr ""
 
-#: includes/users/functions.php:510
+#: includes/users/functions.php:562
 msgid "<strong>ERROR</strong>: There was a problem favoriting that video!"
 msgstr ""
 
-#: includes/users/functions.php:931 includes/users/functions.php:1037
+#: includes/users/functions.php:1012 includes/users/functions.php:1119
 msgid ""
 "<strong>ERROR</strong>: No video was found! Which video are you "
 "subscribing/unsubscribing to?"
 msgstr ""
 
-#: includes/users/functions.php:984 includes/users/functions.php:1090
+#: includes/users/functions.php:1065 includes/users/functions.php:1172
 msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that video!"
 msgstr ""
 
-#: includes/users/functions.php:986 includes/users/functions.php:1092
+#: includes/users/functions.php:1067 includes/users/functions.php:1174
 msgid "<strong>ERROR</strong>: There was a problem subscribing to that video!"
 msgstr ""
 
-#: includes/users/template.php:184 includes/videos/template.php:2106
+#: includes/users/template.php:198 includes/videos/template.php:2383
 msgid "Anonymous"
 msgstr ""
 
-#: includes/users/template.php:503
+#: includes/users/template.php:556
 msgid "Guest"
 msgstr ""
 
-#: includes/users/template.php:507
+#: includes/users/template.php:560
 msgid "Inactive"
 msgstr ""
 
-#: includes/users/template.php:517
+#: includes/users/template.php:570
 msgid "Member"
 msgstr ""
 
-#: includes/users/template.php:557
+#: includes/users/template.php:617
 msgid "Admin"
 msgstr ""
 
-#: includes/users/template.php:894
+#: includes/users/template.php:980
 msgid "Favorite"
 msgstr ""
 
-#: includes/users/template.php:895
+#: includes/users/template.php:981
 msgid "Favorited"
 msgstr ""
 
-#: includes/users/template.php:1058
+#: includes/users/template.php:1156
 msgid "Subscribe"
 msgstr ""
 
-#: includes/users/template.php:1059
+#: includes/users/template.php:1157
 msgid "Unsubscribe"
 msgstr ""
 
-#: includes/users/template.php:1163
+#: includes/users/template.php:1260
 msgid "User updated."
 msgstr ""
 
-#: includes/users/template.php:1188
+#: includes/users/template.php:1287
 msgid "You have super admin privileges."
 msgstr ""
 
-#: includes/users/template.php:1188
+#: includes/users/template.php:1287
 msgid "This user has super admin privileges."
 msgstr ""
 
-#: includes/users/template.php:1255
+#: includes/users/template.php:1370
 msgid "&mdash; No role for this site &mdash;"
 msgstr ""
 
-#: includes/users/template.php:1290
+#: includes/users/template.php:1415
 msgid "&mdash; No role for these videos &mdash;"
 msgstr ""
 
-#: includes/users/template.php:1393
+#: includes/users/template.php:1534
 msgid "You are now logged out."
 msgstr ""
 
-#: includes/users/template.php:1397
+#: includes/users/template.php:1538
 msgid "New user registration is currently not allowed."
 msgstr ""
 
-#: includes/users/template.php:1406
+#: includes/users/template.php:1546
 msgid "Check your e-mail for the confirmation link."
 msgstr ""
 
-#: includes/users/template.php:1411
+#: includes/users/template.php:1551
 msgid "Check your e-mail for your new password."
 msgstr ""
 
-#: includes/users/template.php:1416
+#: includes/users/template.php:1556
 msgid "Registration complete. Please check your e-mail."
 msgstr ""
 
-#: includes/users/template.php:1591 includes/videos/template.php:2221
+#: includes/users/template.php:1741 includes/videos/template.php:2510
 msgid "View %s's profile"
 msgstr ""
 
-#: includes/users/template.php:1591 includes/videos/template.php:2221
+#: includes/users/template.php:1741 includes/videos/template.php:2510
 msgid "Visit %s's website"
 msgstr ""
 
-#: includes/videos/template.php:53 includes/videos/template.php:57
+#: includes/videos/class.posttype.php:234
+msgid "Video Item"
+msgid_plural "Video Items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/videos/class.posttype.php:245
+msgid "Video Item Pending"
+msgid_plural "Video Items Pending"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/videos/class.posttype.php:262
+msgid "Sort Videos"
+msgstr ""
+
+#: includes/videos/class.posttype.php:262
+msgid "Sort"
+msgstr ""
+
+#: includes/videos/class.posttype.php:278
+msgid "Sort Video"
+msgstr ""
+
+#: includes/videos/class.posttype.php:281
+msgid ""
+"Click, drag, re-order & repeat as necessary. The item at the top of the "
+"list will display first."
+msgstr ""
+
+#: includes/videos/class.posttype.php:383
+msgid "Thumbnail"
+msgstr ""
+
+#: includes/videos/metaboxes.php:22
+msgid "Video Settings"
+msgstr ""
+
+#: includes/videos/metaboxes.php:29
+msgid "Featured Video"
+msgstr ""
+
+#: includes/videos/metaboxes.php:48
+msgid "Upload Video"
+msgstr ""
+
+#: includes/videos/metaboxes.php:56
+msgid "Video Url (.mp4)"
+msgstr ""
+
+#: includes/videos/metaboxes.php:64
+msgid "Video Url (.webm)"
+msgstr ""
+
+#: includes/videos/metaboxes.php:72
+msgid "Video Url (.ogg)"
+msgstr ""
+
+#: includes/videos/metaboxes.php:80
+msgid "Video Url (.flv)"
+msgstr ""
+
+#: includes/videos/metaboxes.php:88
+msgid "Custom Thumbnail"
+msgstr ""
+
+#: includes/videos/metaboxes.php:89
+msgid "This will override the auto generated video thumbnail"
+msgstr ""
+
+#: includes/videos/metaboxes.php:98
+msgid ""
+"Get video id from the url eg "
+"http://youtube.com/watch?v=<strong>123456</strong>"
+msgstr ""
+
+#: includes/videos/metaboxes.php:105
+msgid "Video Embed Code"
+msgstr ""
+
+#: includes/videos/metaboxes.php:106
+msgid "Add an embed code here."
+msgstr ""
+
+#: includes/videos/metaboxes.php:113
+msgid "Video Source"
+msgstr ""
+
+#: includes/videos/metaboxes.php:120
+msgid "Self Hosted"
+msgstr ""
+
+#: includes/videos/metaboxes.php:121
+msgid "Embed Code"
+msgstr ""
+
+#: includes/videos/metaboxes.php:128
+msgid "Video Duration"
+msgstr ""
+
+#: includes/videos/metaboxes.php:129
+msgid "The length if the video in minutes eg <strong>6:30</strong>"
+msgstr ""
+
+#: includes/videos/template.php:49 includes/videos/template.php:53
 msgid "New Video"
 msgstr ""
 
-#: includes/videos/template.php:54
+#: includes/videos/template.php:50
 msgid "Create New Video"
 msgstr ""
 
-#: includes/videos/template.php:55
-msgid "Edit"
-msgstr ""
-
-#: includes/videos/template.php:56
+#: includes/videos/template.php:52
 msgid "Edit Video"
 msgstr ""
 
-#: includes/videos/template.php:58 includes/videos/template.php:59
+#: includes/videos/template.php:54 includes/videos/template.php:55
 msgid "View Video"
 msgstr ""
 
-#: includes/videos/template.php:60 includes/widgets/widget-search.php:126
+#: includes/videos/template.php:56 includes/widgets/widget-search.php:142
 msgid "Search Videos"
 msgstr ""
 
-#: includes/videos/template.php:61
+#: includes/videos/template.php:57
 msgid "No videos found"
 msgstr ""
 
-#: includes/videos/template.php:62
+#: includes/videos/template.php:58
 msgid "No videos found in Trash"
 msgstr ""
 
-#: includes/videos/template.php:63
+#: includes/videos/template.php:59
 msgid "Parent Video:"
 msgstr ""
 
-#: includes/videos/template.php:79
+#: includes/videos/template.php:75
 msgid "Search Video Categories"
 msgstr ""
 
-#: includes/videos/template.php:80
+#: includes/videos/template.php:76
 msgid "Popular Video Categories"
 msgstr ""
 
-#: includes/videos/template.php:81
+#: includes/videos/template.php:77
 msgid "All Video Categories"
 msgstr ""
 
-#: includes/videos/template.php:82
+#: includes/videos/template.php:78
 msgid "Parent Video Category"
 msgstr ""
 
-#: includes/videos/template.php:83
+#: includes/videos/template.php:79
 msgid "Parent Video Category:"
 msgstr ""
 
-#: includes/videos/template.php:84
+#: includes/videos/template.php:80
 msgid "Edit Video Category"
 msgstr ""
 
-#: includes/videos/template.php:85
+#: includes/videos/template.php:81
 msgid "Update Video Category"
 msgstr ""
 
-#: includes/videos/template.php:86
+#: includes/videos/template.php:82
 msgid "Add New Video Category"
 msgstr ""
 
-#: includes/videos/template.php:87
+#: includes/videos/template.php:83
 msgid "New Video Category Name"
 msgstr ""
 
-#: includes/videos/template.php:88
+#: includes/videos/template.php:84
 msgid "Separate video categories with commas"
 msgstr ""
 
-#: includes/videos/template.php:89
+#: includes/videos/template.php:85
 msgid "Add or remove video categories"
 msgstr ""
 
-#: includes/videos/template.php:90
+#: includes/videos/template.php:86
 msgid "Choose from the most used video categories"
 msgstr ""
 
-#: includes/videos/template.php:107
+#: includes/videos/template.php:103
 msgid "Search Video Tags"
 msgstr ""
 
-#: includes/videos/template.php:108
+#: includes/videos/template.php:104
 msgid "Popular Video Tags"
 msgstr ""
 
-#: includes/videos/template.php:109
+#: includes/videos/template.php:105
 msgid "All Video Tags"
 msgstr ""
 
-#: includes/videos/template.php:110
+#: includes/videos/template.php:106
 msgid "Parent Video Tag"
 msgstr ""
 
-#: includes/videos/template.php:111
+#: includes/videos/template.php:107
 msgid "Parent Video Tag:"
 msgstr ""
 
-#: includes/videos/template.php:112
+#: includes/videos/template.php:108
 msgid "Edit Video Tag"
 msgstr ""
 
-#: includes/videos/template.php:113
+#: includes/videos/template.php:109
 msgid "Update Video Tag"
 msgstr ""
 
-#: includes/videos/template.php:114
+#: includes/videos/template.php:110
 msgid "Add New Video Tag"
 msgstr ""
 
-#: includes/videos/template.php:115
+#: includes/videos/template.php:111
 msgid "New Video Tag Name"
 msgstr ""
 
-#: includes/videos/template.php:116
+#: includes/videos/template.php:112
 msgid "Separate video tags with commas"
 msgstr ""
 
-#: includes/videos/template.php:117
+#: includes/videos/template.php:113
 msgid "Add or remove video tags"
 msgstr ""
 
-#: includes/videos/template.php:118
+#: includes/videos/template.php:114
 msgid "Choose from the most used video tags"
 msgstr ""
 
-#: includes/videos/template.php:648
+#: includes/videos/template.php:657
 msgid "Video Category: "
 msgstr ""
 
-#: includes/videos/template.php:652
+#: includes/videos/template.php:659
 msgid "Video Tag: "
 msgstr ""
 
-#: includes/videos/template.php:2443
+#: includes/videos/template.php:2747
 msgid "Categories: "
 msgstr ""
 
-#: includes/videos/template.php:2486
+#: includes/videos/template.php:2795
 msgid "Tags: "
 msgstr ""
 
-#: includes/widgets/widget-categories.php:11
+#: includes/widgets/widget-categories.php:12
 msgid "A list or dropdown of video categories."
 msgstr ""
 
-#: includes/widgets/widget-categories.php:12
+#: includes/widgets/widget-categories.php:13
 msgid "(Video Central) Categories"
 msgstr ""
 
-#: includes/widgets/widget-categories.php:29
+#: includes/widgets/widget-categories.php:32
 msgid "Categories"
 msgstr ""
 
-#: includes/widgets/widget-categories.php:113
+#: includes/widgets/widget-categories.php:130
 msgid "Display as dropdown"
 msgstr ""
 
-#: includes/widgets/widget-categories.php:116
+#: includes/widgets/widget-categories.php:138
 msgid "Show post counts"
 msgstr ""
 
-#: includes/widgets/widget-categories.php:119
+#: includes/widgets/widget-categories.php:146
 msgid "Show hierarchy"
 msgstr ""
 
-#: includes/widgets/widget-featured.php:27
+#: includes/widgets/widget-featured.php:28
 msgid "The video central featured videos."
 msgstr ""
 
-#: includes/widgets/widget-featured.php:30
+#: includes/widgets/widget-featured.php:31
 msgid "(Video Central) Featured Videos"
 msgstr ""
 
-#: includes/widgets/widget-featured.php:179
-#: includes/widgets/widget-popular.php:177
-#: includes/widgets/widget-recent.php:177
+#: includes/widgets/widget-featured.php:210
+#: includes/widgets/widget-popular.php:208
+#: includes/widgets/widget-recent.php:208
 msgid "Number of videos to display:"
 msgstr ""
 
-#: includes/widgets/widget-featured.php:185
-#: includes/widgets/widget-popular.php:182
-#: includes/widgets/widget-recent.php:182
+#: includes/widgets/widget-featured.php:221
+#: includes/widgets/widget-popular.php:218
+#: includes/widgets/widget-recent.php:218
 msgid "Thumbnail size"
 msgstr ""
 
-#: includes/widgets/widget-featured.php:213
+#: includes/widgets/widget-featured.php:252
 #: templates/default/videos/content-video-slider-grid.php:4
 msgid "Featured Videos"
 msgstr ""
 
-#: includes/widgets/widget-popular.php:27
+#: includes/widgets/widget-popular.php:28
 msgid "The video central popular videos."
 msgstr ""
 
-#: includes/widgets/widget-popular.php:30
+#: includes/widgets/widget-popular.php:31
 msgid "(Video Central) Popular Videos"
 msgstr ""
 
-#: includes/widgets/widget-popular.php:210
+#: includes/widgets/widget-popular.php:249
 #: templates/default/videos/content-video-slider-grid.php:5
 msgid "Popular Videos"
 msgstr ""
 
-#: includes/widgets/widget-recent.php:27
+#: includes/widgets/widget-recent.php:28
 msgid "The video central recent videos."
 msgstr ""
 
-#: includes/widgets/widget-recent.php:30
+#: includes/widgets/widget-recent.php:31
 msgid "(Video Central) Recent Videos"
 msgstr ""
 
-#: includes/widgets/widget-recent.php:210
+#: includes/widgets/widget-recent.php:249
 msgid "Recent Videos"
 msgstr ""
 
-#: includes/widgets/widget-search.php:27
+#: includes/widgets/widget-search.php:28
 msgid "The video_central video search form."
 msgstr ""
 
-#: includes/widgets/widget-search.php:30
+#: includes/widgets/widget-search.php:31
 msgid "(Video Central) Video Search Form"
 msgstr ""
 
-#: includes/widgets/widget-tags.php:12
+#: includes/widgets/widget-tags.php:13
 msgid "A cloud of your most used tags."
 msgstr ""
 
-#: includes/widgets/widget-tags.php:13
+#: includes/widgets/widget-tags.php:14
 msgid "(Video Central) Tag Cloud"
 msgstr ""
 
-#: includes/widgets/widget-tags.php:38
+#: includes/widgets/widget-tags.php:39
 msgid "Tags"
 msgstr ""
 
-#: includes/widgets/widget-tags.php:73
+#: includes/widgets/widget-tags.php:83
 msgid "Taxonomy:"
 msgstr ""
 
-#: templates/default/video-central-functions.php:51
+#: templates/default/video-central-functions.php:42
 msgid "Video Central Default"
 msgstr ""
 
-#: templates/default/video-central-functions.php:161
+#: templates/default/video-central-functions.php:152
 msgid "Something went wrong. Refresh your browser and try again."
 msgstr ""
 
@@ -1538,19 +2231,11 @@ msgstr ""
 msgid "You may also like"
 msgstr ""
 
-#: templates/default/videos/loop-single-content.php:36
-msgid "Show more"
-msgstr ""
-
-#: templates/default/videos/loop-single-content.php:38
-msgid "Show less"
-msgstr ""
-
-#: video-central.php:127 video-central.php:134
+#: video-central.php:139 video-central.php:149
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: video-central.php:417
+#: video-central.php:476
 msgid ""
 "Sorry, but your version of WordPress, <strong>%s</strong>, does not meet "
 "the Video Central's required version of <strong>3.3.1</strong> to run "
@@ -1558,19 +2243,19 @@ msgid ""
 "return to the Dashboard</a>"
 msgstr ""
 
-#: video-central.php:491
+#: video-central.php:556
 msgid "Videos Default"
 msgstr ""
 
-#: video-central.php:530
+#: video-central.php:597
 msgid "Most popular videos"
 msgstr ""
 
-#: video-central.php:541
+#: video-central.php:608
 msgid "Latest videos"
 msgstr ""
 
-#: video-central.php:551
+#: video-central.php:618
 msgid "Featured videos"
 msgstr ""
 
@@ -1583,86 +2268,124 @@ msgid "The Ultimate Video Manager for WordPress"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Franklin M Gitonga"
+msgid "Franklin Gitonga"
 msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "http://radiumthemes.com/"
 msgstr ""
 
-#: Radium/Video/Metaboxes/Field/File.php:83
-msgctxt "file upload"
-msgid "Upload Files"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/File.php:84
-msgctxt "file upload"
-msgid "+ Add new file"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/File.php:136
-#: Radium/Video/Metaboxes/Field/FileAdvanced.php:100
-msgctxt "file upload"
-msgid "Delete"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/File.php:137
-#: Radium/Video/Metaboxes/Field/FileAdvanced.php:101
-msgctxt "file upload"
-msgid "Edit"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/FileAdvanced.php:64
-msgctxt "file upload"
-msgid "Select or Upload Files"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/Image.php:70
-msgctxt "image upload"
-msgid "Upload Images"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/Image.php:71
-msgctxt "image upload"
-msgid "+ Add new image"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/Image.php:136
-#: Radium/Video/Metaboxes/Field/ImageAdvanced.php:107
-#: Radium/Video/Metaboxes/Field/Thumbnail.php:108
-msgctxt "image upload"
-msgid "Delete"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/Image.php:137
-#: Radium/Video/Metaboxes/Field/ImageAdvanced.php:108
-#: Radium/Video/Metaboxes/Field/Thumbnail.php:109
-msgctxt "image upload"
-msgid "Edit"
-msgstr ""
-
-#: Radium/Video/Metaboxes/Field/ImageAdvanced.php:71
-#: Radium/Video/Metaboxes/Field/Thumbnail.php:72
-msgctxt "image upload"
-msgid "Select or Upload Images"
-msgstr ""
-
-#: includes/admin/admin.php:508
+#: includes/admin/admin.php:541
 msgctxt "admin color scheme"
 msgid "Mint"
 msgstr ""
 
-#: includes/admin/admin.php:517
+#: includes/admin/admin.php:550
 msgctxt "admin color scheme"
 msgid "Evergreen"
 msgstr ""
 
-#: includes/common/functions.php:188
+#: includes/common/functions.php:186
 msgctxt "Separator in time since"
 msgid ","
 msgstr ""
 
-#: includes/videos/template.php:759
+#: includes/modules/metaboxes/fields/file.php:85
+msgctxt "file upload"
+msgid "Upload Files"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file.php:86
+msgctxt "file upload"
+msgid "+ Add new file"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file.php:150
+msgctxt "file upload"
+msgid "Delete"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/file.php:151
+msgctxt "file upload"
+msgid "Edit"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:17
+msgctxt "media"
+msgid "+ Add Media"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:18
+msgctxt "media"
+msgid " file"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:19
+msgctxt "media"
+msgid " files"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:20
+msgctxt "media"
+msgid "Remove"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:21
+msgctxt "media"
+msgid "Edit"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:22
+msgctxt "media"
+msgid "View"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:23
+msgctxt "media"
+msgid "No Title"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:26
+msgctxt "media"
+msgid "Select Files"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:27
+msgctxt "media"
+msgid "or"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/media.php:28
+msgctxt "media"
+msgid "Drop files here to upload"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/plupload-image.php:74
+msgctxt "image upload"
+msgid "Drop images here"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/plupload-image.php:75
+msgctxt "image upload"
+msgid "or"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/plupload-image.php:76
+msgctxt "image upload"
+msgid "Select Files"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/plupload-image.php:149
+msgctxt "image upload"
+msgid "Allowed Image Files"
+msgstr ""
+
+#: includes/modules/metaboxes/fields/thickbox-image.php:51
+msgctxt "image upload"
+msgid "Upload Images"
+msgstr ""
+
+#: includes/videos/template.php:829
 msgctxt "date at time"
 msgid "%1$s at %2$s"
 msgstr ""

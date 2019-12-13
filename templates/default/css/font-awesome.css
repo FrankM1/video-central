@@ -26,6 +26,7 @@
   src: url("../fonts/font-awesome/fontawesome-webfont.eot?#iefix&v=3.0.1") format("embedded-opentype"), url("../fonts/font-awesome/fontawesome-webfont.woff?v=3.0.1") format("woff"), url("../fonts/font-awesome/fontawesome-webfont.ttf?v=3.0.1") format("truetype");
   font-weight: normal;
   font-style: normal; }
+
 /*  Font Awesome styles
     ------------------------------------------------------- */
 [class^="icon-"],
@@ -157,6 +158,7 @@ ul.icons {
 [class^="icon-"].pull-left,
 [class*=" icon-"].pull-left {
   margin-right: .3em; }
+
 [class^="icon-"].pull-right,
 [class*=" icon-"].pull-right {
   margin-left: .3em; }
@@ -165,6 +167,7 @@ ul.icons {
 .btn [class*=" icon-"].pull-left.icon-2x,
 .btn [class*=" icon-"].pull-right.icon-2x {
   margin-top: .18em; }
+
 .btn [class^="icon-"].icon-spin.icon-large,
 .btn [class*=" icon-"].icon-spin.icon-large {
   line-height: .8em; }
@@ -192,11 +195,13 @@ ul.icons {
   display: inline-block;
   -webkit-animation: spin 2s infinite linear;
           animation: spin 2s infinite linear; }
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg); }
   100% {
     -webkit-transform: rotate(359deg); } }
+
 @keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -204,18 +209,17 @@ ul.icons {
   100% {
     -webkit-transform: rotate(359deg);
             transform: rotate(359deg); } }
+
 @-moz-document url-prefix() {
   .icon-spin {
     height: .9em; }
-
   .btn .icon-spin {
     height: auto; }
-
   .icon-spin.icon-large {
     height: 1.25em; }
-
   .btn .icon-spin.icon-large {
     height: .75em; } }
+
 /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
    readers do not read off random characters that represent icons */
 .icon-glass:before {
@@ -1317,5 +1321,4 @@ ul.icons {
 
 .icon-renren:before {
   content: "\f18b"; }
-
 /*# sourceMappingURL=font-awesome.css.map */
