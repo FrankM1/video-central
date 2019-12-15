@@ -33,10 +33,10 @@ function video_central_get_template_part($slug, $name = null)
     $templates[] = $slug.'.php';
 
     // Allow template parst to be filtered
-    $templates = apply_filters(__FUNCTION__, $templates, $slug, $name);
+    $templates = apply_filters( __FUNCTION__, $templates, $slug, $name);
 
     // Return the part that is found
-    return video_central_locate_template($templates, true, false);
+    return video_central_locate_template( $templates, true, false );
 }
 
 /**
@@ -128,6 +128,10 @@ function video_central_locate_template($template_names, $load = false, $require_
 function video_central_enqueue_style($handle = '', $file = '', $dependencies = array(), $version = false, $media = 'all')
 {
 
+    if ( ! is_video_central() ) {
+        return false;
+    }
+
     // No file found yet
     $located = false;
 
@@ -196,6 +200,10 @@ function video_central_enqueue_style($handle = '', $file = '', $dependencies = a
 function video_central_enqueue_script($handle = '', $file = '', $dependencies = array(), $version = false, $in_footer = 'all')
 {
 
+    if ( ! is_video_central() ) {
+        return false;
+    }
+
     // No file found yet
     $located = false;
 
@@ -256,7 +264,7 @@ function video_central_enqueue_script($handle = '', $file = '', $dependencies = 
  * @param string $location Callback function that returns the
  * @param int    $priority
  */
-function video_central_register_template_stack($location_callback = '', $priority = 10)
+function video_central_register_template_stack( $location_callback = '', $priority = 10 )
 {
 
     // Bail if no location, or function does not exist
@@ -265,7 +273,7 @@ function video_central_register_template_stack($location_callback = '', $priorit
     }
 
     // Add location callback to template stack
-    return add_filter('video_central_template_stack', $location_callback, (int) $priority);
+    return add_filter( 'video_central_template_stack', $location_callback, (int) $priority );
 }
 
 /**

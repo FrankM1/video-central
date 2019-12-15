@@ -7,7 +7,7 @@
  * @see /core/filters.php
  */
 
-/*
+/**
  * Attach Video Central to WordPress
  *
  * Video Central uses its own internal actions to help aid in third-party plugin
@@ -33,7 +33,7 @@ add_action('setup_theme',              'video_central_setup_theme',            1
 add_action('after_setup_theme',        'video_central_after_setup_theme',      10);
 //add_action( 'wp_head',                'video_central__player_js_swf', 10); //player fallback
 
-/*
+/**
  * video_central_loaded - Attached to 'plugins_loaded' above
  *
  * Attach various loader actions to the video_central_loaded action.
@@ -42,7 +42,7 @@ add_action('after_setup_theme',        'video_central_after_setup_theme',      1
  */
 add_action('video_central_loaded', 'video_central_register_theme_packages',   14);
 
-/*
+/**
  * video_central_init - Attached to 'init' above
  *
  * Attach various initialization actions to the init action.
@@ -56,7 +56,7 @@ add_action('video_central_init', 'video_central_add_rewrite_categories',  20);
 add_action('video_central_init', 'video_central_add_rewrite_rules', 30);
 add_action('video_central_init', 'video_central_add_permastructs',  40);
 
-/*
+/**
  * video_central_register - Attached to 'init' above on 0 priority
  *
  * Attach various initialization actions early to the init action.
@@ -76,11 +76,11 @@ add_action('video_central_activation',    'video_central_add_activation_redirect
 
 /* Widgets */
 add_action('video_central_widgets_init', array('Video_Central_Widget_Categories', 'register_widget'), 10);
-add_action('video_central_widgets_init', array('Video_Central_Featured_Widget',    'register_widget'), 10);
+add_action('video_central_widgets_init', array('Video_Central_Featured_Widget',   'register_widget'), 10);
 add_action('video_central_widgets_init', array('Video_Central_Popular_Widget',    'register_widget'), 10);
-add_action('video_central_widgets_init', array('Video_Central_Recent_Widget',    'register_widget'), 10);
-add_action('video_central_widgets_init', array('Video_Central_Widget_Search',    'register_widget'), 10);
-add_action('video_central_widgets_init', array('Video_Central_Widget_Tags',        'register_widget'), 10);
+add_action('video_central_widgets_init', array('Video_Central_Recent_Widget',     'register_widget'), 10);
+add_action('video_central_widgets_init', array('Video_Central_Widget_Search',     'register_widget'), 10);
+add_action('video_central_widgets_init', array('Video_Central_Widget_Tags',       'register_widget'), 10);
 
 //add views counter
 add_action('video_central_template_after_video_player', 'video_central_set_video_views');

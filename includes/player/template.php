@@ -83,11 +83,10 @@ _end_;
             $file_ogg = wp_get_attachment_url($file_id_ogg);
             $file_flv = wp_get_attachment_url($file_id_flv);
 
-            $dataSetup['fluid']     = 'true';
-            $dataSetup['controls']  = 'true';
+            $dataSetup['controls']  = '';
             $dataSetup['preload']   = 'auto';
             $dataSetup['poster']    = $poster;
-            $dataSetup['width']     = 'auto';
+            $dataSetup['width']     = '100%';
             $dataSetup['height']    = 'auto';
 
             if ($file_extension == 'flv') {
@@ -117,11 +116,15 @@ _end_;
 
             }
 
-            $jsonDataSetup = str_replace('\\/', '/', json_encode($dataSetup));
+            $jsonDataSetup = implode(' ', array_map(
+                function ($v, $k) { return sprintf("%s='%s'", $k, $v); },
+                $dataSetup,
+                array_keys($dataSetup)
+            ));
 
             if( $source ) {
 
-                $output = "<video class='video-js vjs-default-skin' data-setup='".$jsonDataSetup."'>";
+                $output = "<video class='video-js vjs-default-skin video-js-important' ".$jsonDataSetup.">";
                     $output .= $source;
 
                 $output .= '</video>';

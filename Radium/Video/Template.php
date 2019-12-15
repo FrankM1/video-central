@@ -87,6 +87,7 @@ class Radium_Video_Template
     public function view_project_template($template)
     {
         $page_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+        $file = '';
 
         if ($page_template == 'video-home.php' || $page_template == 'video-list.php') {
             add_filter('video_central_is_video_archive', '__return_true');
@@ -109,7 +110,6 @@ class Radium_Video_Template
             // Check child theme first
             if (file_exists(trailingslashit($template_location).'page-templates/'.$wp_page_template)) {
                 $file = trailingslashit($template_location).'page-templates/'.$wp_page_template;
-
                 break;
             }
         }

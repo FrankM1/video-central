@@ -373,6 +373,7 @@ class Video_Central_Admin
             case 'video_central_settings_single_video_page'      : // Settings - Single Video page
             case 'video_central_settings_user_slugs'             : // Settings - User slugs
             case 'video_central_settings_youtube_api'            : // Settings - Youtube Api
+            case 'video_central_settings_vimeo_api'              : // Settings - Vimeo Api
 
                 $caps = array(video_central()->admin->minimum_capability);
                 break;

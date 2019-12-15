@@ -4,7 +4,7 @@ Plugin Name: Video Central
 Plugin URI: http://plugins.radiumthemes.com/video-central
 Description: The Ultimate Video Manager for WordPress
 Author: Franklin Gitonga
-Version: 1.3.0
+Version: 1.3.1
 Author URI: http://radiumthemes.com/
 License: GPL v2+
 */
@@ -45,7 +45,7 @@ class Video_Central
      *
      * @var string
      */
-    public $version = '1.3.0';
+    public $version = '1.3.1';
 
     /**
      * Current db version of the plugin.
@@ -517,6 +517,10 @@ class Video_Central
     public function enqueue_scripts()
     {
 
+        if ( ! is_video_central() ) {
+            return;
+        }
+
         //video js (http://videojs.com)
         wp_enqueue_script( 'video-central-player', $this->core_assets_url . 'frontend/js/video-js.js', array( 'jquery' ), $this->version, true);
 
@@ -856,7 +860,7 @@ function video_central() {
     return $instance;
 }
 
-/*
+/**
  * Hook Video_Central early onto the 'plugins_loaded' action.
  *
  * This gives all other plugins the chance to load before Video Central, to get their

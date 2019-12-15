@@ -913,7 +913,8 @@ video:hover {
   background-color: #fafafa; }
   .video-central-player.loading video,
   .video-central-player.loading > div {
-    display: none; }
+     display: none;
+  }
   .video-central-player.loading:after {
     content: "";
     position: absolute;
