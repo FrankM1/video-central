@@ -1286,4 +1286,8 @@ video::-webkit-media-text-track-display {
 .video-js .vjs-tech {
   cursor: pointer; }
 
+.video-js-important {
+  height: 100% !important;
+}
+
 /*# sourceMappingURL=video-js.css.map */

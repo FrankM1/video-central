@@ -635,7 +635,7 @@ class Radium_Video_Shortcodes {
         //Output the <video> tag
         $videojs = <<<_end_
 
-        <video class="video-js vjs-default-skin{$class}" width="{$width}" height="{$height}"{$poster_attribute}{$controls_attribute}{$preload_attribute}{$autoplay_attribute}{$loop_attribute}{$muted_attribute} data-setup='{$jsonDataSetup}'>
+        <video class="video-js vjs-default-skin{$class}" width="{$width}" height="{$height}" {$poster_attribute} {$controls_attribute} {$preload_attribute} {$autoplay_attribute} {$loop_attribute} {$muted_attribute}>
             {$mp4_source}
             {$webm_source}
             {$ogg_source}{$track}
@@ -819,7 +819,7 @@ _end_;
         if ( 'mediaelement' === $library && 1 === $instances )
             $html .= "<!--[if lt IE 9]><script>document.createElement('video');</script><![endif]-->\n";
 
-        $html .= sprintf( '<video %s controls="controls">', join( ' ', $attr_strings ) );
+        $html .= sprintf( '<video %s>', join( ' ', $attr_strings ) );
 
         $fileurl = '';
 

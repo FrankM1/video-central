@@ -251,6 +251,42 @@ function video_central_admin_get_settings_fields()
 
         ),
 
+        /* Vimeo Api ********************************************************/
+
+        'video_central_settings_vimeo_api' => array(
+
+            // Api Key setting
+            '_video_central_vimeo_api_key' => array(
+                'title' => __('Vimeo API Key', 'video_central'),
+                'callback' => 'video_central_admin_setting_callback_vimeo_api_key',
+                'sanitize_callback' => 'sanitize_text_field',
+                'args' => array(),
+            ),
+
+            '_video_central_vimeo_api_client_id' => array(
+                'title' => __('Vimeo API Client ID', 'video_central'),
+                'callback' => 'video_central_admin_setting_callback_vimeo_api_client_id',
+                'sanitize_callback' => 'sanitize_text_field',
+                'args' => array(),
+            ),
+
+            '_video_central_vimeo_api_client_secret' => array(
+                'title' => __('Vimeo API Client Secret', 'video_central'),
+                'callback' => 'video_central_admin_setting_callback_vimeo_api_client_secret',
+                'sanitize_callback' => 'sanitize_text_field',
+                'args' => array(),
+            ),
+
+            '_video_central_vimeo_api_daily_quota' => array(
+                'title' => __('Vimeo API Daily Quota', 'video_central'),
+                'callback' => 'video_central_admin_setting_callback_vimeo_api_daily_quota',
+                'sanitize_callback' => 'intval',
+                'args' => array(),
+            ),
+
+        ),
+
+
         /* Youtube Api ********************************************************/
 
         'video_central_settings_youtube_api' => array(
