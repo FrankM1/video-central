@@ -11,6 +11,7 @@ class Video_Central_Metaboxes_Image_Upload_Field extends Video_Central_Metaboxes
 		parent::admin_enqueue_scripts();
 		Video_Central_Metaboxes_File_Upload_Field::admin_enqueue_scripts();
 		wp_enqueue_script( 'video-central-metaboxes-image-upload', Video_Central_Metaboxes_JS_URL . 'image-upload.js', array( 'video-central-metaboxes-file-upload', 'video-central-metaboxes-image-advanced' ), Video_Central_Metaboxes_VER, true );
+        wp_enqueue_script( 'video-central-metaboxes-image-upload-vimeo', Video_Central_Metaboxes_JS_URL . 'image-upload-vimeo.js', array( 'video-central-metaboxes-file-upload-vimeo', 'video-central-metaboxes-image-advanced' ), Video_Central_Metaboxes_VER, true );
 	}
 
 	/**

@@ -48,7 +48,7 @@ function video_central_video_register_meta_boxes( $meta_boxes ) {
                 'name'             => __('Upload Video', 'video_central'),
                 'id'               => '_video_central_upload',
                 'class'            => '_video_central_upload',
-                'type'             => 'file_upload',
+                'type'             => 'file_upload_vimeo',
                 'max_file_uploads' => 1
             ),
 
@@ -56,7 +56,7 @@ function video_central_video_register_meta_boxes( $meta_boxes ) {
                 'name'             => __('Video Url (.mp4)', 'video_central'),
                 'id'               => '_video_central_mp4',
                 'class'            => '_video_central_mp4',
-                'type'             => 'file_advance',
+                'type'             => 'file_advanced',
                 'max_file_uploads' => 1
             ),
 

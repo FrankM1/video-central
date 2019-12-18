@@ -2,7 +2,7 @@
 /**
  * File advanced field class which users WordPress media popup to upload and select files.
  */
-class Video_Central_Metaboxes_File_Upload_Field extends Video_Central_Metaboxes_Media_Field {
+class Video_Central_Metaboxes_File_Upload_Vimeo_Field extends Video_Central_Metaboxes_Media_Field {
 
 	/**
 	 * Enqueue scripts and styles
@@ -10,7 +10,7 @@ class Video_Central_Metaboxes_File_Upload_Field extends Video_Central_Metaboxes_
 	public static function admin_enqueue_scripts() {
 		parent::admin_enqueue_scripts();
 		wp_enqueue_style( 'video-central-metaboxes-upload', Video_Central_Metaboxes_CSS_URL . 'upload.css', array( 'video-central-metaboxes-media' ), Video_Central_Metaboxes_VER );
-		wp_enqueue_script( 'video-central-metaboxes-file-upload', Video_Central_Metaboxes_JS_URL . 'file-upload.js', array( 'video-central-metaboxes-media' ), Video_Central_Metaboxes_VER, true );
+		wp_enqueue_script( 'video-central-metaboxes-file-upload-vimeo', Video_Central_Metaboxes_JS_URL . 'file-upload-vimeo.js', array( 'video-central-metaboxes-media' ), Video_Central_Metaboxes_VER, true );
     }
 
 	/**

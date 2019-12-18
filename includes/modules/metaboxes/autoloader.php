@@ -138,6 +138,7 @@ class Video_Central_Metaboxes_Autoloader {
 
 			'fields/media',
 			'fields/file-upload',
+            'fields/file-upload-vimeo',
 			'fields/image-advanced',
 			'fields/image-upload',
 

@@ -44,7 +44,7 @@ jQuery( function ( $ ) {
 		//Initializes plupload
 		//Uses code from wp.Uploader
 		initUploader: function () {
-			var isIE = navigator.userAgent.indexOf( 'Trident/' ) !== -1 || navigator.userAgent.indexOf( 'MSIE ' ) !== -1,
+			var isIE = navigator.userAgent.indexOf( 'Trident/' ) != - 1 || navigator.userAgent.indexOf( 'MSIE ' ) != - 1,
 				self = this,
 				extensions = this.getExtensions().join( ',' );
 			this.plupload = $.extend( true, {
@@ -139,6 +139,10 @@ jQuery( function ( $ ) {
 				wp.media.model.Attachment.get( response.data.id, file.attachment );
 
 				complete = wp.Uploader.queue.all( function ( attachment ) {
+
+					// TODO added video in my vimeo account
+					alert("ciao vimeo 222");
+
 					return ! attachment.get( 'uploading' );
 				} );
 
@@ -175,7 +179,7 @@ jQuery( function ( $ ) {
 		new FileUploadField( {input: this, el: $( this ).siblings( 'div.video-central-metaboxes-media-view' )} );
 	}
 
-	$( ':input.video-central-metaboxes-file_upload' ).each( init );
+	$( ':input.video-central-metaboxes-file_upload_vimeo' ).each( init );
 	$( '.video-central-metaboxes-input' )
-		.on( 'clone', ':input.video-central-metaboxes-file_upload', init );
+		.on( 'clone', ':input.video-central-metaboxes-file_upload_vimeo', init );
 } );
