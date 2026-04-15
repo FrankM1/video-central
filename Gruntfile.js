@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 
     require('jit-grunt')(grunt, {
         usebanner: 'grunt-banner',
-        replace: 'grunt-text-replace'
+        replace: 'grunt-text-replace',
+        postcss: '@lodder/grunt-postcss'
     });
 
     grunt.loadNpmTasks('grunt-wp-i18n');
@@ -11,8 +12,7 @@ module.exports = function(grunt) {
     // require it at the top and pass in the grunt instance
 	require('time-grunt')(grunt);
 
-    var remapify = require( 'remapify' ),
-        pkgInfo = grunt.file.readJSON( 'package.json' );
+    var pkgInfo = grunt.file.readJSON( 'package.json' );
 
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         watch: {
             sass: {
                 files: ['templates/default/scss/**/*.{scss,sass}', 'assets/admin/scss/**/*.{scss,sass}', 'assets/frontend/scss/**/*.{scss,sass}'],
-                tasks: ['sass', 'postcss', 'jshint', 'uglify']
+                tasks: ['sass', 'postcss', 'eslint', 'uglify']
             },
             scripts: {
                 files: [
@@ -31,8 +31,12 @@ module.exports = function(grunt) {
             }
         },
 
-        // sass
+        // sass (Dart Sass via grunt-sass)
         sass: {
+            options: {
+                implementation: require( 'sass' ),
+                sourceMap: false
+            },
             dist: {
                 files: {
                     'assets/admin/css/style.css': 'assets/admin/scss/style.scss',
@@ -46,19 +50,6 @@ module.exports = function(grunt) {
             }
         },
 
-        //css sprites
-        sprites: {
-
-            sprite: {
-                src: ['templates/default/img/sprites-source/*.png'],
-                css: 'templates/default/scss/_sprites-source.scss',
-                map: 'templates/default/img/sprite.png',
-                classPrefix: 'bg',
-                margin: 45
-            }
-
-        },
-
         postcss: {
 			dev: {
 				options: {
@@ -66,7 +57,7 @@ module.exports = function(grunt) {
 
 					processors: [
 						require( 'autoprefixer' )( {
-							browsers: 'last 5 versions'
+							overrideBrowserslist: [ 'last 5 versions' ]
 						} )
 					]
 				},
@@ -81,10 +72,10 @@ module.exports = function(grunt) {
 				options: {
 					processors: [
 						require( 'autoprefixer' )( {
-							browsers: 'last 5 versions'
+							overrideBrowserslist: [ 'last 5 versions' ]
 						} ),
 						require( 'cssnano' )( {
-							reduceIdents: false
+							preset: [ 'default', { reduceIdents: false } ]
 						} )
 					]
 				},
@@ -98,20 +89,11 @@ module.exports = function(grunt) {
 				} ]
 			}
         },
-        
+
         browserify: {
             options: {
                 browserifyOptions: {
                     debug: true
-                },
-                preBundleCB: function( bundle ) {
-                    bundle.plugin( remapify, [
-                        {
-							cwd: 'assets/admin/js/source/playlist',
-							src: '**/*.js',
-							expose: 'video-central-playlist'
-						}
-                    ] );
                 }
             },
 
@@ -129,13 +111,13 @@ module.exports = function(grunt) {
 
         },
 
-        // javascript linting with jshint
-        jshint: {
+        // javascript linting with eslint
+        eslint: {
             options: {
-                jshintrc: '.jshintrc',
-                "force": true
+                overrideConfigFile: 'eslint.config.mjs',
+                quiet: true
             },
-            all: [
+            target: [
                 'Gruntfile.js',
                 'templates/default/js/source/*.js',
                 'assets/admin/js/source/*.js',
@@ -192,43 +174,6 @@ module.exports = function(grunt) {
 
         },
 
-        // Extract sourcemap to separate file
-        exorcise: {
-            bundle: {
-                options: {},
-                files: {
-                    'templates/default/js/main.js.map': [ 'templates/default/js/main.js' ]
-                }
-            }
-        },
-
-        // image optimization
-        imagemin: {
-            dist: {
-                options: {
-                    optimizationLevel: 7,
-                    progressive: true,
-                    interlaced: true
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'assets/frontend/images/',
-                    src: ['assets/frontend/*.{png,jpg,gif}'],
-                    dest: 'assets/frontend/images/'
-                }, {
-                    expand: true,
-                    cwd: 'assets/admin/images/',
-                    src: ['assets/admin/*.{png,jpg,gif}'],
-                    dest: 'assets/admin/images/'
-                }, {
-                    expand: true,
-                    cwd: 'templates/default/img/',
-                    src: ['templates/default/*.{png,jpg,gif}'],
-                    dest: 'templates/default/img/'
-                }]
-            }
-        },
-
         addtextdomain: {
             options: {
                 textdomain: 'video_central',
@@ -266,52 +211,32 @@ module.exports = function(grunt) {
                     type: 'wp-plugin'
                 }
             }
-        },
-
-        devUpdate: {
-          main: {
-              options: {
-                  updateType: 'prompt', //just report outdated packages
-                  reportUpdated: false, //don't report up-to-date packages
-                  semver: false, // update regardless of package.json
-                  packages: {
-                      devDependencies: true, //only check for devDependencies
-                      dependencies: false
-                  },
-                  packageJson: null, //use matchdep default findup to locate package.json
-                  reportOnlyPkgs: [] //use updateType action on all packages
-              }
-          }
-      }
+        }
 
     });
 
     grunt.registerTask( 'i18n', [
         'addtextdomain',
-        'makepot' 
+        'makepot'
     ] );
 
     grunt.registerTask( 'scripts', [
-        'jshint',
+        'eslint',
         'browserify',
-        //'exorcise',
         'uglify'
     ] );
 
     grunt.registerTask( 'styles', [
         'sass',
         'postcss'
-        //'sprites'
     ] );
 
     // register task
-    grunt.registerTask( 'default', [ 
+    grunt.registerTask( 'default', [
         'i18n',
         'styles',
         'scripts',
         'watch'
     ] );
-
-    grunt.registerTask( 'update-packages', ['devUpdate']);
 
 };

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm update *)",
+      "Bash(npm install *)",
+      "Bash(npm audit *)",
+      "Bash(npm info *)",
+      "Bash(npm ls *)",
+      "Bash(echo \"Exit code: $?\")"
+    ]
+  }
+}
