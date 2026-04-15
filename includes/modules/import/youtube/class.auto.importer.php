@@ -423,7 +423,8 @@ class Video_Central_Youtube_Auto_Importer extends Video_Central_Youtube_API_Quer
      */
     private function _is_import_request($verify_key = false)
     {
-        extract($this->request_vars['var']);
+        $name  = $this->request_vars['var']['name'];
+        $value = $this->request_vars['var']['value'];
         if (isset($_GET[ $name ]) && $value === sanitize_text_field($_GET[ $name ])) {
             $key = $this->request_vars['key'];
             if (isset($_GET[ $key['name'] ])) {

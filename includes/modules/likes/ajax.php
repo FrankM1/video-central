@@ -24,6 +24,28 @@ class Video_Central_Likes_Ajax
     }
 
     /**
+     * Validate post ID from request: must be an integer and a valid video post.
+     *
+     * @since 1.3.2
+     *
+     * @param mixed $raw_id Raw POST value.
+     * @return int|false Sanitized post ID or false on failure.
+     */
+    private function validate_video_id( $raw_id ) {
+        $id = absint( $raw_id );
+
+        if ( ! $id ) {
+            return false;
+        }
+
+        if ( get_post_type( $id ) !== video_central_get_video_post_type() ) {
+            return false;
+        }
+
+        return $id;
+    }
+
+    /**
      * Fired when a like is triggered for incrementing the post's like count.
      *
      * @since 1.0.0
@@ -52,12 +74,22 @@ class Video_Central_Likes_Ajax
             )));
         }
 
+        $id = $this->validate_video_id( isset( $_POST['id'] ) ? $_POST['id'] : 0 );
+        if ( ! $id ) {
+            wp_die(json_encode(array(
+                'success' => false,
+                'time' => time(),
+                'count' => 0,
+                'message' => 'invalid post',
+            )));
+        }
+
         // increment like count in database
-        $count = get_post_meta($_POST['id'], '_video_central_video_likes_count', true);
+        $count = get_post_meta($id, '_video_central_video_likes_count', true);
         if (empty($count) || $count < 0) {
             $count = 0;
         }
-        update_post_meta($_POST['id'], '_video_central_video_likes_count', ++$count);
+        update_post_meta($id, '_video_central_video_likes_count', ++$count);
 
         // return results
         echo json_encode(array(
@@ -99,15 +131,25 @@ class Video_Central_Likes_Ajax
             )));
         }
 
+        $id = $this->validate_video_id( isset( $_POST['id'] ) ? $_POST['id'] : 0 );
+        if ( ! $id ) {
+            wp_die(json_encode(array(
+                'success' => false,
+                'time' => time(),
+                'count' => 0,
+                'message' => 'invalid post',
+            )));
+        }
+
         // decrement like count in database
-        $count = get_post_meta($_POST['id'], '_video_central_video_likes_count', true);
+        $count = get_post_meta($id, '_video_central_video_likes_count', true);
         if (empty($count) || $count <= 0) {
             $count = 1;
         }
         if ($count == 1) {
-            delete_post_meta($_POST['id'], '_video_central_video_likes_count');
+            delete_post_meta($id, '_video_central_video_likes_count');
         } else {
-            update_post_meta($_POST['id'], '_video_central_video_likes_count', --$count);
+            update_post_meta($id, '_video_central_video_likes_count', --$count);
         }
 
         // return results
@@ -149,8 +191,13 @@ class Video_Central_Likes_Ajax
         }
 
         $counts = array();
-        foreach ($_POST['ids'] as $id) {
-            $counts[$id] = get_video_central_likes_count($id);
+        if ( isset( $_POST['ids'] ) && is_array( $_POST['ids'] ) ) {
+            foreach ($_POST['ids'] as $raw_id) {
+                $id = absint( $raw_id );
+                if ( $id ) {
+                    $counts[ $id ] = get_video_central_likes_count( $id );
+                }
+            }
         }
 
         // return results

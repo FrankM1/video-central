@@ -53,7 +53,8 @@ VideosBrowser = wp.Backbone.View.extend({
 		var view = this;
 
 		wp.ajax.post( 'video_central_get_videos_for_frame', {
-			paged: view._paged
+			paged: view._paged,
+			_ajax_nonce: videoCentralPlaylistConfig.nonce
 		}).done(function( response ) {
 			view.collection.add( response.videos );
 

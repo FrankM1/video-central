@@ -27,6 +27,12 @@ class Video_Central_Playlist_Ajax {
 	 * @since 1.3.0
 	 */
 	public function get_videos_for_frame() {
+		check_ajax_referer( 'video_central_playlist_nonce' );
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error();
+		}
+
 		$data = array();
 		$page = isset( $_POST['paged'] ) ? absint( $_POST['paged'] ) : 1;
 		$posts_per_page = isset( $_POST['posts_per_page'] ) ? absint( $_POST['posts_per_page'] ) : 40;
@@ -62,6 +68,12 @@ class Video_Central_Playlist_Ajax {
 	 * @since 2.2.0
 	 */
 	public function get_playlists() {
+		check_ajax_referer( 'video_central_playlist_nonce' );
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error();
+		}
+
 		$data = array();
 		$page = isset( $_POST['paged'] ) ? absint( $_POST['paged'] ) : 1;
 		$posts_per_page = isset( $_POST['posts_per_page'] ) ? absint( $_POST['posts_per_page'] ) : 40;
@@ -97,7 +109,18 @@ class Video_Central_Playlist_Ajax {
 	 * @since 2.0.0
 	 */
 	public function get_playlist_videos() {
+		check_ajax_referer( 'video_central_playlist_nonce' );
+
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error();
+		}
+
 		$post_id = absint( $_POST['post_id'] );
+
+		if ( ! $post_id || get_post_type( $post_id ) !== 'video_central_playlist' ) {
+			wp_send_json_error();
+		}
+
 		wp_send_json_success( video_central_get_playlist_videos( $post_id, 'edit' ) );
 	}
 
@@ -150,13 +173,19 @@ class Video_Central_Playlist_Ajax {
 
 		check_ajax_referer( 'video_central_parse_shortcode' );
 
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error();
+		}
+
 		if ( empty( $_POST['shortcode'] ) ) {
 			wp_send_json_error();
 		}
 
 		$shortcode = wp_unslash( $_POST['shortcode'] );
 
-		if ( 0 !== strpos( $shortcode, '[video_central_playlist ' ) ) {
+		// Validate that the input contains exactly one video_central_playlist shortcode
+		// and nothing else, to prevent shortcode injection.
+		if ( ! preg_match( '/^\[video_central_playlist\s[^\]]*\]$/', $shortcode ) ) {
 			wp_send_json_error();
 		}
 
@@ -174,11 +203,10 @@ class Video_Central_Playlist_Ajax {
 
 		// @codingStandardsIgnoreStart
 		foreach ( $styles as $style ) {
-			$head .= '<link type="text/css" rel="stylesheet" href="' . $style . '">'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
-
+			$head .= '<link type="text/css" rel="stylesheet" href="' . esc_url( $style ) . '">';
 		}
 
-		$head .= '<link rel="stylesheet" href="' . $this->plugin->get_url( 'assets/css/video-central-playlist.min.css' ) . '">'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
+		$head .= '<link rel="stylesheet" href="' . esc_url( $this->plugin->get_url( 'assets/css/video-central-playlist.min.css' ) ) . '">';
 		$head .= '<style type="text/css">.video-central-playlist-videos { max-height: none;}</style>';
 		// @codingStandardsIgnoreEnd
 

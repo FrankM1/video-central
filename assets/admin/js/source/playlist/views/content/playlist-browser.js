@@ -52,8 +52,9 @@ PlaylistBrowser = wp.Backbone.View.extend({
 	getPlaylists: function() {
 		var view = this;
 
-		wp.ajax.post( 'video_central_playlist_get_playlists', {
-			paged: view._paged
+		wp.ajax.post( 'video_central_get_playlists', {
+			paged: view._paged,
+			_ajax_nonce: videoCentralPlaylistConfig.nonce
 		}).done(function( response ) {
 			view.collection.add( response.playlists );
 

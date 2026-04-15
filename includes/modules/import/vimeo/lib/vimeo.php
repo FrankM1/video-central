@@ -128,7 +128,7 @@ class phpVimeo
         if ($this->_cache_enabled == self::CACHE_FILE) {
             $file = $this->_cache_dir.'/'.$hash.'.cache';
             if (file_exists($file)) {
-                return unserialize(file_get_contents($file));
+                return json_decode(file_get_contents($file));
             }
         }
     }
@@ -161,7 +161,7 @@ class phpVimeo
         }
 
         // Regular args
-        $api_params = array('format' => 'php');
+        $api_params = array('format' => 'json');
         if (!empty($method)) {
             $api_params['method'] = $method;
         }
@@ -231,8 +231,8 @@ class phpVimeo
 
         // Return
         if (!empty($method)) {
-            $response = unserialize($response);
-            if ($response->stat == 'ok') {
+            $response = json_decode($response);
+            if ($response && $response->stat == 'ok') {
                 return $response;
             }
             else if ($response->err) {
