@@ -16,7 +16,8 @@ Videos = Backbone.Collection.extend({
 		var collection = this;
 
 		return wp.ajax.post( 'video_central_get_playlist_videos', {
-			post_id: settings.postId
+			post_id: settings.postId,
+			_ajax_nonce: settings.nonce
 		}).done(function( videos ) {
 			collection.reset( videos );
 		});

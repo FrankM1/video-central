@@ -6,7 +6,13 @@
       "Bash(npm audit *)",
       "Bash(npm info *)",
       "Bash(npm ls *)",
-      "Bash(echo \"Exit code: $?\")"
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(git checkout *)",
+      "Bash(php -l /Users/frank/GitHub/archived/video-central/includes/admin/admin.php)",
+      "Bash(php -l /Users/frank/GitHub/archived/video-central/includes/modules/likes/ajax.php)",
+      "Bash(php -l /Users/frank/GitHub/archived/video-central/includes/playlist/class.ajax.php)",
+      "Bash(php -l /Users/frank/GitHub/archived/video-central/includes/playlist/class.editplaylist.php)",
+      "Bash(php -l /Users/frank/GitHub/archived/video-central/includes/modules/import/vimeo/lib/vimeo.php)"
     ]
   }
 }

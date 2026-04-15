@@ -47,6 +47,11 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
      */
     public function import_videos()
     {
+        // Verify the user has permission to import
+        if ( ! current_user_can( 'publish_posts' ) ) {
+            return false;
+        }
+
         $this->post_type = video_central_get_video_post_type();
 
         if (!isset($_POST['video_central_import']) || !$_POST['video_central_import']) {
@@ -78,7 +83,7 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
         }
 
         // prepare array of video IDs
-        $video_ids = array_reverse((array) $_POST['video_central_import']);
+        $video_ids = array_map( 'sanitize_text_field', array_reverse( (array) $_POST['video_central_import'] ) );
 
         $total_videos = count($video_ids);
 
@@ -100,21 +105,23 @@ class Video_Central_Youtube_Importer extends Video_Central_Video_Importer
 
         //set category
         if (isset($_REQUEST['cat_top']) && 'import' == $_REQUEST['action_top']) {
-            $category = $_REQUEST['cat_top'];
+            $category = absint( $_REQUEST['cat_top'] );
         } elseif (isset($_REQUEST['cat2']) && 'import' == $_REQUEST['action2']) {
-            $category = $_REQUEST['cat2'];
+            $category = absint( $_REQUEST['cat2'] );
         }
 
-        if (-1 == $category || 0 == $category) {
+        if ( ! $category || -1 == $category ) {
+            $category = false;
+        } elseif ( $category && ! term_exists( $category, $taxonomy ) ) {
             $category = false;
         }
 
         // set user
         $user = false;
         if (isset($_REQUEST['user_top']) && $_REQUEST['user_top']) {
-            $user = (int) $_REQUEST['user_top'];
+            $user = absint( $_REQUEST['user_top'] );
         } elseif (isset($_REQUEST['user2']) && $_REQUEST['user2']) {
-            $user = (int) $_REQUEST['user2'];
+            $user = absint( $_REQUEST['user2'] );
         }
 
         if ($user) {

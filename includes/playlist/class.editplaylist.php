@@ -109,6 +109,7 @@ class Video_Central_Playlist_EditPlaylist {
 		wp_localize_script( 'video-central-playlist-playlist-edit', 'videoCentralPlaylistConfig', array(
 			'postId'     => $post->ID,
 			'saveNonce'  => wp_create_nonce( 'save-videos_' . $post->ID ),
+			'nonce'      => wp_create_nonce( 'video_central_playlist_nonce' ),
 			'videos'     => video_central_get_playlist_videos( $post->ID, 'edit' ),
 			'l10n'       => array(
 				'addVideos'  => esc_html__( 'Add Videos', 'video_central' ),

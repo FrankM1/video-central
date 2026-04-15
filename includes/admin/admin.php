@@ -470,6 +470,12 @@ class Video_Central_Admin
     {
         wp_enqueue_script('suggest');
 
+        // Localize nonces for suggest AJAX endpoints
+        wp_localize_script( 'suggest', 'videoCentralAdmin', array(
+            'suggestVideoNonce' => wp_create_nonce( 'video_central_suggest_video_nonce' ),
+            'suggestUserNonce'  => wp_create_nonce( 'video_central_suggest_user_nonce' ),
+        ) );
+
         // Get the version to use for JS
         $version = video_central_get_version();
 
@@ -609,10 +615,24 @@ class Video_Central_Admin
      */
     public function suggest_video()
     {
+        global $wpdb;
+
+        // Bail if user cannot edit videos
+        if ( ! current_user_can( 'edit_posts' ) ) {
+            wp_die( '0' );
+        }
+
+        // Check the ajax nonce
+        check_ajax_referer( 'video_central_suggest_video_nonce' );
+
+        // Bail early if no request
+        if ( empty( $_REQUEST['q'] ) ) {
+            wp_die( '0' );
+        }
 
         // Try to get some videos
         $videos = get_posts(array(
-            's' => like_escape($_REQUEST['q']),
+            's' => $wpdb->esc_like( sanitize_text_field( $_REQUEST['q'] ) ),
             'post_type' => video_central_get_video_post_type(),
         ));
 
